@@ -8,6 +8,9 @@ capybara-*.html
 /vendor/bundle
 /log/*
 /tmp/*
+*.swp
+*~
+/config/database.yml
 /db/*.sqlite3
 /public/system/*
 /coverage/
@@ -16,4 +19,6 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 .project
-config/initializers/secret_token.rb
+.DS_Store
+.idea
+.secret
