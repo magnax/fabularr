@@ -1,0 +1,18 @@
+<h1>Nowa postać</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@character) do |f| %>
+
+    <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name, 'Imię' %>
+      <%= f.text_field :name %>
+
+      <%= f.label :gender, 'Płeć' %>
+      <%= f.select :gender, [['-- wybierz --', ''], ['Kobieta', 'K'], ['Mężczyzna', 'M']] %>
+
+      <%= f.submit "Utwórz", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

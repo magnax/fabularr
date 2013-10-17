@@ -18,6 +18,7 @@ layout 'static'
 
   def show
   	@user = User.find(params[:id])
+    @characters = @user.feed
   end
 
   private

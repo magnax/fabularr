@@ -1,1 +1,14 @@
 <h1>Hello <%= @user.email %></h1>
+<% if @user.characters.any? %>
+      <h3>Postacie (<%= @user.characters.count %>)</h3>
+      <ol class="characters">
+        <%= render @characters %>
+      </ol>
+<% else %>
+Nie masz żadnych postaci
+<% end %>
+<% if @user.can_create_new_character? %>
+	<%= link_to "Utwórz nową postać", new_character_path %>
+<% else %>
+	Niestety, nie możesz utworzyć więcej postaci.	
+<% end %>

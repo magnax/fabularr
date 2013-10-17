@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	has_many :characters
+
   before_save { self.email = email.downcase }	
   before_create :create_remember_token
 
@@ -15,10 +17,18 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def can_create_new_character?
+  	self.characters.count < 15
+  end
+
+  def feed
+    Character.where("user_id = ?", id)
+  end
+
   private
 
     def create_remember_token
       self.remember_token = User.encrypt(User.new_remember_token)
     end
-    
+
 end
