@@ -15,6 +15,11 @@ class CharactersController < ApplicationController
     end
   end
 
+  def set
+    cookies.permanent[:character_token] = params[:id]
+    redirect_to events_path
+  end
+
   private
 
     def character_params

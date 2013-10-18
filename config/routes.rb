@@ -1,6 +1,6 @@
 Fabularr::Application.routes.draw do
 
-  get "characters/new"
+  get "characters/:id/set" => 'characters#set', as: :character_set
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :characters, only: [:new, :create]
@@ -14,7 +14,10 @@ Fabularr::Application.routes.draw do
   match '/register', to: 'users#new', via: 'get'
   match '/login', to: 'sessions#new', via: 'get'
   match '/logout', to: 'sessions#destroy', via: 'delete'
-  
+  match '/list', to: 'users#show', via: 'get'
+
+  # Events
+  match "/events", to: 'events#index', via: 'get'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

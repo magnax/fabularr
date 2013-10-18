@@ -4,4 +4,11 @@ FactoryGirl.define do
     password "foobar"
     password_confirmation "foobar"
   end
+
+  factory :character do
+  	name "Magnus"
+  	gender "M"
+  	user
+  end
+
 end

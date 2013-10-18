@@ -1,5 +1,20 @@
 module SessionsHelper
 
+  def current_character_set
+    unless current_character?
+      redirect_to list_url, notice: "Please choose one character."
+    end
+  end
+
+  def current_character?
+    !current_character.nil?
+  end
+
+  def current_character
+      character_token = cookies[:character_token]
+      @current_character ||= Character.find_by(id: character_token)
+  end
+
   def sign_in(user)
     remember_token = User.new_remember_token
     cookies.permanent[:remember_token] = remember_token
