@@ -1,9 +1,12 @@
 Fabularr::Application.routes.draw do
 
+  get "char_names/create"
   get "characters/:id/set" => 'characters#set', as: :character_set
+  get "characters/:id/name" => 'characters#name', as: :character_name
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :characters, only: [:new, :create]
+  resources :char_names
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

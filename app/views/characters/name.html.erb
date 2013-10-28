@@ -1,0 +1,15 @@
+Obecna nazwa postaci: <%= @charname.name %>
+<%= form_for(@charname) do |f| %>
+
+<%= render 'shared/error_messages', object: f.object %>
+	
+  <%= f.hidden_field :named_id %>
+
+  <%= f.label :name, 'Nowe imię:' %>
+  <%= f.text_field :name %>
+
+  <%= f.label :description, 'Opis:' %>
+  <%= f.text_field :description %>
+
+  <%= f.submit "Utwórz" %>
+<% end %>

@@ -8,6 +8,8 @@ FactoryGirl.define do
   factory :character do
   	name "Magnus"
   	gender "M"
+  	location_id "1"
+  	spawn_location_id "1"
   	user
   end
 

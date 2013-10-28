@@ -1,0 +1,2 @@
+module CharNamesHelper
+end

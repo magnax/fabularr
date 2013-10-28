@@ -4,5 +4,6 @@ class EventsController < ApplicationController
 
   def index
   	@character = current_character
+  	@location = @character.location
   end
 end

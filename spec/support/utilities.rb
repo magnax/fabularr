@@ -19,3 +19,13 @@ def sign_in(user, options={})
     click_button "Login"
   end
 end
+
+def choose_character(character, options={})
+  if options[:no_capybara]
+    # Choose character when not using Capybara.
+    cookies[:character_token] = character.id
+  else
+    visit list_path
+    click_link "Magnus"
+  end
+end
