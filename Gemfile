@@ -10,6 +10,7 @@ gem 'mysql2'
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
   gem 'factory_girl_rails', '4.2.1'
+  gem 'simplecov', :require => false
 end
 
 group :test do
