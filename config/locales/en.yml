@@ -20,4 +20,66 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: Hello
+  invalid_credentials: Invalid username or password
+  new_user: New user
+  select: --- select ---
+  unknown_man: unknown man
+  unknown_woman: unknown woman
+  activerecord:
+    models:
+      character: Character
+    attributes:
+      character:
+        name: Name
+        gender: Gender
+      user:
+        email: E-mail
+        password: Password
+        password_confirmation: Confirmation
+  flash:
+    errors:
+      cannot_create: You cannot create more than 15 characters
+    success:
+      welcome: Welcome to Fabular!
+      profile_saved: Profil saved!
+      character_created: New character successfully created
+      character_name_changed: Successfully changed character name
+      character_name_created: Successfully created new character name
+    notice:
+      please_login: Please login!
+      please_choose_char: Please choose one character
+  helpers:
+    label:
+      session:
+        email: E-mail
+        password: Password
+  views:
+    users:
+      new:
+        create: Create my account
+        title: Register new user
+      show:
+        no_chars: You don't have any characters
+        create_char: Create new character
+        cannot_create_char: You cannot create more characters
+    characters:
+      new:
+        title: New character
+        create: Create character
+      name:
+        create: Change name
+        current_name: Current name
+        new_name: New name
+    events:
+      title: Events for
+      index:
+        location: Location
+        characters_here: Characters here
+    layout:
+      login: Login
+      register: Register
+      homepage_link: Home
+    sessions:
+      new:
+        title: Fabular login

@@ -1,0 +1,152 @@
+User pages
+  signup page
+    should have content "Register"
+  signup
+    with invalid information
+      should not create a user
+    with valid information
+      should create a user
+
+User
+  should respond to #email
+  should respond to #password_digest
+  should be valid
+  should respond to #authenticate
+  should respond to #password
+  should respond to #characters
+  should respond to #password_confirmation
+  should respond to #remember_token
+  when password is not present
+    should not be valid
+  when email address is already taken
+    should not be valid
+  when password doesn't match confirmation
+    should not be valid
+  with a password that's too short
+    should be invalid
+  email address with mixed case
+    should be saved as all lower-case
+  remember token
+    remember_token
+      should not be blank
+  when email format is valid
+    should be valid
+  return value of authenticate method
+    with valid password
+      should eq #<User id: 56, email: "user@example.com", password_digest: "$2a$04$tr4/.lJiZf55BBaeVic.budusiREZn6BVizhBYo8y8uA...", created_at: "2014-02-17 13:01:51", updated_at: "2014-02-17 13:01:51", remember_token: "aaaca76ad37f1fbfa0fc33bbf2fc87b5e064d97f">
+    with invalid password
+      should not eq
+      should be false
+  when email format is invalid
+    should be invalid
+  when email is not present
+    should not be valid
+
+Static Pages
+  Home page
+    should have the content 'Fabularr' and proper title
+
+Character
+  should be valid
+  should respond to #user
+  should respond to #spawn_location
+  should respond to #location_id
+  should respond to #spawn_location_id
+  should respond to #location
+  should respond to #default_name
+  should respond to #char_names
+  should respond to #user_id
+  should respond to #gender
+  should respond to #name_for
+  should respond to #name
+  when gender is not K/M
+    should not be valid
+  when gender is not present
+    should not be valid
+  when location_id is nil
+    should not be valid
+  when spawn location_id is nil
+    should not be valid
+  when gender is not K/M
+    should not be valid
+  should respond with proper default name
+    is an unknown man
+    is an unknown woman
+  when gender is not present
+    should not be valid
+  gender with lower case
+    should be saved as uppercase
+  when user_id is not present
+    should not be valid
+  user
+    should eq #<User id: 81, email: "mn@example.com", password_digest: "$2a$04$g09bVpjNEFJf.Ju3w15Fe.BhFp3bLoxvpgMOflQc9zn6...", created_at: "2014-02-17 13:01:53", updated_at: "2014-02-17 13:01:53", remember_token: "defb684c30bf5abf7837a370141cf95951b19b72">
+
+Location
+  should respond to #locationtype_id
+  should respond to #characters
+  should respond to #hearable_characters
+  should respond to #visible_characters
+  should be valid
+
+CharacterNamesPages
+  should get page with form when clicking character name on events page
+    should have links
+      when character is not yet remembered
+        should have link "nieznana kobieta", {:href=>"http://www.example.com/characters/31/name"}
+        after name click
+          should have content "Obecna nazwa postaci: nieznana kobieta"
+          should save new name
+      when character is already remembered
+        should have link "Ella"
+        after name click
+          should have content "Obecna nazwa postaci: Ella"
+          should update name
+
+Events
+  for non signed-in users
+    should have content "Login"
+  for signed-in users
+    should return to list without character set
+      should have content "Hello mn@example.com"
+    for signed-in users, and with character set
+      should have events for character
+        should have content "Zdarzenia dla: Magnus"
+        should have content "Miejsce: Fabular City"
+        should have link "nieznana kobieta"
+        should have link "Magnus"
+        should not have link "Sid"
+
+Authentication
+  login page
+    should have content "Login"
+    with invalid information
+      should have content "Login"
+      should have selector "div.alert.alert-error", {:text=>"Invalid"}
+    with valid information
+      should have content "Hello mn@example.com"
+      should have content "Nie masz"
+      should have link "Logout", {:href=>"/logout"}
+      should have link "Profile", {:href=>"/list"}
+      should not have link "Login", {:href=>"/login"}
+      followed by signout
+        should have link "Login"
+  authorization
+    for non-signed-in users
+      in the Users controller
+        visiting the characters page
+          should have content "Login"
+        visiting the edit page
+          should have content "Login"
+        submitting to the update action
+          should redirect to "/login"
+
+CharName
+  should respond to #character
+  should respond to #named
+  should be valid
+  when character_id is not present
+    should not be valid
+  when named_id is not present
+    should not be valid
+  when name is not present
+    should not be valid

@@ -1,15 +1,15 @@
-Obecna nazwa postaci: <%= @charname.name %>
+<%= t 'views.characters.name.current_name' %>: <%= @charname.display_name %>
 <%= form_for(@charname) do |f| %>
 
 <%= render 'shared/error_messages', object: f.object %>
 	
   <%= f.hidden_field :named_id %>
 
-  <%= f.label :name, 'Nowe imię:' %>
+  <%= f.label :name, t('views.characters.name.new_name') %>
   <%= f.text_field :name %>
 
-  <%= f.label :description, 'Opis:' %>
+  <%= f.label :description %>
   <%= f.text_field :description %>
 
-  <%= f.submit "Utwórz" %>
+  <%= f.submit I18n.t 'views.characters.name.create', class: "btn btn-large btn-primary" %>
 <% end %>

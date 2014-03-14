@@ -1,9 +1,9 @@
 <nav>
-	<%= link_to "Główna", root_path %>
+	<%= link_to t('views.layout.homepage_link'), root_path %>
 
 	<% if signed_in? %>
-		<%= link_to "Zdarzenia", events_path %>
-		<%= link_to "Wróć do listy postaci", list_path %>
-		<%= link_to "Wyloguj się", logout_path, method: "delete" %>
+		<%= link_to t('views.layout.events_link'), events_path %>
+		<%= link_to t('views.layout.back_to_char_list'), list_path %>
+		<%= link_to t('views.layout.logout'), logout_path, method: "delete" %>
 	<% end %>
 </nav>

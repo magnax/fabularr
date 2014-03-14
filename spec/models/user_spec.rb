@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
 
   before do 
-  	@user = User.new(email: "user@example.com", password: "foobar", password_confirmation: "foobar")
+  	@user = FactoryGirl.create(:user)
   end  	
 
   subject { @user }
@@ -18,6 +18,8 @@ describe User do
   it { should respond_to(:characters) }
 
   it { should be_valid }
+
+  its(:remember_token) { should_not be_blank }
 
   describe "when email is not present" do
     before { @user.email = "" }
@@ -45,14 +47,8 @@ describe User do
     end
   end
 
-  describe "when email address is already taken" do
-    before do
-      user_with_same_email = @user.dup
-      user_with_same_email.email = @user.email.upcase
-      user_with_same_email.save
-    end
-
-    it { should_not be_valid }
+  it "is invalid when email address is already taken" do
+    FactoryGirl.build(:user, email: @user.email).should_not be_valid
   end
 
   describe "email address with mixed case" do
@@ -65,25 +61,19 @@ describe User do
     end
   end
   
-  describe "when password is not present" do
-  	before do
-      @user = User.new(email: "user@example.com", password: " ", password_confirmation: " ")
-  	end
-  	it { should_not be_valid }
+  it "is invalid when password is not present" do
+    FactoryGirl.build(:user, password: "").should_not be_valid
   end
 
-  describe "when password doesn't match confirmation" do
-    before { @user.password_confirmation = "mismatch" }
-    it { should_not be_valid }
+  it "is invalid when password doesn't match confirmation" do
+    FactoryGirl.build(:user, password_confirmation: "mismatch").should_not be_valid
   end
 
-  describe "with a password that's too short" do
-    before { @user.password = @user.password_confirmation = "a" * 5 }
-    it { should be_invalid }
+  it "is invalid with a password that's too short" do
+    FactoryGirl.build(:user, password: "aaaaa", password_confirmation: "aaaaa").should_not be_valid
   end
 
   describe "return value of authenticate method" do
-    before { @user.save }
     let(:found_user) { User.find_by(email: @user.email) }
 
     describe "with valid password" do
@@ -97,10 +87,4 @@ describe User do
       specify { expect(user_for_invalid_password).to be_false }
     end
   end
-
-  describe "remember token" do
-    before { @user.save }
-    its(:remember_token) { should_not be_blank }
-  end
-
 end

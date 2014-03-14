@@ -17,18 +17,17 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def create_character(params, location_id)
+    characters.build(params.merge({ spawn_location_id: location_id, location_id: location_id }))
+  end
+
   def can_create_new_character?
   	self.characters.count < 15
   end
 
-  def feed
-    Character.where("user_id = ?", id)
-  end
-
   private
-
-    def create_remember_token
-      self.remember_token = User.encrypt(User.new_remember_token)
-    end
+  def create_remember_token
+    self.remember_token = User.encrypt(User.new_remember_token)
+  end
 
 end

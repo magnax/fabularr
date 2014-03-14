@@ -9,12 +9,14 @@ gem 'mysql2'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
+  gem 'factory_girl_rails', '4.2.1'
 end
 
 group :test do
-  gem 'selenium-webdriver', '2.35.1'
-  gem 'capybara', '2.1.0'
-  gem 'factory_girl_rails', '4.2.1'
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
 end
 
 # Use SCSS for stylesheets

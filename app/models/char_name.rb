@@ -7,4 +7,7 @@ class CharName < ActiveRecord::Base
 	validates :named_id, presence: true
 	validates :name, presence: true
 
+  def display_name
+    name.gsub('%char%', self.named.default_name)
+  end
 end

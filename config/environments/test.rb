@@ -36,4 +36,7 @@ Fabularr::Application.configure do
 
   # Speed up tests by lowering bcrypt's cost function.
   ActiveModel::SecurePassword.min_cost = true
+
+  # set default locale for testing
+  config.i18n.default_locale = :en
 end

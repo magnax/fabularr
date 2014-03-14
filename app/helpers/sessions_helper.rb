@@ -2,7 +2,7 @@ module SessionsHelper
 
   def current_character_set
     unless current_character?
-      redirect_to list_url, notice: "Please choose one character."
+      redirect_to list_url, notice: I18n.t('flash.notice.please_choose_char')
     end
   end
 
@@ -42,7 +42,7 @@ module SessionsHelper
   def signed_in_user
     unless signed_in?
       store_location
-      redirect_to login_url, notice: "Please sign in."
+      redirect_to login_url, notice: I18n.t('flash.notice.please_login')
     end
   end
 

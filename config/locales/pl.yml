@@ -1,0 +1,85 @@
+pl:
+  hello: Witaj
+  invalid_credentials: Nieprawidłowy adres lub hasło
+  female: Kobieta
+  male: Mężczyzna
+  new_user: Nowy użytkownik
+  select: --- wybierz ---
+  unknown_man: nieznana kobieta
+  unknown_woman: nieznany mężczyzna
+  activerecord:
+    models:
+      character: Postać
+    attributes:
+      character:
+        name: Imię
+        gender: Płeć
+      char_name:
+        description: Opis postaci
+      user:
+        email: E-mail
+        password: Hasło
+        password_confirmation: Hasło ponownie
+    errors:
+      models:
+        character:
+          attributes:
+            gender:
+              blank: musi być podana
+              invalid: nieprawidłowa
+            name:
+              blank: musi być podane
+  flash:
+    errors:
+      cannot_create: Nie możesz mieć więcej niż 15 postaci
+      character_name_change_error: Błąd przy zmianie imienia postaci
+    success:
+      welcome: Witamy w Fabular!
+      profile_saved: Profil zapisany!
+      character_created: Nowa postać pomyślnie utworzona
+      character_name_changed: Zmieniono nazwę postaci
+      character_name_created: Utworzono nazwę dla postaci
+    notice:
+      please_login: Zaloguj się, proszę
+      please_choose_char: Musisz najpierw wybrać którąś postać
+  helpers:
+    label:
+      session:
+        email: Adres e-mail
+        password: Hasło
+  views:
+    users:
+      new:
+        create: Utwórz konto
+        title: Rejestracja nowego użytkownika
+      show:
+        characters: Twoje postacie
+        no_chars: Nie masz żadnych postaci
+        create_char: Utwórz nową postać
+        cannot_create_char: Nie możesz tworzyć więcej postaci
+    characters:
+      new:
+        title: Nowa postać
+        create: Utwórz postać
+      name:
+        create: Zmień imię
+        current_name: Obecne imię postaci
+        new_name: Nowe imię
+    events:
+      title: Zdarzenia dla
+      index:
+        location: Miejsce
+        characters_here: Postacie w tym miejscu
+    layout:
+      back_to_char_list: Lista postaci
+      events_link: Powrót do zdarzeń
+      login: Zaloguj się
+      logout: Wyloguj się
+      register: Zarejestruj się
+      homepage_link: Główna
+      nav:
+        profile: Profil
+        settings_link: Ustawienia konta
+    sessions:
+      new:
+        title: Logowanie do Fabular

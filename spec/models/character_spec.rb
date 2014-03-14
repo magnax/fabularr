@@ -3,13 +3,8 @@ require 'spec_helper'
 
 describe Character do
   
-  	let(:user) { FactoryGirl.create(:user) }
-	before { @character = user.characters.build(
-		name: "Magnus", 
-		gender: "M", 
-		location_id: 1, 
-		spawn_location_id: 1
-	)}
+	let(:user) { FactoryGirl.create(:user) }
+	before { @character = FactoryGirl.create(:character, user: user) }
 
 	subject { @character }
 
@@ -30,18 +25,20 @@ describe Character do
 	it { should respond_to(:location) }
 	it { should respond_to(:spawn_location) }
 
-    its(:user) { should eq user }
+  its(:user) { should eq user }
 
 	it { should be_valid }
 
-	describe "when user_id is not present" do
-		before { @character.user_id = nil }
-		it { should_not be_valid }
+	it "is invalid when user_id is not present" do
+		FactoryGirl.build(:character, user: nil).should_not be_valid
 	end
 
-	describe "when gender is not present" do
-		before { @character.gender = nil }
-		it { should_not be_valid }
+  it "is invalid when name is not present" do
+    FactoryGirl.build(:character, name: '').should_not be_valid
+  end
+
+	it "is invalid when gender is not present" do
+    FactoryGirl.build(:character, gender: nil).should_not be_valid
 	end
 
 	describe "when gender is not present" do
@@ -86,16 +83,13 @@ describe Character do
   end
 
   describe "should respond with proper default name" do
-
   	it "is an unknown man" do
-  		expect(@character.default_name).to eq "nieznany mężczyzna"
+  		expect(@character.default_name).to eq "unknown man"
   	end
 
   	it "is an unknown woman" do
   		@character.gender = 'K'
-  		expect(@character.default_name).to eq "nieznana kobieta"
+  		expect(@character.default_name).to eq "unknown woman"
   	end
-
   end
-
 end

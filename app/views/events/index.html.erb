@@ -1,4 +1,4 @@
-<h1>Zdarzenia dla: <%= @character.name_for(@character) %></h1>
-<div>Miejsce: <%= @location.name %></div>
-<h2>Postacie w tym miejscu</h2>
+<h1><%= t 'views.events.title' %>: <%= @character.name_for(@character) %></h1>
+<div><%= t 'views.events.index.location' %>: <%= @location.name %></div>
+<h2><%= t 'views.events.index.characters_here' %></h2>
 <%= render partial: "events/character", collection: @location.characters %>

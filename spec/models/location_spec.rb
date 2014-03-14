@@ -1,12 +1,7 @@
 require 'spec_helper'
 
 describe Location do
-  before { @location = Location.new(
-  	locationtype_id: 1,
-  	locationclass_id: 1,
-  	name: "Fabular City",
-  	parent_location_id: nil
-  )}
+  before { @location = FactoryGirl.create(:location) }
 
   subject { @location }
 

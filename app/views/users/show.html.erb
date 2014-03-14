@@ -1,14 +1,14 @@
-<h1>Hello <%= @user.email %></h1>
+<h1><%= t 'hello' %> <%= @user.email %></h1>
 <% if @user.characters.any? %>
-      <h3>Postacie (<%= @user.characters.count %>)</h3>
-      <ol class="characters">
-        <%= render @characters %>
-      </ol>
+  <h3><%= t 'views.users.show.characters' %> (<%= @user.characters.count %>)</h3>
+  <ol class="characters">
+    <%= render @user.characters %>
+  </ol>
 <% else %>
-Nie masz żadnych postaci
+  <%= t 'views.users.show.no_chars' %>
 <% end %>
 <% if @user.can_create_new_character? %>
-	<%= link_to "Utwórz nową postać", new_character_path %>
+	<%= link_to I18n.t('views.users.show.create_char'), new_character_path %>
 <% else %>
-	Niestety, nie możesz utworzyć więcej postaci.	
+	<%= t 'views.users.show.cannot_create_char' %>
 <% end %>

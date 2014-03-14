@@ -2,14 +2,7 @@ require 'spec_helper'
 
 describe CharName do
   
-  before do
-  	@name = CharName.new(
-  		character_id: 1,
-  		named_id: 2,
-  		name: "Magnus",
-  		description: "Magnus description"
-	)
-  end
+  before { @name = FactoryGirl.create(:char_name) }
 
   subject { @name }
 
@@ -29,8 +22,7 @@ describe CharName do
 	end
 
 	describe "when name is not present" do
-		before { @name.name = nil }
+		before { @name.name = '' }
 		it { should_not be_valid }
 	end
-
 end
