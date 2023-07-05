@@ -19,7 +19,9 @@ describe User do
 
   it { should be_valid }
 
-  its(:remember_token) { should_not be_blank }
+  it do
+    expect(subject.remember_token).to_not be_blank
+  end
 
   describe "when email is not present" do
     before { @user.email = "" }
@@ -48,7 +50,7 @@ describe User do
   end
 
   it "is invalid when email address is already taken" do
-    FactoryGirl.build(:user, email: @user.email).should_not be_valid
+    expect(FactoryGirl.build(:user, email: @user.email)).to_not be_valid
   end
 
   describe "email address with mixed case" do
@@ -62,15 +64,15 @@ describe User do
   end
   
   it "is invalid when password is not present" do
-    FactoryGirl.build(:user, password: "").should_not be_valid
+    wzpect(FactoryGirl.build(:user, password: "")).to_not be_valid
   end
 
   it "is invalid when password doesn't match confirmation" do
-    FactoryGirl.build(:user, password_confirmation: "mismatch").should_not be_valid
+    wzpect(FactoryGirl.build(:user, password_confirmation: "mismatch")).to_not be_valid
   end
 
   it "is invalid with a password that's too short" do
-    FactoryGirl.build(:user, password: "aaaaa", password_confirmation: "aaaaa").should_not be_valid
+    wzpect(FactoryGirl.build(:user, password: "aaaaa", password_confirmation: "aaaaa")).to_not be_valid
   end
 
   describe "return value of authenticate method" do

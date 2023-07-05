@@ -25,20 +25,22 @@ describe Character do
 	it { should respond_to(:location) }
 	it { should respond_to(:spawn_location) }
 
-  its(:user) { should eq user }
+	it do
+  	expect(subject.user).to eq user
+  end
 
 	it { should be_valid }
 
 	it "is invalid when user_id is not present" do
-		FactoryGirl.build(:character, user: nil).should_not be_valid
+		expect(FactoryGirl.build(:character, user: nil)).to_not be_valid
 	end
 
   it "is invalid when name is not present" do
-    FactoryGirl.build(:character, name: '').should_not be_valid
+    expect(FactoryGirl.build(:character, name: '')).to_not be_valid
   end
 
 	it "is invalid when gender is not present" do
-    FactoryGirl.build(:character, gender: nil).should_not be_valid
+    expect(FactoryGirl.build(:character, gender: nil)).to_not be_valid
 	end
 
 	describe "when gender is not present" do
