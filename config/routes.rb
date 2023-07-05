@@ -1,5 +1,6 @@
 Fabularr::Application.routes.draw do
 
+  root to: 'static_pages#home'
   get "char_names/create"
   get "characters/:id/set" => 'characters#set', as: :character_set
   get "characters/:id/name" => 'characters#name', as: :character_name
@@ -10,9 +11,6 @@ Fabularr::Application.routes.draw do
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  root 'static_pages#home'
 
   match '/register', to: 'users#new', via: 'get'
   match '/login', to: 'sessions#new', via: 'get'

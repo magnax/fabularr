@@ -1,4 +1,4 @@
-class CreateCharNames < ActiveRecord::Migration
+class CreateCharNames < ActiveRecord::Migration[4.2]
   def change
     create_table :char_names do |t|
       t.integer :character_id
