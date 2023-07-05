@@ -1,7 +1,7 @@
 class Location < ActiveRecord::Base
 has_many :characters
 
-scope :random, -> { order("RAND()").limit(1) }
+scope :random, -> { order("RANDOM()").limit(1) }
 
 def visible_characters
 	characters

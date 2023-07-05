@@ -1,7 +1,7 @@
 #encoding = utf-8
 require 'spec_helper'
 
-describe "Events" do
+describe "Events", type: :feature do
 
 	subject { page }
 

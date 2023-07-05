@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe "Static Pages" do
-  describe "Home page" do
+describe StaticPagesController, type: :feature do
+  context "Home page" do
     it "should have the content 'Fabularr' and proper title" do
       visit root_path
       expect(page).to have_content('Fabularr')

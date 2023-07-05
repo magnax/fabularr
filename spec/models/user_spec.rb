@@ -64,15 +64,15 @@ describe User do
   end
   
   it "is invalid when password is not present" do
-    wzpect(FactoryGirl.build(:user, password: "")).to_not be_valid
+    expect(FactoryGirl.build(:user, password: "")).to_not be_valid
   end
 
   it "is invalid when password doesn't match confirmation" do
-    wzpect(FactoryGirl.build(:user, password_confirmation: "mismatch")).to_not be_valid
+    expect(FactoryGirl.build(:user, password_confirmation: "mismatch")).to_not be_valid
   end
 
   it "is invalid with a password that's too short" do
-    wzpect(FactoryGirl.build(:user, password: "aaaaa", password_confirmation: "aaaaa")).to_not be_valid
+    expect(FactoryGirl.build(:user, password: "aaaaa", password_confirmation: "aaaaa")).to_not be_valid
   end
 
   describe "return value of authenticate method" do
@@ -86,7 +86,10 @@ describe User do
       let(:user_for_invalid_password) { found_user.authenticate("invalid") }
 
       it { should_not eq user_for_invalid_password }
-      specify { expect(user_for_invalid_password).to be_false }
+      
+      it 'is false' do
+        expect(user_for_invalid_password).to eq false
+      end
     end
   end
 end

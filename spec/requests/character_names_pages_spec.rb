@@ -3,7 +3,7 @@ require 'spec_helper'
 
 #tests for changing (remembering) characters names
 
-describe "CharacterNamesPages" do
+describe "CharacterNamesPages", type: :feature do
 
   describe "should get page with form when clicking character name on events page" do
 	

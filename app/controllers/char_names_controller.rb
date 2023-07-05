@@ -16,7 +16,7 @@ class CharNamesController < ApplicationController
   def update
   	@charname = CharName.find(params[:id])
     
-    if @charname.update_attributes(charname_params)
+    if @charname.update(charname_params)
       flash[:success] = I18n.t 'flash.success.character_name_changed'
     else
       flash[:error] = I18n.t 'flash.errors.character_name_change_error'
