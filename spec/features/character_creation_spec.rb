@@ -25,7 +25,7 @@ describe "Character creation" do
 
       it "should create character" do
         expect { click_on 'Create character' }.to change(Character, :count).by(1)
-        page.should have_selector('div.alert-success', :text => 'New character successfully created')
+        expect(page).to have_selector('div.alert-success', :text => 'New character successfully created')
       end
     end
   end
@@ -43,8 +43,8 @@ describe "Character creation" do
       before { visit new_character_path }
 
       it "should redirect to list" do
-        current_path.should == list_path
-        page.should have_selector('div.alert-error', :text => "You cannot create more than 15 characters")
+        expect(current_path).to eq list_path
+        expect(page).to have_selector('div.alert-error', :text => "You cannot create more than 15 characters")
       end
     end
   end

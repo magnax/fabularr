@@ -63,9 +63,9 @@ describe "CharacterNamesPages", type: :feature do
 
             it "changes name with alert" do
               expect { click_button "Change name" }.to_not change(CharName, :count)
-              page.should have_link "Mrs. Ella"
+              expect(page).to have_link "Mrs. Ella"
               expect(name_for_ella.reload.name).to eq "Mrs. Ella"
-              page.should have_selector "div.alert-success", text: "Successfully changed character name"
+              expect(page).to have_selector "div.alert-success", text: "Successfully changed character name"
             end            
           end
 
@@ -73,7 +73,7 @@ describe "CharacterNamesPages", type: :feature do
             before { fill_in "char_name_name", with: "" }
             it "changes name with alert" do
               expect { click_button "Change name" }.to_not change(CharName, :count)
-              page.should have_link "unknown woman"
+              expect(page).to have_link "unknown woman"
             end
           end
 		    end
@@ -89,7 +89,7 @@ describe "CharacterNamesPages", type: :feature do
 
         it "displays default name" do
           visit character_name_path ella
-          page.should have_content "Current name: unknown woman"
+          expect(page).to have_content "Current name: unknown woman"
         end
       end
 	  end
