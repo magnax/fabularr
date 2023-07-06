@@ -16,13 +16,13 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'factory_girl_rails', '4.2.1'
+  gem 'faker'
   gem 'rspec-rails'
   gem 'simplecov', :require => false
 end
 
 group :test do
   gem 'capybara'
-  gem 'faker'
   gem 'launchy'
   gem 'minitest'
   gem 'rails-controller-testing'
