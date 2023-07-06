@@ -31,4 +31,8 @@ module Fabularr
       g.fixture_replacement :factory_girl, :dir => "spec/factories" 
     end
   end
+
+  unless Rails.env.production?
+    Faker::Config.locale = :ca
+  end
 end
