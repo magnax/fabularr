@@ -5,9 +5,9 @@ describe "Events", type: :feature do
 
 	subject { page }
 
-	let!(:fabular_city) { FactoryGirl.create(:location, name: "Fabular City") }
-	let!(:other_city) { FactoryGirl.create(:location, name: "Other City") }
-	let(:user) { FactoryGirl.create(:user) }
+	let!(:fabular_city) { create(:location, name: "Fabular City") }
+	let!(:other_city) { create(:location, name: "Other City") }
+	let(:user) { create(:user) }
 
 	describe "for non signed-in users" do
 		before { visit events_path }
@@ -27,9 +27,9 @@ describe "Events", type: :feature do
 
 		describe "for signed-in users, and with character set" do
 
-			let!(:magnus) { FactoryGirl.create(:character, name: "Magnus", location: fabular_city, user: user) }
-			let!(:ella) { FactoryGirl.create(:character, name: "Ella", gender: "K", location: fabular_city, user: user) }
-			let!(:sid) { FactoryGirl.create(:character, name: "Sid", location: other_city, user: user) }
+			let!(:magnus) { create(:character, name: "Magnus", location: fabular_city, user: user) }
+			let!(:ella) { create(:character, name: "Ella", gender: "K", location: fabular_city, user: user) }
+			let!(:sid) { create(:character, name: "Sid", location: other_city, user: user) }
 			
 			describe "should have events for character" do
 				before do

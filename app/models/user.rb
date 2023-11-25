@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }
 
+  scope :recently_created, -> { where('created_at <= ?', Date.current - 2.days ) }
+
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end

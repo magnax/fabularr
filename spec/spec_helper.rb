@@ -23,6 +23,7 @@ RSpec.configure do |config|
   config.order = "random"
   
   config.include Capybara::DSL
+  config.include FactoryBot::Syntax::Methods
 
   # [:controller, :view, :request].each do |type|
   #   config.include ::Rails::Controller::Testing::TestProcess, type: type

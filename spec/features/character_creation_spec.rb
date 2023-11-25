@@ -4,8 +4,8 @@ describe "Character creation" do
 
   subject { page }
 
-  let!(:user) { FactoryGirl.create(:user) }
-  let!(:location) { FactoryGirl.create(:location) }
+  let!(:user) { create(:user) }
+  let!(:location) { create(:location) }
 
   before { sign_in user }
 
@@ -31,7 +31,7 @@ describe "Character creation" do
   end
 
   describe "user cannot create more than 5 characters" do
-    before { FactoryGirl.create_list(:character, 15, { user: user }) }
+    before { create_list(:character, 15, { user: user }) }
 
     describe "from list of characters" do
       before { visit list_path }

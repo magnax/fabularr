@@ -4,5 +4,5 @@
 return unless Location.count < 10
 
 (1..19).each do
-  Location.create(name: Faker::Address.city, locationtype_id: 1, locationclass_id: 1)
+  Location.create({ name: Faker::Address.city, locationtype_id: 1, locationclass_id: 1 })
 end

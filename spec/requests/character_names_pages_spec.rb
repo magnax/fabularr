@@ -7,8 +7,8 @@ describe "CharacterNamesPages", type: :feature do
 
   describe "should get page with form when clicking character name on events page" do
 	
-  	let!(:user) { FactoryGirl.create(:user) }
-  	let!(:fabular_city) { FactoryGirl.create(:location) }
+  	let!(:user) { create(:user) }
+  	let!(:fabular_city) { create(:location) }
 
     before { sign_in user }
 
@@ -16,8 +16,8 @@ describe "CharacterNamesPages", type: :feature do
 
     describe "should have links" do
   	  # 2 characters in the same location
-  	  let!(:magnus) { FactoryGirl.create(:character, name: "Magnus", location: fabular_city, user: user) }
-  	  let!(:ella) { FactoryGirl.create(:character, name: "Ella", gender: "K", location: fabular_city, user: user) }
+  	  let!(:magnus) { create(:character, name: "Magnus", location: fabular_city, user: user) }
+  	  let!(:ella) { create(:character, name: "Ella", gender: "K", location: fabular_city, user: user) }
 
   	  before do	
     		choose_character magnus
@@ -47,7 +47,7 @@ describe "CharacterNamesPages", type: :feature do
 
       describe "when character is already remembered" do
 
-    	  let!(:name_for_ella) { FactoryGirl.create(:char_name, character: magnus, named: ella, name: "Ella") }
+    	  let!(:name_for_ella) { create(:char_name, character: magnus, named: ella, name: "Ella") }
 
 		    before { visit events_path }
 
@@ -80,7 +80,7 @@ describe "CharacterNamesPages", type: :feature do
       end
 
       describe "when character was remembered and returned to default" do
-        let!(:ellas_name) { FactoryGirl.create(:char_name, character: magnus, named: ella, name: "Ella") }
+        let!(:ellas_name) { create(:char_name, character: magnus, named: ella, name: "Ella") }
         before do
           visit character_name_path ella
           fill_in "char_name_name", with: ""

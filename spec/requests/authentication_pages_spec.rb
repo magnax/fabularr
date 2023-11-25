@@ -18,7 +18,7 @@ describe "Authentication" do
 
     describe "with valid information" do
       
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { create(:user) }
 
       before do
         fill_in "E-mail",    with: user.email.upcase
@@ -42,7 +42,7 @@ describe "Authentication" do
   describe "authorization" do
 
     describe "for non-signed-in users" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { create(:user) }
 
       describe "in the Users controller" do
 

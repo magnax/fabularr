@@ -1,8 +1,8 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :char_name do
     character
     named
-    name "Magnus"
-    description "Magnus description"
+    name { 'Magnus' }
+    description { 'Magnus description' }
   end
 end  

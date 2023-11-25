@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Location do
-  before { @location = FactoryGirl.create(:location) }
+  before { @location = create(:location) }
 
   subject { @location }
 

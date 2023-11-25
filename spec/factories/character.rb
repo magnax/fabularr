@@ -1,11 +1,11 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence :name do |n|
     "Character #{n}"
   end
 
   factory :character, aliases: [ :named ] do
     name
-    gender "M"
+    gender { "M" }
     location
     spawn_location
     user

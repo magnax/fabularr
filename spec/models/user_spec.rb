@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
 
   before do 
-  	@user = FactoryGirl.create(:user)
+  	@user = create(:user)
   end  	
 
   subject { @user }
@@ -50,7 +50,7 @@ describe User do
   end
 
   it "is invalid when email address is already taken" do
-    expect(FactoryGirl.build(:user, email: @user.email)).to_not be_valid
+    expect(build(:user, email: @user.email)).to_not be_valid
   end
 
   describe "email address with mixed case" do
@@ -64,15 +64,15 @@ describe User do
   end
   
   it "is invalid when password is not present" do
-    expect(FactoryGirl.build(:user, password: "")).to_not be_valid
+    expect(build(:user, password: "")).to_not be_valid
   end
 
   it "is invalid when password doesn't match confirmation" do
-    expect(FactoryGirl.build(:user, password_confirmation: "mismatch")).to_not be_valid
+    expect(build(:user, password_confirmation: "mismatch")).to_not be_valid
   end
 
   it "is invalid with a password that's too short" do
-    expect(FactoryGirl.build(:user, password: "aaaaa", password_confirmation: "aaaaa")).to_not be_valid
+    expect(build(:user, password: "aaaaa", password_confirmation: "aaaaa")).to_not be_valid
   end
 
   describe "return value of authenticate method" do
