@@ -1,4 +1,5 @@
-#encoding = utf-8
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Character do
@@ -31,67 +32,67 @@ describe Character do
 
 	it { should be_valid }
 
-	it "is invalid when user_id is not present" do
+	it 'is invalid when user_id is not present' do
 		expect(build(:character, user: nil)).to_not be_valid
 	end
 
-  it "is invalid when name is not present" do
+  it 'is invalid when name is not present' do
     expect(build(:character, name: '')).to_not be_valid
   end
 
-	it "is invalid when gender is not present" do
+	it 'is invalid when gender is not present' do
     expect(build(:character, gender: nil)).to_not be_valid
 	end
 
-	describe "when gender is not present" do
+	describe 'when gender is not present' do
 		before do
 			@character.gender = nil
 		end
 		it { should_not be_valid }
 	end
 
-	describe "when gender is not K/M" do
+	describe 'when gender is not K/M' do
 		before do
 			@character.gender = 'W'
 		end
 		it { should_not be_valid }
 	end
 	
-	describe "when gender is not K/M" do
+	describe 'when gender is not K/M' do
 		before do
 			@character.gender = 'kobieta'
 		end
 		it { should_not be_valid }
 	end
 
-	describe "when location_id is nil" do
+	describe 'when location_id is nil' do
 		before { @character.location_id = nil }
 		it { should_not be_valid }
 	end
 
-	describe "when spawn location_id is nil" do
+	describe 'when spawn location_id is nil' do
 		before { @character.spawn_location_id = nil }
 		it { should_not be_valid }
 	end
 
-	describe "gender with lower case" do
-    let(:lower_case_gender) { "k" }
+	describe 'gender with lower case' do
+    let(:lower_case_gender) { 'k' }
 
-    it "should be saved as uppercase" do
+    it 'should be saved as uppercase' do
       @character.gender = lower_case_gender
       @character.save
       expect(@character.reload.gender).to eq lower_case_gender.upcase
     end
   end
 
-  describe "should respond with proper default name" do
-  	it "is an unknown man" do
-  		expect(@character.default_name).to eq "unknown man"
+  describe 'should respond with proper default name' do
+  	it 'is an unknown man' do
+  		expect(@character.default_name).to eq 'unknown man'
   	end
 
-  	it "is an unknown woman" do
+  	it 'is an unknown woman' do
   		@character.gender = 'K'
-  		expect(@character.default_name).to eq "unknown woman"
+  		expect(@character.default_name).to eq 'unknown woman'
   	end
   end
 end
