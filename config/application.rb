@@ -30,7 +30,7 @@ module Fabularr
         :request_specs => true 
       g.fixture_replacement :factory_girl, :dir => "spec/factories" 
     end
-    config.active_record.legacy_connection_handling = false
+    config.load_defaults 7.0
   end
 
   unless Rails.env.production?
