@@ -1,9 +1,8 @@
-module SessionsHelper
+# frozen_string_literal: true
 
+module SessionsHelper
   def current_character_set
-    unless current_character?
-      redirect_to list_url, notice: I18n.t('flash.notice.please_choose_char')
-    end
+    redirect_to list_url, notice: I18n.t('flash.notice.please_choose_char') unless current_character?
   end
 
   def current_character?
@@ -11,8 +10,8 @@ module SessionsHelper
   end
 
   def current_character
-      character_token = cookies[:character_token]
-      @current_character ||= Character.find_by(id: character_token)
+    character_token = cookies[:character_token]
+    @current_character ||= Character.find_by(id: character_token)
   end
 
   def sign_in(user)
@@ -59,5 +58,4 @@ module SessionsHelper
   def store_location
     session[:return_to] = request.url if request.get?
   end
-
 end

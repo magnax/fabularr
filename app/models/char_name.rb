@@ -1,11 +1,12 @@
-#encoding = utf-8
+# frozen_string_literal: true
+
 class CharName < ActiveRecord::Base
   belongs_to :character
-  belongs_to :named, class_name: "Character"
+  belongs_to :named, class_name: 'Character'
 
 	validates :character_id, presence: true
-        validates :named_id, presence: true
-        validates :name, presence: true
+  validates :named_id, presence: true
+  validates :name, presence: true
 
   def display_name
     name.gsub('%char%', self.named.default_name)
