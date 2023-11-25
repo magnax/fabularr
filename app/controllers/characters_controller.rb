@@ -1,4 +1,5 @@
-#encoding = utf-8
+# frozen_string_literal: true
+
 class CharactersController < ApplicationController
 	before_action :signed_in_user
   before_action :check_character_create, only: [:new, :create]

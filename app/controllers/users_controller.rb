@@ -1,4 +1,5 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   layout 'static'
 
@@ -24,9 +25,7 @@ class UsersController < ApplicationController
   	@user = current_user
   end
 
-  def edit
-
-  end
+  def edit; end
 
   def update
     if @user.update_attributes(user_params)
@@ -38,11 +37,10 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
-
-  # Before filters
 
   def signed_in_user
     redirect_to login_url, notice: I18n.t('flash.notice.please_login') unless signed_in?
@@ -52,5 +50,4 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
   end
-
 end
