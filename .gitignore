@@ -22,3 +22,4 @@ pickle-email-*.html
 .DS_Store
 .idea
 .secret
+.env
