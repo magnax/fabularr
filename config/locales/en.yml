@@ -72,10 +72,12 @@ en:
         current_name: Current name
         new_name: New name
     events:
-      title: Events for
+      events: Events
       index:
         location: Location
         characters_here: Characters here
+      send: Send
+      title: Events for
     layout:
       login: Login
       register: Register

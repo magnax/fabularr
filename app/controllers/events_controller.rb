@@ -7,5 +7,18 @@ class EventsController < ApplicationController
   def index
     @character = current_character
     @location = @character.location
+    @events = @location.events.includes(:character).newest
+  end
+
+  def create
+    Events::CreateService.call!(event_params)
+
+    redirect_to events_path
+  end
+
+  private
+
+  def event_params
+    params.permit(:body, :location_id, :character_id)
   end
 end

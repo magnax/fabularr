@@ -66,10 +66,12 @@ pl:
         current_name: Obecne imię postaci
         new_name: Nowe imię
     events:
-      title: Zdarzenia dla
+      events: Zdarzenia
       index:
         location: Miejsce
         characters_here: Postacie w tym miejscu
+      send: Wyślij
+      title: Zdarzenia dla
     layout:
       back_to_char_list: Lista postaci
       events_link: Powrót do zdarzeń
