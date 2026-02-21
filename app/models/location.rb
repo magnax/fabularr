@@ -2,6 +2,7 @@
 
 class Location < ActiveRecord::Base
 	has_many :characters
+	has_many :events
 
 	scope :random, -> { order("RANDOM()").limit(1) }
 
