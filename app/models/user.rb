@@ -2,8 +2,9 @@
 
 class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/i
+  MAX_CHARACTERS = 15
 
-  has_many :characters
+  has_many :characters, dependent: :destroy
 
   before_save { self.email = email.downcase }
   before_create :create_remember_token
@@ -23,12 +24,8 @@ class User < ApplicationRecord
     Digest::SHA1.hexdigest(token.to_s)
   end
 
-  def create_character(params, location_id)
-    characters.build(params.merge({ spawn_location_id: location_id, location_id: location_id }))
-  end
-
-  def can_create_new_character?
-    characters.count < 15
+  def can_create_character?
+    characters.count < MAX_CHARACTERS
   end
 
   private

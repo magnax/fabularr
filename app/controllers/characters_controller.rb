@@ -2,21 +2,14 @@
 
 class CharactersController < ApplicationController
   before_action :signed_in_user
-  before_action :check_character_create, only: %i[new create]
 
-  def new
-    @character = current_user.characters.build
-  end
+  def new; end
 
   def create
-    @character = current_user.create_character(character_params, Location.random[0].id)
+    Characters::CreateService.call!(current_user, character_params)
 
-    if @character.save
-      flash[:success] = I18n.t 'flash.success.character_created'
-      redirect_to list_path
-    else
-      render 'new'
-    end
+    flash[:success] = I18n.t 'flash.success.character_created'
+    redirect_to list_path
   end
 
   def set
@@ -33,12 +26,5 @@ class CharactersController < ApplicationController
 
   def character_params
     params.require(:character).permit(:name, :gender)
-  end
-
-  def check_character_create
-    return if current_user.can_create_new_character?
-
-    flash[:error] = I18n.t 'flash.errors.cannot_create'
-    redirect_to list_path and return
   end
 end

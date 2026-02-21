@@ -3,4 +3,21 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
+
+  rescue_from Users::TooManyCharactersError, with: :render_too_many_characters
+  rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid
+
+  private
+
+  def render_too_many_characters
+    flash[:error] = I18n.t 'flash.errors.cannot_create'
+
+    redirect_to list_path
+  end
+
+  def render_record_invalid(err)
+    flash[:error] = I18n.t 'flash.errors.invalid_record'
+
+    render :new, locals: { record: err.record }
+  end
 end

@@ -1,15 +1,25 @@
+<%# locals: (record: nil) %>
+<% errors = record&.errors || {} %>
+
 <h1><%= t 'views.characters.new.title' %></h1>
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@character) do |f| %>
-
-    <%= render 'shared/error_messages', object: f.object %>
+    
+    <%= form_for(:character, url: characters_path, method: 'POST') do |f| %>
 
       <%= f.label :name %>
-      <%= f.text_field :name %>
+      
+      <%= f.text_field :name, value: record&.name %>
+      
+      <% if errors[:name].present? %>
+        <div class="input-error"><%= errors.full_messages_for(:name).join(', ') %></div>
+      <% end %>
 
       <%= f.label :gender %>
-      <%= f.select :gender, [[t('select'), ''], [t('female'), 'K'], [t('male'), 'M']] %>
+      <%= f.select :gender, [[t('select'), ''], [t('female'), 'K'], [t('male'), 'M']],selected: record&.gender %>
+      <% if errors[:gender].present? %>
+        <div class="input-error"><%= errors.full_messages_for(:gender).join(', ') %></div>
+      <% end %>
 
       <%= f.submit I18n.t 'views.characters.new.create', class: "btn btn-large btn-primary" %>
     <% end %>
