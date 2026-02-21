@@ -1,4 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('boot', __dir__)
 
 require 'rails/all'
 
@@ -17,23 +19,21 @@ module Fabularr
     # config.time_zone = 'Central Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.load_path += Dir[Rails.root.join('my/locales/*.{rb,yml}').to_s]
     config.i18n.default_locale = :pl
 
-    config.generators do |g| 
-      g.test_framework :rspec, 
-        :fixtures => true, 
-        :view_specs => false, 
-        :helper_specs => false, 
-        :routing_specs => false, 
-        :controller_specs => true, 
-        :request_specs => true 
-      g.fixture_replacement :factory_bot, :dir => "spec/factories" 
+    config.generators do |g|
+      g.test_framework :rspec,
+                       fixtures: true,
+                       view_specs: false,
+                       helper_specs: false,
+                       routing_specs: false,
+                       controller_specs: true,
+                       request_specs: true
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
     config.load_defaults 7.0
   end
 
-  unless Rails.env.production?
-    Faker::Config.locale = :ca
-  end
+  Faker::Config.locale = :ca unless Rails.env.production?
 end

@@ -3,28 +3,30 @@
 require 'spec_helper'
 
 describe CharName do
-  
-  before { @name = create(:char_name) }
-
   subject { @name }
 
- 	it { should respond_to(:character) }
- 	it { should respond_to(:named) }
+  before { @name = create(:char_name) }
 
- 	it { should be_valid }
+  it { is_expected.to respond_to(:character) }
+  it { is_expected.to respond_to(:named) }
 
- 	describe 'when character_id is not present' do
-		before { @name.character_id = nil }
-		it { should_not be_valid }
-	end
+  it { is_expected.to be_valid }
 
-	describe 'when named_id is not present' do
-		before { @name.named_id = nil }
-		it { should_not be_valid }
-	end
+  describe 'when character_id is not present' do
+    before { @name.character_id = nil }
 
-	describe 'when name is not present' do
-		before { @name.name = '' }
-		it { should_not be_valid }
-	end
+    it { is_expected.not_to be_valid }
+  end
+
+  describe 'when named_id is not present' do
+    before { @name.named_id = nil }
+
+    it { is_expected.not_to be_valid }
+  end
+
+  describe 'when name is not present' do
+    before { @name.name = '' }
+
+    it { is_expected.not_to be_valid }
+  end
 end

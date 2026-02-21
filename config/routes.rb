@@ -1,14 +1,15 @@
-Fabularr::Application.routes.draw do
+# frozen_string_literal: true
 
+Fabularr::Application.routes.draw do
   root to: 'static_pages#home'
-  get "char_names/create"
-  get "characters/:id/set" => 'characters#set', as: :character_set
-  get "characters/:id/name" => 'characters#name', as: :character_name
+  get 'char_names/create'
+  get 'characters/:id/set' => 'characters#set', as: :character_set
+  get 'characters/:id/name' => 'characters#name', as: :character_name
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
-  resources :characters, only: [:new, :create]
+  resources :sessions, only: %i[new create destroy]
+  resources :characters, only: %i[new create]
   resources :char_names
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -18,7 +19,7 @@ Fabularr::Application.routes.draw do
   match '/list', to: 'users#show', via: 'get'
 
   # Events
-  match "/events", to: 'events#index', via: 'get'
+  match '/events', to: 'events#index', via: 'get'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -51,7 +52,7 @@ Fabularr::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

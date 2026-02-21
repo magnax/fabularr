@@ -1,0 +1,17 @@
+require:
+  - rubocop-rails
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-minitest
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-rspec_rails
+
+Metrics/BlockLength:
+  Exclude: 
+    - '*_spec.rb'
+    - 'db/schema.rb'
+  AllowedMethods: ['describe', 'context']
+
+Style/Documentation:
+  Enabled: false

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # main class
-class Character < ActiveRecord::Base
+class Character < ApplicationRecord
   belongs_to :user
   belongs_to :location
   belongs_to :spawn_location, class_name: 'Location'

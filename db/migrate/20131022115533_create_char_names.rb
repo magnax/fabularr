@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCharNames < ActiveRecord::Migration[4.2]
   def change
     create_table :char_names do |t|
@@ -11,7 +13,6 @@ class CreateCharNames < ActiveRecord::Migration[4.2]
 
     add_index :char_names, :character_id
     add_index :char_names, :named_id
-    add_index :char_names, [:character_id, :named_id], unique: true
-    
+    add_index :char_names, %i[character_id named_id], unique: true
   end
 end

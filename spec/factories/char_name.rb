@@ -7,4 +7,4 @@ FactoryBot.define do
     name { 'Magnus' }
     description { 'Magnus description' }
   end
-end  
+end

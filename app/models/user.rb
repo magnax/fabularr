@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class User < ActiveRecord::Base
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-	
+class User < ApplicationRecord
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/i
+
   has_many :characters
 
-  before_save { self.email = email.downcase }	
+  before_save { self.email = email.downcase }
   before_create :create_remember_token
 
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
@@ -13,13 +13,13 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  scope :recently_created, -> { where('created_at <= ?', Date.current - 2.days ) }
+  scope :recently_created, -> { where('created_at <= ?', Date.current - 2.days) }
 
-  def User.new_remember_token
+  def self.new_remember_token
     SecureRandom.urlsafe_base64
   end
 
-  def User.encrypt(token)
+  def self.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
 
@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def can_create_new_character?
-  	self.characters.count < 15
+    characters.count < 15
   end
 
   private

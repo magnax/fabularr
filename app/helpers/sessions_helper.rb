@@ -39,10 +39,10 @@ module SessionsHelper
   end
 
   def signed_in_user
-    unless signed_in?
-      store_location
-      redirect_to login_url, notice: I18n.t('flash.notice.please_login')
-    end
+    return if signed_in?
+
+    store_location
+    redirect_to login_url, notice: I18n.t('flash.notice.please_login')
   end
 
   def sign_out

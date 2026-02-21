@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class CharactersController < ApplicationController
-	before_action :signed_in_user
-  before_action :check_character_create, only: [:new, :create]
+  before_action :signed_in_user
+  before_action :check_character_create, only: %i[new create]
 
   def new
-  	@character = current_user.characters.build
+    @character = current_user.characters.build
   end
 
   def create
-  	@character = current_user.create_character(character_params, Location.random[0].id)
+    @character = current_user.create_character(character_params, Location.random[0].id)
 
     if @character.save
       flash[:success] = I18n.t 'flash.success.character_created'
@@ -36,9 +36,9 @@ class CharactersController < ApplicationController
   end
 
   def check_character_create
-  	if not current_user.can_create_new_character? 
-			flash[:error] = I18n.t 'flash.errors.cannot_create'
-			redirect_to list_path and return	
-  	end
+    return if current_user.can_create_new_character?
+
+    flash[:error] = I18n.t 'flash.errors.cannot_create'
+    redirect_to list_path and return
   end
 end
