@@ -19,6 +19,7 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
+  gem 'bullet'
   gem 'dotenv'
   gem 'factory_bot_rails'
   gem 'faker'
