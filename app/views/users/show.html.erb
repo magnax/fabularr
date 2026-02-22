@@ -7,7 +7,7 @@
 <% else %>
   <%= t 'views.users.show.no_chars' %>
 <% end %>
-<% if @user.can_create_new_character? %>
+<% if @user.can_create_character? %>
 	<%= link_to I18n.t('views.users.show.create_char'), new_character_path %>
 <% else %>
 	<%= t 'views.users.show.cannot_create_char' %>

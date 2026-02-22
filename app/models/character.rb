@@ -7,6 +7,7 @@ class Character < ApplicationRecord
   belongs_to :spawn_location, class_name: 'Location'
 
   has_many :char_names, dependent: :destroy
+  has_many :events, dependent: :destroy
 
   before_save { self.gender = gender.upcase }
 

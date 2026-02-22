@@ -20,12 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: Hello
-  invalid_credentials: Invalid username or password
-  new_user: New user
-  select: --- select ---
-  unknown_man: unknown man
-  unknown_woman: unknown woman
   activerecord:
     models:
       character: Character
@@ -37,6 +31,10 @@ en:
         email: E-mail
         password: Password
         password_confirmation: Confirmation
+  events:
+    initial:
+      location_info: You are in some place which looks like grassland.
+      people_info: You see some other people around.
   flash:
     errors:
       cannot_create: You cannot create more than 15 characters
@@ -49,11 +47,15 @@ en:
     notice:
       please_login: Please login!
       please_choose_char: Please choose one character
+  hello: Hello
   helpers:
     label:
       session:
         email: E-mail
         password: Password
+  invalid_credentials: Invalid username or password
+  new_user: New user
+  select: --- select ---
   views:
     users:
       new:
@@ -85,3 +87,5 @@ en:
     sessions:
       new:
         title: Fabular login
+  unknown_man: unknown man
+  unknown_woman: unknown woman
