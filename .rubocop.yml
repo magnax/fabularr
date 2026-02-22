@@ -13,5 +13,8 @@ Metrics/BlockLength:
     - 'db/schema.rb'
   AllowedMethods: ['describe', 'context']
 
+Style/ClassAndModuleChildren:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false

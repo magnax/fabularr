@@ -35,13 +35,12 @@ group :development, :test do
 end
 
 group :test do
+  gem 'benchmark'
   gem 'capybara'
   gem 'launchy'
-  gem 'minitest'
+  gem 'logger'
+  gem 'minitest', '~> 5.1.0'
+  gem 'ostruct'
   gem 'rails-controller-testing'
   gem 'test-unit'
-end
-
-group :doc do
-  gem 'sdoc', require: false
 end
