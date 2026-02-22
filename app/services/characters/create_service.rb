@@ -11,6 +11,7 @@ module Characters
           spawn_location_id: random_location_id
         )
       )
+
       Characters::CreateInitialEvents.call!(new_char)
     end
 

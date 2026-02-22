@@ -9,12 +9,12 @@
 </form>
 <% events.each do |event| %>
   <div>
-    <%= @character.name_for(event.character)  %>
+    <%= raw event[:character] %>
   </div>
   <div>
-    <%= event.created_at  %>
+    <%= event[:created_at]  %>
   </div>
   <div>
-    <%= event.body  %>
+    <%= event[:body].html_safe  %>
   </div>
 <% end %>

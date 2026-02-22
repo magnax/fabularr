@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   def index
     @character = current_character
     @location = @character.location
-    @events = @location.events.includes(:character).newest
+    @events = Events::FetchEvents.call!(@character)
   end
 
   def create

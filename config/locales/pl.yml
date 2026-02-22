@@ -33,6 +33,8 @@ pl:
     initial:
       location_info: Znajdujesz się w miejscu, które można określić jako łąka.
       people_info: W pobliżu widzisz kilka innych osób.
+    people:
+      spawn_info: Widzisz nową osobę, to %{character_link}.
   flash:
     errors:
       cannot_create: Nie możesz mieć więcej niż 15 postaci

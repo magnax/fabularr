@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_21_093113) do
     t.text "body"
     t.integer "location_id"
     t.integer "character_id"
+    t.integer "receiver_character_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
