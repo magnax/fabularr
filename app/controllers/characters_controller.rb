@@ -6,7 +6,7 @@ class CharactersController < ApplicationController
   def new; end
 
   def create
-    Characters::CreateService.call!(current_user, character_params)
+    Characters::CreateService.call(current_user, character_params)
 
     flash[:success] = I18n.t 'flash.success.character_created'
     redirect_to list_path

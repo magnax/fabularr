@@ -16,7 +16,7 @@ class Event < ApplicationRecord
   def parse(character)
     {
       body: parsed_body(character),
-      character: character.name_for(self.character),
+      character: self.character.present? ? character.name_for(self.character) : nil,
       created_at: created_at.strftime('%Y-%m-%d')
     }.with_indifferent_access
   end
