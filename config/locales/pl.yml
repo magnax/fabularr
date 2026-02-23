@@ -30,6 +30,12 @@ pl:
             name:
               blank: musi być podane
   events:
+    character:
+      talking:
+        other: "%{char_name} mówi: "
+        to_me: "%{char_name} mówi do Ciebie: "
+        me: 'Mówisz: '
+        to_other: 'Mówisz do %{char_name}: '
     initial:
       location_info: Znajdujesz się w miejscu, które można określić jako łąka.
       people_info: W pobliżu widzisz kilka innych osób.

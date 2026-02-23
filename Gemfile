@@ -40,6 +40,7 @@ group :test do
   gem 'launchy'
   gem 'logger'
   gem 'minitest'
+  gem 'mocha'
   gem 'mutex_m'
   gem 'ostruct'
   gem 'rails-controller-testing'

@@ -9,14 +9,14 @@
 </form>
 <% events.each do |event| %>
   <div>
-    <%= event[:created_at]  %>
+    <%= event[:created_at] %>
   </div>
-  <% if event[:character] %>
+  <% if event[:lead] %>
     <div>
-      <%= raw event[:character] %>
+      <%= t(event[:lead][:key], char_name: event[:lead][:char_name]).html_safe %>
     </div>
   <% end %>
   <div>
-    <%= event[:body].html_safe  %>
+    <%= event[:body].html_safe %>
   </div>
 <% end %>

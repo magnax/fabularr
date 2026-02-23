@@ -9,7 +9,9 @@ Fabularr::Application.routes.draw do
 
   resources :users
   resources :sessions, only: %i[new create destroy]
-  resources :characters, only: %i[new create]
+  resources :characters, only: %i[new create] do
+    get :talk
+  end
   resources :char_names
   resources :events
 

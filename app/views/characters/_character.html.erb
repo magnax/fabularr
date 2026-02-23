@@ -1,3 +1,5 @@
 <div>
-	<%= link_to character.name_for(character), character_set_url(character.id)  %>
+  <%= link_to character.name_for(character), character_set_url(character.id) %>
+	<%= character.gender %>
+	<%= character.location.name %>
 </div>

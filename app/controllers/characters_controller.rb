@@ -22,6 +22,12 @@ class CharactersController < ApplicationController
     @charname = current_character.char_name_or_build @named_character
   end
 
+  def talk
+    @named_character = Character.find(params[:character_id])
+    @charname = current_character.char_name_or_build @named_character
+    @location = current_character.location
+  end
+
   private
 
   def character_params

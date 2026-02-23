@@ -7,6 +7,6 @@ return unless Location.count < 10
 
 User.create!(email: 'm@m.eu', password: 'fabular', password_confirmation: 'fabular')
 
-19.times do
+5.times do
   Location.create({ name: Faker::Address.city, locationtype_id: 1, locationclass_id: 1 })
 end
