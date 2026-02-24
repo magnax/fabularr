@@ -22,12 +22,12 @@ module Events
 
     def parsed_body
       parsed_body = @event.body
-      # char_match = parsed_body.match(CHARID_REGEX)
-      # return parsed_body unless char_match
+      char_match = parsed_body.match(Event::CHARID_REGEX)
+      return parsed_body unless char_match
 
-      # character_for = Character.find_by(id: char_match[1])
-      # name_for = link_to_name_for(character_for)
-      # parsed_body.gsub(CHARID_REGEX, name_for)
+      character_for = Character.find_by(id: char_match[1])
+      name_for = link_to_name_for(character_for)
+      parsed_body.gsub(Event::CHARID_REGEX, name_for)
     end
 
     def lead # rubocop:disable Metrics/MethodLength
@@ -58,10 +58,13 @@ module Events
       end
     end
 
-    def link_to_name_for(character)
-      return if character.blank?
+    def link_to_name_for(char)
+      return if char.blank?
 
-      link_to @viewing_character.name_for(character), character_name_url(character.id, only_path: true)
+      link_to(
+        @viewing_character.name_for(char),
+        character_name_url(char.id, only_path: true)
+      )
     end
 
     def parsed_time
