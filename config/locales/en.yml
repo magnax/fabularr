@@ -11,6 +11,12 @@ en:
         password: Password
         password_confirmation: Confirmation
   events:
+    character:
+      talking:
+        other: "%{char_name} says: "
+        to_me: "%{char_name} says to You: "
+        me: "You're saying: "
+        to_other: "You're saying to %{char_name}: "
     initial:
       location_info: You are in some place which looks like grassland.
       people_info: You see some other people around.
