@@ -16,6 +16,13 @@ Metrics/BlockLength:
     - 'db/schema.rb'
   AllowedMethods: ['describe', 'context']
 
+RSpec/MultipleExpectations:
+  Enabled: true
+  Max: 5
+
+RSpec/NestedGroups:
+  Max: 6
+
 Style/ClassAndModuleChildren:
   Enabled: false
 

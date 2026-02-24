@@ -6,9 +6,11 @@ describe 'Character creation' do
   subject { page }
 
   let!(:user) { create(:user) }
-  let!(:location) { create(:location) }
 
-  before { sign_in user }
+  before do
+    create(:location)
+    sign_in user
+  end
 
   describe 'user can create first character' do
     before do

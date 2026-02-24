@@ -3,13 +3,16 @@
 require 'spec_helper'
 
 describe 'Authentication' do
-  @login_title = 'Fabular login'
   subject { page }
 
-  describe 'login page' do
-    before { visit login_path }
+  let(:login_title) { 'Fabular login' }
 
-    it { is_expected.to have_content(@login_title) }
+  describe 'login page' do
+    before do
+      visit login_path
+    end
+
+    it { is_expected.to have_content(login_title) }
 
     describe 'with invalid information' do
       before { click_button 'Login' }
@@ -49,13 +52,13 @@ describe 'Authentication' do
         describe 'visiting the characters page' do
           before { visit user_path(user) }
 
-          it { is_expected.to have_content(@login_title) }
+          it { is_expected.to have_content(login_title) }
         end
 
         describe 'visiting the edit page' do
           before { visit edit_user_path(user) }
 
-          it { is_expected.to have_content(@login_title) }
+          it { is_expected.to have_content(login_title) }
         end
 
         describe 'submitting to the update action' do

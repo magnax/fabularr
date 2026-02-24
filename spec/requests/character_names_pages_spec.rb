@@ -78,9 +78,8 @@ describe 'CharacterNamesPages', type: :feature do
       end
 
       describe 'when character was remembered and returned to default' do
-        let!(:ellas_name) { create(:char_name, character: magnus, named: ella, name: 'Ella') }
-
         before do
+          create(:char_name, character: magnus, named: ella, name: 'Ella')
           visit character_name_path ella
           fill_in 'char_name_name', with: ''
           click_button 'Change name'

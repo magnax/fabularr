@@ -25,12 +25,11 @@ describe 'Events', type: :feature do
     end
 
     describe 'for signed-in users, and with character set' do
-      let!(:magnus) { create(:character, name: 'Magnus', location: fabular_city, user: user) }
-      let!(:ella) { create(:character, name: 'Ella', gender: 'K', location: fabular_city, user: user) }
-      let!(:sid) { create(:character, name: 'Sid', location: other_city, user: user) }
-
       describe 'should have events for character' do
         before do
+          create(:character, name: 'Magnus', location: fabular_city, user: user)
+          create(:character, name: 'Ella', gender: 'K', location: fabular_city, user: user)
+          create(:character, name: 'Sid', location: other_city, user: user)
           visit list_path
           click_link 'Magnus'
         end

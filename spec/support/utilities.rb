@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-include ApplicationHelper
-
 def valid_signin(user)
   fill_in 'E-mail', with: user.email
   fill_in 'Password', with: user.password
