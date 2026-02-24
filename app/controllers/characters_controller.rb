@@ -3,7 +3,9 @@
 class CharactersController < ApplicationController
   before_action :signed_in_user
 
-  def new; end
+  def new
+    raise Users::TooManyCharactersError unless @current_user.can_create_character?
+  end
 
   def create
     Characters::CreateService.call(current_user, character_params)
