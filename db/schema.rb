@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_21_093113) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_25_074019) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "char_names", id: :serial, force: :cascade do |t|
     t.integer "character_id"
-    t.integer "named_id"
-    t.string "name"
-    t.text "description"
     t.datetime "created_at"
+    t.text "description"
+    t.string "name"
+    t.integer "named_id"
     t.datetime "updated_at"
     t.index ["character_id", "named_id"], name: "index_char_names_on_character_id_and_named_id", unique: true
     t.index ["character_id"], name: "index_char_names_on_character_id"
@@ -27,41 +27,63 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_21_093113) do
   end
 
   create_table "characters", id: :serial, force: :cascade do |t|
-    t.string "name"
+    t.datetime "created_at"
     t.string "gender"
     t.integer "location_id"
+    t.string "name"
     t.integer "spawn_location_id"
-    t.integer "user_id"
-    t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "user_id"
   end
 
   create_table "events", force: :cascade do |t|
     t.text "body"
-    t.integer "location_id"
     t.integer "character_id"
-    t.integer "receiver_character_id"
     t.datetime "created_at", null: false
+    t.integer "location_id"
+    t.integer "receiver_character_id"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "location_resources", force: :cascade do |t|
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.integer "location_id"
+    t.integer "resource_id"
     t.datetime "updated_at", null: false
   end
 
   create_table "locations", id: :serial, force: :cascade do |t|
-    t.integer "locationtype_id"
+    t.datetime "created_at"
     t.integer "locationclass_id"
+    t.integer "locationtype_id"
     t.string "name"
     t.integer "parent_location_id"
-    t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.integer "location_id"
+    t.integer "starting_character_id"
+    t.string "unit"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "key"
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
+    t.datetime "created_at"
     t.string "email"
     t.string "password_digest"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string "remember_token"
+    t.datetime "updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
-
 end

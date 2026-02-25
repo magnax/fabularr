@@ -1,0 +1,2 @@
+class LocationResource < ApplicationRecord
+end
