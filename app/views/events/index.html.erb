@@ -1,6 +1,7 @@
 <h1><%= t 'views.events.title' %>: <%= @character.name_for(@character) %></h1>
 <div><%= t 'views.events.index.location' %>: <%= @location.name %></div>
-<h2><%= t('views.events.events') %></h2>
 <%= render partial: 'events/events', locals: { events: @events } %>
-<h2><%= t 'views.events.index.characters_here' %></h2>
-<%= render partial: "events/character", collection: @location.characters %>
+<%= render partial: "events/characters", locals: { characters: @location.characters } %>
+<%= render partial: "events/items", locals: { items: @location.items } %>
+<%= render partial: "events/resources", locals: { resources: @resources } %>
+<%= render partial: "events/projects", locals: { projects: @location.projects } %>

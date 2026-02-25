@@ -1,0 +1,10 @@
+<h2><%= t 'views.events.index.items_here' %></h2>
+<% if items.any? %>
+  <% items.each do |item| %>
+    <div>
+      <%= t("items.#{item.key}") %>
+    </div>
+  <% end %>
+<% else %>
+  <%= t('items.nothing_here') %>
+<% end %>

@@ -8,6 +8,8 @@ class EventsController < ApplicationController
     @character = current_character
     @location = @character.location
     @events = Events::FetchEvents.call!(@character)
+    @items = @location.items
+    @resources = @location.location_resources.includes(:resource)
   end
 
   def create

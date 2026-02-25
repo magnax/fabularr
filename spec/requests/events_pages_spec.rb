@@ -39,6 +39,10 @@ describe 'Events', type: :feature do
         it { is_expected.to have_link('Magnus') }
         it { is_expected.to have_link('unknown woman') }
         it { is_expected.not_to have_link('Sid') }
+        it { is_expected.to have_content('Resources') }
+        it { is_expected.to have_content('Items') }
+        it { is_expected.to have_content('Projects') }
+        it { is_expected.to have_link('Discover new resource') }
       end
     end
   end

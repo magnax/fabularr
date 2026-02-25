@@ -1,0 +1,10 @@
+<h2><%= t 'views.events.index.projects_here' %></h2>
+<% if projects.any? %>
+  <% projects.each do |project| %>
+    <div>
+      <%= t("projects.#{project.key}") %>
+    </div>
+  <% end %>
+<% else %>
+  <%= t('projects.nothing_here') %>
+<% end %>

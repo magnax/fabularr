@@ -1,0 +1,11 @@
+<h2><%= t 'views.events.index.resources_here' %></h2>
+<% if resources.any? %>
+  <% resources.each do |resource| %>
+    <div>
+      <%= t("resources.#{resource.key}") %>
+    </div>
+  <% end %>
+<% else %>
+  <%= t('resources.nothing_here') %>
+<% end %>
+<%= link_to t('views.events.discover_new_resource'), '/resources/new' %>

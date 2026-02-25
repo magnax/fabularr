@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 class Location < ApplicationRecord
-  has_many :characters
-  has_many :events
+  has_many :characters, dependent: :destroy
+  has_many :events, dependent: :destroy
+  has_many :items, dependent: :destroy
+  has_many :location_resources, dependent: :destroy
+  has_many :projects, dependent: :destroy
 
   scope :random, -> { order('RANDOM()').limit(1) }
 
