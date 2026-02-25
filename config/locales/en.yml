@@ -22,6 +22,7 @@ en:
       people_info: You see some other people around.
     people:
       spawn_info: You see a new person, its %{character_link}.
+  female: Female
   flash:
     errors:
       cannot_create: You cannot create more than 15 characters
@@ -41,7 +42,14 @@ en:
         email: E-mail
         password: Password
   invalid_credentials: Invalid username or password
+  items:
+    nothing_here: Nothing is laying here
   new_user: New user
+  male: Male
+  projects:
+    nothing_here: No projects
+  resources:
+    nothing_here: No visible resources
   select: --- select ---
   views:
     users:
@@ -61,10 +69,14 @@ en:
         current_name: Current name
         new_name: New name
     events:
+      discover_new_resource: Discover new resource
       events: Events
       index:
-        location: Location
         characters_here: Characters here
+        items_here: Items
+        location: Location
+        projects_here: Projects
+        resources_here: Resources
       send: Send
       title: Events for
     layout:

@@ -1,12 +1,4 @@
 pl:
-  hello: Witaj
-  invalid_credentials: Nieprawidłowy adres lub hasło
-  female: Kobieta
-  male: Mężczyzna
-  new_user: Nowy użytkownik
-  select: --- wybierz ---
-  unknown_man: nieznana kobieta
-  unknown_woman: nieznany mężczyzna
   activerecord:
     models:
       character: Postać
@@ -41,6 +33,7 @@ pl:
       people_info: W pobliżu widzisz kilka innych osób.
     people:
       spawn_info: Widzisz nową osobę, to %{character_link}.
+  female: Kobieta
   flash:
     errors:
       cannot_create: Nie możesz mieć więcej niż 15 postaci
@@ -54,11 +47,22 @@ pl:
     notice:
       please_login: Zaloguj się, proszę
       please_choose_char: Musisz najpierw wybrać którąś postać
+  hello: Witaj
   helpers:
     label:
       session:
         email: Adres e-mail
         password: Hasło
+  invalid_credentials: Nieprawidłowy adres lub hasło
+  items:
+    nothing_here: Nic tu nie leży
+  male: Mężczyzna
+  new_user: Nowy użytkownik
+  projects:
+    nothing_here: Nie ma żadnych projektów
+  resources:
+    nothing_here: Nie widać żadnych zasobów
+  select: --- wybierz ---
   views:
     users:
       new:
@@ -78,10 +82,14 @@ pl:
         current_name: Obecne imię postaci
         new_name: Nowe imię
     events:
+      discover_new_resource: Odkryj nowy zasób
       events: Zdarzenia
       index:
-        location: Miejsce
         characters_here: Postacie w tym miejscu
+        items_here: Przedmioty
+        location: Miejsce
+        projects_here: Projekty
+        resources_here: Zasoby
       send: Wyślij
       title: Zdarzenia dla
     layout:
@@ -97,3 +105,5 @@ pl:
     sessions:
       new:
         title: Logowanie do Fabular
+  unknown_man: nieznana kobieta
+  unknown_woman: nieznany mężczyzna
