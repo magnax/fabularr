@@ -1,0 +1,7 @@
+<p>Discover new resource!!!</p>
+
+<%= form_for :project, url: projects_path, method: 'POST' do |form| %>
+  <%= form.hidden_field :location_id, value: @location.id %>
+  <%= form.hidden_field :project_type, value: 'discover_location_resource' %>
+  <%= form.submit 'Odkrywaj' %>
+<% end %>

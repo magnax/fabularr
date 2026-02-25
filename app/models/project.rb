@@ -2,4 +2,5 @@
 
 class Project < ApplicationRecord
   belongs_to :location, optional: true
+  belongs_to :starting_character, optional: false, class_name: 'Character'
 end

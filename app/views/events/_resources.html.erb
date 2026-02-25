@@ -8,4 +8,4 @@
 <% else %>
   <%= t('resources.nothing_here') %>
 <% end %>
-<%= link_to t('views.events.discover_new_resource'), '/resources/new' %>
+<%= link_to t('views.events.discover_new_resource'), new_location_location_resource_url(@location.id) %>

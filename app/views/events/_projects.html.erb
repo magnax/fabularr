@@ -2,7 +2,7 @@
 <% if projects.any? %>
   <% projects.each do |project| %>
     <div>
-      <%= t("projects.#{project.key}") %>
+      #<%= project.id %>, started by: <%= project.starting_character_id %>
     </div>
   <% end %>
 <% else %>
