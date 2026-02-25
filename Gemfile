@@ -37,6 +37,7 @@ end
 group :test do
   gem 'benchmark'
   gem 'capybara'
+  gem 'database_cleaner-active_record'
   gem 'launchy'
   gem 'logger'
   gem 'minitest'

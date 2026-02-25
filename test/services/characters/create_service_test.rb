@@ -8,8 +8,13 @@ class Characters::CreateServiceTest < ActiveSupport::TestCase
   end
 
   def setup
+    DatabaseCleaner.start
     @user = create(:user)
     @location = create(:location)
+  end
+
+  def teardown
+    DatabaseCleaner.clean
   end
 
   test 'creates character in an empty location' do

@@ -13,9 +13,21 @@ module ActiveSupport
 
     fixtures :all
 
+    DatabaseCleaner.strategy = :transaction
+
     def login(user, character)
       ApplicationController.any_instance.expects(:current_user).returns(user)
       ApplicationController.any_instance.expects(:current_character).returns(character)
     end
   end
 end
+
+# class Minitest::Spec
+#   before :each do
+#     DatabaseCleaner.start
+#   end
+
+#   after :each do
+#     DatabaseCleaner.clean
+#   end
+# end
