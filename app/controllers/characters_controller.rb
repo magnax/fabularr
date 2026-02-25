@@ -15,12 +15,12 @@ class CharactersController < ApplicationController
   end
 
   def set
-    cookies.permanent[:character_token] = params[:id]
+    cookies.permanent[:character_token] = params[:character_id]
     redirect_to events_path
   end
 
   def name
-    @named_character = Character.find(params[:id])
+    @named_character = Character.find(params[:character_id])
     @charname = current_character.char_name_or_build @named_character
   end
 

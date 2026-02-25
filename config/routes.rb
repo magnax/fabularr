@@ -3,17 +3,16 @@
 Fabularr::Application.routes.draw do
   root to: 'static_pages#home'
 
-  get 'char_names/create'
-  get 'characters/:id/set' => 'characters#set', as: :character_set
-  get 'characters/:id/name' => 'characters#name', as: :character_name
-
-  resources :users
-  resources :sessions, only: %i[new create destroy]
   resources :characters, only: %i[new create] do
     get :talk
+    get :set
+    get :name
   end
   resources :char_names
   resources :events
+  resources :location_resources
+  resources :sessions, only: %i[new create destroy]
+  resources :users
 
   match '/register', to: 'users#new', via: 'get'
   match '/login', to: 'sessions#new', via: 'get'
