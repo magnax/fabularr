@@ -44,8 +44,10 @@ en:
   invalid_credentials: Invalid username or password
   items:
     nothing_here: Nothing is laying here
-  new_user: New user
   male: Male
+  new_user: New user
+  project_types:
+    discover_resource: Discovering new resources
   projects:
     join: Join project
     leave: Leave project

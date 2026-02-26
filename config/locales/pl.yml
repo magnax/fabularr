@@ -58,6 +58,8 @@ pl:
     nothing_here: Nic tu nie leży
   male: Mężczyzna
   new_user: Nowy użytkownik
+  project_types:
+    discover_resource: Poszukiwanie nowych zasobów
   projects:
     join: Dołącz do projektu
     leave: Opuść projekt

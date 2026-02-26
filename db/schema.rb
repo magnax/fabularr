@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_26_091119) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_26_161928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -69,10 +69,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_26_091119) do
     t.datetime "updated_at"
   end
 
+  create_table "project_types", force: :cascade do |t|
+    t.integer "base_speed"
+    t.datetime "created_at", null: false
+    t.boolean "fixed"
+    t.string "key"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.integer "amount"
     t.datetime "created_at", null: false
     t.integer "location_id"
+    t.integer "project_type_id"
     t.integer "starting_character_id"
     t.string "unit"
     t.datetime "updated_at", null: false
@@ -97,7 +106,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_26_091119) do
   create_table "workers", force: :cascade do |t|
     t.integer "character_id"
     t.datetime "created_at", null: false
-    t.time "left_at"
     t.integer "project_id"
     t.datetime "updated_at", null: false
   end
