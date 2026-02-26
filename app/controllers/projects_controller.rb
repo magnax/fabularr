@@ -16,6 +16,12 @@ class ProjectsController < ApplicationController
     redirect_to events_path
   end
 
+  def leave
+    Projects::LeaveService.call(current_character, params[:project_id])
+
+    redirect_to events_path
+  end
+
   private
 
   def project_params

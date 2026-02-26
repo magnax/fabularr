@@ -3,7 +3,11 @@
   <% projects.each do |project| %>
     <div>
       #<%= project.id %>, <%= t('projects.started_by') %>: <%= project.starting_character_id %>
-      <%= link_to t('projects.join'), project_join_path(project.id) %>
+      <% if @current_character.project.blank? %>
+        <%= link_to t('projects.join'), project_join_path(project.id) %>
+      <% elsif @current_character.project == project %>
+        <%= link_to t('projects.leave'), project_leave_path(project.id) %>
+      <% end %>
     </div>
   <% end %>
 <% else %>

@@ -47,7 +47,8 @@ en:
   new_user: New user
   male: Male
   projects:
-    join: Join
+    join: Join project
+    leave: Leave project
     nothing_here: No projects
     started_by: Started by
   resources:

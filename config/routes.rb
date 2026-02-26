@@ -15,6 +15,7 @@ Fabularr::Application.routes.draw do
   end
   resources :projects, only: :create do
     get :join
+    get :leave
   end
   resources :sessions, only: %i[new create destroy]
   resources :users

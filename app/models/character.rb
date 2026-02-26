@@ -2,20 +2,23 @@
 
 # main class
 class Character < ApplicationRecord
-  belongs_to :user
   belongs_to :location
   belongs_to :spawn_location, class_name: 'Location'
+  belongs_to :user
 
   has_many :char_names, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_many :workers, dependent: :destroy
+
+  has_many :projects, through: :workers
 
   before_save { self.gender = gender.upcase }
 
-  validates :user_id, presence: true
-  validates :name, presence: true
   validates :gender, presence: true, format: { with: /\A[km]\z/i }
   validates :location_id, presence: true
+  validates :name, presence: true
   validates :spawn_location_id, presence: true
+  validates :user_id, presence: true
 
   def default_name
     gender == 'K' ? I18n.t('unknown_woman') : I18n.t('unknown_man')
@@ -39,5 +42,9 @@ class Character < ApplicationRecord
 
   def char_name_or_build(character)
     char_name_for(character) || char_names.build(named: character, name: name_for(character))
+  end
+
+  def project
+    workers.active.last&.project
   end
 end
