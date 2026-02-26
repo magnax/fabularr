@@ -19,6 +19,9 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 15
 
+Rails/CreateTableWithTimestamps:
+  Enabled: false
+
 RSpec/MultipleExpectations:
   Enabled: true
   Max: 5

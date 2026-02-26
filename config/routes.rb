@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Fabularr::Application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq' # http://localhost:3000/sidekiq
+
   root to: 'static_pages#home'
 
   resources :characters, only: %i[new create] do
