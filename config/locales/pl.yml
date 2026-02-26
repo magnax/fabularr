@@ -62,7 +62,7 @@ pl:
     join: Dołącz do projektu
     leave: Opuść projekt
     nothing_here: Nie ma żadnych projektów
-    started_by: Rozpoczęty przez
+    started_by: Rozpoczęty przez %{char_url}
   resources:
     nothing_here: Nie widać żadnych zasobów
   select: --- wybierz ---

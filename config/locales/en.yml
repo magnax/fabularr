@@ -50,7 +50,7 @@ en:
     join: Join project
     leave: Leave project
     nothing_here: No projects
-    started_by: Started by
+    started_by: Started by %{char_url}
   resources:
     nothing_here: No visible resources
   select: --- select ---

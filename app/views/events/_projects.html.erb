@@ -2,7 +2,7 @@
 <% if projects.any? %>
   <% projects.each do |project| %>
     <div>
-      #<%= project.id %>, <%= t('projects.started_by') %>: <%= project.starting_character_id %>
+      #<%= project.id %>, <%= t('projects.started_by', char_url: link_to(current_character.name_for(project.starting_character), character_name_url(project.starting_character_id))).html_safe %>
       <% if @current_character.project.blank? %>
         <%= link_to t('projects.join'), project_join_path(project.id) %>
       <% elsif @current_character.project == project %>
