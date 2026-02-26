@@ -9,7 +9,11 @@
 <body>
 	<%= render 'layouts/character_header' %>
 	<% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>"><%= value %></div>
+    <% if key == 'errors' %>
+      <div class="alert alert-<%= key %>"><%= value.split("\n").join('< /br>') %></div>
+    <% else %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
   <% end %>
 	
   <%= yield %>

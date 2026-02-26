@@ -2,6 +2,10 @@ en:
   activerecord:
     models:
       character: Character
+    errors:
+      messages:
+        record_invalid: Nieprawidłowe dane
+        required: Wymagane
     attributes:
       character:
         name: Name
@@ -22,10 +26,14 @@ en:
       people_info: You see some other people around.
     people:
       spawn_info: You see a new person, its %{character_link}.
+    projects:
+      starting_me: You're starting project
+      starting_other: You see that %{character_link} is starting new project
   female: Female
   flash:
     errors:
       cannot_create: You cannot create more than 15 characters
+      invalid_record: Invalid record
     success:
       welcome: Welcome to Fabular!
       profile_saved: Profil saved!

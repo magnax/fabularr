@@ -13,6 +13,9 @@ pl:
         password: Hasło
         password_confirmation: Hasło ponownie
     errors:
+      messages:
+        record_invalid: Nieprawidłowe dane
+        required: Wymagane
       models:
         character:
           attributes:
@@ -33,11 +36,15 @@ pl:
       people_info: W pobliżu widzisz kilka innych osób.
     people:
       spawn_info: Widzisz nową osobę, to %{character_link}.
+    projects:
+      starting_me: Rozpoczynasz projekt
+      starting_other: Widzisz jak %{character_link} rozpoczyna nowy projekt
   female: Kobieta
   flash:
     errors:
       cannot_create: Nie możesz mieć więcej niż 15 postaci
       character_name_change_error: Błąd przy zmianie imienia postaci
+      invalid_record: Nieprawidłowe dane
     success:
       welcome: Witamy w Fabular!
       profile_saved: Profil zapisany!

@@ -17,7 +17,11 @@ class ApplicationController < ActionController::Base
 
   def render_record_invalid(err)
     flash[:error] = I18n.t 'flash.errors.invalid_record'
-
-    render :new, locals: { record: err.record }
+    if "#{request.original_url}/new" == request.referer
+      render :new, locals: { record: err.record }
+    else
+      flash[:errors] = err.record.errors.full_messages.join("\n")
+      redirect_to request.referer, params: request.params
+    end
   end
 end

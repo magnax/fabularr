@@ -16,6 +16,9 @@ Metrics/BlockLength:
     - 'db/schema.rb'
   AllowedMethods: ['describe', 'context']
 
+Metrics/MethodLength:
+  Max: 15
+
 RSpec/MultipleExpectations:
   Enabled: true
   Max: 5
