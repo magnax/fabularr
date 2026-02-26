@@ -47,7 +47,9 @@ en:
   new_user: New user
   male: Male
   projects:
+    join: Join
     nothing_here: No projects
+    started_by: Started by
   resources:
     nothing_here: No visible resources
   select: --- select ---

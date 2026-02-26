@@ -59,7 +59,9 @@ pl:
   male: Mężczyzna
   new_user: Nowy użytkownik
   projects:
+    join: Dołącz
     nothing_here: Nie ma żadnych projektów
+    started_by: Rozpoczęty przez
   resources:
     nothing_here: Nie widać żadnych zasobów
   select: --- wybierz ---

@@ -2,7 +2,8 @@
 <% if projects.any? %>
   <% projects.each do |project| %>
     <div>
-      #<%= project.id %>, started by: <%= project.starting_character_id %>
+      #<%= project.id %>, <%= t('projects.started_by') %>: <%= project.starting_character_id %>
+      <%= link_to t('projects.join'), project_join_path(project.id) %>
     </div>
   <% end %>
 <% else %>

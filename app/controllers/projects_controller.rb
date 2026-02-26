@@ -10,6 +10,12 @@ class ProjectsController < ApplicationController
     redirect_to events_path
   end
 
+  def join
+    Projects::JoinService.call(current_character, params[:project_id])
+
+    redirect_to events_path
+  end
+
   private
 
   def project_params
