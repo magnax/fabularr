@@ -2,7 +2,9 @@
 <% if projects.any? %>
   <% projects.each do |project| %>
     <div>
-      <%= t("project_types.#{project.project_type.key}") %>, <%= t('projects.started_by', char_url: link_to(current_character.name_for(project.starting_character), character_name_url(project.starting_character_id))).html_safe %>
+      <%= t("project_types.#{project.project_type.key}") %>
+      (<%= (project.elapsed.to_f / project.duration * 100.0).round(1) %>%), 
+      <%= t('projects.started_by', char_url: link_to(current_character.name_for(project.starting_character), character_name_url(project.starting_character_id))).html_safe %>
       <% if @current_character.project.blank? %>
         <%= link_to t('projects.join'), project_join_path(project.id) %>
       <% elsif @current_character.project == project %>
