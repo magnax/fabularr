@@ -4,9 +4,8 @@ class ProjectsProgressJob
   include Sidekiq::Job
 
   def perform
-    ids = Worker.active.pluck(:project_id).uniq
-    Project.where(id: ids).find_each do |project|
-      project.update(elapsed: project.elapsed + 300) unless project.elapsed >= project.duration
+    Project.pending.find_each do |project|
+      Projects::ProgressService.call(project.id)
     end
 
     s = Setting.find_by key: 'projects'

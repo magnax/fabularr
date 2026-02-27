@@ -6,4 +6,6 @@ class Project < ApplicationRecord
   belongs_to :project_type
 
   has_many :workers, dependent: :destroy
+
+  scope :pending, -> { where(elapsed < duration) }
 end

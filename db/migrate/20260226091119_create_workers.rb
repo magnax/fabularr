@@ -3,7 +3,7 @@ class CreateWorkers < ActiveRecord::Migration[8.1]
     create_table :workers do |t|
       t.integer :project_id
       t.integer :character_id
-      t.time :left_at
+      t.datetime :left_at
 
       t.timestamps
     end
