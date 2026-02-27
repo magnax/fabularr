@@ -79,7 +79,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_26_212529) do
 
   create_table "projects", force: :cascade do |t|
     t.integer "amount"
+    t.datetime "checked_at"
     t.datetime "created_at", null: false
+    t.integer "duration", default: 0
+    t.integer "elapsed", default: 0
     t.integer "location_id"
     t.integer "project_type_id"
     t.integer "starting_character_id"
@@ -111,6 +114,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_26_212529) do
   create_table "workers", force: :cascade do |t|
     t.integer "character_id"
     t.datetime "created_at", null: false
+    t.time "left_at"
     t.integer "project_id"
     t.datetime "updated_at", null: false
   end
