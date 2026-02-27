@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Projects
   class CreateService < ApplicationService
     def initialize(character, params)
@@ -6,7 +8,12 @@ module Projects
     end
 
     def call
-      Project.create!(starting_character: @character, location: location, project_type_id: @params[:project_type_id])
+      Project.create!(
+        starting_character: @character,
+        location: location,
+        project_type_id: project_type.id,
+        duration: duration
+      )
 
       location.events.create!(
         character_id: nil,
@@ -23,7 +30,15 @@ module Projects
     private
 
     def location
-      @location ||= Location.find_by(id: @params[:location_id])
+      @location ||= @character.location
+    end
+
+    def duration
+      project_type.base_speed
+    end
+
+    def project_type
+      @project_type ||= ProjectType.find_by(id: @params[:project_type_id])
     end
   end
 end
