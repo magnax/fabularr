@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :project do
-    starting_character_id { 1 }
-    location_id { 1 }
+    association :starting_character, factory: :character
+    location
+    project_type
+
     amount { 1 }
-    unit { "MyString" }
+    unit { 'g' }
   end
 end
