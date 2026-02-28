@@ -22,4 +22,10 @@ namespace :jobs do
     s = Setting.where(key: 'projects').first_or_create
     s.update(value: '0')
   end
+
+  desc 'Check job status'
+  task status: :environment do
+    s = Setting.where(key: 'projects').first&.value
+    puts "Job status: #{s}"
+  end
 end
