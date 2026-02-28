@@ -28,4 +28,8 @@ Fabularr::Application.routes.draw do
   match '/login', to: 'sessions#new', via: 'get'
   match '/logout', to: 'sessions#destroy', via: 'delete'
   match '/list', to: 'users#show', via: 'get'
+
+  namespace :api do
+    resources :events, only: :show
+  end
 end
