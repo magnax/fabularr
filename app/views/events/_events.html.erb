@@ -8,16 +8,18 @@
 
 <button type="submit"><%= t('views.events.send') %></button>
 </form>
-<% events.each do |event| %>
-  <div>
-    <%= event[:created_at] %>
-  </div>
-  <% if event[:lead] %>
+<section id="event-list">
+  <% events.each do |event| %>
     <div>
-      <%= t(event[:lead][:key], char_name: event[:lead][:char_name]).html_safe %>
+      <%= event[:created_at] %>
+    </div>
+    <% if event[:lead] %>
+      <div>
+        <%= t(event[:lead][:key], char_name: event[:lead][:char_name]).html_safe %>
+      </div>
+    <% end %>
+    <div>
+      <%= event[:body].html_safe %>
     </div>
   <% end %>
-  <div>
-    <%= event[:body].html_safe %>
-  </div>
-<% end %>
+</section>

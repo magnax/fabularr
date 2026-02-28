@@ -347,6 +347,11 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
+    solid_cable (3.0.12)
+      actioncable (>= 7.2)
+      activejob (>= 7.2)
+      activerecord (>= 7.2)
+      railties (>= 7.2)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -361,6 +366,9 @@ GEM
     timecop (0.9.10)
     timeout (0.6.0)
     tsort (0.2.0)
+    turbo-rails (2.0.23)
+      actionpack (>= 7.1.0)
+      railties (>= 7.1.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -424,7 +432,9 @@ DEPENDENCIES
   sass-rails
   sidekiq
   simplecov
+  solid_cable
   timecop
+  turbo-rails
   turbolinks
   uglifier (>= 1.3.0)
 

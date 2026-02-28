@@ -16,7 +16,9 @@ gem 'rails', '8.1.2'
 gem 'rake'
 gem 'sass-rails'
 gem 'sidekiq'
+gem 'solid_cable'
 gem 'turbolinks'
+gem 'turbo-rails'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do

@@ -3,7 +3,9 @@
 module Events
   module CreateService
     def self.call!(params)
-      Event.create!(params)
+      event = Event.create!(params)
+
+      ActionCable.server.broadcast("events_#{params[:location_id]}", { id: event.id })
     end
   end
 end

@@ -16,7 +16,8 @@ class EventsController < ApplicationController
   def create
     Events::CreateService.call!(event_params)
 
-    redirect_to events_path
+    # redirect_to events_path
+    render json: {}, status: :no_content
   end
 
   private
