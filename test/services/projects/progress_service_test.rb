@@ -55,4 +55,47 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test 'project ongoing and checked for the first time' do
+    time = DateTime.parse('2026-02-01 11:00:00')
+    Timecop.freeze(time)
+    project = create(:project,
+                     duration: 900, elapsed: 300,
+                     checked_at: nil)
+    create(:worker, project: project,
+                    character: create(:character),
+                    left_at: nil)
+
+    Timecop.freeze(time + 10.minutes) do
+      assert_difference -> { project.reload.elapsed }, 600 do
+        call_service(project.id)
+      end
+    end
+
+    project.reload
+
+    assert_equal time + 10.minutes, project.checked_at
+  end
+
+  test 'project checked after expected duration' do
+    time = DateTime.parse('2026-02-01 11:00:00')
+    Timecop.freeze(time)
+    project = create(:project,
+                     duration: 1000, elapsed: 900,
+                     checked_at: DateTime.parse('2026-02-01 11:15:00'))
+    create(:worker, project: project,
+                    character: create(:character),
+                    left_at: nil)
+
+    Timecop.freeze(time + 20.minutes) do
+      assert_difference -> { project.reload.elapsed }, 100 do
+        call_service(project.id)
+      end
+    end
+
+    project.reload
+
+    assert_equal time + 20.minutes, project.checked_at
+    assert_equal project.elapsed, project.duration
+  end
 end

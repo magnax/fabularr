@@ -7,5 +7,5 @@ class Project < ApplicationRecord
 
   has_many :workers, dependent: :destroy
 
-  scope :pending, -> { where(elapsed < duration) }
+  scope :pending, -> { where('elapsed < duration') }
 end
