@@ -27,8 +27,12 @@ module Projects
         elapsed += (t_end - t_start)
       end
 
-      elapsed = project.duration - project.elapsed if (project.duration - project.elapsed) < elapsed
-      project.update(elapsed: project.elapsed + elapsed, checked_at: current_time)
+      if (project.duration - project.elapsed) > elapsed
+        project.update(elapsed: project.elapsed + elapsed, checked_at: current_time)
+      else
+        project.update(elapsed: project.duration, checked_at: current_time)
+        Projects::EndService.call(project.id)
+      end
     end
 
     private

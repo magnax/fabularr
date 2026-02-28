@@ -37,6 +37,8 @@ pl:
     people:
       spawn_info: Widzisz nową osobę, to %{character_link}.
     projects:
+      ended: Projekt zakończył się
+      my_ended: Projekt rozpoczęty przez Ciebie właśnie się zakończył
       starting_me: Rozpoczynasz projekt
       starting_other: Widzisz jak %{character_link} rozpoczyna nowy projekt
   female: Kobieta

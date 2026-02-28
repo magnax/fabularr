@@ -89,7 +89,9 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
 
     Timecop.freeze(time + 20.minutes) do
       assert_difference -> { project.reload.elapsed }, 100 do
-        call_service(project.id)
+        assert_difference -> { Event.count }, 1 do
+          call_service(project.id)
+        end
       end
     end
 

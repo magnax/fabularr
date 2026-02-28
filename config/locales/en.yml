@@ -27,6 +27,8 @@ en:
     people:
       spawn_info: You see a new person, its %{character_link}.
     projects:
+      ended: Project has ended.
+      my_ended: Project started by you has just ended.
       starting_me: You're starting project
       starting_other: You see that %{character_link} is starting new project
   female: Female
