@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   def index
     @character = current_character
     @location = @character.location
-    @events = Events::FetchEvents.call!(@character)
+    @events = Events::FetchEvents.call(@character)
     @items = @location.items
     @resources = @location.location_resources.includes(:resource)
     @projects = @location.projects.pending.includes(:starting_character, :project_type)
@@ -16,7 +16,7 @@ class EventsController < ApplicationController
   def create
     Events::CreateService.call!(event_params)
 
-    redirect_to events_path
+    render json: {}, status: :no_content
   end
 
   private

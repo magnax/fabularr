@@ -19,7 +19,7 @@ module Events
         )
       end
 
-      ActionCable.server.broadcast("events_#{@location.id}", { body: @body })
+      ActionCable.server.broadcast("location_#{@location.id}", { type: 'event', body: @body })
     end
   end
 end

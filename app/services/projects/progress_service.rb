@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Projects
   class ProgressService < ApplicationService
     def initialize(project_id)
@@ -29,6 +31,14 @@ module Projects
 
       if (project.duration - project.elapsed) > elapsed
         project.update(elapsed: project.elapsed + elapsed, checked_at: current_time)
+        ActionCable.server.broadcast(
+          "location_#{project.location_id}",
+          {
+            type: 'project',
+            id: project.id,
+            progress: (project.elapsed.to_f / project.duration * 100.0).round(1)
+          }
+        )
       else
         project.update(elapsed: project.duration, checked_at: current_time)
         Projects::EndService.call(project.id)

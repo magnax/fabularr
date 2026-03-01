@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class EventsChannel < ApplicationCable::Channel
+class LocationChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "events_#{params[:location_id]}"
+    stream_from "location_#{params[:location_id]}"
   end
 
   def unsubscribed
