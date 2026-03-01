@@ -4,7 +4,9 @@ class Api::EventsController < ApplicationController
   before_action :signed_in_user
 
   def show
-    render json: { event: Events::ParseService.call(event, character).as_json }
+    render json: {
+      event: Events::ParseService.call(event, character, parsed: true).as_json
+    }
   end
 
   private

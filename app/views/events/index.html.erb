@@ -1,6 +1,6 @@
 <section id="current_character" data-id="<%= @character.id %>"><h1><%= t 'views.events.title' %>: <%= @character.name_for(@character) %></h1></section>
 <div><%= t 'views.events.index.location' %>: <%= @location.name %></div>
-<section id="events" data-channel="events_<%= @location.id %>" data-location-id="<%= @location.id %>">
+<section id="events" data-location-id="<%= @location.id %>">
   <%= turbo_stream_from @location, "events_#{@location.id}" %>
   <%= render partial: 'events/events', locals: { events: @events } %>
 </section>

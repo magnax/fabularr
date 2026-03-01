@@ -5,15 +5,16 @@ module Events
     include Rails.application.routes.url_helpers
     include ActionView::Helpers::UrlHelper
 
-    def initialize(event, viewing_character)
+    def initialize(event, viewing_character, parsed: false)
       @event = event
       @viewing_character = viewing_character
+      @parsed = parsed
     end
 
     def call
       {
         body: parsed_body,
-        lead: lead,
+        lead: @parsed ? parsed_lead : lead,
         created_at: parsed_time
       }.with_indifferent_access
     end
@@ -30,7 +31,12 @@ module Events
       parsed_body.gsub(Event::CHARID_REGEX, name_for)
     end
 
-    def lead # rubocop:disable Metrics/MethodLength
+    def parsed_lead
+      l = lead
+      I18n.t(l[:key], char_name: l[:char_name])
+    end
+
+    def lead
       return if @event.character_id.blank?
 
       if @event.character_id == @viewing_character.id

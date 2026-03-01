@@ -39,6 +39,9 @@ window.onload = function () {
           ${event["created_at"]}
         </div>
         <div>
+          ${event["lead"]}
+        </div>
+        <div>
           ${event["body"]}
         </div>
       `
