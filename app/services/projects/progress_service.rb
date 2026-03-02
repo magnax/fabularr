@@ -9,9 +9,6 @@ module Projects
     def call
       return unless project.elapsed < project.duration
       return unless project.workers.any?
-
-      workers = project.workers.active + Worker.where(project_id: project.id).where('left_at > ?', project.checked_at)
-
       return unless workers.any?
 
       current_time = 0
@@ -31,6 +28,7 @@ module Projects
 
       if (project.duration - project.elapsed) > elapsed
         project.update(elapsed: project.elapsed + elapsed, checked_at: current_time)
+
         ActionCable.server.broadcast(
           "location_#{project.location_id}",
           {
@@ -46,6 +44,13 @@ module Projects
     end
 
     private
+
+    def workers
+      @workers ||= project.workers.active +
+                   Worker
+                   .where(project_id: project.id)
+                   .where('left_at > ?', project.checked_at)
+    end
 
     def created_after_checked?(worker)
       project.checked_at.nil? ||
