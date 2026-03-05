@@ -17,7 +17,7 @@ module Characters
         )
       )
 
-      Characters::CreateInitialEvents.call!(new_char)
+      Characters::CreateInitialEvents.call(new_char)
     end
 
     private

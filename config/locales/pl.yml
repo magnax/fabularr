@@ -33,7 +33,11 @@ pl:
         to_other: 'Mówisz do %{char_name}: '
     initial:
       location_info: Znajdujesz się w miejscu, które można określić jako łąka.
-      people_info: W pobliżu widzisz kilka innych osób.
+      people_info: 
+        zero: Nie widzisz nikogo innego w pobliżu.
+        one: W pobliżu widzisz jedną osobę.
+        other: W pobliżu widzisz %{count} innych osób.
+      
     people:
       spawn_info: Widzisz nową osobę, to %{character_link}.
     projects:

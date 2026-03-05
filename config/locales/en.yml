@@ -23,7 +23,10 @@ en:
         to_other: "You're saying to %{char_name}: "
     initial:
       location_info: You are in some place which looks like grassland.
-      people_info: You see some other people around.
+      people_info: 
+        zero: You don't see anyone nearby.
+        one: You see one other person nearby.
+        other: You see %{count} other people nearby.
     people:
       spawn_info: You see a new person, its %{character_link}.
     projects:
