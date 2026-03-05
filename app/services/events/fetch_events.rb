@@ -17,6 +17,7 @@ module Events
     def events
       @events ||= location.events
                           .includes(:character, :receiver_character)
+                          .where('created_at > ?', @character.created_at)
                           .visible_for(@character.id)
     end
 

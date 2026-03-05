@@ -28,6 +28,6 @@ class EventsCreateTest < ActionDispatch::IntegrationTest
       post events_route, params: params
     end
 
-    assert_response :found
+    assert_response :no_content
   end
 end
