@@ -8,5 +8,9 @@ FactoryBot.define do
 
     amount { 1 }
     unit { 'g' }
+
+    trait :discover_resource do
+      project_type { FactoryBot.create(:project_type, key: 'discover_resource') }
+    end
   end
 end

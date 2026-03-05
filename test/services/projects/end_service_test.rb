@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Projects::EndServiceTest < ActiveSupport::TestCase
@@ -54,5 +56,17 @@ class Projects::EndServiceTest < ActiveSupport::TestCase
       type: 'project.end',
       project_id: project.id
     )
+  end
+
+  test 'end project (discover_resource) creates resource in location' do
+    location = create(:location)
+    starting_character = create(:character, location: location)
+    project = create(:project, :discover_resource, location: location,
+                                                   starting_character: starting_character)
+    create(:worker, project: project, character: starting_character)
+
+    assert_difference -> { LocationResource.count }, 1 do
+      call_service(project.id)
+    end
   end
 end

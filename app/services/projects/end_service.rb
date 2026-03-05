@@ -7,6 +7,7 @@ module Projects
     end
 
     def call
+      Projects::Dispatcher.call(@project_id)
       update_workers
       broadcast_to_location
       return unless project.starting_character.location == project.location

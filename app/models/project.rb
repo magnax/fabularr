@@ -8,4 +8,8 @@ class Project < ApplicationRecord
   has_many :workers, dependent: :destroy
 
   scope :pending, -> { where('elapsed < duration') }
+
+  DISPATCH_SERVICE = {
+    'discover_resource' => 'DiscoverResource'
+  }
 end
