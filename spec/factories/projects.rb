@@ -5,6 +5,8 @@ FactoryBot.define do
     association :starting_character, factory: :character
     location
     project_type
+    duration { 2000 }
+    elapsed { 0 }
 
     amount { 1 }
     unit { 'g' }

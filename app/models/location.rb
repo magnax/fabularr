@@ -6,6 +6,8 @@ class Location < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :location_resources, dependent: :destroy
   has_many :projects, dependent: :destroy
+  has_many :workers, through: :projects
+
   belongs_to :location_type
 
   scope :random, -> { order('RANDOM()').limit(1) }

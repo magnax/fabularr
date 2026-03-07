@@ -1,19 +1,29 @@
 en:
   activerecord:
-    models:
-      character: Character
-    errors:
-      messages:
-        record_invalid: Nieprawidłowe dane
-        required: Wymagane
     attributes:
       character:
         name: Name
         gender: Gender
+      char_name:
+        description: Character description
       user:
         email: E-mail
         password: Password
         password_confirmation: Confirmation
+    models:
+      character: Character
+    errors:
+      messages:
+        record_invalid: Invalid data
+        required: Required
+      models:
+        character:
+          attributes:
+            gender:
+              blank: should be given
+              invalid: invalid
+            name:
+              blank: should be given
   events:
     character:
       talking:
@@ -27,6 +37,7 @@ en:
         zero: You don't see anyone nearby.
         one: You see one other person nearby.
         other: You see %{count} other people nearby.
+      projects_info: You see %{ongoing} ongoing projects, %{working} of which someone is currently working on.
     people:
       spawn_info: You see a new person, its %{character_link}.
     projects:
@@ -38,6 +49,7 @@ en:
   flash:
     errors:
       cannot_create: You cannot create more than 15 characters
+      character_name_change_error: Error during character name changing
       invalid_record: Invalid record
     success:
       welcome: Welcome to Fabular!
@@ -81,18 +93,10 @@ en:
     nothing_here: No visible resources
   select: --- select ---
   views:
-    users:
-      new:
-        create: Create my account
-        title: Register new user
-      show:
-        no_chars: You don't have any characters
-        create_char: Create new character
-        cannot_create_char: You cannot create more characters
     characters:
       new:
-        title: New character
         create: Create character
+        title: New character
       name:
         create: Change name
         current_name: Current name
@@ -108,10 +112,25 @@ en:
         resources_here: Resources
       send: Send
       title: Events for
+    users:
+      new:
+        create: Create my account
+        title: Register new user
+      show:
+        cannot_create_char: You cannot create more characters
+        characters: Your characters
+        create_char: Create new character
+        no_chars: You don't have any characters
     layout:
-      login: Login
-      register: Register
+      back_to_char_list: Characters list
+      events_link: Back to events
       homepage_link: Home
+      login: Login
+      logout: Logout
+      nav:
+        profile: Profile
+        settings_link: Account settings
+      register: Register
     sessions:
       new:
         title: Fabular login

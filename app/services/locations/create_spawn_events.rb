@@ -18,6 +18,13 @@ module Locations
         receiver_character_id: @character.id,
         body: I18n.t('events.initial.people_info', count: @location.characters.length - 1)
       )
+
+      @location.events.create!(
+        character_id: nil,
+        receiver_character_id: @character.id,
+        body: I18n.t('events.initial.projects_info', ongoing: @location.projects.pending.length,
+                                                     working: @location.workers.pluck(:location_id).uniq.length)
+      )
     end
   end
 end

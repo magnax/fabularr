@@ -1,7 +1,5 @@
 pl:
   activerecord:
-    models:
-      character: Postać
     attributes:
       character:
         name: Imię
@@ -12,6 +10,8 @@ pl:
         email: E-mail
         password: Hasło
         password_confirmation: Hasło ponownie
+    models:
+      character: Postać
     errors:
       messages:
         record_invalid: Nieprawidłowe dane
@@ -37,7 +37,7 @@ pl:
         zero: Nie widzisz nikogo innego w pobliżu.
         one: W pobliżu widzisz jedną osobę.
         other: W pobliżu widzisz %{count} innych osób.
-      
+      projects_info: Widzisz %{ongoing} rozpoczętych projektów lub innych czynności, z czego nad %{working} ktoś obecnie pracuje.
     people:
       spawn_info: Widzisz nową osobę, to %{character_link}.
     projects:
@@ -93,19 +93,10 @@ pl:
     nothing_here: Nie widać żadnych zasobów
   select: --- wybierz ---
   views:
-    users:
-      new:
-        create: Utwórz konto
-        title: Rejestracja nowego użytkownika
-      show:
-        characters: Twoje postacie
-        no_chars: Nie masz żadnych postaci
-        create_char: Utwórz nową postać
-        cannot_create_char: Nie możesz tworzyć więcej postaci
     characters:
       new:
-        title: Nowa postać
         create: Utwórz postać
+        title: Nowa postać
       name:
         create: Zmień imię
         current_name: Obecne imię postaci
@@ -121,16 +112,25 @@ pl:
         resources_here: Zasoby
       send: Wyślij
       title: Zdarzenia dla
+    users:
+      new:
+        create: Utwórz konto
+        title: Rejestracja nowego użytkownika
+      show:
+        cannot_create_char: Nie możesz tworzyć więcej postaci
+        characters: Twoje postacie
+        create_char: Utwórz nową postać
+        no_chars: Nie masz żadnych postaci
     layout:
       back_to_char_list: Lista postaci
       events_link: Powrót do zdarzeń
+      homepage_link: Główna
       login: Zaloguj się
       logout: Wyloguj się
-      register: Zarejestruj się
-      homepage_link: Główna
       nav:
         profile: Profil
         settings_link: Ustawienia konta
+      register: Zarejestruj się
     sessions:
       new:
         title: Logowanie do Fabular
