@@ -22,7 +22,7 @@ en:
         me: "You're saying: "
         to_other: "You're saying to %{char_name}: "
     initial:
-      location_info: You are in some place which looks like grassland.
+      location_info: You are in some place which looks like %{location_type}.
       people_info: 
         zero: You don't see anyone nearby.
         one: You see one other person nearby.

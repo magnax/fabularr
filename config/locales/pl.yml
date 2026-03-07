@@ -32,7 +32,7 @@ pl:
         me: 'Mówisz: '
         to_other: 'Mówisz do %{char_name}: '
     initial:
-      location_info: Znajdujesz się w miejscu, które można określić jako łąka.
+      location_info: Znajdujesz się w miejscu, które można określić jako %{location_type}.
       people_info: 
         zero: Nie widzisz nikogo innego w pobliżu.
         one: W pobliżu widzisz jedną osobę.
