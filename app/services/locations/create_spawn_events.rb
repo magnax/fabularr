@@ -8,23 +8,31 @@ module Locations
     end
 
     def call
-      @location.events.create!(
-        character_id: nil,
-        receiver_character_id: @character.id,
-        body: I18n.t('events.initial.location_info', location_type: I18n.t("locations.#{@location.location_type.key}"))
-      )
-      @location.events.create!(
-        character_id: nil,
-        receiver_character_id: @character.id,
-        body: I18n.t('events.initial.people_info', count: @location.characters.length - 1)
-      )
+      create_event('location_info', { location_type: location_type })
+      create_event('people_info', { count: @location.characters.length - 1 })
+      create_event('projects_info', { ongoing: ongoing_length, working: working_length })
+    end
 
+    private
+
+    def create_event(key, params)
       @location.events.create!(
         character_id: nil,
         receiver_character_id: @character.id,
-        body: I18n.t('events.initial.projects_info', ongoing: @location.projects.pending.length,
-                                                     working: @location.workers.pluck(:location_id).uniq.length)
+        body: I18n.t("events.initial.#{key}", **params)
       )
+    end
+
+    def location_type
+      I18n.t("locations.#{@location.location_type.key}")
+    end
+
+    def ongoing_length
+      @location.projects.pending.length
+    end
+
+    def working_length
+      @location.workers.pluck(:location_id).uniq.length
     end
   end
 end
