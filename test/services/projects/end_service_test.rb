@@ -58,8 +58,28 @@ class Projects::EndServiceTest < ActiveSupport::TestCase
     )
   end
 
-  test 'end project (discover_resource) creates resource in location' do
+  test '#discover_resource does not create resource if no resources defined' do
     location = create(:location)
+    starting_character = create(:character, location: location)
+    project = create(:project, :discover_resource, location: location,
+                                                   starting_character: starting_character)
+    create(:worker, project: project, character: starting_character)
+
+    assert_difference -> { LocationResource.count }, 0 do
+      call_service(project.id)
+    end
+  end
+
+  test '#discover_resource creates food resource in location' do
+    type = create(:location_type, key: 'meadow')
+    location = create(:location, location_type: type)
+
+    food_type = create(:resource_type, key: 'food')
+    other_type = create(:resource_type, key: 'material')
+
+    create(:resource, key: 'wood', resource_type_id: [other_type.id])
+    resource = create(:resource, key: 'mushrooms', resource_type_id: [food_type.id])
+
     starting_character = create(:character, location: location)
     project = create(:project, :discover_resource, location: location,
                                                    starting_character: starting_character)
@@ -68,5 +88,7 @@ class Projects::EndServiceTest < ActiveSupport::TestCase
     assert_difference -> { LocationResource.count }, 1 do
       call_service(project.id)
     end
+
+    assert_equal resource.id, location.reload.location_resources.sole.resource_id
   end
 end
