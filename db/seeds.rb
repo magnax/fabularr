@@ -7,6 +7,7 @@ return unless Location.count < 10
 
 User.create!(email: 'm@m.eu', password: 'fabular', password_confirmation: 'fabular')
 
-5.times do
-  Location.create({ name: Faker::Address.city, locationtype_id: 1, locationclass_id: 1 })
+%w[beach desert fields forest hills lakeside meadow mountains swamp tundra].each do |key|
+  lt = LocationType.create!(key: key)
+  Location.create({ name: Faker::Address.city, location_type_id: lt.id, locationclass_id: 1 })
 end

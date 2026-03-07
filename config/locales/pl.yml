@@ -69,6 +69,17 @@ pl:
   invalid_credentials: Nieprawidłowy adres lub hasło
   items:
     nothing_here: Nic tu nie leży
+  locations:
+    beach: plaża
+    desert: pustynia
+    fields: pola
+    forest: las
+    hills: wzgórza
+    lakeside: pojezierze
+    meadow: łąka
+    mountains: góry
+    swamp: bagna
+    tundra: tundra
   male: Mężczyzna
   new_user: Nowy użytkownik
   project_types:

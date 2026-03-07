@@ -57,6 +57,17 @@ en:
   invalid_credentials: Invalid username or password
   items:
     nothing_here: Nothing is laying here
+  locations:
+    beach: beach
+    desert: desert
+    fields: fields
+    forest: forest
+    hills: hills
+    lakeside: lakeside
+    meadow: meadow
+    mountains: mountains
+    swamp: swamp
+    tundra: tundra
   male: Male
   new_user: New user
   project_types:
