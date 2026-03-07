@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_06_162413) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_07_194414) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -96,9 +96,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_06_162413) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "resource_types", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "key"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "resources", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "key"
+    t.boolean "material", default: true
+    t.integer "resource_type_id", array: true
+    t.string "unit", default: "grams"
     t.datetime "updated_at", null: false
   end
 
