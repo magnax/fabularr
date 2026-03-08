@@ -102,6 +102,7 @@ pl:
         current_name: Obecne imię postaci
         new_name: Nowe imię
     events:
+      collect_resource: Zbieraj
       discover_new_resource: Odkryj nowy zasób
       events: Zdarzenia
       index:

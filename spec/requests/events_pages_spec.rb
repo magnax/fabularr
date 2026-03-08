@@ -45,5 +45,21 @@ describe 'Events', type: :feature do
         it { is_expected.to have_link('Discover new resource') }
       end
     end
+
+    describe 'should have events for character' do
+      let!(:lr) do
+        create(:location_resource, location: fabular_city,
+                                   resource: create(:resource, key: 'mushrooms'))
+      end
+
+      before do
+        create(:character, name: 'Magnus', location: fabular_city, user: user)
+        visit list_path
+        click_link 'Magnus'
+      end
+
+      it { is_expected.to have_content('Mushrooms') }
+      it { is_expected.to have_link('Collect', href: "http://www.example.com/projects/new/collect/#{lr.id}") }
+    end
   end
 end

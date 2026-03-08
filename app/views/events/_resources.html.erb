@@ -1,8 +1,10 @@
 <h2><%= t 'views.events.index.resources_here' %></h2>
-<% if resources.any? %>
-  <% resources.each do |resource| %>
+
+<% if location_resources.any? %>
+  <% location_resources.each do |lr| %>
     <div>
-      <%= t("resources.#{resource.key}") %>
+      <%= link_to t('views.events.collect_resource'), new_projects_url(type: 'collect', location_resource_id: lr.id) %>
+      <%= t("resources.#{lr.resource.key}") %>
     </div>
   <% end %>
 <% else %>
