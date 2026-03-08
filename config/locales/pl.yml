@@ -90,7 +90,16 @@ pl:
     nothing_here: Nie ma żadnych projektów
     started_by: Rozpoczęty przez %{char_url}
   resources:
+    beeswax: wosk pszczeli
+    coal: węgiel
+    mushrooms: grzyby
     nothing_here: Nie widać żadnych zasobów
+    nuts: orzechy
+    salmon: łosoś
+    sand: piasek
+    seaweeds: wodorosty
+    strawberries: truskawki
+    wood: drewno
   select: --- wybierz ---
   views:
     characters:

@@ -90,7 +90,16 @@ en:
     nothing_here: No projects
     started_by: Started by %{char_url}
   resources:
+    beeswax: beeswax
+    coal: coal
+    mushrooms: mushrooms
     nothing_here: No visible resources
+    nuts: nuts
+    salmon: salmon
+    sand: sand
+    seaweeds: seaweeds
+    strawberries: strawberries
+    wood: wood
   select: --- select ---
   views:
     characters:
