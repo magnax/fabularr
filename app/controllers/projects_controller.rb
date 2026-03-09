@@ -4,6 +4,10 @@ class ProjectsController < ApplicationController
   before_action :signed_in_user
   before_action :current_character_set
 
+  def new
+    @project_info = Projects::ProjectInfoService.call(project_info_params)
+  end
+
   def create
     Projects::CreateService.call(current_character, project_params)
 
@@ -26,5 +30,9 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:project_type_id)
+  end
+
+  def project_info_params
+    params.permit(:location_resource_id, :type)
   end
 end

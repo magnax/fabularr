@@ -12,7 +12,8 @@ module Projects
         starting_character: @character,
         location: location,
         project_type_id: project_type.id,
-        duration: duration
+        duration: duration,
+        amount: amount
       )
 
       location.events.create!(
@@ -34,7 +35,13 @@ module Projects
     end
 
     def duration
-      project_type.base_speed
+      return project_type.base_speed if project_type.fixed?
+
+      @params[:amount] * project_type.base_speed
+    end
+
+    def amount
+      @params[:amount]
     end
 
     def project_type

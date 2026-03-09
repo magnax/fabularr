@@ -1,0 +1,10 @@
+<p>Start project</p>
+
+<p><%= t('views.projects.collect_info', amount: @project_info[:amount]) %></p>
+
+<%= form_for :project, url: projects_path, method: 'POST' do |form| %>
+  <%= form.hidden_field :project_type_id, value: @project_info[:project_type_id] %>
+  <%= form.hidden_field :location_resource_id, value: @project_info[:location_resource].id %>
+  <%= form.text_field :amount %>
+  <%= form.submit t('views.projects.start') %>
+<% end %>

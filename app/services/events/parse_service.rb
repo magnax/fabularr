@@ -33,7 +33,8 @@ module Events
 
     def parsed_lead
       l = lead
-      I18n.t(l[:key], char_name: l[:char_name])
+
+      I18n.t(l[:key], char_name: l[:char_name]) if l
     end
 
     def lead
