@@ -122,15 +122,6 @@ en:
         resources_here: Resources
       send: Send
       title: Events for
-    users:
-      new:
-        create: Create my account
-        title: Register new user
-      show:
-        cannot_create_char: You cannot create more characters
-        characters: Your characters
-        create_char: Create new character
-        no_chars: You don't have any characters
     layout:
       back_to_char_list: Characters list
       events_link: Back to events
@@ -141,8 +132,25 @@ en:
         profile: Profile
         settings_link: Account settings
       register: Register
+    location_resources:
+      new:
+        title: Discover new resources!
+    projects:
+      collect: Collect
+      collect_info: One character can collect only %{amount} grams in one day. Turns number will be rounded up. The final amount can differ by max 20% depending on provided amount.
+      discover: Discover
+      start: Start project
     sessions:
       new:
         title: Fabular login
+    users:
+      new:
+        create: Create my account
+        title: Register new user
+      show:
+        cannot_create_char: You cannot create more characters
+        characters: Your characters
+        create_char: Create new character
+        no_chars: You don't have any characters
   unknown_man: unknown man
   unknown_woman: unknown woman

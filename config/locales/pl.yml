@@ -122,15 +122,6 @@ pl:
         resources_here: Zasoby
       send: Wyślij
       title: Zdarzenia dla
-    users:
-      new:
-        create: Utwórz konto
-        title: Rejestracja nowego użytkownika
-      show:
-        cannot_create_char: Nie możesz tworzyć więcej postaci
-        characters: Twoje postacie
-        create_char: Utwórz nową postać
-        no_chars: Nie masz żadnych postaci
     layout:
       back_to_char_list: Lista postaci
       events_link: Powrót do zdarzeń
@@ -141,8 +132,25 @@ pl:
         profile: Profil
         settings_link: Ustawienia konta
       register: Zarejestruj się
+    location_resources:
+      new:
+        title: Odkryj nowe zasoby!
+    projects:
+      collect: Zbieraj
+      collect_info: W ciągu jednego dnia jedna postać może zebrać tylko %{amount} gram. Liczba tur będzie zaokrąglona w górę. To ile otrzymasz na koniec podlega losowym odchyłom (maks. 20%) od ilości jaką podasz.
+      discover: Odkrywaj
+      start: Rozpocznij projekt
     sessions:
       new:
         title: Logowanie do Fabular
+    users:
+      new:
+        create: Utwórz konto
+        title: Rejestracja nowego użytkownika
+      show:
+        cannot_create_char: Nie możesz tworzyć więcej postaci
+        characters: Twoje postacie
+        create_char: Utwórz nową postać
+        no_chars: Nie masz żadnych postaci
   unknown_man: nieznana kobieta
   unknown_woman: nieznany mężczyzna

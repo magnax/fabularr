@@ -103,6 +103,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_07_194414) do
   end
 
   create_table "resources", force: :cascade do |t|
+    t.float "base_speed_per_unit"
     t.datetime "created_at", null: false
     t.string "key"
     t.boolean "material", default: true
