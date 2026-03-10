@@ -43,7 +43,7 @@ pl:
     projects:
       ended: Projekt zakończył się
       my_ended: Projekt rozpoczęty przez Ciebie właśnie się zakończył
-      starting_me: Rozpoczynasz projekt
+      starting_me: "Rozpoczynasz nowy projekt: %{info}."
       starting_other: Widzisz jak %{character_link} rozpoczyna nowy projekt
   female: Kobieta
   flash:
@@ -83,6 +83,7 @@ pl:
   male: Mężczyzna
   new_user: Nowy użytkownik
   project_types:
+    collect: zbieranie
     discover_resource: Poszukiwanie nowych zasobów
   projects:
     join: Dołącz do projektu
