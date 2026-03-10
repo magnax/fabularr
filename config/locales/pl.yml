@@ -112,6 +112,7 @@ pl:
         current_name: Obecne imię postaci
         new_name: Nowe imię
     events:
+      age: '%{age} lat'
       collect_resource: Zbieraj
       discover_new_resource: Odkryj nowy zasób
       events: Zdarzenia
@@ -119,6 +120,7 @@ pl:
         characters_here: Postacie w tym miejscu
         items_here: Przedmioty
         location: Miejsce
+        name_title: 'Nazwa: '
         projects_here: Projekty
         resources_here: Zasoby
       send: Wyślij

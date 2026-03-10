@@ -47,4 +47,8 @@ class Character < ApplicationRecord
   def project
     workers.active.last&.project
   end
+
+  def age
+    20 + (DateTime.current.to_i - created_at.to_i) / 86_400 / 20
+  end
 end

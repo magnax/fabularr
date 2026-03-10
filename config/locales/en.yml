@@ -112,6 +112,7 @@ en:
         current_name: Current name
         new_name: New name
     events:
+      age: '%{age} years'
       collect_resource: Collect resource
       discover_new_resource: Discover new resource
       events: Events
@@ -119,6 +120,7 @@ en:
         characters_here: Characters here
         items_here: Items
         location: Location
+        name_title: 'Name:'
         projects_here: Projects
         resources_here: Resources
       send: Send

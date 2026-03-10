@@ -6,7 +6,12 @@
 </section>
 
 <div>
+  <%= t 'views.events.index.name_title' %>: <%= @character.name_for(@character) %>
+  (<%= t "views.events.age", age: @character.age %>)
+</div>
+<div>
   <%= t 'views.events.index.location' %>: <%= @location.name %>
+  [<%= t "locations.#{@location.location_type.key}" %>]
 </div>
 
 <section id="events" data-location-id="<%= @location.id %>">
