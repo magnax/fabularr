@@ -42,7 +42,7 @@ en:
       spawn_info: You see a new person, its %{character_link}.
     projects:
       ended: Project has ended.
-      my_ended: Project started by you has just ended.
+      my_ended: Project started by you has just ended. %{project_info}
       starting_me: "You're starting new project: %{info}."
       starting_other: You see that %{character_link} is starting new project
   female: Female
@@ -85,6 +85,8 @@ en:
   project_types:
     collect: collecting
     discover_resource: Discovering new resources
+  project_info:
+    discover: 'Found new resource: %{res}'
   projects:
     join: Join project
     leave: Leave project

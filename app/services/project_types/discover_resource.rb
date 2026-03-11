@@ -14,6 +14,7 @@ module ProjectTypes
       LocationResource.create!(
         location_id: project.location_id, resource_id: discovered_resource.id
       )
+      project.project_descriptions.create!(subject: discovered_resource)
     end
 
     private

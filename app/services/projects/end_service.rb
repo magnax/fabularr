@@ -32,7 +32,7 @@ module Projects
 
     def update_starting_character
       event = Event.create!(
-        body: I18n.t('events.projects.my_ended'),
+        body: I18n.t('events.projects.my_ended', project_info: project_info),
         location: project.location,
         receiver_character: project.starting_character
       )
@@ -53,6 +53,16 @@ module Projects
 
     def channel
       @channel ||= "location_#{project.location_id}"
+    end
+
+    def project_info
+      return unless project.project_descriptions.any?
+
+      I18n.t('project_info.discover', res: resource_info)
+    end
+
+    def resource_info
+      I18n.t("resources.#{project.project_descriptions.first.subject.key}")
     end
 
     def project

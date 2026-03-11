@@ -90,5 +90,8 @@ class Projects::EndServiceTest < ActiveSupport::TestCase
     end
 
     assert_equal resource.id, location.reload.location_resources.sole.resource_id
+
+    event = Event.where(receiver_character_id: starting_character.id).last
+    assert_equal 'Project started by you has just ended. Found new resource: mushrooms', event.body
   end
 end

@@ -42,7 +42,7 @@ pl:
       spawn_info: Widzisz nową osobę, to %{character_link}.
     projects:
       ended: Projekt zakończył się
-      my_ended: Projekt rozpoczęty przez Ciebie właśnie się zakończył
+      my_ended: Projekt rozpoczęty przez Ciebie właśnie się zakończył. %{project_info}
       starting_me: "Rozpoczynasz nowy projekt: %{info}."
       starting_other: Widzisz jak %{character_link} rozpoczyna nowy projekt
   female: Kobieta
@@ -85,6 +85,8 @@ pl:
   project_types:
     collect: zbieranie
     discover_resource: Poszukiwanie nowych zasobów
+  project_info:
+    discover: 'Znaleziono nowy zasób: %{res}'
   projects:
     join: Dołącz do projektu
     leave: Opuść projekt
