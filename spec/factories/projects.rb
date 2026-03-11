@@ -14,5 +14,9 @@ FactoryBot.define do
     trait :discover_resource do
       project_type { FactoryBot.create(:project_type, key: 'discover_resource') }
     end
+
+    trait :collect do
+      project_type { FactoryBot.create(:project_type, key: 'collect') }
+    end
   end
 end

@@ -11,6 +11,7 @@ class Project < ApplicationRecord
   scope :pending, -> { where('elapsed < duration') }
 
   DISPATCH_SERVICE = {
-    'discover_resource' => 'DiscoverResource'
+    'discover_resource' => 'DiscoverResource',
+    'collect' => 'Collect'
   }
 end

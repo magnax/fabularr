@@ -2,6 +2,7 @@
 
 class ProjectDescription < ApplicationRecord
   belongs_to :subject, polymorphic: true
+  belongs_to :project
 
   RESOURCE = 'resource'
   MATERIAL = 'material'

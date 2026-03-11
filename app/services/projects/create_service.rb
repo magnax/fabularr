@@ -8,7 +8,7 @@ module Projects
     end
 
     def call
-      create_project!
+      @project = create_project!
       create_project_descriptions!
 
       create_creator_event!
@@ -35,6 +35,7 @@ module Projects
       return if project_type.key == 'discover_resource'
 
       ProjectDescription.create!(
+        project: @project,
         subject: resource,
         amount: amount,
         unit: resource.unit

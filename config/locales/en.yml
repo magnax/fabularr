@@ -86,6 +86,7 @@ en:
     collect: collecting
     discover_resource: Discovering new resources
   project_info:
+    collect: '%{amount} %{unit} of %{res} landed on the ground.'
     discover: 'Found new resource: %{res}'
   projects:
     join: Join project

@@ -7,7 +7,7 @@ describe Location do
 
   before { @location = create(:location) }
 
-  it { is_expected.to respond_to(:locationtype_id) }
+  it { is_expected.to respond_to(:location_type_id) }
 
   it { is_expected.to respond_to(:characters) }
 

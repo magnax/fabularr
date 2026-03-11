@@ -58,7 +58,7 @@ describe 'Events', type: :feature do
         click_link 'Magnus'
       end
 
-      it { is_expected.to have_content('Mushrooms') }
+      it { is_expected.to have_content('mushrooms') }
       it { is_expected.to have_link('Collect', href: "http://www.example.com/projects/new/collect/#{lr.id}") }
     end
   end

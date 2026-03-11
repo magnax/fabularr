@@ -58,11 +58,24 @@ module Projects
     def project_info
       return unless project.project_descriptions.any?
 
-      I18n.t('project_info.discover', res: resource_info)
+      case project.project_type.key
+      when 'collect'
+        I18n.t('project_info.collect', amount: resource_description.amount.to_i,
+                                       res: resource_info,
+                                       unit: resource_description.unit)
+      when 'discover_resource'
+
+        I18n.t('project_info.discover', res: resource_info)
+
+      end
     end
 
     def resource_info
-      I18n.t("resources.#{project.project_descriptions.first.subject.key}")
+      I18n.t("resources.#{resource_description.subject.key}")
+    end
+
+    def resource_description
+      @resource_description ||= project.project_descriptions.first
     end
 
     def project

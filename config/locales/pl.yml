@@ -86,6 +86,7 @@ pl:
     collect: zbieranie
     discover_resource: Poszukiwanie nowych zasobów
   project_info:
+    collect: '%{amount} %{unit} %{res} wylądowało na ziemi.'
     discover: 'Znaleziono nowy zasób: %{res}'
   projects:
     join: Dołącz do projektu
