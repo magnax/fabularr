@@ -50,6 +50,8 @@ module Projects
     end
 
     def project_info
+      return type_name if location_resource.blank?
+
       "#{type_name} #{resource_name}"
     end
 

@@ -18,10 +18,11 @@ class Characters::CreateServiceTest < ActiveSupport::TestCase
       gender: 'M'
     }
 
-    assert_difference -> { Character.count }, 1 do
-      assert_difference -> { Event.count }, 2 do
-        call_service(@user, params)
-      end
+    assert_difference(
+      -> { Character.count } => 1,
+      -> { Event.count } => 3
+    ) do
+      call_service(@user, params)
     end
   end
 
@@ -34,10 +35,11 @@ class Characters::CreateServiceTest < ActiveSupport::TestCase
       gender: 'M'
     }
 
-    assert_difference -> { Character.count }, 1 do
-      assert_difference -> { Event.count }, 3 do
-        call_service(@user, params)
-      end
+    assert_difference(
+      -> { Character.count } => 1,
+      -> { Event.count } => 4
+    ) do
+      call_service(@user, params)
     end
   end
 end
