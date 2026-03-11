@@ -78,10 +78,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_180200) do
   create_table "project_descriptions", force: :cascade do |t|
     t.float "amount"
     t.datetime "created_at", null: false
+    t.bigint "project_id"
     t.integer "subject_id"
     t.string "subject_type"
     t.string "unit"
     t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_descriptions_on_project_id"
   end
 
   create_table "project_types", force: :cascade do |t|
@@ -153,4 +155,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_180200) do
     t.integer "project_id"
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "project_descriptions", "projects"
 end
