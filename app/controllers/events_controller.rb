@@ -8,7 +8,7 @@ class EventsController < ApplicationController
     @character = current_character
     @location = @character.location
     @events = Events::FetchEvents.call(@character)
-    @items = @location.items
+    @items = @location.location_objects
     @location_resources = @location.location_resources
     @projects = @location.projects.pending.includes(:starting_character, :project_type)
   end

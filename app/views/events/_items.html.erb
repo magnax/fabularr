@@ -2,7 +2,7 @@
 <% if items.any? %>
   <% items.each do |item| %>
     <div>
-      <%= t("items.#{item.key}") %>
+      <%= item.amount.to_i %> <%= t(item.unit) %> <%= t("resources.#{item.subject.key}") %>
     </div>
   <% end %>
 <% else %>
