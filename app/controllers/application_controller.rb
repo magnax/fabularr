@@ -24,4 +24,11 @@ class ApplicationController < ActionController::Base
       redirect_to request.referer, params: request.params
     end
   end
+
+  around_action :switch_locale
+
+  def switch_locale(&action)
+    locale = params[:locale] || I18n.default_locale
+    I18n.with_locale(locale, &action)
+  end
 end
