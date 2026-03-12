@@ -9,6 +9,7 @@ class Character < ApplicationRecord
   has_many :char_names, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :workers, dependent: :destroy
+  has_many :inventory_objects, dependent: :destroy
 
   has_many :projects, through: :workers
 
