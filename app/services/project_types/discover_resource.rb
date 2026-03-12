@@ -22,12 +22,14 @@ module ProjectTypes
     def discovered_resource
       return unless Resource.any?
 
-      r_keys = RESOURCES[location.location_type.key.to_sym] & Resource.all.pluck(:key)
-      resources = Resource.where(key: r_keys)
+      @discovered_resource ||= begin
+        r_keys = RESOURCES[location.location_type.key.to_sym] & Resource.all.pluck(:key)
+        resources = Resource.where(key: r_keys)
 
-      resources.select do |rr|
-        rr.resource_type_id.include?(ResourceType.find_by(key: 'food').id)
-      end.sample
+        resources.select do |rr|
+          rr.resource_type_id.include?(ResourceType.find_by(key: 'food').id)
+        end.sample
+      end
     end
 
     def location

@@ -62,7 +62,7 @@ module Projects
       when 'collect'
         I18n.t('project_info.collect', amount: resource_description.amount.to_i,
                                        res: resource_info,
-                                       unit: resource_description.unit)
+                                       unit: I18n.t(resource_description.unit))
       when 'discover_resource'
 
         I18n.t('project_info.discover', res: resource_info)

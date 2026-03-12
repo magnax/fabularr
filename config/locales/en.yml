@@ -60,6 +60,7 @@ en:
     notice:
       please_login: Please login!
       please_choose_char: Please choose one character
+  grams: grams
   hello: Hello
   helpers:
     label:

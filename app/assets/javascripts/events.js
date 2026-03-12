@@ -13,6 +13,9 @@ window.onload = function () {
         case 'project':
           dispatch_project(data.id, data.progress);
           break;
+        case 'project.end':
+          dispatch_end_project(data.project_id);
+          break;
         default:
           console.log(data);
       }
