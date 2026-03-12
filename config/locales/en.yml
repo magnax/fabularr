@@ -129,6 +129,8 @@ en:
         resources_here: Resources
       send: Send
       title: Events for
+    inventory_objects:
+      title: Inventory
     layout:
       back_to_char_list: Characters list
       events_link: Back to events

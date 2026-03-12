@@ -60,7 +60,9 @@ pl:
     notice:
       please_login: Zaloguj się, proszę
       please_choose_char: Musisz najpierw wybrać którąś postać
-  grams: gramów
+  grams: 
+    n: gram
+    gen: gramów
   hello: Witaj
   helpers:
     label:
@@ -97,7 +99,9 @@ pl:
   resources:
     beeswax: wosk pszczeli
     coal: węgiel
-    mushrooms: grzyby
+    mushrooms:
+      n: grzyby
+      gen: grzybów
     nothing_here: Nie widać żadnych zasobów
     nuts: orzechy
     salmon: łosoś
@@ -129,6 +133,8 @@ pl:
         resources_here: Zasoby
       send: Wyślij
       title: Zdarzenia dla
+    inventory_objects:
+      title: Inwentarz
     layout:
       back_to_char_list: Lista postaci
       events_link: Powrót do zdarzeń

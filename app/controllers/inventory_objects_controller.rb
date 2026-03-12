@@ -4,6 +4,10 @@ class InventoryObjectsController < ApplicationController
   before_action :signed_in_user
   before_action :current_character_set
 
+  def index
+    @items = current_character.inventory_objects
+  end
+
   def create
     InventoryObjects::CreateService.call(current_character, inventory_object_params)
 

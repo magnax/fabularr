@@ -52,4 +52,8 @@ class Character < ApplicationRecord
   def age
     20 + (DateTime.current.to_i - created_at.to_i) / 86_400 / 20
   end
+
+  def carrying_weight
+    '1200 grams'
+  end
 end

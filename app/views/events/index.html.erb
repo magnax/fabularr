@@ -10,6 +10,10 @@
   (<%= t "views.events.age", age: @character.age %>)
 </div>
 <div>
+  <%= t 'views.events.index.carrying' %>: <%= @character.carrying_weight %>
+  [<%= link_to t('views.events.index.inventory_page'), inventory_objects_path %>]
+</div>
+<div>
   <%= t 'views.events.index.location' %>: <%= @location.name %>
   [<%= t "locations.#{@location.location_type.key}" %>]
 </div>
