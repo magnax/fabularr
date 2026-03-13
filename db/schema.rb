@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_13_174420) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_13_201907) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -109,7 +109,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_13_174420) do
 
   create_table "project_descriptions", force: :cascade do |t|
     t.float "amount"
+    t.float "amount_needed"
     t.datetime "created_at", null: false
+    t.string "description_type"
     t.bigint "project_id"
     t.integer "subject_id"
     t.string "subject_type"
@@ -142,10 +144,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_13_174420) do
   create_table "recipe_instructions", force: :cascade do |t|
     t.integer "amount"
     t.datetime "created_at", null: false
+    t.string "instruction_type"
     t.bigint "recipe_id"
     t.integer "subject_id"
     t.string "subject_type"
-    t.string "type"
     t.string "unit"
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_recipe_instructions_on_recipe_id"

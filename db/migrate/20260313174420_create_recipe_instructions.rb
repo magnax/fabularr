@@ -4,7 +4,7 @@ class CreateRecipeInstructions < ActiveRecord::Migration[8.1]
   def change
     create_table :recipe_instructions do |t|
       t.references :recipe, foreign_key: true
-      t.string :type
+      t.string :instruction_type
       t.integer :subject_id
       t.string :subject_type
       t.integer :amount
