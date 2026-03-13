@@ -70,7 +70,7 @@ module Events
 
       link_to(
         @viewing_character.name_for(char),
-        character_name_url(char.id, only_path: true)
+        character_name_url(character_id: char.id, only_path: true)
       )
     end
 
