@@ -145,6 +145,8 @@ pl:
         profile: Profil
         settings_link: Ustawienia konta
       register: Zarejestruj się
+    location_objects:
+      take: Możesz podnieść maks. 
     location_resources:
       new:
         title: Odkryj nowe zasoby!

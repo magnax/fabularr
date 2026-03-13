@@ -6,5 +6,6 @@ FactoryBot.define do
     subject_type { 'Resource' }
     amount { 100 }
     unit { 'grams' }
+    character
   end
 end

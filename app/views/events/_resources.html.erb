@@ -4,7 +4,7 @@
   <% location_resources.each do |lr| %>
     <div>
       <%= link_to t('views.events.collect_resource'), new_projects_url(type: 'collect', location_resource_id: lr.id) %>
-      <%= t("resources.#{lr.resource.key}") %>
+      <%= tn("resources.#{lr.resource.key}") %>
     </div>
   <% end %>
 <% else %>

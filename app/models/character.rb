@@ -2,6 +2,8 @@
 
 # main class
 class Character < ApplicationRecord
+  MAX_CAPACITY = 15_000
+
   belongs_to :location
   belongs_to :spawn_location, class_name: 'Location'
   belongs_to :user
@@ -54,6 +56,6 @@ class Character < ApplicationRecord
   end
 
   def carrying_weight
-    '1200 grams'
+    inventory_objects.sum(&:amount)
   end
 end

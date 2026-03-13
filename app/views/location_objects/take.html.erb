@@ -1,4 +1,4 @@
-You can take max. <%= @location_object.amount.to_i %> <%= @location_object.unit %> of <%= t("resources.#{@resource.key}") %>
+<%= t('views.location_objects.take') %> <%= @location_object.amount.to_i %> <%= td(@location_object.unit) %> <%= td("resources.#{@resource.key}") %>
 
 <%= form_for :inventory_object, url: inventory_objects_path, method: 'POST' do |form| %>
   <%= form.hidden_field :subject_id, value: @location_object.subject_id %>

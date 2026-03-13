@@ -141,6 +141,8 @@ en:
         profile: Profile
         settings_link: Account settings
       register: Register
+    location_objects:
+      take: You can take max. 
     location_resources:
       new:
         title: Discover new resources!
