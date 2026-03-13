@@ -142,11 +142,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_13_174420) do
   create_table "recipe_instructions", force: :cascade do |t|
     t.integer "amount"
     t.datetime "created_at", null: false
+    t.bigint "recipe_id"
     t.integer "subject_id"
     t.string "subject_type"
     t.string "type"
     t.string "unit"
     t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_recipe_instructions_on_recipe_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -208,4 +210,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_13_174420) do
   add_foreign_key "inventory_objects", "characters"
   add_foreign_key "location_objects", "locations"
   add_foreign_key "project_descriptions", "projects"
+  add_foreign_key "recipe_instructions", "recipes"
 end
