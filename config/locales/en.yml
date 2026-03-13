@@ -121,7 +121,9 @@ en:
       discover_new_resource: Discover new resource
       events: Events
       index:
+        build_menu: Build menu
         characters_here: Characters here
+        inventory_page: Inventory
         items_here: Items
         location: Location
         name_title: 'Name:'
@@ -151,6 +153,9 @@ en:
       collect_info: One character can collect only %{amount} grams in one day. Turns number will be rounded up. The final amount can differ by max 20% depending on provided amount.
       discover: Discover
       start: Start project
+    recipes:
+      index:
+        title: Build menu
     sessions:
       new:
         title: Fabular login

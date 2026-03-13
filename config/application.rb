@@ -11,7 +11,7 @@ Bundler.require(:default, Rails.env)
 module Fabularr
   class Application < Rails::Application
     config.i18n.load_path += Dir[Rails.root.join('my/locales/*.{rb,yml}').to_s]
-    I18n.available_locales = %i[en pl]
+    I18n.available_locales = %i[ca en pl]
     config.i18n.default_locale = :pl
 
     config.generators do |g|

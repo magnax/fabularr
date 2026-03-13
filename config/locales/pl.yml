@@ -125,7 +125,9 @@ pl:
       discover_new_resource: Odkryj nowy zasób
       events: Zdarzenia
       index:
+        build_menu: Menu budowania
         characters_here: Postacie w tym miejscu
+        inventory_page: Inwentarz
         items_here: Przedmioty
         location: Miejsce
         name_title: 'Nazwa: '
@@ -155,6 +157,9 @@ pl:
       collect_info: W ciągu jednego dnia jedna postać może zebrać tylko %{amount} gram. Liczba tur będzie zaokrąglona w górę. To ile otrzymasz na koniec podlega losowym odchyłom (maks. 20%) od ilości jaką podasz.
       discover: Odkrywaj
       start: Rozpocznij projekt
+    recipes:
+      index:
+        title: Menu budowania
     sessions:
       new:
         title: Logowanie do Fabular

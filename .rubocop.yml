@@ -23,6 +23,9 @@ Metrics/MethodLength:
 Rails/CreateTableWithTimestamps:
   Enabled: false
 
+Rails/Output:
+  Enabled: false
+
 RSpec/MultipleExpectations:
   Enabled: true
   Max: 5

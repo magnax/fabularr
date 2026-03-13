@@ -1,0 +1,16 @@
+<h2><%= t('views.recipes.index.title') %></h2>
+
+<div>Recipes: <%= @recipes.count %></div>
+
+<% @recipes.each do |recipe| %>
+  <div>
+    <p><%= recipe.key %></p>
+    <p>Time needed: <%= recipe.base_speed %></p>
+    <p>Resources needed:</p>
+    <ul>
+      <% recipe.recipe_instructions.each do |instruction| %>
+        <li><%= instruction.amount %> <%= instruction.subject.key %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

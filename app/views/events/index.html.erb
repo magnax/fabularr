@@ -17,6 +17,9 @@
   <%= t 'views.events.index.location' %>: <%= @location.name %>
   [<%= t "locations.#{@location.location_type.key}" %>]
 </div>
+<div>
+  <%= link_to t('views.events.index.build_menu'), recipes_path %>
+</div>
 
 <section id="events" data-location-id="<%= @location.id %>">
   <%= render partial: 'events/events', locals: { events: @events } %>
