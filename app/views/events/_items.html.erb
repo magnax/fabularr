@@ -3,7 +3,7 @@
   <% items.each do |item| %>
     <div>
       <%= link_to t('resources.take'), location_object_take_path(item.id) %>
-      <%= item.amount.to_i %> <%= td(item.unit) %> <%= td("resources.#{item.subject.key}") %>
+      <%= item.amount.to_i %> <%= td(item.subject.unit) %> <%= td("resources.#{item.subject.key}") %>
     </div>
   <% end %>
 <% else %>

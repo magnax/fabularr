@@ -1,6 +1,7 @@
 <%= t('views.inventory_objects.title') %>
 
 <% @items.each do |item| %>
-
-  <div><%= item.amount.to_i %> <%= td(item.subject.unit) %> <%= td("resources.#{item.subject.key}") %></div>
+  <div>
+    <%= link_to t('resources.drop'), inventory_object_drop_path(item.id) %>
+    <%= item.amount.to_i %> <%= td(item.subject.unit) %> <%= td("resources.#{item.subject.key}") %></div>
 <% end %>

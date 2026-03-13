@@ -1,0 +1,8 @@
+<%= t('views.location_objects.drop') %> <%= @inventory_object.amount.to_i %> <%= td(@resource.unit) %> <%= td("resources.#{@resource.key}") %>
+
+<%= form_for :location_object, url: location_objects_path, method: 'POST' do |form| %>
+  <%= form.hidden_field :subject_id, value: @inventory_object.subject_id %>
+  <%= form.hidden_field :subject_type, value: @inventory_object.subject_type %>
+  <%= form.text_field :amount %>
+  <%= form.submit t('views.projects.start') %>
+<% end %>

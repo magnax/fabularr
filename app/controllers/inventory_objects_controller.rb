@@ -14,9 +14,20 @@ class InventoryObjectsController < ApplicationController
     redirect_to events_path
   end
 
+  def drop
+    @character = current_character
+    @location = @character.location
+    @inventory_object = inventory_object
+    @resource = inventory_object.subject
+  end
+
   private
 
   def inventory_object_params
     params.require(:inventory_object).permit(:subject_id, :subject_type, :amount)
+  end
+
+  def inventory_object
+    @inventory_object ||= InventoryObject.find_by(id: params[:inventory_object_id])
   end
 end
