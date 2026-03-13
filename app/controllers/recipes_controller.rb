@@ -6,5 +6,6 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
+    @project_type_id = ProjectType.find_by(key: 'build')
   end
 end

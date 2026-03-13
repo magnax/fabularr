@@ -2,12 +2,16 @@
 
 module Projects
   class CreateService < ApplicationService
+    class RecipeNotFoundError < StandardError; end
+
     def initialize(character, params)
       @character = character
       @params = params
     end
 
     def call
+      raise RecipeNotFoundError if recipe_not_found?
+
       @project = create_project!
       create_project_descriptions!
 
@@ -20,6 +24,12 @@ module Projects
     end
 
     private
+
+    def recipe_not_found?
+      return unless project_type.key == 'build'
+
+      recipe.blank?
+    end
 
     def create_project!
       Project.create!(
@@ -34,12 +44,32 @@ module Projects
     def create_project_descriptions!
       return if project_type.key == 'discover_resource'
 
-      ProjectDescription.create!(
-        project: @project,
-        subject: resource,
-        amount: amount,
-        unit: resource.unit
-      )
+      if project_type.key == 'collect'
+
+        ProjectDescription.create!(
+          project: @project,
+          description_type: ProjectDescription::RESOURCE_OUT,
+          subject: resource,
+          amount: 0,
+          amount_needed: amount,
+          unit: resource.unit
+        )
+      else
+        materials.each do |material|
+          ProjectDescription.create!(
+            project: @project,
+            description_type: ProjectDescription::RESOURCE_IN,
+            subject: material.subject,
+            amount: 0,
+            amount_needed: material.amount,
+            unit: material.unit
+          )
+        end
+      end
+    end
+
+    def materials
+      recipe.recipe_instructions.resource
     end
 
     def create_creator_event!
@@ -69,9 +99,22 @@ module Projects
     end
 
     def duration
+      return build_duration if build_project?
       return project_type.base_speed if project_type.fixed?
 
       amount * project_type.base_speed
+    end
+
+    def build_project?
+      @build_project ||= project_type.key == 'build'
+    end
+
+    def build_duration
+      recipe.base_speed
+    end
+
+    def recipe
+      @recipe ||= Recipe.find_by(id: @params[:recipe_id])
     end
 
     def amount

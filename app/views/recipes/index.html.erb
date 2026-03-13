@@ -4,7 +4,19 @@
 
 <% @recipes.each do |recipe| %>
   <div>
-    <p><%= recipe.key %></p>
+    <p>
+      <%= 
+        button_to(
+          'Profile', projects_path(
+            project: { 
+              project_type_id: @project_type_id,
+              recipe_id: recipe.id
+            }
+          )
+        )
+      %>
+      <%= recipe.key %>
+    </p>
     <p>Time needed: <%= recipe.base_speed %></p>
     <p>Resources needed:</p>
     <ul>

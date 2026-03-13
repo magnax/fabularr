@@ -29,7 +29,9 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:project_type_id, :amount, :location_resource_id)
+    params.require(:project).permit(
+      :project_type_id, :amount, :location_resource_id, :recipe_id
+    )
   end
 
   def project_info_params
