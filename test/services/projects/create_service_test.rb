@@ -26,6 +26,7 @@ class ProjectsCreateServiceTest < ActiveSupport::TestCase
 
     assert_equal 1000, project.duration
     assert_equal 0, project.elapsed
+    assert project.ready
   end
 
   test 'collect resource' do
@@ -50,6 +51,7 @@ class ProjectsCreateServiceTest < ActiveSupport::TestCase
     assert_equal 'collect', project.project_type.key
     assert_equal 600, project.duration
     assert_equal 0, project.elapsed
+    assert project.ready
 
     desc = ProjectDescription.last
     assert_equal strawberry.id, desc.subject_id
@@ -89,6 +91,7 @@ class ProjectsCreateServiceTest < ActiveSupport::TestCase
     assert_equal 'build', project.project_type.key
     assert_equal 3600, project.duration
     assert_equal 0, project.elapsed
+    assert_not project.ready
 
     desc = ProjectDescription.last
     assert_equal stone.id, desc.subject_id

@@ -3,12 +3,19 @@
   <% projects.each do |project| %>
     <div data-project-id="<%= project.id %>">
       <%= t("project_types.#{project.project_type.key}") %>
+      <% if project.ready %>
+        ready
+      <% else %>
+        x
+      <% end %>
       (<span id="percent-<%= project.id %>">
         <%= (project.elapsed.to_f / project.duration * 100.0).round(1) %>
       </span>%), 
       <%= t('projects.started_by', char_url: link_to(current_character.name_for(project.starting_character), character_name_url(project.starting_character_id))).html_safe %>
       <% if @current_character.project.blank? %>
-        <%= link_to t('projects.join'), project_join_path(project.id) %>
+        <% if project.ready %>
+          <%= link_to t('projects.join'), project_join_path(project.id) %>
+        <% end %>
       <% elsif @current_character.project == project %>
         <%= link_to t('projects.leave'), project_leave_path(project.id) %>
       <% end %>

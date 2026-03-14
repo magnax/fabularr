@@ -4,6 +4,8 @@ module Projects
   class CreateService < ApplicationService
     class RecipeNotFoundError < StandardError; end
 
+    TYPES_READY = %w[collect discover_resource].freeze
+
     def initialize(character, params)
       @character = character
       @params = params
@@ -37,7 +39,8 @@ module Projects
         location: location,
         project_type_id: project_type.id,
         duration: duration,
-        amount: amount
+        amount: amount,
+        ready: ready?
       )
     end
 
@@ -119,6 +122,10 @@ module Projects
 
     def amount
       @params[:amount].to_i
+    end
+
+    def ready?
+      TYPES_READY.include? project_type.key
     end
 
     def project_type

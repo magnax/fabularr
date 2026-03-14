@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_13_201907) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_14_114524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -136,6 +136,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_13_201907) do
     t.integer "elapsed", default: 0
     t.integer "location_id"
     t.integer "project_type_id"
+    t.boolean "ready", default: false
     t.integer "starting_character_id"
     t.string "unit"
     t.datetime "updated_at", null: false
