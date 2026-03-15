@@ -21,19 +21,22 @@ class ApplicationController < ActionController::Base
     if render_new?
       render :new, locals: { record: err.record }
     else
-      flash[:errors] = err.record.errors.full_messages.join("\n")
-      redirect_to request.referer, params: request.params
+      flash_errors_and_redirect(err.record)
     end
   end
 
   def render_form_invalid(err)
     flash[:error] = I18n.t 'flash.errors.invalid_form'
-    flash[:errors] = err.model.errors.full_messages.join("\n")
-    redirect_to request.referer, params: request.params
+    flash_errors_and_redirect(err.model)
   end
 
   def render_new?
     "#{request.original_url}/new" == request.referer
+  end
+
+  def flash_errors_and_redirect(obj)
+    flash[:errors] = obj.errors.full_messages.join("\n")
+    redirect_to request.referer, params: request.params
   end
 
   def default_url_options
