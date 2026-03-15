@@ -15,8 +15,9 @@ Fabularr::Application.routes.draw do
     end
     resources :char_names
     resources :events
-    resources :inventory_objects, only: %i[index create] do
+    resources :inventory_objects, only: %i[index create update] do
       get :drop
+      get :add
     end
     resources :location_objects, only: [:create] do
       get :take

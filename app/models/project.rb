@@ -14,4 +14,10 @@ class Project < ApplicationRecord
     'discover_resource' => 'DiscoverResource',
     'collect' => 'Collect'
   }
+
+  def name(for_character)
+    type_name = I18n.t("projects.name.#{project_type.key}")
+    char_name = for_character.name_for(starting_character)
+    "#{type_name.titleize}, #{I18n.t('projects.name.started_by')}#{char_name}"
+  end
 end

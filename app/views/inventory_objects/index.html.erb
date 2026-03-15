@@ -3,5 +3,6 @@
 <% @items.each do |item| %>
   <div>
     <%= link_to t('resources.drop'), inventory_object_drop_path(item.id) %>
+    <%= link_to t('resources.add_to_project'), inventory_object_add_path(item.id) %>
     <%= item.amount.to_i %> <%= td(item.subject.unit) %> <%= td("resources.#{item.subject.key}") %></div>
 <% end %>

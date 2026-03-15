@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Users::TooManyCharactersError, with: :render_too_many_characters
   rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid
+  rescue_from ActiveModel::ValidationError, with: :render_form_invalid
 
   private
 
@@ -23,6 +24,12 @@ class ApplicationController < ActionController::Base
       flash[:errors] = err.record.errors.full_messages.join("\n")
       redirect_to request.referer, params: request.params
     end
+  end
+
+  def render_form_invalid(err)
+    flash[:error] = I18n.t 'flash.errors.invalid_form'
+    flash[:errors] = err.model.errors.full_messages.join("\n")
+    redirect_to request.referer, params: request.params
   end
 
   def default_url_options

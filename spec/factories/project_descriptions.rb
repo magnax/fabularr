@@ -7,5 +7,9 @@ FactoryBot.define do
     unit { 'grams' }
     amount { 1.5 }
     project
+
+    trait :resource_in do
+      description_type { ProjectDescription::RESOURCE_IN }
+    end
   end
 end
