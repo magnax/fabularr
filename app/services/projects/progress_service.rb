@@ -7,14 +7,41 @@ module Projects
     end
 
     def call
-      return unless project.elapsed < project.duration
+      return unless pending_project?
       return unless project.workers.any?
       return unless workers.any?
 
-      current_time = 0
-      elapsed = 0
+      if (project.duration - project.elapsed) > elapsed_time
+        progress_project!
+      else
+        end_project!
+      end
+    end
 
-      workers.each do |worker|
+    private
+
+    def pending_project?
+      project.elapsed < project.duration
+    end
+
+    def progress_project!
+      project.update(elapsed: project.elapsed + elapsed_time, checked_at: DateTime.current)
+
+      broadcast_progress!
+    end
+
+    def end_project!
+      project.update(elapsed: project.duration, checked_at: DateTime.current)
+
+      Projects::EndService.call(project.id)
+    end
+
+    def elapsed_time
+      @elapsed_time ||= calculate_elapsed_time
+    end
+
+    def calculate_elapsed_time
+      workers.inject(0) do |elapsed, worker|
         current_time = DateTime.current
         t_start = if created_after_checked?(worker)
                     worker.created_at
@@ -23,20 +50,9 @@ module Projects
                   end
         t_end = worker.left_at || current_time.to_time
 
-        elapsed += (t_end - t_start)
-      end
-
-      if (project.duration - project.elapsed) > elapsed
-        project.update(elapsed: project.elapsed + elapsed, checked_at: current_time)
-
-        broadcast_progress!
-      else
-        project.update(elapsed: project.duration, checked_at: current_time)
-        Projects::EndService.call(project.id)
+        elapsed + (t_end - t_start)
       end
     end
-
-    private
 
     def workers
       @workers ||= project.workers.active +
