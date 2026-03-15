@@ -1,4 +1,16 @@
 en:
+  activemodel:
+    errors:
+      messages:
+        model_invalid: Invalid model
+      models:
+        projects/add_resource_form:
+          attributes:
+            amount:
+              blank: Amount must be provided
+            project_id:
+              invalid: Project must be provided
+          does_not_need_resource: Project nie ma takiego wymaganego zasobu
   activerecord:
     attributes:
       character:
@@ -50,7 +62,8 @@ en:
     errors:
       cannot_create: You cannot create more than 15 characters
       character_name_change_error: Error during character name changing
-      invalid_record: Invalid record
+      invalid_form: Invalid data
+      invalid_record: Invalid data
     success:
       welcome: Welcome to Fabular!
       profile_saved: Profil saved!
@@ -70,6 +83,7 @@ en:
   invalid_credentials: Invalid username or password
   items:
     nothing_here: Nothing is laying here
+    stone_knife: stone knife
   locations:
     beach: beach
     desert: desert
@@ -92,6 +106,10 @@ en:
   projects:
     join: Join project
     leave: Leave project
+    name:
+      build: building
+      discover_resource: discovering new resources
+      started_by: 'started by: '
     nothing_here: No projects
     started_by: Started by %{char_url}
   resources:
@@ -104,6 +122,7 @@ en:
     sand: sand
     seaweeds: seaweeds
     strawberries: strawberries
+    stone: stone
     wood: wood
   select: --- select ---
   views:
@@ -144,6 +163,11 @@ en:
         settings_link: Account settings
       register: Register
     location_objects:
+      add_to_project: 'You want to add to the project:'
+      amount: 'Amount: '
+      have: You have
+      projects: 'Project: '
+      submit: Add to project
       take: You can take max. 
     location_resources:
       new:
