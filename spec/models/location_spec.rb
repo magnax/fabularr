@@ -3,9 +3,9 @@
 require 'spec_helper'
 
 describe Location do
-  subject { @location }
+  subject { location }
 
-  before { @location = create(:location) }
+  let(:location) { create(:location) }
 
   it { is_expected.to respond_to(:location_type_id) }
 

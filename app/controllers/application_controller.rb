@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def render_record_invalid(err)
     flash[:error] = I18n.t 'flash.errors.invalid_record'
-    if "#{request.original_url}/new" == request.referer
+    if render_new?
       render :new, locals: { record: err.record }
     else
       flash[:errors] = err.record.errors.full_messages.join("\n")
@@ -30,6 +30,10 @@ class ApplicationController < ActionController::Base
     flash[:error] = I18n.t 'flash.errors.invalid_form'
     flash[:errors] = err.model.errors.full_messages.join("\n")
     redirect_to request.referer, params: request.params
+  end
+
+  def render_new?
+    "#{request.original_url}/new" == request.referer
   end
 
   def default_url_options

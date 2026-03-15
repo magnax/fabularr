@@ -13,7 +13,7 @@ class Project < ApplicationRecord
   DISPATCH_SERVICE = {
     'discover_resource' => 'DiscoverResource',
     'collect' => 'Collect'
-  }
+  }.freeze
 
   def name(for_character)
     type_name = I18n.t("projects.name.#{project_type.key}")

@@ -29,14 +29,7 @@ module Projects
       if (project.duration - project.elapsed) > elapsed
         project.update(elapsed: project.elapsed + elapsed, checked_at: current_time)
 
-        ActionCable.server.broadcast(
-          "location_#{project.location_id}",
-          {
-            type: 'project',
-            id: project.id,
-            progress: (project.elapsed.to_f / project.duration * 100.0).round(1)
-          }
-        )
+        broadcast_progress!
       else
         project.update(elapsed: project.duration, checked_at: current_time)
         Projects::EndService.call(project.id)
@@ -50,6 +43,17 @@ module Projects
                    Worker
                    .where(project_id: project.id)
                    .where('left_at > ?', project.checked_at)
+    end
+
+    def broadcast_progress!
+      ActionCable.server.broadcast(
+        "location_#{project.location_id}",
+        {
+          type: 'project',
+          id: project.id,
+          progress: (project.elapsed.to_f / project.duration * 100.0).round(1)
+        }
+      )
     end
 
     def created_after_checked?(worker)

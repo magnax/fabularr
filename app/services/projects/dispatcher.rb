@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Projects
   class Dispatcher < ApplicationService
     def initialize(project_id)

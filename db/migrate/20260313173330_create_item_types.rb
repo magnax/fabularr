@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateItemTypes < ActiveRecord::Migration[8.1]
   def change
     create_table :item_types do |t|

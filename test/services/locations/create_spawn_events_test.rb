@@ -34,7 +34,7 @@ class Locations::CreateSpawnEventsTest < ActiveSupport::TestCase
 
   # You see 13 ongoing projects or other activities, 4 of which someone is currently working on.
 
-  # Znajdujesz się w miejscu, które można określić ogólnie jako las. To miejsce stanowi źródło 16 różnych rodzajów surowców, które mogą być przez ciebie pozyskiwane, spostrzegasz również 20 zwierząt.
+  # Znajdujesz się w miejscu, które można określić ogólnie jako las. To miejsce stanowi źródło 16 różnych rodzajów surowców, które mogą być przez ciebie pozyskiwane, spostrzegasz również 20 zwierząt. # rubocop:disable Layout/LineLength
   # W twoim inwentarzu nie ma żadnych przedmiotów ani surowców.
   # Znajduje się tutaj 14 pojazdów i budynków.
   # Widzisz też 22 innych osób w tym miejscu.

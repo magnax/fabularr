@@ -13,10 +13,17 @@ Lint/MissingSuper:
 Metrics/BlockLength:
   Exclude: 
     - '*_spec.rb'
-    - '*_test.rb'
+    - 'test/**/*_test.rb'
     - 'db/schema.rb'
     - 'config/routes.rb'
   AllowedMethods: ['describe', 'context']
+  CountAsOne:
+    - hash
+
+Metrics/ClassLength:
+  Max: 125
+  CountAsOne:
+    - hash
 
 Metrics/MethodLength:
   Max: 25
@@ -28,6 +35,9 @@ Rails/CreateTableWithTimestamps:
 
 Rails/Output:
   Enabled: false
+
+RSpec/ExampleLength:
+  Max: 25
 
 RSpec/MultipleExpectations:
   Enabled: true

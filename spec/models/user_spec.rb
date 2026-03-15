@@ -3,11 +3,9 @@
 require 'spec_helper'
 
 describe User do
-  subject { @user }
+  subject { user }
 
-  before do
-    @user = create(:user)
-  end
+  let(:user) { create(:user) }
 
   it { is_expected.to respond_to(:email) }
   it { is_expected.to respond_to(:password_digest) }
@@ -21,11 +19,11 @@ describe User do
   it { is_expected.to be_valid }
 
   it do
-    expect(subject.remember_token).not_to be_blank
+    expect(user.remember_token).not_to be_blank
   end
 
   describe 'when email is not present' do
-    before { @user.email = '' }
+    before { user.email = '' }
 
     it { is_expected.not_to be_valid }
   end
@@ -35,8 +33,8 @@ describe User do
       addresses = %w[user@foo,com user_at_foo.org example.user@foo.
                      foo@bar_baz.com foo@bar+baz.com foo@bar..com]
       addresses.each do |invalid_address|
-        @user.email = invalid_address
-        expect(@user).not_to be_valid
+        user.email = invalid_address
+        expect(user).not_to be_valid
       end
     end
   end
@@ -45,23 +43,23 @@ describe User do
     it 'is valid' do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
-        @user.email = valid_address
-        expect(@user).to be_valid
+        user.email = valid_address
+        expect(user).to be_valid
       end
     end
   end
 
   it 'is invalid when email address is already taken' do
-    expect(build(:user, email: @user.email)).not_to be_valid
+    expect(build(:user, email: user.email)).not_to be_valid
   end
 
   describe 'email address with mixed case' do
     let(:mixed_case_email) { 'Foo@ExAMPle.CoM' }
 
     it 'is saved as all lower-case' do
-      @user.email = mixed_case_email
-      @user.save
-      expect(@user.reload.email).to eq mixed_case_email.downcase
+      user.email = mixed_case_email
+      user.save
+      expect(user.reload.email).to eq mixed_case_email.downcase
     end
   end
 
@@ -78,10 +76,10 @@ describe User do
   end
 
   describe 'return value of authenticate method' do
-    let(:found_user) { described_class.find_by(email: @user.email) }
+    let(:found_user) { described_class.find_by(email: user.email) }
 
     describe 'with valid password' do
-      it { is_expected.to eq found_user.authenticate(@user.password) }
+      it { is_expected.to eq found_user.authenticate(user.password) }
     end
 
     describe 'with invalid password' do
