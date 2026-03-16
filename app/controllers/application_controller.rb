@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
+  include Authentication
 
   rescue_from Users::TooManyCharactersError, with: :render_too_many_characters
   rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid
@@ -48,5 +49,11 @@ class ApplicationController < ActionController::Base
   def switch_locale(&action)
     locale = params[:locale] || I18n.default_locale
     I18n.with_locale(locale, &action)
+  end
+
+  def current_character_set
+    return if current_character.present?
+
+    redirect_to list_url, notice: I18n.t('flash.notice.please_choose_char')
   end
 end

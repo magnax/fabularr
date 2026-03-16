@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  allow_unauthenticated_access only: %i[new create]
+
   def new; end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user&.authenticate(params[:session][:password])
-      sign_in_and_redirect!(user)
+    user = User.authenticate_by(params.require(:session).permit(:email, :password))
+
+    if user
+      start_new_session_for user
+      redirect_to list_path
     else
       flash.now[:error] = t :invalid_credentials
       render 'new'
@@ -14,14 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    sign_out
+    terminate_session
     redirect_to root_url
-  end
-
-  private
-
-  def sign_in_and_redirect!(user)
-    sign_in user
-    redirect_to list_path
   end
 end

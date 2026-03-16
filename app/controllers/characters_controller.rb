@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class CharactersController < ApplicationController
-  before_action :signed_in_user
-
   def new
     raise Users::TooManyCharactersError unless @current_user.can_create_character?
   end
