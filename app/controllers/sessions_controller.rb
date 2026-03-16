@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user&.authenticate(params[:session][:password])
-      sign_in_and_redirect!
+      sign_in_and_redirect!(user)
     else
       flash.now[:error] = t :invalid_credentials
       render 'new'
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
   private
 
-  def sign_in_and_redirect!
+  def sign_in_and_redirect!(user)
     sign_in user
     redirect_to list_path
   end

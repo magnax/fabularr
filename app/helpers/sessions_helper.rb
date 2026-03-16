@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module SessionsHelper
+  attr_writer :current_user
+
   def current_character_set
     redirect_to list_url, notice: I18n.t('flash.notice.please_choose_char') unless current_character?
   end
@@ -21,14 +23,6 @@ module SessionsHelper
     self.current_user = user
   end
 
-  def signed_in?
-    !current_user.nil?
-  end
-
-  def current_user=(user)
-    @current_user = user
-  end
-
   def current_user
     remember_token = User.encrypt(cookies[:remember_token])
     @current_user ||= User.find_by(remember_token: remember_token)
@@ -43,6 +37,10 @@ module SessionsHelper
 
     store_location
     redirect_to login_url, notice: I18n.t('flash.notice.please_login')
+  end
+
+  def signed_in?
+    !current_user.nil?
   end
 
   def sign_out
