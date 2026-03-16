@@ -22,6 +22,10 @@ module ActiveSupport
   end
 end
 
+class ApplicationSystemTest < ActionDispatch::SystemTestCase
+  driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
+end
+
 # class Minitest::Spec
 #   before :each do
 #     DatabaseCleaner.start
