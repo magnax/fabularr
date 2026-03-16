@@ -5,6 +5,8 @@ require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'
 require 'mocha/minitest'
 
+require 'support/application_system_test'
+
 module ActiveSupport
   class TestCase
     include FactoryBot::Syntax::Methods
@@ -15,23 +17,11 @@ module ActiveSupport
 
     DatabaseCleaner.strategy = :transaction
 
-    def login(user, character)
+    def login(user, character = nil)
       ApplicationController.any_instance.expects(:current_user).returns(user)
+      return if character.blank?
+
       ApplicationController.any_instance.expects(:current_character).returns(character)
     end
   end
 end
-
-class ApplicationSystemTest < ActionDispatch::SystemTestCase
-  driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
-end
-
-# class Minitest::Spec
-#   before :each do
-#     DatabaseCleaner.start
-#   end
-
-#   after :each do
-#     DatabaseCleaner.clean
-#   end
-# end

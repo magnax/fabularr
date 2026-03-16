@@ -2,7 +2,7 @@
 
 class CharactersController < ApplicationController
   def new
-    raise Users::TooManyCharactersError unless @current_user.can_create_character?
+    raise Users::TooManyCharactersError unless current_user.can_create_character?
   end
 
   def create
