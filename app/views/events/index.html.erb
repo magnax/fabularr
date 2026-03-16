@@ -1,3 +1,4 @@
+<% provide(:js_name, 'events') %>
 <%= turbo_stream_from @location, "location_#{@location.id}" %>
 <section id="current_character" data-id="<%= @character.id %>">
   <h1>
