@@ -5,6 +5,7 @@ class User < ApplicationRecord
   MAX_CHARACTERS = 15
 
   has_many :characters, dependent: :destroy
+  has_many :sessions, dependent: :destroy
 
   before_save { self.email = email.downcase }
   before_create :create_remember_token
