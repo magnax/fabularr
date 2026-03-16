@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   layout 'static'
 
   before_action :correct_user, only: %i[edit update]
+  allow_unauthenticated_access only: %i[new create]
 
   def new
     @user = User.new
