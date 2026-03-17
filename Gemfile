@@ -49,7 +49,5 @@ group :test do
   gem 'mutex_m'
   gem 'ostruct'
   gem 'rails-controller-testing'
-  gem 'selenium-webdriver', '4.9.0'
   gem 'timecop'
-  gem 'webdrivers', '5.3.1'
 end

@@ -2,10 +2,18 @@
 
 require 'test_helper'
 
-class CharactersNewTest < ApplicationSystemTest
+class CharactersNewTest < ActionDispatch::IntegrationTest
   def setup
     @user = create(:user)
     sign_in
+  end
+
+  def sign_in
+    visit new_session_url
+    fill_in 'E-mail', with: @user.email
+    fill_in 'Password', with: @user.password
+
+    click_on 'Login'
   end
 
   test 'visiting the characters list page' do

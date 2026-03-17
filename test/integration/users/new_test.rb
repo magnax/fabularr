@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class UsersNewTest < ApplicationSystemTest
+class UsersNewTest < ActionDispatch::IntegrationTest
   test 'register page' do
     visit register_path
 

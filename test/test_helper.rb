@@ -4,8 +4,18 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'
 require 'mocha/minitest'
+require 'capybara/minitest'
+require 'capybara/rails'
 
-require 'support/application_system_test'
+class ActionDispatch::IntegrationTest
+  include Capybara::DSL
+  include Capybara::Minitest::Assertions
+
+  teardown do
+    Capybara.reset_sessions!
+    Capybara.use_default_driver
+  end
+end
 
 module ActiveSupport
   class TestCase
