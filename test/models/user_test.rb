@@ -1,5 +1,21 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  email           :string
+#  password_digest :string
+#  remember_token  :string
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+# Indexes
+#
+#  index_users_on_email           (email) UNIQUE
+#  index_users_on_remember_token  (remember_token)
+#
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase

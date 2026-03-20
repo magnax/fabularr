@@ -15,7 +15,7 @@ module Fabularr
     config.i18n.default_locale = :pl
 
     config.generators do |g|
-      g.test_framework :rspec,
+      g.test_framework :minitest,
                        fixtures: true,
                        view_specs: false,
                        helper_specs: false,

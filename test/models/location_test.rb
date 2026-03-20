@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: locations
+#
+#  id                 :integer          not null, primary key
+#  name               :string
+#  created_at         :datetime
+#  updated_at         :datetime
+#  location_type_id   :integer
+#  locationclass_id   :integer
+#  parent_location_id :integer
+#
 require 'test_helper'
 
 class LocationTest < ActiveSupport::TestCase

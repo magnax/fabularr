@@ -1,5 +1,22 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: projects
+#
+#  id                    :bigint           not null, primary key
+#  amount                :integer
+#  checked_at            :datetime
+#  duration              :integer          default(0)
+#  elapsed               :integer          default(0)
+#  ready                 :boolean          default(FALSE)
+#  unit                  :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  location_id           :integer
+#  project_type_id       :integer
+#  starting_character_id :integer
+#
 require 'test_helper'
 
 class ProjectTest < ActiveSupport::TestCase

@@ -21,6 +21,10 @@ gem 'turbolinks'
 gem 'turbo-rails'
 gem 'uglifier', '>= 1.3.0'
 
+group :development do
+  gem 'db-annotate'
+end
+
 group :development, :test do
   gem 'bullet'
   gem 'dotenv'

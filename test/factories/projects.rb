@@ -1,5 +1,22 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: projects
+#
+#  id                    :bigint           not null, primary key
+#  amount                :integer
+#  checked_at            :datetime
+#  duration              :integer          default(0)
+#  elapsed               :integer          default(0)
+#  ready                 :boolean          default(FALSE)
+#  unit                  :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  location_id           :integer
+#  project_type_id       :integer
+#  starting_character_id :integer
+#
 FactoryBot.define do
   factory :project do
     association :starting_character, factory: :character
@@ -11,12 +28,10 @@ FactoryBot.define do
     amount { 1 }
     unit { 'g' }
 
-    trait :discover_resource do
-      project_type { FactoryBot.create(:project_type, key: 'discover_resource') }
-    end
-
-    trait :collect do
-      project_type { FactoryBot.create(:project_type, key: 'collect') }
+    %i[discover_resource collect build].each do |key|
+      trait key do
+        project_type { FactoryBot.create(:project_type, key: key.to_s) }
+      end
     end
   end
 end

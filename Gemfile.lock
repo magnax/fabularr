@@ -114,6 +114,9 @@ GEM
       database_cleaner-core (~> 2.0)
     database_cleaner-core (2.0.1)
     date (3.5.1)
+    db-annotate (1.0.0)
+      activerecord (>= 7.1, < 9.0)
+      rake (>= 10.4, < 14.0)
     docile (1.4.1)
     dotenv (3.2.0)
     drb (2.2.3)
@@ -342,7 +345,7 @@ GEM
     thor (1.5.0)
     tilt (2.7.0)
     timecop (0.9.10)
-    timeout (0.6.0)
+    timeout (0.6.1)
     tsort (0.2.0)
     turbo-rails (2.0.23)
       actionpack (>= 7.1.0)
@@ -378,6 +381,7 @@ DEPENDENCIES
   capybara
   coffee-rails
   database_cleaner-active_record
+  db-annotate
   dotenv
   factory_bot_rails
   faker
