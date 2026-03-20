@@ -77,6 +77,7 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.8)
       public_suffix (>= 2.0.2, < 8.0)
+    ansi (1.5.0)
     ast (2.4.3)
     base64 (0.3.0)
     bcrypt (3.1.21)
@@ -113,7 +114,6 @@ GEM
       database_cleaner-core (~> 2.0)
     database_cleaner-core (2.0.1)
     date (3.5.1)
-    diff-lcs (1.6.2)
     docile (1.4.1)
     dotenv (3.2.0)
     drb (2.2.3)
@@ -170,6 +170,11 @@ GEM
     minitest (6.0.2)
       drb (~> 2.0)
       prism (~> 1.5)
+    minitest-reporters (1.7.1)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
     mocha (3.0.2)
       ruby2_keywords (>= 0.0.5)
     mutex_m (0.3.0)
@@ -235,10 +240,6 @@ GEM
       activesupport (= 8.1.2)
       bundler (>= 1.15.0)
       railties (= 8.1.2)
-    rails-controller-testing (1.0.5)
-      actionpack (>= 5.0.1.rc1)
-      actionview (>= 5.0.1.rc1)
-      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.3.0)
       activesupport (>= 5.0.0)
       minitest
@@ -266,23 +267,6 @@ GEM
     regexp_parser (2.11.3)
     reline (0.6.3)
       io-console (~> 0.5)
-    rspec-core (3.13.6)
-      rspec-support (~> 3.13.0)
-    rspec-expectations (3.13.5)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.13.0)
-    rspec-mocks (3.13.7)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.13.0)
-    rspec-rails (8.0.3)
-      actionpack (>= 7.2)
-      activesupport (>= 7.2)
-      railties (>= 7.2)
-      rspec-core (~> 3.13)
-      rspec-expectations (~> 3.13)
-      rspec-mocks (~> 3.13)
-      rspec-support (~> 3.13)
-    rspec-support (3.13.7)
     rubocop (1.84.2)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -316,13 +300,6 @@ GEM
     rubocop-rake (0.7.1)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1)
-    rubocop-rspec (3.9.0)
-      lint_roller (~> 1.1)
-      rubocop (~> 1.81)
-    rubocop-rspec_rails (2.32.0)
-      lint_roller (~> 1.1)
-      rubocop (~> 1.72, >= 1.72.1)
-      rubocop-rspec (~> 3.5)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     sass-rails (6.0.0)
@@ -410,6 +387,7 @@ DEPENDENCIES
   launchy
   logger
   minitest
+  minitest-reporters
   mocha
   mutex_m
   net-http
@@ -420,16 +398,12 @@ DEPENDENCIES
   pry-rails
   puma
   rails (= 8.1.2)
-  rails-controller-testing
   rake
-  rspec-rails
   rubocop-capybara
   rubocop-factory_bot
   rubocop-minitest
   rubocop-rails
   rubocop-rake
-  rubocop-rspec
-  rubocop-rspec_rails
   sass-rails
   sidekiq
   simplecov

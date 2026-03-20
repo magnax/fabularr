@@ -6,6 +6,8 @@ require 'rails/test_help'
 require 'mocha/minitest'
 require 'capybara/minitest'
 require 'capybara/rails'
+require 'minitest/reporters'
+Minitest::Reporters.use!
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
@@ -20,6 +22,8 @@ end
 module ActiveSupport
   class TestCase
     include FactoryBot::Syntax::Methods
+
+    parallelize(workers: :number_of_processors)
 
     ActiveRecord::Migration.check_all_pending!
 

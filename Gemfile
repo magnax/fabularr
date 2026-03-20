@@ -27,14 +27,11 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'overmind'
-  gem 'rspec-rails'
   gem 'rubocop-capybara'
   gem 'rubocop-factory_bot'
   gem 'rubocop-minitest'
   gem 'rubocop-rails'
   gem 'rubocop-rake'
-  gem 'rubocop-rspec'
-  gem 'rubocop-rspec_rails'
   gem 'simplecov', require: false
 end
 
@@ -45,9 +42,9 @@ group :test do
   gem 'launchy'
   gem 'logger'
   gem 'minitest'
+  gem 'minitest-reporters'
   gem 'mocha'
   gem 'mutex_m'
   gem 'ostruct'
-  gem 'rails-controller-testing'
   gem 'timecop'
 end
