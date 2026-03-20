@@ -3,6 +3,91 @@
 require 'test_helper'
 
 class CharacterTest < ActiveSupport::TestCase
+  test 'model fields and methods' do
+    character = create(:character)
+
+    assert_respond_to character, :name
+    assert_respond_to character, :gender
+    assert_respond_to character, :user_id
+    assert_respond_to character, :location_id
+    assert_respond_to character, :spawn_location_id
+    assert_respond_to character, :user
+    assert_respond_to character, :char_names
+    assert_respond_to character, :default_name
+    assert_respond_to character, :name_for
+    assert_respond_to character, :location
+    assert_respond_to character, :spawn_location
+  end
+
+  test 'valid character' do
+    character = build(:character, user: create(:user), name: 'Magnus',
+                                  gender: 'M', location: create(:location),
+                                  spawn_location: create(:location))
+
+    assert character.valid?
+  end
+
+  test 'invalid without user_id' do
+    character = build(:character, user_id: nil)
+
+    assert_not character.valid?
+    assert_includes character.errors[:user_id], "can't be blank"
+  end
+
+  test 'invalid without name' do
+    character = build(:character, name: '')
+
+    assert_not character.valid?
+    assert_includes character.errors[:name], 'should be given'
+  end
+
+  test 'invalid without gender' do
+    character = build(:character, gender: '')
+
+    assert_not character.valid?
+    assert_includes character.errors[:gender], 'should be given'
+  end
+
+  test 'invalid without location' do
+    character = build(:character, location_id: nil)
+
+    assert_not character.valid?
+    assert_includes character.errors[:location_id], "can't be blank"
+  end
+
+  test 'invalid without spawn location' do
+    character = build(:character, spawn_location_id: nil)
+
+    assert_not character.valid?
+    assert_includes character.errors[:spawn_location_id], "can't be blank"
+  end
+
+  test 'invalid with wrong gender' do
+    character = build(:character, gender: 'W')
+
+    assert_not character.valid?
+    assert_includes character.errors[:gender], 'invalid'
+
+    character.gender = 'woman'
+    assert_not character.valid?
+    assert_includes character.errors[:gender], 'invalid'
+  end
+
+  test 'save gender as uppercase' do
+    character = create(:character, gender: 'm')
+
+    assert_equal 'M', character.gender
+  end
+
+  test 'respond to default name' do
+    character = create(:character, gender: 'K')
+
+    assert_equal 'unknown woman', character.default_name
+
+    character.update(gender: 'M')
+    assert_equal 'unknown man', character.default_name
+  end
+
   test 'carrying_weight' do
     character = create(:character)
     iron = create(:resource, key: 'iron')
