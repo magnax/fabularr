@@ -4,8 +4,6 @@ require:
   - rubocop-factory_bot
   - rubocop-minitest
   - rubocop-rake
-  - rubocop-rspec
-  - rubocop-rspec_rails
 
 Lint/MissingSuper:
   Enabled: false
@@ -35,16 +33,6 @@ Rails/CreateTableWithTimestamps:
 
 Rails/Output:
   Enabled: false
-
-RSpec/ExampleLength:
-  Max: 25
-
-RSpec/MultipleExpectations:
-  Enabled: true
-  Max: 5
-
-RSpec/NestedGroups:
-  Max: 6
 
 Style/ClassAndModuleChildren:
   Enabled: false
