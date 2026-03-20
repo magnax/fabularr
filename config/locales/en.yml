@@ -101,6 +101,7 @@ en:
     collect: collecting
     discover_resource: Discovering new resources
   project_info:
+    build: 'Manufactured: %{item}'
     collect: '%{amount} %{unit} of %{res} landed on the ground.'
     discover: 'Found new resource: %{res}'
   projects:

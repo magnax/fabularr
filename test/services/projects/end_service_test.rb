@@ -12,7 +12,8 @@ class Projects::EndServiceTest < ActiveSupport::TestCase
   test 'broadcasting end project message to worker' do
     starting_character = create(:character)
     worker_character = create(:character)
-    project = create(:project, starting_character: starting_character)
+    project = create(:project, :discover_resource,
+                     starting_character: starting_character)
     create(:worker, project: project, character: worker_character)
 
     call_service(project.id)
@@ -29,7 +30,8 @@ class Projects::EndServiceTest < ActiveSupport::TestCase
     location = create(:location)
     starting_character = create(:character, location: location)
     worker_character = create(:character, location: location)
-    project = create(:project, location: location, starting_character: starting_character)
+    project = create(:project, :discover_resource,
+                     location: location, starting_character: starting_character)
     create(:worker, project: project, character: worker_character)
 
     call_service(project.id)
@@ -46,7 +48,9 @@ class Projects::EndServiceTest < ActiveSupport::TestCase
     location = create(:location)
     starting_character = create(:character, location: location)
     worker_character = create(:character, location: location)
-    project = create(:project, location: location, starting_character: starting_character)
+    project = create(:project, :discover_resource,
+                     location: location,
+                     starting_character: starting_character)
     create(:worker, project: project, character: worker_character)
 
     call_service(project.id)
@@ -119,5 +123,34 @@ class Projects::EndServiceTest < ActiveSupport::TestCase
 
     event = Event.where(receiver_character_id: starting_character.id).last
     assert_match(/Project started by you has just ended. (\d{2,3}) grams of mushrooms landed on the ground/, event.body)
+  end
+
+  test "#build creates manufactured item in character's inventory" do
+    location = create(:location)
+
+    resource = create(:resource, :material, key: 'stone')
+    create(:item_type, key: 'stone_knife')
+    recipe = create(:recipe, key: 'stone_knife')
+    create(:recipe_instruction, recipe: recipe,
+                                instruction_type: 'resource', subject: resource, amount: 100)
+
+    starting_character = create(:character, location: location)
+    project = create(:project, :build, location: location,
+                                       starting_character: starting_character,
+                                       recipe: recipe)
+    create(:project_description, project: project, subject: resource, amount: 100,
+                                 unit: 'grams')
+    create(:worker, project: project, character: starting_character)
+
+    assert_difference -> { InventoryObject.count }, 1 do
+      call_service(project.id)
+    end
+
+    inv_object = starting_character.reload.inventory_objects.sole
+    assert_equal 'Item', inv_object.subject_type
+    assert_equal recipe.key, inv_object.subject.item_type.key
+
+    event = Event.where(receiver_character_id: starting_character.id).last
+    assert_match(/Project started by you has just ended. Manufactured: stone knife/, event.body)
   end
 end

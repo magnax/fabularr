@@ -91,6 +91,7 @@ class ProjectsCreateServiceTest < ActiveSupport::TestCase
     assert_equal 'build', project.project_type.key
     assert_equal 3600, project.duration
     assert_equal 0, project.elapsed
+    assert_equal recipe.id, project.recipe_id
     assert_not project.ready
 
     desc = ProjectDescription.last

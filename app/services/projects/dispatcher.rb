@@ -7,7 +7,7 @@ module Projects
     end
 
     def call
-      return if service_name.nil?
+      raise NotImplementedError if service_name.nil?
 
       "ProjectTypes::#{service_name}".constantize.call(project.id)
     end

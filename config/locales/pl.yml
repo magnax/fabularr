@@ -103,6 +103,7 @@ pl:
     collect: zbieranie
     discover_resource: Poszukiwanie nowych zasobów
   project_info:
+    build: 'Wyprodukowano: %{item}'
     collect: '%{amount} %{unit} %{res} wylądowało na ziemi.'
     discover: 'Znaleziono nowy zasób: %{res}'
   projects:

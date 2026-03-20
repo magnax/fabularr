@@ -13,5 +13,6 @@
 #  placeable_id   :integer
 #
 class Item < ApplicationRecord
-  belongs_to :location, optional: true
+  belongs_to :placeable, polymorphic: true, optional: true
+  belongs_to :item_type
 end

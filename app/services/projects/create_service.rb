@@ -34,14 +34,24 @@ module Projects
     end
 
     def create_project!
-      Project.create!(
+      Project.create!(project_attributes)
+    end
+
+    def project_attributes
+      return project_base_attributes unless project_type.key == 'build'
+
+      project_base_attributes.merge(recipe: recipe)
+    end
+
+    def project_base_attributes
+      {
         starting_character: @character,
         location: location,
         project_type_id: project_type.id,
         duration: duration,
         amount: amount,
         ready: ready?
-      )
+      }
     end
 
     def create_project_descriptions!

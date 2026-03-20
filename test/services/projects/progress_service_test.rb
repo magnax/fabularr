@@ -61,7 +61,7 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
   test 'project ongoing and checked for the first time' do
     time = DateTime.parse('2026-02-01 11:00:00')
     Timecop.freeze(time)
-    project = create(:project,
+    project = create(:project, :discover_resource,
                      duration: 900, elapsed: 300,
                      checked_at: nil)
     create(:worker, project: project,
@@ -82,7 +82,7 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
   test 'project checked after expected duration' do
     time = DateTime.parse('2026-02-01 11:00:00')
     Timecop.freeze(time)
-    project = create(:project,
+    project = create(:project, :discover_resource,
                      duration: 1000, elapsed: 900,
                      checked_at: DateTime.parse('2026-02-01 11:15:00'))
     create(:worker, project: project,
