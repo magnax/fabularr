@@ -13,7 +13,6 @@
 #  spawn_location_id :integer
 #  user_id           :integer
 #
-# main class
 class Character < ApplicationRecord
   MAX_CAPACITY = 15_000
 

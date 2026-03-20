@@ -15,7 +15,16 @@
 #  updated_at            :datetime         not null
 #  location_id           :integer
 #  project_type_id       :integer
+#  recipe_id             :bigint
 #  starting_character_id :integer
+#
+# Indexes
+#
+#  index_projects_on_recipe_id  (recipe_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (recipe_id => recipes.id)
 #
 require 'test_helper'
 

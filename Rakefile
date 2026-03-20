@@ -6,4 +6,3 @@
 require File.expand_path('config/application', __dir__)
 
 Fabularr::Application.load_tasks
-Annotate.load_tasks
