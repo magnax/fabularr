@@ -57,6 +57,8 @@ pl:
       my_ended: Projekt rozpoczęty przez Ciebie właśnie się zakończył. %{project_info}
       starting_me: "Rozpoczynasz nowy projekt: %{info}."
       starting_other: Widzisz jak %{character_link} rozpoczyna nowy projekt
+    take_resource: Podnosisz %{amount} %{unit} %{res} z ziemi
+    take_resource_others: Widzisz jak %{character_link} podnosi trochę %{res} z ziemi
   female: Kobieta
   flash:
     errors:
@@ -99,13 +101,13 @@ pl:
     tundra: tundra
   male: Mężczyzna
   new_user: Nowy użytkownik
-  project_types:
-    collect: zbieranie
-    discover_resource: Poszukiwanie nowych zasobów
   project_info:
     build: 'Wyprodukowano: %{item}'
     collect: '%{amount} %{unit} %{res} wylądowało na ziemi.'
     discover: 'Znaleziono nowy zasób: %{res}'
+  project_types:
+    collect: zbieranie
+    discover_resource: Poszukiwanie nowych zasobów
   projects:
     join: Dołącz do projektu
     leave: Opuść projekt
@@ -116,23 +118,40 @@ pl:
     nothing_here: Nie ma żadnych projektów
     started_by: Rozpoczęty przez %{char_url}
   resources:
-    beeswax: wosk pszczeli
-    coal: węgiel
+    beeswax:
+      n: wosk pszczeli
+      gen: wosku pszczelego
+    coal: 
+      n: węgiel
+      gen: węgla
+    iron:
+      n: żelazo
+      gen: żelaza
     mushrooms:
       n: grzyby
       gen: grzybów
     nothing_here: Nie widać żadnych zasobów
-    nuts: orzechy
-    salmon: łosoś
-    sand: piasek
-    seaweeds: wodorosty
+    nuts: 
+      n: orzechy
+      gen: orzechów
+    salmon: 
+      n: łosoś
+      gen: łososia
+    sand: 
+      n: piasek
+      gen: piasku
+    seaweeds: 
+      n: wodorosty
+      gen: wodorostów
     strawberries:
       n: truskawki
       gen: truskawek
     stone:
       n: kamień
       gen: kamienia
-    wood: drewno
+    wood: 
+      n: drewno
+      gen: drewna
   select: --- wybierz ---
   views:
     characters:

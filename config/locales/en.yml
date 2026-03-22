@@ -51,12 +51,14 @@ en:
         other: You see %{count} other people nearby.
       projects_info: You see %{ongoing} ongoing projects, %{working} of which someone is currently working on.
     people:
-      spawn_info: You see a new person, its %{character_link}.
+      spawn_info: "You see a new person, it's %{character_link}."
     projects:
       ended: Project has ended.
       my_ended: Project started by you has just ended. %{project_info}
       starting_me: "You're starting new project: %{info}."
       starting_other: You see that %{character_link} is starting new project
+    take_resource: "You're taking %{amount} %{unit} of %{res} from the ground"
+    take_resource_others: 'You see that %{character_link} is taking some %{res} from the ground'
   female: Female
   flash:
     errors:
@@ -74,6 +76,8 @@ en:
       please_login: Please login!
       please_choose_char: Please choose one character
   grams: grams
+  # blank lines on purpose!!
+
   hello: Hello
   helpers:
     label:
@@ -97,13 +101,13 @@ en:
     tundra: tundra
   male: Male
   new_user: New user
-  project_types:
-    collect: collecting
-    discover_resource: Discovering new resources
   project_info:
     build: 'Manufactured: %{item}'
     collect: '%{amount} %{unit} of %{res} landed on the ground.'
     discover: 'Found new resource: %{res}'
+  project_types:
+    collect: collecting
+    discover_resource: Discovering new resources
   projects:
     join: Join project
     leave: Leave project
@@ -115,16 +119,39 @@ en:
     started_by: Started by %{char_url}
   resources:
     beeswax: beeswax
+    # in polish translations there are different conjugations - I'm using nominative and genitive
+    # these blank lines in en.yml are just to sync line numbers
     coal: coal
+
+
+    iron: iron
+
+
     mushrooms: mushrooms
+
+
     nothing_here: No visible resources
     nuts: nuts
+
+
     salmon: salmon
+
+
     sand: sand
+
+
     seaweeds: seaweeds
+
+
     strawberries: strawberries
+
+
     stone: stone
+
+
     wood: wood
+
+
   select: --- select ---
   views:
     characters:

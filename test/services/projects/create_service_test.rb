@@ -73,6 +73,7 @@ class ProjectsCreateServiceTest < ActiveSupport::TestCase
     create(:recipe_instruction, recipe: recipe, subject: stone,
                                 amount: 100, unit: 'grams',
                                 instruction_type: 'resource')
+    second_character = create(:character, location: @current_character.location)
 
     params = {
       project_type_id: project_type.id,
@@ -102,7 +103,10 @@ class ProjectsCreateServiceTest < ActiveSupport::TestCase
     assert_equal 100, desc.amount_needed
     assert_equal 'grams', desc.unit
 
-    # event = Event.last
-    # assert_equal "You're starting new project: collecting strawberries.", event.body
+    event = second_character.visible_events.last
+    assert_equal(
+      "You see that <!--CHARID:#{@current_character.id}--> is starting new project",
+      event.body
+    )
   end
 end

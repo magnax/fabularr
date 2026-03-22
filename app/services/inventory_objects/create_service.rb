@@ -36,6 +36,41 @@ module InventoryObjects
       (location_object.amount - amount).zero?
     end
 
+    def create_events!
+      create_character_event!
+      create_other_characters_events!
+    end
+
+    def create_character_event!
+      Event.create!(
+        body: I18n.t(
+          'events.take_resource',
+          res: I18n.td("resources.#{subject.key}"),
+          amount: amount.to_i,
+          unit: I18n.td(location_object.unit)
+        ),
+        location: @character.location,
+        receiver_character: @character
+      )
+    end
+
+    def create_other_characters_events!
+      @character.location.visible_characters.each do |char|
+        next if char == @character
+
+        Event.create!(
+          body: I18n.t(
+            'events.take_resource_others',
+            character_link: @character.char_id,
+            res: I18n.td("resources.#{subject.key}")
+          ),
+          location: @character.location,
+          character: @character,
+          receiver_character: char
+        )
+      end
+    end
+
     def amount
       return char_max_amount if location_max_amount > char_max_amount
 
@@ -64,14 +99,6 @@ module InventoryObjects
       @inventory_object ||= @character.inventory_objects
                                       .where(subject: subject)
                                       .first_or_create(amount: 0)
-    end
-
-    def create_events!
-      Event.create!(
-        body: 'Res. taken',
-        location: @character.location,
-        receiver_character: @character
-      )
     end
 
     def subject

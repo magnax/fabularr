@@ -16,7 +16,7 @@ module Characters
         @location.events.create!(
           character_id: nil,
           receiver_character_id: ch.id,
-          body: I18n.t('events.people.spawn_info', character_link: "<!--CHARID:#{@character.id}-->")
+          body: I18n.t('events.people.spawn_info', character_link: @character.char_id)
         )
       end
     end

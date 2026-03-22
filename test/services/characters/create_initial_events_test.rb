@@ -24,7 +24,7 @@ class Characters::CreateInitialEventsTest < ActiveSupport::TestCase
   end
 
   test 'creates event with proper number of other characters in location: one' do
-    create(:character, location: @location)
+    existing_character = create(:character, location: @location)
     character = create(:character, spawn_location: @location, location: @location)
 
     assert_difference -> { Event.count }, 4 do
@@ -34,6 +34,9 @@ class Characters::CreateInitialEventsTest < ActiveSupport::TestCase
     char_events = Event.where(receiver_character: character)
     assert_equal 3, char_events.length
     assert_includes char_events.pluck(:body), 'You see one other person nearby.'
+
+    ev = existing_character.visible_events.last
+    assert_equal "You see a new person, it's <!--CHARID:#{character.id}-->.", ev.body
   end
 
   test 'creates event with proper number of other characters in location: many' do

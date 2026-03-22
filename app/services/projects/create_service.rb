@@ -20,7 +20,7 @@ module Projects
       create_creator_event!
       body = I18n.t(
         'events.projects.starting_other',
-        character_link: "<!--CHARID:#{@character.id}-->"
+        character_link: @character.char_id
       )
       Events::CreateEventForAllService.call(location, body, except: @character)
     end
