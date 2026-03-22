@@ -10,7 +10,7 @@ module Definitions::LocationResources
     lakeside: %w[strawberries mushrooms nuts wood sand seaweeds salmon beeswax],
     meadow: %w[strawberries mushrooms nuts coal wood beeswax],
     mountains: %w[mushrooms coal wood],
-    swamp: %w[strawberries mushrooms wood beeswax],
+    swamp: %w[strawberries mushrooms wood beeswax stone],
     tundra: %w[strawberries mushrooms coal wood]
   }.freeze
 end

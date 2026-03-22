@@ -150,11 +150,12 @@ pl:
       events: Zdarzenia
       index:
         build_menu: Menu budowania
+        carrying: Dźwiga
         characters_here: Postacie w tym miejscu
         inventory_page: Inwentarz
         items_here: Przedmioty
         location: Miejsce
-        name_title: 'Nazwa: '
+        name_title: Nazwa
         projects_here: Projekty
         resources_here: Zasoby
       send: Wyślij
@@ -175,9 +176,10 @@ pl:
       add_to_project: 'Chcesz dodać do projektu:'
       amount: 'Ilość: '
       have: 'Posiadasz'
+      max_take: Możesz podnieść maks. 
       projects: 'Projekt: '
       submit: 'Dodaj do projektu'
-      take: Możesz podnieść maks. 
+      take: Podnieś
     location_resources:
       new:
         title: Odkryj nowe zasoby!

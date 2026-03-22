@@ -142,11 +142,12 @@ en:
       events: Events
       index:
         build_menu: Build menu
+        carrying: Carrying
         characters_here: Characters here
         inventory_page: Inventory
         items_here: Items
         location: Location
-        name_title: 'Name:'
+        name_title: Name
         projects_here: Projects
         resources_here: Resources
       send: Send
@@ -167,9 +168,10 @@ en:
       add_to_project: 'You want to add to the project:'
       amount: 'Amount: '
       have: You have
+      max_take: You can take max. 
       projects: 'Project: '
       submit: Add to project
-      take: You can take max. 
+      take: Take
     location_resources:
       new:
         title: Discover new resources!
