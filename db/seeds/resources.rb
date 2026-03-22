@@ -42,9 +42,15 @@ resources = [
   {
     key: 'beeswax', unit: 'grams', bs: 288,
     types: [r_medicine.id]
+  },
+  {
+    key: 'stone', unit: 'grams', bs: 450,
+    types: [r_material.id]
   }
 ]
 
 resources.each do |res|
   Resource.create!(key: res[:key], unit: res[:unit], base_speed_per_unit: res[:bs], resource_type_id: res[:types])
 end
+
+puts "ResourceTypes (#{ResourceType.count}), Resources: #{Resource.pluck(:key).join(', ')} loaded"
