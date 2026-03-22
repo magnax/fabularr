@@ -7,10 +7,11 @@ module InventoryObjects
     def initialize(character, params)
       @character = character
       @params = params
+      @amount = calculated_amount
     end
 
     def call
-      raise InvalidParamsError if location_object.blank?
+      raise InvalidParamsError if @params[:amount].blank? || location_object.blank?
 
       update_inventory_and_location!
 
@@ -20,7 +21,7 @@ module InventoryObjects
     private
 
     def update_inventory_and_location!
-      inventory_object.update!(amount: inventory_object.amount + amount)
+      inventory_object.update!(amount: inventory_object.amount + @amount)
       update_location_object!
     end
 
@@ -28,12 +29,12 @@ module InventoryObjects
       if should_destroy_location?
         location_object.destroy
       else
-        location_object.update!(amount: location_object.amount - amount)
+        location_object.update!(amount: location_object.amount - @amount)
       end
     end
 
     def should_destroy_location?
-      (location_object.amount - amount).zero?
+      (location_object.amount - @amount).zero?
     end
 
     def create_events!
@@ -46,7 +47,7 @@ module InventoryObjects
         body: I18n.t(
           'events.take_resource',
           res: I18n.td("resources.#{subject.key}"),
-          amount: amount.to_i,
+          amount: @amount.to_i,
           unit: I18n.td(location_object.unit)
         ),
         location: @character.location,
@@ -71,10 +72,13 @@ module InventoryObjects
       end
     end
 
-    def amount
-      return char_max_amount if location_max_amount > char_max_amount
+    def calculated_amount
+      @calculated_amount ||= begin
+        return if @params[:amount].blank?
+        return char_max_amount if location_max_amount > char_max_amount
 
-      location_max_amount
+        location_max_amount
+      end
     end
 
     def location_max_amount

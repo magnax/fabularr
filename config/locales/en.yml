@@ -89,6 +89,11 @@ en:
         password: Password
   invalid_credentials: Invalid username or password
   items:
+    damage:
+      brand_new: brand new
+      damaged: damaged
+      new: new
+      used: used
     nothing_here: Nothing is laying here
     stone_knife: stone knife
   locations:
@@ -109,6 +114,7 @@ en:
     collect: '%{amount} %{unit} of %{res} landed on the ground.'
     discover: 'Found new resource: %{res}'
   project_types:
+    build: building
     collect: collecting
     discover_resource: Discovering new resources
   projects:
@@ -183,6 +189,8 @@ en:
       send: Send
       title: Events for
     inventory_objects:
+      add_to_project: Add to project
+      drop: Drop
       title: Inventory
     layout:
       back_to_char_list: Characters list

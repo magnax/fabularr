@@ -71,7 +71,7 @@ class Character < ApplicationRecord
   end
 
   def carrying_weight
-    inventory_objects.sum(&:amount)
+    inventory_objects.resource.sum(&:amount) + inventory_objects.item.sum { |i| i.subject.weight }
   end
 
   def char_id

@@ -4,13 +4,11 @@
     <div data-project-id="<%= project.id %>">
       <%= t("project_types.#{project.project_type.key}") %>
       <% if project.ready %>
-        ready
+        <%= "\u2714" %>
       <% else %>
-        x
+        <%= "\u2718" %>
       <% end %>
-      (<span id="percent-<%= project.id %>">
-        <%= (project.elapsed.to_f / project.duration * 100.0).round(1) %>
-      </span>%), 
+      (<span id="percent-<%= project.id %>"><%= (project.elapsed.to_f / project.duration * 100.0).round(1) %></span>%), 
       <%= t('projects.started_by', char_url: link_to(current_character.name_for(project.starting_character), character_name_url(project.starting_character_id))).html_safe %>
       <% if @current_character.project.blank? %>
         <% if project.ready %>

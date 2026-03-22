@@ -26,4 +26,5 @@ class InventoryObject < ApplicationRecord
   belongs_to :character
 
   scope :resource, -> { where(subject_type: 'Resource') }
+  scope :item, -> { where(subject_type: 'Item') }
 end

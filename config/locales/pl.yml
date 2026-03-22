@@ -89,6 +89,11 @@ pl:
         password: Hasło
   invalid_credentials: Nieprawidłowy adres lub hasło
   items:
+    damage:
+      brand_new: całkiem nowy
+      damaged: uszkodzony
+      new: nowy
+      used: używany
     nothing_here: Nic tu nie leży
     stone_knife: kamienny nóż
   locations:
@@ -109,6 +114,7 @@ pl:
     collect: '%{amount} %{unit} %{res} wylądowało na ziemi.'
     discover: 'Znaleziono nowy zasób: %{res}'
   project_types:
+    build: produkcja
     collect: zbieranie
     discover_resource: Poszukiwanie nowych zasobów
   projects:
@@ -183,6 +189,8 @@ pl:
       send: Wyślij
       title: Zdarzenia dla
     inventory_objects:
+      add_to_project: Dodaj do projektu
+      drop: Upuść
       title: Inwentarz
     layout:
       back_to_char_list: Lista postaci

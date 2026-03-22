@@ -4,7 +4,8 @@ class InventoryObjectsController < ApplicationController
   before_action :current_character_set
 
   def index
-    @items = current_character.inventory_objects
+    @resources = current_character.inventory_objects.resource
+    @items = current_character.inventory_objects.item
   end
 
   def create

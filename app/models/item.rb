@@ -15,4 +15,10 @@
 class Item < ApplicationRecord
   belongs_to :placeable, polymorphic: true, optional: true
   belongs_to :item_type
+
+  delegate :weight, to: :item_type
+
+  def damage_key
+    'brand_new'
+  end
 end

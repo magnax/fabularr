@@ -129,7 +129,7 @@ class Projects::EndServiceTest < ActiveSupport::TestCase
     location = create(:location)
 
     resource = create(:resource, :material, key: 'stone')
-    create(:item_type, key: 'stone_knife')
+    create(:item_type, key: 'stone_knife', weight: 120)
     recipe = create(:recipe, key: 'stone_knife')
     create(:recipe_instruction, recipe: recipe,
                                 instruction_type: 'resource', subject: resource, amount: 100)
@@ -141,12 +141,16 @@ class Projects::EndServiceTest < ActiveSupport::TestCase
     create(:project_description, project: project, subject: resource, amount: 100,
                                  unit: 'grams')
     create(:worker, project: project, character: starting_character)
+    create(:inventory_object, character: starting_character,
+                              subject: resource, amount: 100)
 
     assert_difference -> { InventoryObject.count }, 1 do
       call_service(project.id)
     end
 
-    inv_object = starting_character.reload.inventory_objects.sole
+    assert_equal 220, starting_character.carrying_weight
+
+    inv_object = starting_character.reload.inventory_objects.item.sole
     assert_equal 'Item', inv_object.subject_type
     assert_equal recipe.key, inv_object.subject.item_type.key
 
