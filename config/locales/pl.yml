@@ -126,7 +126,9 @@ pl:
     salmon: łosoś
     sand: piasek
     seaweeds: wodorosty
-    strawberries: truskawki
+    strawberries:
+      n: truskawki
+      gen: truskawek
     stone:
       n: kamień
       gen: kamienia

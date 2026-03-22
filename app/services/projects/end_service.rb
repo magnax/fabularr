@@ -83,7 +83,7 @@ module Projects
     end
 
     def resource_info
-      I18n.t("resources.#{resource_description.subject.key}")
+      I18n.tn("resources.#{resource_description.subject.key}")
     end
 
     def resource_description
