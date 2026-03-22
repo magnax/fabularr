@@ -75,6 +75,9 @@ pl:
     notice:
       please_login: Zaloguj się, proszę
       please_choose_char: Musisz najpierw wybrać którąś postać
+  gram: 
+    n: gram
+    gen: gramów
   grams: 
     n: gram
     gen: gramów
@@ -209,7 +212,11 @@ pl:
       start: Rozpocznij projekt
     recipes:
       index:
-        title: Menu budowania
+        continue: Kontynuuj
+        recipes_count: Dostępnych instrukcji
+        resources: Potrzebne materiały
+        time: Potrzebny czas
+        title: Budowanie i produkcja
     sessions:
       new:
         title: Logowanie do Fabular

@@ -9,7 +9,7 @@ Definitions::Recipes::RECIPES.each do |recipe|
 
     res = Resource.where(key: i[:key]).first_or_create
     RecipeInstruction.create!(
-      recipe_id: r.id, subject: res, amount: i[:amount]
+      recipe_id: r.id, subject: res, amount: i[:amount], unit: 'grams'
     )
   end
 end

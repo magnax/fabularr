@@ -1,13 +1,13 @@
 <h2><%= t('views.recipes.index.title') %></h2>
 
-<div>Recipes: <%= @recipes.count %></div>
+<div><%= t('views.recipes.index.recipes_count') %>: <%= @recipes.count %></div>
 
 <% @recipes.each do |recipe| %>
   <div>
     <p>
       <%= 
         button_to(
-          'Profile', projects_path(
+          t('views.recipes.index.continue'), projects_path(
             project: { 
               project_type_id: @project_type_id,
               recipe_id: recipe.id
@@ -15,13 +15,15 @@
           )
         )
       %>
-      <%= recipe.key %>
+      <%= t("items.#{recipe.key}") %>
     </p>
-    <p>Time needed: <%= recipe.base_speed %></p>
-    <p>Resources needed:</p>
+    <p><%= t('views.recipes.index.time') %>: <%= recipe.base_speed %></p>
+    <p><%= t('views.recipes.index.resources') %>:</p>
     <ul>
       <% recipe.recipe_instructions.each do |instruction| %>
-        <li><%= instruction.amount %> <%= instruction.subject.key %></li>
+        <li>
+          <%= tn("resources.#{instruction.subject.key}") %>
+          (<%= instruction.amount %> <%= td(instruction.unit) %>)</li>
       <% end %>
     </ul>
   </div>

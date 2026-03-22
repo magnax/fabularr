@@ -75,6 +75,9 @@ en:
     notice:
       please_login: Please login!
       please_choose_char: Please choose one character
+  gram: grams
+  # blank lines on purpose!!
+
   grams: grams
   # blank lines on purpose!!
 
@@ -209,7 +212,11 @@ en:
       start: Start project
     recipes:
       index:
-        title: Build menu
+        continue: Continue
+        recipes_count: Available formulas
+        resources: Materials needed
+        time: Time needed
+        title: Building & production
     sessions:
       new:
         title: Fabular login
