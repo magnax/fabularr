@@ -27,4 +27,5 @@ class LocationObject < ApplicationRecord
   belongs_to :location
 
   scope :resource, -> { where(subject_type: 'Resource') }
+  scope :item, -> { where(subject_type: 'Item') }
 end

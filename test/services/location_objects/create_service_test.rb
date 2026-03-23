@@ -79,4 +79,21 @@ class LocationObjectsCreateServiceTest < ActiveSupport::TestCase
 
     assert_equal 150, location_iron.reload.amount
   end
+
+  test 'drop item from inventory' do
+    item_type = create(:item_type, key: 'stone_knife')
+    knife = create(:item, item_type: item_type)
+    inv_knife = create(:inventory_object, character: @character, subject: knife)
+
+    params = {
+      inventory_object_id: inv_knife.id
+    }
+
+    assert_difference(
+      -> { InventoryObject.count } => -1,
+      -> { LocationObject.count } => 1
+    ) do
+      call_service(params)
+    end
+  end
 end

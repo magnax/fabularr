@@ -21,6 +21,14 @@ class InventoryObjectsController < ApplicationController
     @resource = inventory_object.subject
   end
 
+  def drop_item
+    LocationObjects::CreateService.call(
+      current_character, params.permit(:inventory_object_id)
+    )
+
+    redirect_to events_path
+  end
+
   def add
     @inventory_object = current_character.inventory_objects.find_by(id: params[:inventory_object_id])
     @resource = inventory_object.subject

@@ -20,7 +20,11 @@ module LocationObjects
     private
 
     def update_inventory_and_location!
-      location_object.update!(amount: location_object.amount + amount)
+      if location_object.subject.is_a?(Resource)
+        location_object.update!(
+          amount: location_object.amount + amount
+        )
+      end
       update_inventory_object!
     end
 
@@ -33,7 +37,7 @@ module LocationObjects
     end
 
     def should_destroy_inventory_object?
-      (inventory_object.amount - amount).zero?
+      inventory_object.subject.is_a?(Item) || (inventory_object.amount - amount).zero?
     end
 
     def amount
@@ -42,12 +46,6 @@ module LocationObjects
       else
         @params[:amount].to_f
       end
-    end
-
-    def inventory_object
-      @inventory_object ||= @character.inventory_objects
-                                      .resource
-                                      .find_by(subject_id: @params[:subject_id])
     end
 
     def location_object
@@ -65,11 +63,18 @@ module LocationObjects
     end
 
     def subject
-      subject_class.find_by(id: @params[:subject_id])
+      @subject ||= inventory_object.subject
     end
 
-    def subject_class
-      @subject_class ||= @params[:subject_type].constantize
+    def inventory_object
+      @inventory_object ||=
+        if @params[:inventory_object_id]
+          @character.inventory_objects.find_by(id: @params[:inventory_object_id])
+        else
+          @character.inventory_objects
+                    .resource
+                    .find_by(subject_id: @params[:subject_id])
+        end
     end
   end
 end

@@ -17,6 +17,10 @@ class ActionDispatch::IntegrationTest
     Capybara.reset_sessions!
     Capybara.use_default_driver
   end
+
+  def host
+    @host ||= Capybara.app_host
+  end
 end
 
 module ActiveSupport
@@ -35,7 +39,10 @@ module ActiveSupport
       ApplicationController.any_instance.expects(:require_authentication).returns(true)
       return if character.blank?
 
-      ApplicationController.any_instance.expects(:current_character).returns(character)
+      ApplicationController.any_instance
+                           .expects(:current_character)
+                           .times(1..10)
+                           .returns(character)
     end
   end
 end

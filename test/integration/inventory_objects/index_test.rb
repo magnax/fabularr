@@ -23,12 +23,14 @@ class InventoryObjectsIndexTest < ActionDispatch::IntegrationTest
     iron = create(:resource, key: 'iron')
     stone_knife = create(:item_type, key: 'stone_knife', weight: 120)
     knife = create(:item, item_type: stone_knife, placeable: @character)
-    create(:inventory_object, character: @character, subject: iron, amount: 200)
-    create(:inventory_object, character: @character, subject: knife, unit: nil)
+    inv_iron = create(:inventory_object, character: @character, subject: iron, amount: 200)
+    inv_knife = create(:inventory_object, character: @character, subject: knife, unit: nil)
     visit 'en/inventory_objects'
 
     assert_content 'Inventory'
     assert_content '200 grams iron'
     assert_content 'brand new stone knife'
+    assert_link 'Drop', href: "#{host}/en/inventory_objects/#{inv_iron.id}/drop"
+    assert_link 'Drop', href: "#{host}/en/inventory_objects/#{inv_knife.id}/drop_item"
   end
 end

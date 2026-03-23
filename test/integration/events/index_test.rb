@@ -64,4 +64,24 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
       'Collect', href: "http://www.example.com/en/projects/new/collect/#{lr.id}"
     )
   end
+
+  test 'resources and items are visible' do
+    fabular_city = create(:location, name: 'Fabular City')
+    lr = create(:location_object, location: fabular_city,
+                                  subject: create(:resource, key: 'mushrooms'),
+                                  amount: 200, unit: 'grams')
+    create(:character, name: 'Magnus', location: fabular_city, user: @user)
+    stone_knife = create(:item_type, key: 'stone_knife', weight: 120)
+    knife = create(:item, item_type: stone_knife)
+    location_knife = create(:location_object, location: fabular_city,
+                                              subject: knife, unit: nil)
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_content 'Take 200 grams mushrooms'
+    assert_link 'Take', href: "#{host}/en/location_objects/#{lr.id}/take"
+    assert_content 'Take brand new stone knife'
+    assert_link 'Take', href: "#{host}/en/location_objects/#{location_knife.id}/take_item"
+  end
 end
