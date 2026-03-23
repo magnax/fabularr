@@ -20,10 +20,19 @@
     <p><%= t('views.recipes.index.time') %>: <%= recipe.base_speed %></p>
     <p><%= t('views.recipes.index.resources') %>:</p>
     <ul>
-      <% recipe.recipe_instructions.each do |instruction| %>
+      <% recipe.recipe_instructions.resource.each do |instruction| %>
         <li>
           <%= tn("resources.#{instruction.subject.key}") %>
           (<%= instruction.amount %> <%= td(instruction.unit) %>)</li>
+      <% end %>
+    </ul>
+
+    <p><%= t('views.recipes.index.tools') %>:</p>
+    <ul>
+      <% recipe.recipe_instructions.tool.each do |instruction| %>
+        <li>
+          <%= t("items.#{instruction.subject.key}") %>
+         </li>
       <% end %>
     </ul>
   </div>

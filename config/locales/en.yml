@@ -103,6 +103,7 @@ en:
     iron_knife: iron knife
     nothing_here: Nothing is laying here
     stone_knife: stone knife
+    wooden_shaft: wooden shaft
   locations:
     beach: beach
     desert: desert

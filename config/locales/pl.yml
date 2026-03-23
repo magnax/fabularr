@@ -103,6 +103,7 @@ pl:
     iron_knife: żelazny nóż
     nothing_here: Nic tu nie leży
     stone_knife: kamienny nóż
+    wooden_shaft: drewniany trzonek
   locations:
     beach: plaża
     desert: pustynia
@@ -233,6 +234,7 @@ pl:
         resources: Potrzebne materiały
         time: Potrzebny czas
         title: Budowanie i produkcja
+        tools: Potrzebne narzędzia
     sessions:
       new:
         title: Logowanie do Fabular
