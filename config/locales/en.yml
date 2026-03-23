@@ -43,6 +43,10 @@ en:
         to_me: "%{char_name} says to You: "
         me: "You're saying: "
         to_other: "You're saying to %{char_name}: "
+    drop_item: You drop a %{item}
+    drop_item_others: You see that %{character_link} is dropping a %{item}
+    drop_resource: You drop %{amount} %{unit} of %{res}
+    drop_resource_others: You see that %{character_link} is dropping some %{res}
     initial:
       location_info: You are in some place which looks like %{location_type}.
       people_info: 

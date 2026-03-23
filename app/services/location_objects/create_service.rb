@@ -4,9 +4,14 @@ module LocationObjects
   class CreateService < ApplicationService
     class InvalidParamsError < StandardError; end
 
+    include Events::BodyHelper
+
+    attr_reader :character
+
     def initialize(character, params)
       @character = character
       @params = params
+      @amount = calculated_amount
     end
 
     def call
@@ -22,7 +27,7 @@ module LocationObjects
     def update_inventory_and_location!
       if location_object.subject.is_a?(Resource)
         location_object.update!(
-          amount: location_object.amount + amount
+          amount: location_object.amount + @amount
         )
       end
       update_inventory_object!
@@ -32,19 +37,23 @@ module LocationObjects
       if should_destroy_inventory_object?
         inventory_object.destroy
       else
-        inventory_object.update!(amount: inventory_object.amount - amount)
+        inventory_object.update!(amount: inventory_object.amount - @amount)
       end
     end
 
     def should_destroy_inventory_object?
-      inventory_object.subject.is_a?(Item) || (inventory_object.amount - amount).zero?
+      inventory_object.subject.is_a?(Item) || (inventory_object.amount - @amount).zero?
     end
 
-    def amount
-      if @params[:amount].to_f > inventory_object.amount
-        inventory_object.amount
-      else
-        @params[:amount].to_f
+    def calculated_amount
+      @calculated_amount ||= begin
+        return if @params[:amount].blank?
+
+        if @params[:amount].to_f > inventory_object.amount
+          inventory_object.amount
+        else
+          @params[:amount].to_f
+        end
       end
     end
 
@@ -55,11 +64,29 @@ module LocationObjects
     end
 
     def create_events!
+      create_character_event!
+      create_other_characters_events!
+    end
+
+    def create_character_event!
       Event.create!(
-        body: 'Res. dropped',
+        body: send("drop_#{subject.class.to_s.downcase}_body"),
         location: @character.location,
         receiver_character: @character
       )
+    end
+
+    def create_other_characters_events!
+      @character.location.visible_characters.each do |char|
+        next if char == @character
+
+        Event.create!(
+          body: send("drop_#{subject.class.to_s.downcase}_others_body"),
+          location: @character.location,
+          character: @character,
+          receiver_character: char
+        )
+      end
     end
 
     def subject

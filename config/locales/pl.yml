@@ -43,6 +43,10 @@ pl:
         to_me: "%{char_name} mówi do Ciebie: "
         me: 'Mówisz: '
         to_other: 'Mówisz do %{char_name}: '
+    drop_item: Upuszczasz %{item}
+    drop_item_others: Widzisz jak %{character_link} upuszcza %{item}
+    drop_resource: Upuszczasz %{amount} %{unit} %{res}
+    drop_resource_others: Widzisz jak %{character_link} upuszcza trochę %{res}
     initial:
       location_info: Znajdujesz się w miejscu, które można określić jako %{location_type}.
       people_info: 
