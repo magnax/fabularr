@@ -16,6 +16,14 @@ class LocationObjectsController < ApplicationController
     @resource = location_object.subject
   end
 
+  def take_item
+    InventoryObjects::CreateService.call(
+      current_character, params.permit(:location_object_id)
+    )
+
+    redirect_to events_path
+  end
+
   private
 
   def location_object_params

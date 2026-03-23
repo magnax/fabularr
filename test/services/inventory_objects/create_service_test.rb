@@ -155,4 +155,30 @@ class InventoryObjectsCreateServiceTest < ActiveSupport::TestCase
       ev.body
     )
   end
+
+  test 'taking item from the ground' do
+    second_character = create(:character, location: @character.location)
+    item_type = create(:item_type, key: 'iron_knife')
+    iron_knife = create(:item, item_type: item_type)
+    location_iron_knife = create(:location_object, location: @character.location,
+                                                   subject: iron_knife)
+
+    params = {
+      location_object_id: location_iron_knife.id
+    }
+    assert_difference -> { Event.count } => 2,
+                      -> { InventoryObject.count } => 1,
+                      -> { LocationObject.count } => -1 do
+      call_service(params)
+    end
+
+    ev = @character.visible_events.last
+    assert_equal "You're taking iron knife", ev.body
+
+    ev = second_character.visible_events.last
+    assert_equal(
+      "You see that <!--CHARID:#{@character.id}--> is taking iron knife",
+      ev.body
+    )
+  end
 end

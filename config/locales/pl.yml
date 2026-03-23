@@ -61,6 +61,8 @@ pl:
       my_ended: Projekt rozpoczęty przez Ciebie właśnie się zakończył. %{project_info}
       starting_me: "Rozpoczynasz nowy projekt: %{info}."
       starting_other: Widzisz jak %{character_link} rozpoczyna nowy projekt
+    take_item: Podnosisz %{item}
+    take_item_others: Widzisz jak %{character_link} podnosi %{item}
     take_resource: Podnosisz %{amount} %{unit} %{res} z ziemi
     take_resource_others: Widzisz jak %{character_link} podnosi trochę %{res} z ziemi
   female: Kobieta
@@ -98,6 +100,7 @@ pl:
       damaged: uszkodzony
       new: nowy
       used: używany
+    iron_knife: żelazny nóż
     nothing_here: Nic tu nie leży
     stone_knife: kamienny nóż
   locations:

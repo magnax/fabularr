@@ -61,6 +61,8 @@ en:
       my_ended: Project started by you has just ended. %{project_info}
       starting_me: "You're starting new project: %{info}."
       starting_other: You see that %{character_link} is starting new project
+    take_item: "You're taking %{item}"
+    take_item_others: You see that %{character_link} is taking %{item}
     take_resource: "You're taking %{amount} %{unit} of %{res} from the ground"
     take_resource_others: 'You see that %{character_link} is taking some %{res} from the ground'
   female: Female
@@ -98,6 +100,7 @@ en:
       damaged: damaged
       new: new
       used: used
+    iron_knife: iron knife
     nothing_here: Nothing is laying here
     stone_knife: stone knife
   locations:

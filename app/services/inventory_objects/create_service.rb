@@ -4,6 +4,10 @@ module InventoryObjects
   class CreateService < ApplicationService
     class InvalidParamsError < StandardError; end
 
+    include Events::BodyHelper
+
+    attr_reader :character
+
     def initialize(character, params)
       @character = character
       @params = params
@@ -11,7 +15,7 @@ module InventoryObjects
     end
 
     def call
-      raise InvalidParamsError if @params[:amount].blank? || location_object.blank?
+      raise InvalidParamsError if location_object.blank? && @params[:amount].blank?
 
       update_inventory_and_location!
 
@@ -21,8 +25,16 @@ module InventoryObjects
     private
 
     def update_inventory_and_location!
-      inventory_object.update!(amount: inventory_object.amount + @amount)
+      if resource?
+        inventory_object.update!(amount: inventory_object.amount + @amount)
+      else
+        inventory_object
+      end
       update_location_object!
+    end
+
+    def resource?
+      @resource ||= subject.is_a?(Resource)
     end
 
     def update_location_object!
@@ -34,7 +46,11 @@ module InventoryObjects
     end
 
     def should_destroy_location?
-      (location_object.amount - @amount).zero?
+      item? || (location_object.amount - @amount).zero?
+    end
+
+    def item?
+      @item ||= subject.is_a?(Item)
     end
 
     def create_events!
@@ -44,12 +60,7 @@ module InventoryObjects
 
     def create_character_event!
       Event.create!(
-        body: I18n.t(
-          'events.take_resource',
-          res: I18n.td("resources.#{subject.key}"),
-          amount: @amount.to_i,
-          unit: I18n.td(location_object.unit)
-        ),
+        body: send("take_#{subject.class.to_s.downcase}_body"),
         location: @character.location,
         receiver_character: @character
       )
@@ -60,11 +71,7 @@ module InventoryObjects
         next if char == @character
 
         Event.create!(
-          body: I18n.t(
-            'events.take_resource_others',
-            character_link: @character.char_id,
-            res: I18n.td("resources.#{subject.key}")
-          ),
+          body: send("take_#{subject.class.to_s.downcase}_others_body"),
           location: @character.location,
           character: @character,
           receiver_character: char
@@ -94,9 +101,17 @@ module InventoryObjects
     end
 
     def location_object
-      @location_object ||= @character.location.location_objects
-                                     .resource
-                                     .find_by(subject_id: @params[:subject_id])
+      @location_object ||= item_location_object || resource_location_object
+    end
+
+    def item_location_object
+      @item_location_object ||= location.location_objects.item.find_by(id: @params[:location_object_id])
+    end
+
+    def resource_location_object
+      @resource_location_object ||= location.location_objects
+                                            .resource
+                                            .find_by(subject_id: @params[:subject_id])
     end
 
     def inventory_object
@@ -106,11 +121,11 @@ module InventoryObjects
     end
 
     def subject
-      subject_class.find_by(id: @params[:subject_id])
+      @subject ||= location_object.subject
     end
 
-    def subject_class
-      @subject_class ||= @params[:subject_type].constantize
+    def location
+      @location ||= @character.location
     end
   end
 end
