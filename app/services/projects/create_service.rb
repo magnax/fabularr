@@ -15,7 +15,7 @@ module Projects
       raise RecipeNotFoundError if recipe_not_found?
 
       @project = create_project!
-      create_project_descriptions!
+      create_project_descriptions! unless discover_project?
 
       create_creator_event!
       body = I18n.t(
@@ -26,6 +26,10 @@ module Projects
     end
 
     private
+
+    def discover_project?
+      project_type.key == 'discover_resource'
+    end
 
     def recipe_not_found?
       return unless project_type.key == 'build'
@@ -55,22 +59,11 @@ module Projects
     end
 
     def create_project_descriptions!
-      return if project_type.key == 'discover_resource'
-
       if project_type.key == 'collect'
-
-        ProjectDescription.create!(
-          project: @project,
-          description_type: ProjectDescription::RESOURCE_OUT,
-          subject: resource,
-          amount: 0,
-          amount_needed: amount,
-          unit: resource.unit
-        )
+        create_collect_type_project_description!
       else
         materials.each do |material|
-          ProjectDescription.create!(
-            project: @project,
+          @project.project_descriptions.create!(
             description_type: ProjectDescription::RESOURCE_IN,
             subject: material.subject,
             amount: 0,
@@ -78,11 +71,34 @@ module Projects
             unit: material.unit
           )
         end
+        tools.each do |tool|
+          @project.project_descriptions.create!(
+            description_type: ProjectDescription::TOOL,
+            subject: tool.subject,
+            amount: nil,
+            amount_needed: nil,
+            unit: nil
+          )
+        end
       end
+    end
+
+    def create_collect_type_project_description!
+      @project.project_descriptions.create!(
+        description_type: ProjectDescription::RESOURCE_OUT,
+        subject: resource,
+        amount: 0,
+        amount_needed: amount,
+        unit: resource.unit
+      )
     end
 
     def materials
       recipe.recipe_instructions.resource
+    end
+
+    def tools
+      recipe.recipe_instructions.tool
     end
 
     def create_creator_event!

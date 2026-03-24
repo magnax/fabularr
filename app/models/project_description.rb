@@ -27,12 +27,14 @@ class ProjectDescription < ApplicationRecord
   belongs_to :subject, polymorphic: true
   belongs_to :project
 
+  scope :resource_in, -> { where(description_type: RESOURCE_IN) }
+  scope :tool, -> { where(description_type: TOOL) }
   # Types:
 
-  RESOURCE_IN = 'resource_in' # input
-  RESOURCE_OUT = 'resource_out' # output
   ITEM_IN = 'item_in'
   ITEM_OUT = 'item_out'
   MACHINE = 'machine'
+  RESOURCE_IN = 'resource_in' # input
+  RESOURCE_OUT = 'resource_out' # output
   TOOL = 'tool'
 end
