@@ -29,5 +29,10 @@ FactoryBot.define do
     subject_type { 'Resource' }
     amount { 1 }
     unit { 'grams' }
+
+    trait :tool do
+      instruction_type { 'tool' }
+      subject { FactoryBot.create(:item_type) }
+    end
   end
 end
