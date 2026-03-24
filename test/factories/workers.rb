@@ -13,7 +13,11 @@
 #
 FactoryBot.define do
   factory :worker do
-    project_id { 1 }
-    character_id { 1 }
+    project
+    character
+
+    trait :working do
+      left_at { nil }
+    end
   end
 end

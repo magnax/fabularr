@@ -117,4 +117,67 @@ class LocationObjectsCreateServiceTest < ActiveSupport::TestCase
     ev = second_character.visible_events.sole
     assert_equal "You see that <!--CHARID:#{@character.id}--> is dropping a stone knife", ev.body
   end
+
+  test 'dropping item which is not needed in current project' do
+    item_type_knife = create(:item_type, key: 'stone_knife')
+    item_type_hammer = create(:item_type, key: 'stone_hammer')
+    knife = create(:item, item_type: item_type_knife)
+    hammer = create(:item, item_type: item_type_hammer)
+    create(:inventory_object, character: @character, subject: knife)
+    inv_hammer = create(:inventory_object, character: @character, subject: hammer)
+
+    recipe = create(:recipe)
+    create(:recipe_instruction, :tool, recipe: recipe, subject: item_type_knife)
+    project = create(:project, :build, recipe: recipe)
+    worker = create(:worker, :working, project: project, character: @character)
+
+    params = {
+      inventory_object_id: inv_hammer.id
+    }
+
+    call_service(params)
+
+    assert_nil worker.reload.left_at
+  end
+
+  test 'dropping item which is needed in project will terminate working' do
+    item_type = create(:item_type, key: 'stone_knife')
+    knife = create(:item, item_type: item_type)
+    inv_knife = create(:inventory_object, character: @character, subject: knife)
+
+    recipe = create(:recipe)
+    create(:recipe_instruction, :tool, recipe: recipe, subject: item_type)
+    project = create(:project, :build, recipe: recipe)
+    worker = create(:worker, :working, project: project, character: @character)
+
+    params = {
+      inventory_object_id: inv_knife.id
+    }
+
+    call_service(params)
+
+    assert_not_nil worker.reload.left_at
+  end
+
+  test 'dropping item which is needed but duplicated in inventory' do
+    item_type = create(:item_type, key: 'stone_knife')
+    knife = create(:item, item_type: item_type)
+    second_knife = create(:item, item_type: item_type)
+
+    inv_knife = create(:inventory_object, character: @character, subject: knife)
+    create(:inventory_object, character: @character, subject: second_knife)
+
+    recipe = create(:recipe)
+    create(:recipe_instruction, :tool, recipe: recipe, subject: item_type)
+    project = create(:project, :build, recipe: recipe)
+    worker = create(:worker, :working, project: project, character: @character)
+
+    params = {
+      inventory_object_id: inv_knife.id
+    }
+
+    call_service(params)
+
+    assert_nil worker.reload.left_at
+  end
 end

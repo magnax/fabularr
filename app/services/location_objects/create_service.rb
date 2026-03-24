@@ -18,6 +18,7 @@ module LocationObjects
       raise InvalidParamsError if inventory_object.blank?
 
       update_inventory_and_location!
+      update_running_project!
 
       create_events!
     end
@@ -43,6 +44,21 @@ module LocationObjects
 
     def should_destroy_inventory_object?
       inventory_object.subject.is_a?(Item) || (inventory_object.amount - @amount).zero?
+    end
+
+    def update_running_project!
+      return unless current_worker
+      return if Recipes::CheckToolRequirementsService.call(@character, project)
+
+      current_worker.update(left_at: DateTime.current)
+    end
+
+    def project
+      @project ||= current_worker.project
+    end
+
+    def current_worker
+      @current_worker ||= @character.workers.active.first
     end
 
     def calculated_amount

@@ -19,25 +19,7 @@ module Projects
     private
 
     def can_join?
-      return true if recipe.blank? || recipe.recipe_instructions.tool.none?
-
-      needed_tools.all? do |tool|
-        tool.subject.key.in? inventory_keys
-      end
-    end
-
-    def needed_tools
-      @needed_tools ||= recipe.recipe_instructions.tool
-    end
-
-    def inventory_keys
-      @inventory_keys ||= @character.inventory_objects
-                                    .item
-                                    .map { |item| item.subject.item_type.key }
-    end
-
-    def recipe
-      @recipe ||= project.recipe
+      Recipes::CheckToolRequirementsService.call(@character, project)
     end
 
     def project
