@@ -7,6 +7,7 @@
 #  id               :bigint           not null, primary key
 #  amount           :integer
 #  instruction_type :string
+#  speed            :float
 #  subject_type     :string
 #  unit             :string
 #  created_at       :datetime         not null

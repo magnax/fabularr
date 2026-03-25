@@ -102,6 +102,7 @@ en:
       used: used
     iron_knife: iron knife
     nothing_here: Nothing is laying here
+    stone_axe: stone axe
     stone_knife: stone knife
     wooden_shaft: wooden shaft
   locations:
@@ -224,6 +225,7 @@ en:
     projects:
       collect: Collect
       collect_info: One character can collect only %{amount} grams in one day. Turns number will be rounded up. The final amount can differ by max 20% depending on provided amount.
+      collect_info_tool: If you have %{key}, you can collect %{amount} grams in one day.
       discover: Discover
       start: Start project
     recipes:

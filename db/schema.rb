@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_20_200338) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_25_212508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -149,6 +149,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_20_200338) do
     t.datetime "created_at", null: false
     t.string "instruction_type"
     t.bigint "recipe_id"
+    t.float "speed"
     t.integer "subject_id"
     t.string "subject_type"
     t.string "unit"
@@ -160,6 +161,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_20_200338) do
     t.integer "base_speed"
     t.datetime "created_at", null: false
     t.string "key"
+    t.string "recipe_type"
     t.datetime "updated_at", null: false
   end
 

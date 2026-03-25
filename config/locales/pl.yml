@@ -102,6 +102,7 @@ pl:
       used: używany
     iron_knife: żelazny nóż
     nothing_here: Nic tu nie leży
+    stone_axe: kamienna siekiera
     stone_knife: kamienny nóż
     wooden_shaft: drewniany trzonek
   locations:
@@ -225,6 +226,7 @@ pl:
     projects:
       collect: Zbieraj
       collect_info: W ciągu jednego dnia jedna postać może zebrać tylko %{amount} gram. Liczba tur będzie zaokrąglona w górę. To ile otrzymasz na koniec podlega losowym odchyłom (maks. 20%) od ilości jaką podasz.
+      collect_info_tool: Jeśli masz %{key}, możesz zebrać %{amount} gram jednego dnia.
       discover: Odkrywaj
       start: Rozpocznij projekt
     recipes:
