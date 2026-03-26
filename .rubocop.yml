@@ -28,6 +28,9 @@ Metrics/MethodLength:
   Exclude: 
     - '*_test.rb'
 
+Naming/VariableNumber:
+  Enabled: false
+
 Rails/CreateTableWithTimestamps:
   Enabled: false
 
