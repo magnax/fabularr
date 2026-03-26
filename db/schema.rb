@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_25_212508) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_26_194506) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -220,6 +220,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_212508) do
     t.datetime "created_at", null: false
     t.datetime "left_at"
     t.integer "project_id"
+    t.float "speed", default: 1.0
     t.datetime "updated_at", null: false
   end
 
