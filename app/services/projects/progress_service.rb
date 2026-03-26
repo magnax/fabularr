@@ -50,7 +50,7 @@ module Projects
                   end
         t_end = worker.left_at || current_time.to_time
 
-        elapsed + (t_end - t_start)
+        elapsed + ((t_end - t_start) * worker.speed)
       end
     end
 
