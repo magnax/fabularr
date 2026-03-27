@@ -77,4 +77,8 @@ class Character < ApplicationRecord
   def char_id
     "<!--CHARID:#{id}-->"
   end
+
+  def tools_keys
+    inventory_objects.item.map { |i| i.subject.item_type.key }
+  end
 end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
+
 require 'test_helper'
 
 class LocationObjectsCreateServiceTest < ActiveSupport::TestCase
@@ -204,4 +206,61 @@ class LocationObjectsCreateServiceTest < ActiveSupport::TestCase
     new_worker = Worker.where(left_at: nil).sole
     assert_equal 1, new_worker.speed
   end
+
+  test 'dropping item which is optional but not the best that user has' do
+    knife_type = create(:item_type, key: 'stone_knife')
+    axe_type = create(:item_type, key: 'stone_axe')
+    knife = create(:item, item_type: knife_type)
+    axe = create(:item, item_type: axe_type)
+
+    inv_knife = create(:inventory_object, character: @character, subject: knife)
+    create(:inventory_object, character: @character, subject: axe)
+
+    recipe = create(:recipe, recipe_type: 'collect')
+    create(:recipe_instruction, :tool, recipe: recipe, subject: knife_type, speed: 1.5)
+    create(:recipe_instruction, :tool, recipe: recipe, subject: axe_type, speed: 2)
+    project = create(:project, :collect, recipe: recipe)
+    worker = create(:worker, :working, project: project, character: @character, speed: 2)
+
+    params = {
+      inventory_object_id: inv_knife.id
+    }
+
+    assert_difference -> { Worker.count } => 0 do
+      call_service(params)
+    end
+
+    assert_nil worker.reload.left_at
+    assert_equal 2, worker.reload.speed
+  end
+
+  test 'dropping optional best item' do
+    knife_type = create(:item_type, key: 'stone_knife')
+    axe_type = create(:item_type, key: 'stone_axe')
+    knife = create(:item, item_type: knife_type)
+    axe = create(:item, item_type: axe_type)
+
+    create(:inventory_object, character: @character, subject: knife)
+    inv_axe = create(:inventory_object, character: @character, subject: axe)
+
+    recipe = create(:recipe, recipe_type: 'collect')
+    create(:recipe_instruction, :tool, recipe: recipe, subject: knife_type, speed: 1.5)
+    create(:recipe_instruction, :tool, recipe: recipe, subject: axe_type, speed: 2)
+    project = create(:project, :collect, recipe: recipe)
+    worker = create(:worker, :working, project: project, character: @character, speed: 2)
+
+    params = {
+      inventory_object_id: inv_axe.id
+    }
+
+    assert_difference -> { Worker.count } => 1 do
+      call_service(params)
+    end
+
+    assert_not_nil worker.reload.left_at
+    new_worker = Worker.where(left_at: nil).sole
+    assert_equal 1.5, new_worker.speed
+  end
 end
+
+# rubocop:enable Metrics/ClassLength

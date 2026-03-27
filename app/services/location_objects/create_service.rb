@@ -50,7 +50,7 @@ module LocationObjects
       return unless current_worker
 
       if Recipes::CheckToolRequirementsService.call(@character, project)
-        return unless dropped_optional_tool?
+        return unless dropped_best_tool?
 
         create_new_worker!
       else
@@ -58,10 +58,21 @@ module LocationObjects
       end
     end
 
-    def dropped_optional_tool?
+    def dropped_best_tool?
       return unless inventory_object.subject.is_a?(Item)
+      return unless dropped_optional_tool?
 
-      inventory_object.subject.item_type.key.in? optional_tools.keys
+      best_tool.nil? ||
+        best_tool == dropped_item_key ||
+        optional_tools[dropped_item_key] > optional_tools[best_tool]
+    end
+
+    def dropped_optional_tool?
+      dropped_item_key.in?(optional_tools.keys)
+    end
+
+    def dropped_item_key
+      @dropped_item_key ||= inventory_object.subject.item_type.key
     end
 
     def optional_tools
@@ -70,7 +81,13 @@ module LocationObjects
 
     def create_new_worker!
       current_worker.update(left_at: DateTime.current)
-      Worker.create!(character: @character, project: project, speed: 1)
+      Worker.create!(
+        character: @character, project: project, speed: optional_tools[best_tool] || 1
+      )
+    end
+
+    def best_tool
+      @best_tool ||= Recipes::BestOptionalTool.call(@character, project.recipe)
     end
 
     def project
