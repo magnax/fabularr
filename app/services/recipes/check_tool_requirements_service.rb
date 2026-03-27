@@ -8,7 +8,7 @@ module Recipes
     end
 
     def call
-      return true if @project.recipe.blank? || tools_needed.none?
+      return true if recipe.blank? || !build_recipe? || tools_needed.none?
 
       tools_needed.all? { |tool| tool.subject.key.in?(items_keys) }
     end
@@ -16,11 +16,19 @@ module Recipes
     private
 
     def tools_needed
-      @tools_needed ||= @project.recipe.recipe_instructions.tool
+      @tools_needed ||= recipe.recipe_instructions.tool
     end
 
     def items_keys
       @character.inventory_objects.item.map { |item| item.subject.item_type.key }
+    end
+
+    def build_recipe?
+      recipe.recipe_type == Recipe::BUILD
+    end
+
+    def recipe
+      @recipe ||= @project.recipe
     end
   end
 end

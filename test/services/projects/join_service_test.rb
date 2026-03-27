@@ -26,7 +26,7 @@ class ProjectsJoinServiceTest < ActiveSupport::TestCase
   end
 
   test 'cannot join to project without needed tools' do
-    recipe = create(:recipe)
+    recipe = create(:recipe, recipe_type: Recipe::BUILD)
     create(:recipe_instruction, :tool, recipe: recipe)
     project = create(:project, :build, recipe: recipe)
 

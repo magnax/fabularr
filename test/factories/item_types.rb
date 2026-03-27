@@ -12,6 +12,6 @@
 #
 FactoryBot.define do
   factory :item_type do
-    key { 'MyString' }
+    key { Faker::Lorem.word }
   end
 end

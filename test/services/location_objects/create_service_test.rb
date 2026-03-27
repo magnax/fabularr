@@ -145,7 +145,7 @@ class LocationObjectsCreateServiceTest < ActiveSupport::TestCase
     knife = create(:item, item_type: item_type)
     inv_knife = create(:inventory_object, character: @character, subject: knife)
 
-    recipe = create(:recipe)
+    recipe = create(:recipe, recipe_type: Recipe::BUILD)
     create(:recipe_instruction, :tool, recipe: recipe, subject: item_type)
     project = create(:project, :build, recipe: recipe)
     worker = create(:worker, :working, project: project, character: @character)
@@ -179,5 +179,29 @@ class LocationObjectsCreateServiceTest < ActiveSupport::TestCase
     call_service(params)
 
     assert_nil worker.reload.left_at
+  end
+
+  test 'dropping item which is optional will add worker with new speed' do
+    item_type = create(:item_type, key: 'stone_knife')
+    knife = create(:item, item_type: item_type)
+
+    inv_knife = create(:inventory_object, character: @character, subject: knife)
+
+    recipe = create(:recipe, recipe_type: 'collect')
+    create(:recipe_instruction, :tool, recipe: recipe, subject: item_type, speed: 1.8)
+    project = create(:project, :collect, recipe: recipe)
+    worker = create(:worker, :working, project: project, character: @character, speed: 1.8)
+
+    params = {
+      inventory_object_id: inv_knife.id
+    }
+
+    assert_difference -> { Worker.count } => 1 do
+      call_service(params)
+    end
+
+    assert_not_nil worker.reload.left_at
+    new_worker = Worker.where(left_at: nil).sole
+    assert_equal 1, new_worker.speed
   end
 end

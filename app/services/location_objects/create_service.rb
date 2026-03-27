@@ -48,9 +48,29 @@ module LocationObjects
 
     def update_running_project!
       return unless current_worker
-      return if Recipes::CheckToolRequirementsService.call(@character, project)
 
+      if Recipes::CheckToolRequirementsService.call(@character, project)
+        return unless dropped_optional_tool?
+
+        create_new_worker!
+      else
+        current_worker.update(left_at: DateTime.current)
+      end
+    end
+
+    def dropped_optional_tool?
+      return unless inventory_object.subject.is_a?(Item)
+
+      inventory_object.subject.item_type.key.in? optional_tools.keys
+    end
+
+    def optional_tools
+      @optional_tools ||= Projects::OptionalTools.call(project)
+    end
+
+    def create_new_worker!
       current_worker.update(left_at: DateTime.current)
+      Worker.create!(character: @character, project: project, speed: 1)
     end
 
     def project
