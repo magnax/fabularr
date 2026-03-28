@@ -18,6 +18,7 @@ module InventoryObjects
       raise InvalidParamsError if location_object.blank? && @params[:amount].blank?
 
       update_inventory_and_location!
+      update_running_project!
 
       create_events!
     end
@@ -31,6 +32,41 @@ module InventoryObjects
         inventory_object
       end
       update_location_object!
+    end
+
+    def update_running_project!
+      return unless current_worker
+      return unless inventory_object_better?
+
+      current_worker.update!(left_at: DateTime.current)
+      @character.workers.create!(
+        project: current_worker.project, speed: inventory_object_speed
+      )
+      Event.create!(
+        body: 'Your project speed will now increase',
+        location: @character.location,
+        receiver_character: @character
+      )
+    end
+
+    def project
+      @project ||= current_worker.project
+    end
+
+    def current_worker
+      @current_worker ||= @character.workers.active.first
+    end
+
+    def inventory_object_better?
+      true
+    end
+
+    def inventory_object_speed
+      optional_tools[inventory_object.subject.item_type.key]
+    end
+
+    def optional_tools
+      @optional_tools ||= Projects::OptionalTools.call(current_worker.project)
     end
 
     def resource?

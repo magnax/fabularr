@@ -181,4 +181,34 @@ class InventoryObjectsCreateServiceTest < ActiveSupport::TestCase
       ev.body
     )
   end
+
+  test 'taking item which can speed up current project' do
+    item_type = create(:item_type, key: 'iron_knife')
+    iron_knife = create(:item, item_type: item_type)
+    location_iron_knife = create(:location_object, location: @character.location,
+                                                   subject: iron_knife)
+    recipe = create(:recipe, recipe_type: Recipe::COLLECT)
+    create(:recipe_instruction, :tool, recipe: recipe, subject: item_type, speed: 2)
+
+    project = create(:project, :collect, recipe: recipe)
+    worker = create(:worker, :working, project: project, character: @character, speed: 1.8)
+
+    params = {
+      location_object_id: location_iron_knife.id
+    }
+    assert_difference -> { Event.count } => 2,
+                      -> { InventoryObject.count } => 1,
+                      -> { LocationObject.count } => -1,
+                      -> { Worker.count } => 1 do
+      call_service(params)
+    end
+
+    evs = @character.visible_events.pluck(:body)
+    assert_includes evs, 'Your project speed will now increase'
+
+    assert_not_nil worker.reload.left_at
+
+    new_worker = Worker.where(left_at: nil).sole
+    assert_equal 2, new_worker.speed
+  end
 end
