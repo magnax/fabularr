@@ -5,6 +5,7 @@
 # Table name: locations
 #
 #  id                 :integer          not null, primary key
+#  coords             :point
 #  name               :string
 #  created_at         :datetime
 #  updated_at         :datetime
@@ -19,10 +20,27 @@ class LocationTest < ActiveSupport::TestCase
     location = build(:location)
 
     assert_respond_to location, :location_type_id
+    assert_respond_to location, :coords
+
+    assert location.valid?
+  end
+
+  test 'model methods' do
+    location = build(:location)
+
     assert_respond_to location, :characters
     assert_respond_to location, :visible_characters
     assert_respond_to location, :hearable_characters
+    assert_respond_to location, :x
+    assert_respond_to location, :y
 
     assert location.valid?
+  end
+
+  test 'read coordinates' do
+    location = build(:location, coords: '23.5,55.8')
+
+    assert_equal 23.5, location.x
+    assert_equal 55.8, location.y
   end
 end

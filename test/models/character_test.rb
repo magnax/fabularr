@@ -5,6 +5,7 @@
 # Table name: characters
 #
 #  id                :integer          not null, primary key
+#  coords            :point
 #  gender            :string
 #  name              :string
 #  created_at        :datetime
@@ -30,6 +31,10 @@ class CharacterTest < ActiveSupport::TestCase
     assert_respond_to character, :name_for
     assert_respond_to character, :location
     assert_respond_to character, :spawn_location
+    assert_respond_to character, :coords
+
+    assert_respond_to character, :x
+    assert_respond_to character, :y
   end
 
   test 'valid character' do
@@ -109,5 +114,12 @@ class CharacterTest < ActiveSupport::TestCase
     create(:inventory_object, character: character, subject: sand, amount: 300)
 
     assert_equal 500, character.carrying_weight
+  end
+
+  test 'read coordinates' do
+    character = build(:character, coords: '22.3,44.5')
+
+    assert_equal 22.3, character.x
+    assert_equal 44.5, character.y
   end
 end

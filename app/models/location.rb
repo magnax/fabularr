@@ -5,6 +5,7 @@
 # Table name: locations
 #
 #  id                 :integer          not null, primary key
+#  coords             :point
 #  name               :string
 #  created_at         :datetime
 #  updated_at         :datetime
@@ -13,6 +14,10 @@
 #  parent_location_id :integer
 #
 class Location < ApplicationRecord
+  # include Coordinates
+
+  delegate :x, :y, to: :coords
+
   has_many :characters, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :items, dependent: :destroy

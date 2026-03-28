@@ -5,6 +5,7 @@
 # Table name: characters
 #
 #  id                :integer          not null, primary key
+#  coords            :point
 #  gender            :string
 #  name              :string
 #  created_at        :datetime

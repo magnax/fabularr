@@ -5,6 +5,7 @@
 # Table name: characters
 #
 #  id                :integer          not null, primary key
+#  coords            :point
 #  gender            :string
 #  name              :string
 #  created_at        :datetime
@@ -15,6 +16,8 @@
 #
 class Character < ApplicationRecord
   MAX_CAPACITY = 15_000
+
+  delegate :x, :y, to: :coords
 
   belongs_to :location
   belongs_to :spawn_location, class_name: 'Location'
