@@ -6,23 +6,26 @@
   </h1>
 </section>
 
-<div>
-  <%= t 'views.events.index.name_title' %>: <%= @character.name_for(@character) %>
-  (<%= t "views.events.age", age: @character.age %>)
-</div>
-<div>
-  <%= t 'views.events.index.carrying' %>: <%= @character.carrying_weight %>
-  [<%= link_to t('views.events.index.inventory_page'), inventory_objects_path %>]
-</div>
-<div>
-  <%= t 'views.events.index.location' %>: <%= @location.name %>
-  [<%= t "locations.#{@location.location_type.key}" %>]
-</div>
-<div>
-  <%= link_to t('views.events.index.build_menu'), recipes_path %>
-</div>
+<section id="character_information" style="float: left; width: 50%;">
+  <div>
+    <%= t 'views.events.index.name_title' %>: <%= @character.name_for(@character) %>
+    (<%= t "views.events.age", age: @character.age %>)
+  </div>
+  <div>
+    <%= t 'views.events.index.carrying' %>: <%= @character.carrying_weight %>
+    [<%= link_to t('views.events.index.inventory_page'), inventory_objects_path %>]
+  </div>
+  <div>
+    <%= t 'views.events.index.location' %>: <%= @location.name %>
+    [<%= t "locations.#{@location.location_type.key}" %>]
+  </div>
+  <div>
+    <%= link_to t('views.events.index.build_menu'), recipes_path %>
+  </div>
+</section>
+<section id="map"  style="float: right; width: 50%;"><img src="maps" width=200 height=200></section>
 
-<section id="events" data-location-id="<%= @location.id %>">
+<section id="events" data-location-id="<%= @location.id %>" style="clear: both;">
   <%= render partial: 'events/events', locals: { events: @events } %>
 </section>
 

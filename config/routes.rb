@@ -27,6 +27,7 @@ Fabularr::Application.routes.draw do
     resources :locations do
       resources :location_resources, only: :new
     end
+    resources :maps, only: :index
     resources :projects, only: :create do
       get :join
       get :leave
