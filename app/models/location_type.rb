@@ -11,4 +11,28 @@
 #
 class LocationType < ApplicationRecord
   has_many :locations, dependent: nil
+
+  BEACH = 'beach'
+  DESERT = 'desert'
+  FIELDS = 'fields'
+  FOREST = 'forest'
+  HILLS = 'hills'
+  LAKESIDE = 'lakeside'
+  MEADOW = 'meadow'
+  MOUNTAINS = 'mountains'
+  SWAMP = 'swamp'
+  TUNDRA = 'tundra'
+
+  COLOR_BEACH = 'ffeeaa'
+  COLOR_DESERT = 'ffff00'
+  COLOR_FIELDS = '66ff00'
+  COLOR_FOREST = '008000'
+  COLOR_HILLS = '37c8ab'
+  COLOR_LAKESIDE = '87deaa'
+  COLOR_MEADOW = '00ff66'
+  COLOR_MOUNTAINS = 'b3b3b3'
+  COLOR_SWAMP = 'ac939d'
+  COLOR_TUNDRA = '808080'
+  COLOR_WATER = '00ffff'
+  COLOR_BORDER = 'e6e6e6'
 end
