@@ -4,7 +4,7 @@ Definitions::Recipes::RECIPES.each do |recipe|
   if recipe[:type] == 'build'
     ItemType.where(key: recipe[:key]).first_or_create
     r = Recipe.where(key: recipe[:key])
-              .first_or_create(type: 'build', base_speed: recipe[:base_speed])
+              .first_or_create(recipe_type: 'build', base_speed: recipe[:base_speed])
     recipe[:instructions].each do |i|
       case i[:type]
       when 'resource'
@@ -23,10 +23,10 @@ Definitions::Recipes::RECIPES.each do |recipe|
     end
   elsif recipe[:type] == 'collect'
     r = Recipe.where(key: recipe[:key])
-              .first_or_create(type: 'collect')
+              .first_or_create(recipe_type: 'collect')
     recipe[:instructions].each do |i|
       item_type = ItemType.where(key: i[:key]).first_or_create
-      r.recipe_instruction.create!(
+      r.recipe_instructions.create!(
         subject: item_type,
         instruction_type: RecipeInstruction::TOOL,
         speed: i[:speed]

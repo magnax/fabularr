@@ -18,6 +18,7 @@
   <div>
     <%= t 'views.events.index.location' %>: <%= @location.name %>
     [<%= t "locations.#{@location.location_type.key}" %>]
+    [<%= "#{@location.x}, #{@location.y}" %>]
   </div>
   <div>
     <%= link_to t('views.events.index.build_menu'), recipes_path %>

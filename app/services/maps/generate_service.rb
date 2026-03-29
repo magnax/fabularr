@@ -16,7 +16,23 @@ module Maps
     private
 
     def image_data
-      @image_data ||= full_map.crop(150, 150, 200, 200).to_blob
+      @image_data ||= result.to_blob
+    end
+
+    def result
+      canvas = full_map.crop(position[:x], position[:y], 200, 200)
+      draw = Magick::Draw.new
+      draw.circle(100, 100, 97, 100)
+      draw.draw(canvas)
+      canvas
+    end
+
+    def position
+      @position ||= { x: coords.x - 100, y: coords.y - 100 }
+    end
+
+    def coords
+      @coords ||= @character.location.coords
     end
 
     def full_map
