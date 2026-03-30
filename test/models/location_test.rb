@@ -9,9 +9,17 @@
 #  name               :string
 #  created_at         :datetime
 #  updated_at         :datetime
+#  location_class_id  :bigint
 #  location_type_id   :integer
-#  locationclass_id   :integer
 #  parent_location_id :integer
+#
+# Indexes
+#
+#  index_locations_on_location_class_id  (location_class_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (location_class_id => location_classes.id)
 #
 require 'test_helper'
 

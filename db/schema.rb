@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_28_193128) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_30_185519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -73,6 +73,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_28_193128) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "location_classes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "key"
+    t.boolean "moveable"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "location_objects", force: :cascade do |t|
     t.float "amount"
     t.datetime "created_at", null: false
@@ -102,11 +109,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_28_193128) do
   create_table "locations", id: :serial, force: :cascade do |t|
     t.point "coords"
     t.datetime "created_at"
+    t.bigint "location_class_id"
     t.integer "location_type_id"
-    t.integer "locationclass_id"
+    t.integer "max_capacity"
+    t.integer "max_characters"
     t.string "name"
     t.integer "parent_location_id"
     t.datetime "updated_at"
+    t.index ["location_class_id"], name: "index_locations_on_location_class_id"
   end
 
   create_table "project_descriptions", force: :cascade do |t|
@@ -228,6 +238,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_28_193128) do
 
   add_foreign_key "inventory_objects", "characters"
   add_foreign_key "location_objects", "locations"
+  add_foreign_key "locations", "location_classes"
   add_foreign_key "project_descriptions", "projects"
   add_foreign_key "projects", "recipes"
   add_foreign_key "recipe_instructions", "recipes"

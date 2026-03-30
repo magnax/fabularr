@@ -6,16 +6,24 @@
 #
 #  id                 :integer          not null, primary key
 #  coords             :point
+#  max_capacity       :integer
+#  max_characters     :integer
 #  name               :string
 #  created_at         :datetime
 #  updated_at         :datetime
+#  location_class_id  :bigint
 #  location_type_id   :integer
-#  locationclass_id   :integer
 #  parent_location_id :integer
 #
+# Indexes
+#
+#  index_locations_on_location_class_id  (location_class_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (location_class_id => location_classes.id)
+#
 class Location < ApplicationRecord
-  # include Coordinates
-
   delegate :x, :y, to: :coords
 
   has_many :characters, dependent: :destroy
@@ -28,6 +36,7 @@ class Location < ApplicationRecord
   has_many :workers, through: :projects
 
   belongs_to :location_type
+  belongs_to :location_class
 
   scope :random, -> { order('RANDOM()').limit(1) }
 
