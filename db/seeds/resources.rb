@@ -8,49 +8,49 @@ r_raw_food = ResourceType.where(key: 'raw_food').first_or_create
 
 resources = [
   {
-    key: 'strawberries', unit: 'grams', bs: 57,
+    key: 'strawberries', bs: 57,
     types: [r_food.id]
   },
   {
-    key: 'mushrooms', unit: 'grams', bs: 72,
+    key: 'mushrooms', bs: 72,
     types: [r_food.id]
   },
   {
-    key: 'nuts', unit: 'grams', bs: 21,
+    key: 'nuts', bs: 21,
     types: [r_food.id]
   },
   {
-    key: 'coal', unit: 'kilograms', bs: 4320,
+    key: 'coal', bs: 43,
     types: [r_fuel.id]
   },
   {
-    key: 'wood', unit: 'kilograms', bs: 4500,
+    key: 'wood', bs: 45,
     types: [r_fuel.id, r_material.id]
   },
   {
-    key: 'sand', unit: 'kilograms', bs: 3500,
+    key: 'sand', bs: 35,
     types: [r_material.id]
   },
   {
-    key: 'seaweeds', unit: 'grams', bs: 90,
+    key: 'seaweeds', bs: 90,
     types: [r_raw_food.id]
   },
   {
-    key: 'salmon', unit: 'grams', bs: 43,
+    key: 'salmon', bs: 43,
     types: [r_raw_food.id]
   },
   {
-    key: 'beeswax', unit: 'grams', bs: 288,
+    key: 'beeswax', bs: 288,
     types: [r_medicine.id]
   },
   {
-    key: 'stone', unit: 'grams', bs: 450,
+    key: 'stone', bs: 450,
     types: [r_material.id]
   }
 ]
 
 resources.each do |res|
-  Resource.create!(key: res[:key], unit: res[:unit], base_speed_per_unit: res[:bs], resource_type_id: res[:types])
+  Resource.create!(key: res[:key], unit: 'grams', base_speed_per_unit: res[:bs], resource_type_id: res[:types])
 end
 
 puts "ResourceTypes (#{ResourceType.count}), Resources: #{Resource.pluck(:key).join(', ')} loaded"
