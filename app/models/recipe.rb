@@ -15,6 +15,7 @@ class Recipe < ApplicationRecord
   has_many :recipe_instructions, dependent: :destroy
 
   BUILD = 'build'
+  BUILDING = 'building'
   COLLECT = 'collect'
 
   scope :by_type, ->(type) { where(recipe_type: type) }

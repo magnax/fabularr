@@ -6,6 +6,8 @@
 #
 #  id                 :integer          not null, primary key
 #  coords             :point
+#  max_capacity       :integer
+#  max_characters     :integer
 #  name               :string
 #  created_at         :datetime
 #  updated_at         :datetime

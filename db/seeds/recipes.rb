@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-Definitions::Recipes::RECIPES.each do |recipe|
-  if recipe[:type] == 'build'
+Definitions::Recipes::RECIPES.each do |recipe| # rubocop:disable Metrics/BlockLength
+  case recipe[:type]
+  when 'build'
     ItemType.where(key: recipe[:key]).first_or_create
     r = Recipe.where(key: recipe[:key])
               .first_or_create(recipe_type: 'build', base_speed: recipe[:base_speed])
@@ -21,7 +22,7 @@ Definitions::Recipes::RECIPES.each do |recipe|
         )
       end
     end
-  elsif recipe[:type] == 'collect'
+  when 'collect'
     r = Recipe.where(key: recipe[:key])
               .first_or_create(recipe_type: 'collect')
     recipe[:instructions].each do |i|
@@ -32,9 +33,21 @@ Definitions::Recipes::RECIPES.each do |recipe|
         speed: i[:speed]
       )
     end
+  when 'building'
+    r = Recipe.where(key: recipe[:key])
+              .first_or_create(recipe_type: 'building', base_speed: recipe[:base_speed])
+    recipe[:instructions].each do |i|
+      res = Resource.where(key: i[:key]).first_or_create
+      r.recipe_instructions.create!(
+        subject: res,
+        instruction_type: RecipeInstruction::RESOURCE,
+        unit: 'grams', amount: i[:amount]
+      )
+    end
   end
 end
 
+puts "Created #{Recipe.count} recipes: #{Recipe.all.pluck(:key).join(', ')}"
 stone = Resource.find_by(key: 'stone')
 wood = Resource.find_by(key: 'wood')
 knife = ItemType.find_by(key: 'stone_knife')

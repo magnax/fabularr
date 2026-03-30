@@ -27,6 +27,14 @@ module Definitions::Recipes
         { type: 'tool', key: 'stone_knife', speed: 1.2 },
         { type: 'tool', key: 'stone_axe', speed: 2 }
       ]
+    },
+    {
+      key: 'wood_shack',
+      type: 'building',
+      base_speed: 500,
+      instructions: [
+        { type: 'resource', key: 'wood', amount: 100 }
+      ]
     }
   ].freeze
 end

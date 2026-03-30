@@ -36,6 +36,8 @@ en:
               invalid: invalid
             name:
               blank: should be given
+  buildings:
+    wood_shack: Wood shack
   events:
     character:
       talking:
@@ -233,6 +235,7 @@ en:
     recipes:
       index:
         continue: Continue
+        manual: Done manually
         recipes_count: Available formulas
         resources: Materials needed
         time: Time needed
