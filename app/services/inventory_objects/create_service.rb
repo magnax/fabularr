@@ -107,9 +107,10 @@ module InventoryObjects
         next if char == @character
 
         Event.create!(
+          # take_resource_others_body take_item_others_body
           body: send("take_#{subject.class.to_s.downcase}_others_body"),
           location: @character.location,
-          character: @character,
+          character: nil,
           receiver_character: char
         )
       end

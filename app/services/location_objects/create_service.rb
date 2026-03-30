@@ -136,7 +136,7 @@ module LocationObjects
         Event.create!(
           body: send("drop_#{subject.class.to_s.downcase}_others_body"),
           location: @character.location,
-          character: @character,
+          character: nil,
           receiver_character: char
         )
       end

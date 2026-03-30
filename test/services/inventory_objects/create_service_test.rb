@@ -135,7 +135,7 @@ class InventoryObjectsCreateServiceTest < ActiveSupport::TestCase
     second_character = create(:character, location: @character.location)
 
     create(:location_object, location: @character.location,
-                             subject: @iron, amount: 100)
+                             subject: @iron, amount: 100, unit: nil)
 
     params = {
       subject_id: @iron.id,
@@ -176,6 +176,7 @@ class InventoryObjectsCreateServiceTest < ActiveSupport::TestCase
     assert_equal "You're taking iron knife", ev.body
 
     ev = second_character.visible_events.last
+    assert_nil ev.character_id
     assert_equal(
       "You see that <!--CHARID:#{@character.id}--> is taking iron knife",
       ev.body

@@ -10,7 +10,7 @@ module Events::BodyHelper
     I18n.t('events.drop_resource',
            res: I18n.td("resources.#{subject.key}"),
            amount: calculated_amount.to_i,
-           unit: I18n.td(location_object.unit))
+           unit: I18n.td(location_object.subject.unit))
   end
 
   def drop_resource_others_body
@@ -30,7 +30,7 @@ module Events::BodyHelper
       'events.take_resource',
       res: I18n.td("resources.#{subject.key}"),
       amount: calculated_amount.to_i,
-      unit: I18n.td(location_object.unit)
+      unit: I18n.td(location_object.subject.unit)
     )
   end
 

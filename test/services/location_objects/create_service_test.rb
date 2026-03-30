@@ -67,7 +67,7 @@ class LocationObjectsCreateServiceTest < ActiveSupport::TestCase
     location_iron = create(:location_object, location: @character.location,
                                              subject: iron, amount: 100)
     create(:inventory_object, character: @character, subject: iron,
-                              amount: 50)
+                              amount: 50, unit: nil)
     second_character = create(:character, location: @character.location)
 
     params = {
@@ -91,7 +91,7 @@ class LocationObjectsCreateServiceTest < ActiveSupport::TestCase
     ev = second_character.visible_events.sole
 
     assert_equal second_character.id, ev.receiver_character_id
-    assert_equal @character.id, ev.character_id
+    assert_nil ev.character_id
     assert_equal "You see that <!--CHARID:#{@character.id}--> is dropping some iron", ev.body
   end
 
@@ -117,6 +117,7 @@ class LocationObjectsCreateServiceTest < ActiveSupport::TestCase
     assert_equal 'You drop a stone knife', ev.body
 
     ev = second_character.visible_events.sole
+    assert_nil ev.character_id
     assert_equal "You see that <!--CHARID:#{@character.id}--> is dropping a stone knife", ev.body
   end
 
