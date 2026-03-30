@@ -173,13 +173,15 @@ pl:
   select: --- wybierz ---
   views:
     characters:
-      new:
-        create: Utwórz postać
-        title: Nowa postać
       name:
         create: Zmień imię
         current_name: Obecne imię postaci
         new_name: Nowe imię
+      new:
+        create: Utwórz postać
+        title: Nowa postać
+      talk:
+        talk_to: Powiedz coś do %{charname}
     events:
       age: '%{age} lat'
       collect_resource: Zbieraj

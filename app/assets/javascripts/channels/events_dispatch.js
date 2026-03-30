@@ -7,7 +7,8 @@ function dispatch_event(event_id, character_id) {
       return response.json();
     })
     .then(data => {
-      appendLine(data["event"])
+      appendLine(data["event"]);
+      document.getElementById("submit-body").value = '';
     })
     .catch(error => {
       console.error("There was a problem with the fetch operation:", error);

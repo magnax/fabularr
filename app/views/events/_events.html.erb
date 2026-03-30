@@ -1,13 +1,10 @@
 <h2><%= t('views.events.events') %></h2>
-<form action="/events" method="POST">
-<input type="text" name="body">
+<%= form_for(:event) do |f| %>
 
-<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-<%= hidden_field_tag :location_id, @location.id %>
-<%= hidden_field_tag :character_id, @character.id %>
+  <%= f.text_field :body, id: 'submit-body' %>
+  <%= f.submit t('views.events.send'), data: { disable_with: false }, class: "btn btn-large btn-primary" %>
 
-<button type="submit"><%= t('views.events.send') %></button>
-</form>
+<% end %>
 <section id="event-list">
   <% events.each do |event| %>
     <div>

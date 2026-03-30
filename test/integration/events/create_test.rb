@@ -18,10 +18,10 @@ class EventsCreateTest < ActionDispatch::IntegrationTest
 
   test 'character can talk to another character' do
     params = {
-      body: Faker::Lorem.sentence,
-      location_id: @location.id,
-      character_id: @character.id,
-      receiver_character_id: @other_character.id
+      event: {
+        body: Faker::Lorem.sentence,
+        receiver_character_id: @other_character.id
+      }
     }
 
     assert_difference -> { Event.count }, 1 do

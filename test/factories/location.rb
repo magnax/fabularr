@@ -6,5 +6,6 @@ FactoryBot.define do
     locationclass_id { 1 }
     name { 'Fabular City' }
     parent_location_id { nil }
+    coords { ActiveRecord::Point.new(x: 100, y: 100) }
   end
 end

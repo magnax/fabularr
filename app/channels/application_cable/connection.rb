@@ -17,8 +17,9 @@ module ApplicationCable
     end
 
     def verified_user
-      remember_token = User.encrypt(cookies[:remember_token])
-      @verified_user ||= User.find_by(remember_token: remember_token)
+      session = Session.find_by(id: cookies.signed[:session_id])
+
+      User.find_by(id: session&.user_id)
     end
   end
 end

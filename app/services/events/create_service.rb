@@ -1,16 +1,31 @@
 # frozen_string_literal: true
 
 module Events
-  module CreateService
-    def self.call!(params)
-      event = Event.create!(params)
+  class CreateService < ApplicationService
+    def initialize(character, params)
+      @character = character
+      @params = params
+    end
+
+    def call
+      event = Event.create!(
+        @params.merge(
+          character: @character, location: location
+        )
+      )
 
       ActionCable.server.broadcast(
-        "location_#{params[:location_id]}",
+        "location_#{location.id}",
         {
           type: 'event', event_id: event.id
         }
       )
+    end
+
+    private
+
+    def location
+      @location ||= @character.location
     end
   end
 end

@@ -8,7 +8,7 @@ class EventsController < ApplicationController
     @location = @character.location
     @events = Events::FetchEvents.call(@character)
     @items = {
-      resources: @location.location_objects.resource,
+      resources: @location.location_objects.includes(:subject).resource,
       items: @location.location_objects.item
     }
     @location_resources = @location.location_resources
@@ -16,14 +16,18 @@ class EventsController < ApplicationController
   end
 
   def create
-    Events::CreateService.call!(event_params)
+    Events::CreateService.call(current_character, event_params)
 
-    render json: {}, status: :no_content
+    if params[:event][:reload]
+      redirect_to events_path
+    else
+      render json: {}, status: :no_content
+    end
   end
 
   private
 
   def event_params
-    params.permit(:body, :location_id, :character_id, :receiver_character_id)
+    params.require(:event).permit(:body, :receiver_character_id)
   end
 end

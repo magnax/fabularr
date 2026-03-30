@@ -173,13 +173,15 @@ en:
   select: --- select ---
   views:
     characters:
-      new:
-        create: Create character
-        title: New character
       name:
         create: Change name
         current_name: Current name
         new_name: New name
+      new:
+        create: Create character
+        title: New character
+      talk:
+        talk_to: Say something to %{charname}
     events:
       age: '%{age} years'
       collect_resource: Collect resource
