@@ -2,8 +2,6 @@
 
 module ProjectTypes
   class Collect < ApplicationService
-    include Definitions::LocationResources
-
     def initialize(project_id)
       @project_id = project_id
     end

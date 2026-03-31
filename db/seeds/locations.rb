@@ -5,7 +5,11 @@ LocationClass.where(key: 'animal').first_or_create(moveable: true)
 LocationClass.where(key: 'building').first_or_create(moveable: false)
 LocationClass.where(key: 'vehicle').first_or_create(moveable: true)
 
-%w[beach desert fields forest hills lakeside meadow mountains swamp tundra].each do |key|
+Definitions::LocationTypes::CONFIG_BUILDINGS.each_key do |key|
+  LocationType.create!(key: key)
+end
+
+Definitions::LocationTypes::CONFIG_TOWNS.each do |key|
   location_type = LocationType.create!(key: key)
   found = false
   until found

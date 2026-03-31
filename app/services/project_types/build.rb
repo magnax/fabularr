@@ -2,8 +2,6 @@
 
 module ProjectTypes
   class Build < ApplicationService
-    include Definitions::LocationResources
-
     def initialize(project_id)
       @project_id = project_id
     end
@@ -11,12 +9,6 @@ module ProjectTypes
     def call
       InventoryObject.create(character: project.starting_character,
                              subject: created_item)
-
-      # LocationObject.create!(
-      #   location_id: project.location_id, subject: resource, amount: amount, unit: resource.unit
-      # )
-
-      # resource_description.update!(amount: amount)
     end
 
     private

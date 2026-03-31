@@ -12,6 +12,7 @@
 class LocationType < ApplicationRecord
   has_many :locations, dependent: nil
 
+  # Towns:
   BEACH = 'beach'
   DESERT = 'desert'
   FIELDS = 'fields'
@@ -22,6 +23,9 @@ class LocationType < ApplicationRecord
   MOUNTAINS = 'mountains'
   SWAMP = 'swamp'
   TUNDRA = 'tundra'
+
+  # Buildings:
+  WOOD_SHACK = 'wood_shack'
 
   COLOR_BEACH = 'ffeeaa'
   COLOR_DESERT = 'ffff00'

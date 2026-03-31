@@ -15,11 +15,11 @@ module Projects
     private
 
     def service_name
-      @service_name ||= Project::DISPATCH_SERVICE[project_type.key]
+      @service_name ||= Project::DISPATCH_SERVICE[project_type_key]
     end
 
-    def project_type
-      @project_type ||= project.project_type
+    def project_type_key
+      @project_type_key ||= project.recipe&.recipe_type || project.project_type.key
     end
 
     def project

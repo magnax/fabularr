@@ -14,7 +14,7 @@ class ProjectsBuildCreateServiceTest < ActiveSupport::TestCase
   test 'basic build - just one type of resource needed' do
     project_type = create(:project_type, key: 'build',
                                          base_speed: 0, fixed: true)
-    stone = create(:resource, :raw_food, key: 'stone')
+    stone = create(:resource, :material, key: 'stone')
     recipe = create(:recipe, key: 'stone_knife', base_speed: 3600)
     create(:recipe_instruction, recipe: recipe, subject: stone,
                                 amount: 100, unit: 'grams',
@@ -59,7 +59,7 @@ class ProjectsBuildCreateServiceTest < ActiveSupport::TestCase
   test 'build using tool and one type of resource' do
     project_type = create(:project_type, key: 'build',
                                          base_speed: 0, fixed: true)
-    stone = create(:resource, :raw_food, key: 'stone')
+    stone = create(:resource, :material, key: 'stone')
     item_type = create(:item_type, key: 'stone_knife')
     recipe = create(:recipe, key: 'wooden_shaft', base_speed: 3600)
     create(:recipe_instruction, recipe: recipe, subject: stone,
@@ -88,5 +88,27 @@ class ProjectsBuildCreateServiceTest < ActiveSupport::TestCase
     assert_nil desc.amount
     assert_nil desc.amount_needed
     assert_nil desc.unit
+  end
+
+  test 'building - just material' do
+    project_type = create(:project_type, key: 'build',
+                                         base_speed: 0, fixed: true)
+    wood = create(:resource, :material, key: 'wood')
+    recipe = create(:recipe, recipe_type: 'building', key: 'wood_shack', base_speed: 3600)
+    create(:recipe_instruction, recipe: recipe, subject: wood,
+                                amount: 100, unit: 'grams',
+                                instruction_type: 'resource')
+
+    params = {
+      project_type_id: project_type.id,
+      recipe_id: recipe.id
+    }
+
+    assert_difference(
+      -> { Project.count } => 1,
+      -> { ProjectDescription.count } => 1
+    ) do
+      call_service(params)
+    end
   end
 end

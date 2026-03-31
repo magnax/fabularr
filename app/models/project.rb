@@ -39,6 +39,7 @@ class Project < ApplicationRecord
 
   DISPATCH_SERVICE = {
     'build' => 'Build',
+    'building' => 'Building',
     'collect' => 'Collect',
     'discover_resource' => 'DiscoverResource'
   }.freeze

@@ -34,9 +34,13 @@ class Location < ApplicationRecord
   has_many :resources, through: :location_resources
   has_many :projects, dependent: :destroy
   has_many :workers, through: :projects
+  has_many :buildings, dependent: :destroy,
+                       class_name: 'Building',
+                       inverse_of: :parent_location
 
   belongs_to :location_type
   belongs_to :location_class
+  belongs_to :parent_location, optional: true, class_name: 'Location'
 
   scope :random, -> { order('RANDOM()').limit(1) }
 
