@@ -65,5 +65,8 @@ class ProjectsBuildEndServiceTest < ActiveSupport::TestCase
     end
 
     assert_equal 1, location.reload.buildings.length
+
+    new_location = Location.last
+    assert_equal location.coords, new_location.coords
   end
 end

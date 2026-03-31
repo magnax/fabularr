@@ -1,0 +1,12 @@
+<h2><%= t 'views.events.index.buildings_here' %></h2>
+<% if buildings.any? %>
+  <% buildings.each do |item| %>
+    <div>
+      <%= link_to fa_icon('arrow-right'), location_enter_path(item.id), title: t('views.buildings.enter') %>
+      <%= td("buildings.#{item.location_type.key}") %>
+    </div>
+  <% end %>
+
+<% else %>
+  <%= t('views.events.index.no_buildings_here') %>
+<% end %>

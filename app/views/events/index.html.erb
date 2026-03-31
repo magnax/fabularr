@@ -36,5 +36,18 @@
     resources: @items[:resources], items: @items[:items] 
   } 
 %>
-<%= render partial: "events/resources", locals: { location_resources: @location_resources } %>
+<%= render partial: "events/buildings", locals: { buildings: @buildings } %>
+
+<% if @location.town? %>
+  <%= render partial: "events/resources", locals: { 
+      location_resources: @location_resources 
+    } %>
+<% elsif @location.parent_location_id %>
+  <div>
+    <%= link_to fa_icon('arrow-right'),
+        location_enter_path(@location.parent_location.id),                                title: t('views.buildings.enter')
+    %>
+    <%= @location.parent_location.name %>
+  </div>
+<% end %>
 <%= render partial: "events/projects", locals: { projects: @projects } %>

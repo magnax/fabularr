@@ -12,6 +12,7 @@ class EventsController < ApplicationController
       items: @location.location_objects.item
     }
     @location_resources = @location.location_resources
+    @buildings = @location.buildings
     @projects = @location.projects.pending.includes(:starting_character, :project_type)
   end
 

@@ -25,6 +25,7 @@ Fabularr::Application.routes.draw do
       get :take_item
     end
     resources :locations do
+      get :enter
       resources :location_resources, only: :new
     end
     resources :maps, only: :index

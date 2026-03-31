@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :location_class do
-    key { nil }
+    key { 'town' }
     moveable { false }
   end
 end

@@ -11,7 +11,8 @@ module ProjectTypes
         Definitions::LocationTypes::CONFIG_BUILDINGS[location_type.key].merge(
           location_type: location_type,
           location_class: LocationClass.find_by(key: recipe.recipe_type),
-          parent_location: location
+          parent_location: location,
+          coords: location.coords
         )
       )
     end

@@ -52,4 +52,8 @@ class Location < ApplicationRecord
     # not final implementation!
     characters
   end
+
+  def town?
+    location_class.key == 'town'
+  end
 end

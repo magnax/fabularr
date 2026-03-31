@@ -79,9 +79,9 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     sign_in
     click_link 'Magnus'
 
-    assert_content 'Take 200 grams mushrooms'
+    assert_content '200 grams mushrooms'
     assert_link 'Take', href: "#{host}/en/location_objects/#{lr.id}/take"
-    assert_content 'Take brand new stone knife'
+    assert_content 'brand new stone knife'
     assert_link 'Take', href: "#{host}/en/location_objects/#{location_knife.id}/take_item"
   end
 end
