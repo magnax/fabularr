@@ -212,4 +212,27 @@ class InventoryObjectsCreateServiceTest < ActiveSupport::TestCase
     new_worker = Worker.where(left_at: nil).sole
     assert_equal 2, new_worker.speed
   end
+
+  test 'taking resource should not trigger project checking' do
+    create(:location_object, location: @character.location,
+                             subject: @iron, amount: 100)
+    item_type = create(:item_type, key: 'iron_knife')
+    recipe = create(:recipe, recipe_type: Recipe::COLLECT)
+    create(:recipe_instruction, :tool, recipe: recipe, subject: item_type, speed: 2)
+
+    project = create(:project, :collect, recipe: recipe)
+    create(:worker, :working, project: project, character: @character, speed: 1.8)
+
+    params = {
+      subject_id: @iron.id,
+      subject_type: 'Resource',
+      amount: '300'
+    }
+    assert_difference -> { Event.count } => 1,
+                      -> { InventoryObject.count } => 1,
+                      -> { LocationObject.count } => -1,
+                      -> { Worker.count } => 0 do
+      call_service(params)
+    end
+  end
 end

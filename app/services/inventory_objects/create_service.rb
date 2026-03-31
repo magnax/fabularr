@@ -18,7 +18,7 @@ module InventoryObjects
       raise InvalidParamsError if location_object.blank? && @params[:amount].blank?
 
       update_inventory_and_location!
-      update_running_project!
+      update_running_project! unless resource?
 
       create_events!
     end
