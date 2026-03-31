@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'bcrypt'
 gem 'coffee-rails'
+gem 'font-awesome-rails'
 gem 'i18n'
 gem 'jbuilder'
 gem 'jquery-rails'

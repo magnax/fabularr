@@ -2,14 +2,14 @@
 <% if items.any? || resources.any? %>
   <% resources.each do |item| %>
     <div>
-      <%= link_to t('views.location_objects.take'), location_object_take_path(item.id) %>
+      <%= link_to fa_icon('upload'), location_object_take_path(item.id), title: t('views.location_objects.take') %>
       <%= item.amount.to_i %> <%= td(item.subject.unit) %> <%= td("resources.#{item.subject.key}") %>
     </div>
   <% end %>
 
   <% items.each do |item| %>
     <div>
-      <%= link_to t('views.location_objects.take'), location_object_take_item_path(item.id) %>
+      <%= link_to fa_icon('arrow-up'), location_object_take_item_path(item.id), title: t('views.location_objects.take') %>
       <%= t("items.damage.#{item.subject.damage_key}") %> <%= t("items.#{item.subject.item_type.key}") %>
     </div>
   <% end %>
