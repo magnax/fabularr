@@ -2,7 +2,7 @@
 <% if projects.any? %>
   <% projects.each do |project| %>
     <div data-project-id="<%= project.id %>">
-      <%= t("project_types.#{project.project_type.key}") %>
+      <%= project.short_name %>
       <% if project.ready %>
         <%= "\u2714" %>
       <% else %>

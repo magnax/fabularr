@@ -192,12 +192,14 @@ pl:
       events: Zdarzenia
       index:
         build_menu: Menu budowania
+        buildings_here: Budynki i pojazdy
         carrying: Dźwiga
         characters_here: Postacie w tym miejscu
         inventory_page: Inwentarz
         items_here: Przedmioty
         location: Miejsce
         name_title: Nazwa
+        no_buildings_here: Nie ma żadnych budynków ani pojazdów
         projects_here: Projekty
         resources_here: Zasoby
       send: Wyślij

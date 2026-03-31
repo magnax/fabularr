@@ -55,7 +55,7 @@ module Projects
     end
 
     def project_info
-      I18n.t("project_types.#{project_type.key}")
+      @project.short_name
     end
 
     def duration

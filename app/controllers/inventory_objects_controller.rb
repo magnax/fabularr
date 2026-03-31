@@ -32,7 +32,9 @@ class InventoryObjectsController < ApplicationController
   def add
     @inventory_object = current_character.inventory_objects.find_by(id: params[:inventory_object_id])
     @resource = inventory_object.subject
-    @projects = Project.all.map { |p| [p.name(current_character), p.id] }
+    @projects = Projects::FilterMissingResourceService.call(
+      current_character, @inventory_object.subject
+    )
   end
 
   def update

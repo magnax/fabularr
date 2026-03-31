@@ -45,8 +45,24 @@ class Project < ApplicationRecord
   }.freeze
 
   def name(for_character)
-    type_name = I18n.t("projects.name.#{project_type.key}")
     char_name = for_character.name_for(starting_character)
-    "#{type_name.titleize}, #{I18n.t('projects.name.started_by')}#{char_name}"
+    "#{short_name}, #{I18n.t('projects.name.started_by')}#{char_name}"
+  end
+
+  def short_name
+    type_name = I18n.t("projects.name.#{project_type.key}").titleize
+    case project_type.key
+    when 'build'
+      return type_name unless recipe
+
+      case recipe.recipe_type
+      when 'build'
+        tool_name = I18n.t("items.#{recipe.key}")
+        "#{type_name}: #{tool_name}"
+      when 'building'
+        tool_name = I18n.t("buildings.#{recipe.key}")
+        "#{type_name}: #{tool_name}"
+      end
+    end
   end
 end

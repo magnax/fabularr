@@ -192,12 +192,14 @@ en:
       events: Events
       index:
         build_menu: Build menu
+        buildings_here: Buildings & vehicles
         carrying: Carrying
         characters_here: Characters here
         inventory_page: Inventory
         items_here: Items
         location: Location
         name_title: Name
+        no_buildings_here: No buildings nor vehicles here
         projects_here: Projects
         resources_here: Resources
       send: Send
