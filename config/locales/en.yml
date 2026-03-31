@@ -67,7 +67,6 @@ en:
     take_item_others: You see that %{character_link} is taking %{item}
     take_resource: "You're taking %{amount} %{unit} of %{res} from the ground"
     take_resource_others: 'You see that %{character_link} is taking some %{res} from the ground'
-  female: Female
   flash:
     errors:
       cannot_create: You cannot create more than 15 characters
@@ -83,6 +82,9 @@ en:
     notice:
       please_login: Please login!
       please_choose_char: Please choose one character
+  genders:
+    K: female
+    M: male
   gram: grams
   # blank lines on purpose!!
 
@@ -118,7 +120,6 @@ en:
     mountains: mountains
     swamp: swamp
     tundra: tundra
-  male: Male
   new_user: New user
   project_info:
     build: 'Manufactured: %{item}'

@@ -30,7 +30,7 @@ class CharactersNewTest < ActionDispatch::IntegrationTest
     click_on 'Create new character'
 
     fill_in 'Name', with: 'Magnus'
-    select('Female', from: 'Gender')
+    select('female', from: 'Gender')
 
     click_on 'Create character'
     assert_text 'New character successfully created'

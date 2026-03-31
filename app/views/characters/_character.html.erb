@@ -1,6 +1,6 @@
 <div>
   <%= link_to character.name_for(character), character_set_url(character.id) %>
-	<%= character.gender %>
+	<%= fa_icon(character.male? ? 'mars' : 'venus', title: t("genders.#{character.gender}")) %>
 	<%= character.location.name %>
 	[<%= character.location.location_type.key %>]
 </div>

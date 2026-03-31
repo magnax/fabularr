@@ -84,4 +84,8 @@ class Character < ApplicationRecord
   def tools_keys
     inventory_objects.item.map { |i| i.subject.item_type.key }
   end
+
+  def male?
+    gender == 'M'
+  end
 end

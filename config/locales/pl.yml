@@ -67,7 +67,6 @@ pl:
     take_item_others: Widzisz jak %{character_link} podnosi %{item}
     take_resource: Podnosisz %{amount} %{unit} %{res} z ziemi
     take_resource_others: Widzisz jak %{character_link} podnosi trochę %{res} z ziemi
-  female: Kobieta
   flash:
     errors:
       cannot_create: Nie możesz mieć więcej niż 15 postaci
@@ -83,6 +82,9 @@ pl:
     notice:
       please_login: Zaloguj się, proszę
       please_choose_char: Musisz najpierw wybrać którąś postać
+  genders:
+    K: kobieta
+    M: mężczyzna
   gram: 
     n: gram
     gen: gramów
@@ -118,7 +120,6 @@ pl:
     mountains: góry
     swamp: bagna
     tundra: tundra
-  male: Mężczyzna
   new_user: Nowy użytkownik
   project_info:
     build: 'Wyprodukowano: %{item}'

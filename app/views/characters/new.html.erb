@@ -16,7 +16,7 @@
       <% end %>
 
       <%= f.label :gender %>
-      <%= f.select :gender, [[t('select'), ''], [t('female'), 'K'], [t('male'), 'M']],selected: record&.gender %>
+      <%= f.select :gender, [[t('select'), ''], [t('genders.K'), 'K'], [t('genders.M'), 'M']],selected: record&.gender %>
 
       <% if errors[:gender].present? %>
         <div class="input-error">
