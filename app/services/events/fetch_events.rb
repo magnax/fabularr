@@ -15,9 +15,7 @@ module Events
     private
 
     def events
-      @events ||= location.events
-                          .where('created_at > ?', @character.created_at)
-                          .visible_for(@character.id)
+      @events ||= @character.visible_events.order(created_at: :desc)
     end
 
     def location

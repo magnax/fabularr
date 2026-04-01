@@ -7,16 +7,18 @@
 <% end %>
 <section id="event-list">
   <% events.each do |event| %>
-    <div>
-      <%= event[:created_at] %>
-    </div>
-    <% if event[:lead] %>
-      <div>
-        <%= t(event[:lead][:key], char_name: event[:lead][:char_name]).html_safe %>
-      </div>
-    <% end %>
-    <div>
-      <%= event[:body].html_safe %>
+    <div class="event">
+      <span class="event-date">
+        <%= event[:created_at] %>
+      </span>
+      <% if event[:lead] %>
+        <span>
+          <%= t(event[:lead][:key], char_name: event[:lead][:char_name]).html_safe %>
+        </span>
+      <% end %>
+      <span>
+        <%= event[:body].html_safe %>
+      </span>
     </div>
   <% end %>
 </section>
