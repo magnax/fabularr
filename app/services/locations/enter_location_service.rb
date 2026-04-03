@@ -23,8 +23,7 @@ module Locations
     def create_character_event!
       Event.create!(
         body: I18n.t(
-          'events.enter_location', in_place: location.name,
-                                   out_place: previous_location.name, count: location.characters.count - 1
+          'events.enter_location', count: location.characters.count - 1, **locations_args
         ),
         receiver_character: @character,
         location: previous_location
@@ -32,36 +31,35 @@ module Locations
     end
 
     def create_others_events!
-      create_previous_location_events!
-      create_entered_location_events!
+      create_location_events!(previous_location, 'leave')
+      create_location_events!(location, 'enter')
     end
 
-    def create_previous_location_events!
-      previous_location.characters.find_each do |char|
-        next if char == @character
-
-        Event.create!(
-          body: I18n.t('events.leave_location_other', character_link: @character.char_id,
-                                                      in_place: location.name,
-                                                      out_place: previous_location.name),
-          receiver_character: char,
-          location: previous_location
-        )
-      end
-    end
-
-    def create_entered_location_events!
+    def create_location_events!(location, direction)
       location.characters.find_each do |char|
         next if char == @character
 
         Event.create!(
-          body: I18n.t('events.enter_location_other', character_link: @character.char_id,
-                                                      in_place: location.name,
-                                                      out_place: previous_location.name),
+          body: I18n.t(
+            "events.#{direction}_location_other",
+            character_link: @character.char_id,
+            **locations_args
+          ),
           receiver_character: char,
           location: location
         )
       end
+    end
+
+    def locations_args
+      @locations_args ||= {
+        in_place: name_for(location),
+        out_place: name_for(previous_location)
+      }
+    end
+
+    def name_for(location)
+      location.name || I18n.t("#{location.location_class.key}s.#{location.location_type.key}")
     end
 
     def previous_location

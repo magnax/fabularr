@@ -13,7 +13,7 @@ class Locations::EnterLocationServiceTest < ActiveSupport::TestCase
 
   test 'enter the building from town location' do
     location = create(:location) # default is town
-    building = create(:location, :building, parent_location: location, name: 'Town Hall')
+    building = create(:location, :building, parent_location: location, name: nil)
     @character.update!(location: location)
 
     assert_difference -> { Event.count } => 1 do
@@ -22,7 +22,7 @@ class Locations::EnterLocationServiceTest < ActiveSupport::TestCase
 
     char_events = Event.where(receiver_character: @character)
     assert_includes char_events.pluck(:body),
-                    'You are entering from Fabular City into Town Hall, where you see 0 people'
+                    'You are entering from Fabular City into Wood shack, where you see 0 people'
   end
 
   test 'enter the building from town location - other characters present' do
