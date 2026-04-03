@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class InventoryObjectsCreateServiceTest < ActiveSupport::TestCase
+class InventoryObjectsCreateServiceTest < ActiveSupport::TestCase # rubocop:disable Metrics/ClassLength
   def setup
     @character = create(:character)
     @iron = create(:resource, key: 'iron')

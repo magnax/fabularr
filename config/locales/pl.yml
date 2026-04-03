@@ -49,6 +49,9 @@ pl:
     drop_item_others: Widzisz jak %{character_link} upuszcza %{item}
     drop_resource: Upuszczasz %{amount} %{unit} %{res}
     drop_resource_others: Widzisz jak %{character_link} upuszcza trochę %{res}
+    enter_location: Opuszczasz %{out_place} wchodząc do %{in_place}, gdzie widzisz %{count} osób
+    enter_location_other: Widzisz jak %{character_link} wchodzi do %{in_place} z %{out_place} 
+    leave_location_other: Widzisz jak %{character_link} opuszcza %{out_place} wchodząc do %{in_place}
     initial:
       location_info: Znajdujesz się w miejscu, które można określić jako %{location_type}.
       people_info: 

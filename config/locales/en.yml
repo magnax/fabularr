@@ -49,6 +49,9 @@ en:
     drop_item_others: You see that %{character_link} is dropping a %{item}
     drop_resource: You drop %{amount} %{unit} of %{res}
     drop_resource_others: You see that %{character_link} is dropping some %{res}
+    enter_location: You are entering from %{out_place} into %{in_place}, where you see %{count} people
+    enter_location_other: You see %{character_link} is entering %{in_place} from %{out_place} 
+    leave_location_other: You see %{character_link} is leaving %{out_place} entering %{in_place}
     initial:
       location_info: You are in some place which looks like %{location_type}.
       people_info: 
