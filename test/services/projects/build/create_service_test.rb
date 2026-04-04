@@ -101,14 +101,18 @@ class ProjectsBuildCreateServiceTest < ActiveSupport::TestCase
 
     params = {
       project_type_id: project_type.id,
-      recipe_id: recipe.id
+      recipe_id: recipe.id,
+      name: 'Town Hall'
     }
 
     assert_difference(
       -> { Project.count } => 1,
-      -> { ProjectDescription.count } => 1
+      -> { ProjectDescription.count } => 2
     ) do
       call_service(params)
     end
+
+    pd = ProjectDescription.where(description_type: 'settings').sole
+    assert_equal 'Town Hall', pd.metadata['name']
   end
 end

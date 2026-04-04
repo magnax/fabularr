@@ -44,6 +44,7 @@ module Projects
           unit: nil
         )
       end
+      create_name_description! if @params[:name]
     end
 
     def materials
@@ -52,6 +53,17 @@ module Projects
 
     def tools
       recipe.recipe_instructions.tool
+    end
+
+    def create_name_description!
+      @project.project_descriptions.create!(
+        description_type: ProjectDescription::SETTINGS,
+        subject: nil,
+        amount: nil,
+        amount_needed: nil,
+        unit: nil,
+        metadata: { name: @params[:name] }
+      )
     end
 
     def project_info

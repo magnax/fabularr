@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_30_185519) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_04_065729) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -124,6 +124,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_30_185519) do
     t.float "amount_needed"
     t.datetime "created_at", null: false
     t.string "description_type"
+    t.json "metadata"
     t.bigint "project_id"
     t.integer "subject_id"
     t.string "subject_type"

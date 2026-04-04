@@ -8,6 +8,7 @@
 #  amount           :float
 #  amount_needed    :float
 #  description_type :string
+#  metadata         :json
 #  subject_type     :string
 #  unit             :string
 #  created_at       :datetime         not null
@@ -24,7 +25,7 @@
 #  fk_rails_...  (project_id => projects.id)
 #
 class ProjectDescription < ApplicationRecord
-  belongs_to :subject, polymorphic: true
+  belongs_to :subject, polymorphic: true, optional: true
   belongs_to :project
 
   scope :resource_in, -> { where(description_type: RESOURCE_IN) }
@@ -36,5 +37,6 @@ class ProjectDescription < ApplicationRecord
   MACHINE = 'machine'
   RESOURCE_IN = 'resource_in' # input
   RESOURCE_OUT = 'resource_out' # output
+  SETTINGS = 'settings' # additional params to the project, ie. name of building
   TOOL = 'tool'
 end
