@@ -88,4 +88,13 @@ class Character < ApplicationRecord
   def male?
     gender == 'M'
   end
+
+  def project_info
+    return if project.blank?
+
+    {
+      name: project.short_name,
+      percent: ((project.elapsed.to_f / project.duration) * 100.0).round(1)
+    }
+  end
 end

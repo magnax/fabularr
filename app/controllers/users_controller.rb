@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @characters = @user.characters.includes(location: %i[location_type parent_location])
   end
 
   def edit; end

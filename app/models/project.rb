@@ -50,9 +50,9 @@ class Project < ApplicationRecord
   end
 
   def short_name
-    type_name = I18n.t("projects.name.#{project_type.key}").titleize
+    type_name = I18n.t("projects.name.#{project_type.key}").capitalize
     case project_type.key
-    when 'build'
+    when ProjectType::BUILD
       return type_name unless recipe
 
       case recipe.recipe_type
@@ -63,6 +63,8 @@ class Project < ApplicationRecord
         tool_name = I18n.t("buildings.#{recipe.key}")
         "#{type_name}: #{tool_name}"
       end
+    when ProjectType::DISCOVER_RESOURCE
+      type_name
     end
   end
 

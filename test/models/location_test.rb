@@ -53,4 +53,14 @@ class LocationTest < ActiveSupport::TestCase
     assert_equal 23.5, location.x
     assert_equal 55.8, location.y
   end
+
+  test 'display_name' do
+    location = create(:location, name: 'Fabular City')
+    building = create(:location, :building, parent_location: location, name: 'Town Hall')
+
+    assert_equal 'Fabular City', location.display_name
+    assert_equal 'Fabular City', location.display_name(parent: true)
+    assert_equal 'Town Hall', building.display_name
+    assert_equal 'Fabular City (Town Hall)', building.display_name(parent: true)
+  end
 end

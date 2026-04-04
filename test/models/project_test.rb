@@ -40,4 +40,11 @@ class ProjectTest < ActiveSupport::TestCase
 
     assert_equal 'Building, started by: Magnus', name
   end
+
+  test 'name for project - discovering resources' do
+    character = create(:character)
+    project = create(:project, :discover_resource, starting_character: character)
+
+    assert_equal 'Discovering new resources', project.short_name
+  end
 end

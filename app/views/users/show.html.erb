@@ -1,9 +1,13 @@
 <h1><%= t 'hello' %> <%= @user.email %></h1>
-<% if @user.characters.any? %>
-  <h3><%= t 'views.users.show.characters' %> (<%= @user.characters.count %>)</h3>
-  <ol class="characters">
-    <%= render @user.characters %>
-  </ol>
+<% if @characters.any? %>
+  <h3><%= t 'views.users.show.characters' %> (<%= @characters.count %>)</h3>
+  <table class="characters">
+    <% @characters.each do |character| %>
+      <tr>
+        <%= render character %>
+      </tr>
+    <% end %>
+  </table>
 <% else %>
   <%= t 'views.users.show.no_chars' %>
 <% end %>

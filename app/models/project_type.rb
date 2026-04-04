@@ -12,4 +12,7 @@
 #  updated_at :datetime         not null
 #
 class ProjectType < ApplicationRecord
+  BUILD = 'build'
+  COLLECT = 'collect'
+  DISCOVER_RESOURCE = 'discover_resource'
 end

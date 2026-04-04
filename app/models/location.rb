@@ -56,4 +56,14 @@ class Location < ApplicationRecord
   def town?
     location_class.key == 'town'
   end
+
+  def display_name(parent: false)
+    return name unless parent && parent_location.present?
+
+    "#{parent_location.name} (#{name})"
+  end
+
+  def display_name_links
+    name
+  end
 end

@@ -1,6 +1,17 @@
-<div>
-  <%= link_to character.name_for(character), character_set_url(character.id) %>
-	<%= fa_icon(character.male? ? 'mars' : 'venus', title: t("genders.#{character.gender}")) %>
-	<%= character.location.name %>
-	[<%= character.location.location_type.key %>]
-</div>
+  <td>
+		<%= link_to character.name_for(character), character_set_url(character.id) %>
+	</td>
+	<td>
+		<%= fa_icon(character.male? ? 'mars' : 'venus', title: t("genders.#{character.gender}")) %>
+	</td>
+	<td>
+		<%= character.location.display_name(parent: true) %>
+	</td>
+	<td>
+		<%= character.location.location_type.key %>
+	</td>
+	<td>
+		<% if character.project_info %>
+			<a title="<%= character.project_info[:name] %>"><%= fa_icon('cogs') %></a> (P <%= character.project_info[:percent]%>%)</a>
+		<% end %>
+	</td>

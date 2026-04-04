@@ -122,4 +122,13 @@ class CharacterTest < ActiveSupport::TestCase
     assert_equal 22.3, character.x
     assert_equal 44.5, character.y
   end
+
+  test 'project info' do
+    character = create(:character)
+    project = create(:project, :build, location: character.location, duration: 100, elapsed: 43)
+    create(:worker, character: character, project: project, left_at: nil)
+
+    assert_equal 'Building', character.project_info[:name]
+    assert_equal 43, character.project_info[:percent]
+  end
 end
