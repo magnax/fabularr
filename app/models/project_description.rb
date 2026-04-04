@@ -30,6 +30,7 @@ class ProjectDescription < ApplicationRecord
 
   scope :resource_in, -> { where(description_type: RESOURCE_IN) }
   scope :tool, -> { where(description_type: TOOL) }
+  scope :settings, -> { where(description_type: SETTINGS) }
   # Types:
 
   ITEM_IN = 'item_in'

@@ -57,6 +57,8 @@ class ProjectsBuildEndServiceTest < ActiveSupport::TestCase
                                        recipe: recipe)
     create(:project_description, project: project, subject: wood, amount: 100,
                                  unit: 'grams')
+    create(:project_description, :settings, project: project, subject: nil,
+                                            metadata: { name: 'Town Hall' })
     create(:worker, project: project, character: starting_character)
 
     assert_difference -> { InventoryObject.count } => 0,
@@ -68,5 +70,6 @@ class ProjectsBuildEndServiceTest < ActiveSupport::TestCase
 
     new_location = Location.last
     assert_equal location.coords, new_location.coords
+    assert_equal 'Town Hall', new_location.name
   end
 end

@@ -35,5 +35,9 @@ FactoryBot.define do
     trait :resource_in do
       description_type { ProjectDescription::RESOURCE_IN }
     end
+
+    trait :settings do
+      description_type { ProjectDescription::SETTINGS }
+    end
   end
 end

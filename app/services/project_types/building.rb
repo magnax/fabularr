@@ -12,7 +12,8 @@ module ProjectTypes
           location_type: location_type,
           location_class: LocationClass.find_by(key: recipe.recipe_type),
           parent_location: location,
-          coords: location.coords
+          coords: location.coords,
+          name: name
         )
       )
     end
@@ -21,6 +22,10 @@ module ProjectTypes
 
     def location_type
       @location_type ||= LocationType.find_by(key: recipe.key)
+    end
+
+    def name
+      project.settings['name']
     end
 
     def recipe

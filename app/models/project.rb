@@ -65,4 +65,8 @@ class Project < ApplicationRecord
       end
     end
   end
+
+  def settings
+    project_descriptions.settings.first&.metadata || {}
+  end
 end
