@@ -22,7 +22,7 @@
 #  fk_rails_...  (location_id => locations.id)
 #
 FactoryBot.define do
-  factory :loation_name do
+  factory :location_name do
     character
     location
     name { 'Town Hall ' }

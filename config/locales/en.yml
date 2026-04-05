@@ -123,6 +123,7 @@ en:
     mountains: mountains
     swamp: swamp
     tundra: tundra
+    unnamed_place: unnamed place
   new_user: New user
   project_info:
     build: 'Manufactured: %{item}'

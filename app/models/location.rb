@@ -29,6 +29,7 @@ class Location < ApplicationRecord
   has_many :characters, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :items, dependent: :destroy
+  has_many :location_names, dependent: :destroy
   has_many :location_objects, dependent: :destroy
   has_many :location_resources, dependent: :destroy
   has_many :resources, through: :location_resources
@@ -57,13 +58,25 @@ class Location < ApplicationRecord
     location_class.key == 'town'
   end
 
-  def display_name(parent: false)
-    return name unless parent && parent_location.present?
+  def display_name(character, parent: false)
+    parent_name = parent && parent_location.present? ? parent_location.display_name(character) : nil
+    remembered_name = location_name(character)&.name || default_name
+    return remembered_name unless parent && parent_location.present?
 
-    "#{parent_location.name} (#{name})"
+    "#{parent_name} (#{remembered_name})"
   end
 
   def display_name_links
     name
+  end
+
+  def default_name
+    return I18n.t('locations.unnamed_place') if town?
+
+    name || I18n.t("locations.#{location_type.key}")
+  end
+
+  def location_name(character)
+    location_names.where(character: character).first
   end
 end

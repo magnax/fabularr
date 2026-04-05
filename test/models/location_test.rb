@@ -54,13 +54,50 @@ class LocationTest < ActiveSupport::TestCase
     assert_equal 55.8, location.y
   end
 
-  test 'display_name' do
+  test 'default name for town location' do
+    location = create(:location, name: 'Fabular City')
+
+    assert_equal 'unnamed place', location.default_name
+  end
+
+  test 'default name for building' do
     location = create(:location, name: 'Fabular City')
     building = create(:location, :building, parent_location: location, name: 'Town Hall')
 
-    assert_equal 'Fabular City', location.display_name
-    assert_equal 'Fabular City', location.display_name(parent: true)
-    assert_equal 'Town Hall', building.display_name
-    assert_equal 'Fabular City (Town Hall)', building.display_name(parent: true)
+    assert_equal 'Town Hall', building.default_name
+  end
+
+  test 'display_name for character' do
+    location = create(:location, name: 'Fabular City')
+    building = create(:location, :building, parent_location: location, name: 'Town Hall')
+    character1 = create(:character)
+    character2 = create(:character)
+    character3 = create(:character)
+    character4 = create(:character)
+
+    create(:location_name, character: character2, location: location, name: 'Some Place')
+    create(:location_name, character: character2, location: building, name: 'Some Building')
+
+    create(:location_name, character: character3, location: location, name: 'My Place')
+
+    create(:location_name, character: character4, location: building, name: 'My Building')
+
+    # character has no remembered names
+    assert_equal 'unnamed place', location.display_name(character1)
+    assert_equal 'unnamed place', location.display_name(character1, parent: true)
+    assert_equal 'Town Hall', building.display_name(character1)
+    assert_equal 'unnamed place (Town Hall)', building.display_name(character1, parent: true)
+
+    # character has all names remembered
+    assert_equal 'Some Place', location.display_name(character2)
+    assert_equal 'Some Place', location.display_name(character2, parent: true)
+    assert_equal 'Some Building', building.display_name(character2)
+    assert_equal 'Some Place (Some Building)', building.display_name(character2, parent: true)
+
+    # character has remembered only town name, not building
+    assert_equal 'My Place (Town Hall)', building.display_name(character3, parent: true)
+
+    # character has remembered only building name, not town
+    assert_equal 'unnamed place (My Building)', building.display_name(character4, parent: true)
   end
 end

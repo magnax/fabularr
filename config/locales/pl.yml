@@ -123,6 +123,7 @@ pl:
     mountains: góry
     swamp: bagna
     tundra: tundra
+    unnamed_place: nienazwane miejsce
   new_user: Nowy użytkownik
   project_info:
     build: 'Wyprodukowano: %{item}'
