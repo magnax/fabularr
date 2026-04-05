@@ -40,7 +40,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     click_link 'Magnus'
 
     assert_content('Events for: Magnus')
-    assert_content('Location: Fabular City')
+    assert_content('Location: unnamed place')
     assert_link('Magnus')
     assert_link('unknown woman')
     assert_no_link('Sid')
@@ -83,5 +83,18 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     assert_link 'Take', href: "#{host}/en/location_objects/#{lr.id}/take"
     assert_content 'brand new stone knife'
     assert_link 'Take', href: "#{host}/en/location_objects/#{location_knife.id}/take_item"
+  end
+
+  test 'links to location names' do
+    fabular_city = create(:location, name: 'Fabular City')
+    town_hall = create(:location, :building, parent_location: fabular_city, name: 'Town Hall')
+
+    create(:character, name: 'Magnus', location: fabular_city, user: @user)
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_link 'unnamed place', href: "#{host}/en/locations/#{fabular_city.id}/name"
+    assert_link 'Town Hall', href: "#{host}/en/locations/#{town_hall.id}/name"
   end
 end

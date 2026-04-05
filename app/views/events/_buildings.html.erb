@@ -3,7 +3,7 @@
   <% buildings.each do |item| %>
     <div>
       <%= link_to fa_icon('arrow-right'), location_enter_path(item.id), title: t('views.buildings.enter') %>
-      <%= td("buildings.#{item.location_type.key}") %>
+      <%= link_to item.display_name(@character), location_name_path(item.id) %>
     </div>
   <% end %>
 

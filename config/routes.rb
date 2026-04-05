@@ -20,12 +20,14 @@ Fabularr::Application.routes.draw do
       get :drop
       get :drop_item
     end
+    resources :location_names, only: []
     resources :location_objects, only: [:create] do
       get :take
       get :take_item
     end
     resources :locations do
       get :enter
+      get :name
       resources :location_resources, only: :new
     end
     resources :maps, only: :index

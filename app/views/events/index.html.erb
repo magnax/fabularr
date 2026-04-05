@@ -16,7 +16,7 @@
     [<%= link_to t('views.events.index.inventory_page'), inventory_objects_path %>]
   </div>
   <div>
-    <%= t 'views.events.index.location' %>: <%= @location.name %>
+    <%= t 'views.events.index.location' %>: <%= link_to @location.display_name(@character), location_name_path(@location.id) %>
     [<%= t "locations.#{@location.location_type.key}" %>]
     [<%= "#{@location.x}, #{@location.y}" %>]
   </div>
