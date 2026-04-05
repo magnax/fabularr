@@ -53,8 +53,8 @@ module Locations
 
     def locations_args
       @locations_args ||= {
-        in_place: name_for(location),
-        out_place: name_for(previous_location)
+        in_place: location.loc_id,
+        out_place: previous_location.loc_id
       }
     end
 

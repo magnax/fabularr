@@ -23,12 +23,34 @@ module Events
 
     def parsed_body
       event_body = @event.body || ''
-      char_match = event_body.match(Event::CHARID_REGEX)
-      return event_body unless char_match
+      event_body = parse_characters(event_body)
+      parse_locations(event_body)
+    end
 
-      character_for = Character.find_by(id: char_match[1])
-      name_for = link_to_name_for(character_for)
-      event_body.gsub(Event::CHARID_REGEX, name_for)
+    def parse_characters(event_body)
+      char_matches = event_body.scan(Event::CHARID_REGEX)
+      return event_body unless char_matches.any?
+
+      char_matches.flatten.each do |match|
+        character_for = Character.find_by(id: match)
+        name_for = link_to_name_for(character_for)
+        event_body = event_body.gsub(Event::CHARID_REGEX_TEXT.gsub('(\d+)', match), name_for)
+      end
+      event_body
+    end
+
+    def parse_locations(event_body)
+      location_matches = event_body.scan(Event::LOCID_REGEX)
+      return event_body unless location_matches.any?
+
+      location_matches.flatten.each do |match|
+        location_for = Location.find_by(id: match)
+        name_for = link_to_location_name_for(location_for)
+
+        event_body = event_body.gsub(Event::LOCID_REGEX_TEXT.gsub('(\d+)', match), name_for)
+      end
+
+      event_body
     end
 
     def parsed_lead
@@ -71,6 +93,15 @@ module Events
       link_to(
         @viewing_character.name_for(char),
         character_name_url(character_id: char.id, only_path: true)
+      )
+    end
+
+    def link_to_location_name_for(location)
+      return if location.blank?
+
+      link_to(
+        location.display_name(@viewing_character),
+        location_name_url(location_id: location.id, only_path: true)
       )
     end
 

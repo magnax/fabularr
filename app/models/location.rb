@@ -84,4 +84,8 @@ class Location < ApplicationRecord
   def location_name(character)
     location_names.where(character: character).first
   end
+
+  def loc_id
+    "<!--LOCID:#{id}-->"
+  end
 end

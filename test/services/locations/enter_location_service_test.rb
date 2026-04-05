@@ -22,7 +22,11 @@ class Locations::EnterLocationServiceTest < ActiveSupport::TestCase
 
     char_events = Event.where(receiver_character: @character)
     assert_includes char_events.pluck(:body),
-                    'You are entering from Fabular City into Wood shack, where you see 0 people'
+                    'You are entering from '\
+                    "<!--LOCID:#{location.id}-->"\
+                    ' into '\
+                    "<!--LOCID:#{building.id}-->"\
+                    ', where you see 0 people'
   end
 
   test 'enter the building from town location - other characters present' do
@@ -39,14 +43,28 @@ class Locations::EnterLocationServiceTest < ActiveSupport::TestCase
 
     char_events = Event.where(receiver_character: @character)
     assert_includes char_events.pluck(:body),
-                    'You are entering from Fabular City into Town Hall, where you see 1 people'
+                    'You are entering from '\
+                    "<!--LOCID:#{location.id}-->"\
+                    ' into ' \
+                    "<!--LOCID:#{building.id}-->"\
+                    ', where you see 1 people'
 
     ev = Event.where(receiver_character: town_character).sole
-    assert_equal "You see <!--CHARID:#{@character.id}--> is leaving Fabular City entering Town Hall",
+    assert_equal 'You see '\
+                 "<!--CHARID:#{@character.id}--> "\
+                 'is leaving '\
+                 "<!--LOCID:#{location.id}-->"\
+                 ' entering '\
+                 "<!--LOCID:#{building.id}-->",
                  ev.body
 
     ev = Event.where(receiver_character: building_character).sole
-    assert_equal "You see <!--CHARID:#{@character.id}--> is entering Town Hall from Fabular City",
+    assert_equal 'You see '\
+                 "<!--CHARID:#{@character.id}--> "\
+                 'is entering '\
+                 "<!--LOCID:#{building.id}-->"\
+                 ' from '\
+                 "<!--LOCID:#{location.id}-->",
                  ev.body
   end
 end

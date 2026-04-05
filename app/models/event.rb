@@ -14,7 +14,10 @@
 #
 class Event < ApplicationRecord
   NEWEST_COUNT = 20
-  CHARID_REGEX = /<!--CHARID:(\d+)-->/
+  CHARID_REGEX_TEXT = '<!--CHARID:(\d+)-->'
+  CHARID_REGEX = /#{CHARID_REGEX_TEXT}/
+  LOCID_REGEX_TEXT = '<!--LOCID:(\d+)-->'
+  LOCID_REGEX = /#{LOCID_REGEX_TEXT}/
 
   belongs_to :location
   belongs_to :character, optional: true

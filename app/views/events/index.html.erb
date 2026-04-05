@@ -16,7 +16,7 @@
     [<%= link_to t('views.events.index.inventory_page'), inventory_objects_path %>]
   </div>
   <div>
-    <%= t 'views.events.index.location' %>: <%= link_to @location.display_name(@character), location_name_path(@location.id) %>
+    <%= t 'views.events.index.location' %>: <%= link_to @location.display_name(@character, parent: true), location_name_path(@location.id) %>
     [<%= t "locations.#{@location.location_type.key}" %>]
     [<%= "#{@location.x}, #{@location.y}" %>]
   </div>
@@ -47,7 +47,7 @@
     <%= link_to fa_icon('arrow-right'),
         location_enter_path(@location.parent_location.id),                                title: t('views.buildings.enter')
     %>
-    <%= @location.parent_location.name %>
+    <%= link_to @location.parent_location.display_name(@character), location_name_path(@location.parent_location.id) %>
   </div>
 <% end %>
 <%= render partial: "events/projects", locals: { projects: @projects } %>
