@@ -76,6 +76,11 @@ class Location < ApplicationRecord
     name || I18n.t("locations.#{location_type.key}")
   end
 
+  def location_name_or_build(character)
+    location_names.where(character: character).first ||
+      location_names.build(character: character, name: default_name)
+  end
+
   def location_name(character)
     location_names.where(character: character).first
   end

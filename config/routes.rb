@@ -20,7 +20,7 @@ Fabularr::Application.routes.draw do
       get :drop
       get :drop_item
     end
-    resources :location_names, only: []
+    resources :location_names, only: %i[create]
     resources :location_objects, only: [:create] do
       get :take
       get :take_item

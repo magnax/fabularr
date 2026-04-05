@@ -8,4 +8,10 @@ class LocationsController < ApplicationController
 
     redirect_to events_path
   end
+
+  def name
+    @location = Location.find(params[:location_id])
+    @character = current_character
+    @name = @location.location_name_or_build(current_character)
+  end
 end

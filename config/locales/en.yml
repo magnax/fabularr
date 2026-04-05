@@ -211,6 +211,7 @@ en:
     inventory_objects:
       add_to_project: Add to project
       drop: Drop
+      max_drop: You can drop max.
       title: Inventory
     layout:
       back_to_char_list: Characters list
@@ -222,6 +223,11 @@ en:
         profile: Profile
         settings_link: Account settings
       register: Register
+    locations:
+      name:
+        create: 'Create'
+        current_name: 'Current name:'
+        new_name: 'New name:'
     location_objects:
       add_to_project: 'You want to add to the project:'
       amount: 'Amount: '
@@ -247,6 +253,7 @@ en:
         resources: Materials needed
         time: Time needed
         title: Building & production
+        tools: Tools needed
     sessions:
       new:
         title: Fabular login

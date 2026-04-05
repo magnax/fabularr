@@ -1,0 +1,13 @@
+<%= t 'views.locations.name.current_name' %>: <%= @name.name %>
+<%= form_for(@name, url: location_names_path, method: 'POST') do |f| %>
+
+<%= render 'shared/error_messages', object: f.object %>
+	
+  <%= f.hidden_field :character_id, value: @character.id %>
+  <%= f.hidden_field :location_id, value: @location.id %>
+
+  <%= f.label :name, t('views.locations.name.new_name') %>
+  <%= f.text_field :name %>
+
+  <%= f.submit I18n.t 'views.locations.name.create', data: { disable_with: false }, class: "btn btn-large btn-primary" %>
+<% end %>

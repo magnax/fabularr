@@ -24,6 +24,7 @@ class Character < ApplicationRecord
   belongs_to :user
 
   has_many :char_names, dependent: :destroy
+  has_many :location_names, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :visible_events, dependent: :destroy,
                             class_name: 'Event',

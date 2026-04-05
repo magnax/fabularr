@@ -223,6 +223,11 @@ pl:
         profile: Profil
         settings_link: Ustawienia konta
       register: Zarejestruj się
+    locations:
+      name:
+        create: 'Utwórz'
+        current_name: 'Obecna nazwa:'
+        new_name: 'Nowa nazwa:'
     location_objects:
       add_to_project: 'Chcesz dodać do projektu:'
       amount: 'Ilość: '
