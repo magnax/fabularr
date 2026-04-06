@@ -191,7 +191,7 @@ en:
         talk_to: Say something to %{charname}
     events:
       age: '%{age} years'
-      collect_resource: Collect resource
+      collect_resource: Collect
       discover_new_resource: Discover new resource
       events: Events
       index:

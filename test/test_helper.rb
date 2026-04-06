@@ -19,7 +19,7 @@ class ActionDispatch::IntegrationTest
   end
 
   def host
-    @host ||= Capybara.app_host
+    @host ||= Capybara.default_host
   end
 end
 

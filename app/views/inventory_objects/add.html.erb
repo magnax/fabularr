@@ -1,7 +1,7 @@
 <%= t('views.location_objects.add_to_project') %> <%= tn("resources.#{@resource.key}") %>
 <p><%= t('views.location_objects.have') %>: <%= @inventory_object.amount.to_i %> <%= td(@resource.unit) %></p>
 
-<%= form_with url: inventory_object_path(@inventory_object.id), method: 'PUT' do |form| %>
+<%= form_with url: inventory_object_url(@inventory_object.id), method: 'PUT' do |form| %>
   <%= form.hidden_field :subject_id, value: @inventory_object.subject_id %>
   <%= form.hidden_field :subject_type, value: @inventory_object.subject_type %>
   <div>

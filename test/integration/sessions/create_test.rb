@@ -22,10 +22,8 @@ class SessionsCreateTest < ActionDispatch::IntegrationTest
 
     assert_content("Hello #{user.email}")
     assert_content("You don't have any characters")
-    assert_link('Profile')
-    assert_selector(:css, 'a[href="/en/list"]')
-    assert_link('Logout')
-    assert_selector(:css, 'a[href="/en/logout"]')
+    assert_link('Profile', href: "#{host}/en/list")
+    assert_link('Logout', href: "#{host}/en/logout")
     assert_no_link('Login')
   end
 

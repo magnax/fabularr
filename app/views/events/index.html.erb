@@ -6,24 +6,8 @@
   </h1>
 </section>
 
-<section id="character_information" style="float: left; width: 50%;">
-  <div>
-    <%= t 'views.events.index.name_title' %>: <%= @character.name_for(@character) %>
-    (<%= t "views.events.age", age: @character.age %>)
-  </div>
-  <div>
-    <%= t 'views.events.index.carrying' %>: <%= @character.carrying_weight %>
-    [<%= link_to t('views.events.index.inventory_page'), inventory_objects_path %>]
-  </div>
-  <div>
-    <%= t 'views.events.index.location' %>: <%= link_to @location.display_name(@character, parent: true), location_name_path(@location.id) %>
-    [<%= t "locations.#{@location.location_type.key}" %>]
-    [<%= "#{@location.x}, #{@location.y}" %>]
-  </div>
-  <div>
-    <%= link_to t('views.events.index.build_menu'), recipes_path %>
-  </div>
-</section>
+<%= render partial: 'events/character_info' %>
+
 <section id="map"  style="float: right; width: 50%;"><img src="maps" width=200 height=200></section>
 
 <section id="events" data-location-id="<%= @location.id %>" style="clear: both;">
@@ -45,9 +29,9 @@
 <% elsif @location.parent_location_id %>
   <div>
     <%= link_to fa_icon('arrow-right'),
-        location_enter_path(@location.parent_location.id),                                title: t('views.buildings.enter')
+        location_enter_url(@location.parent_location.id),                                title: t('views.buildings.enter')
     %>
-    <%= link_to @location.parent_location.display_name(@character), location_name_path(@location.parent_location.id) %>
+    <%= link_to @location.parent_location.display_name(@character), location_name_url(@location.parent_location.id) %>
   </div>
 <% end %>
 <%= render partial: "events/projects", locals: { projects: @projects } %>

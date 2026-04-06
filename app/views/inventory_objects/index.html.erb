@@ -2,15 +2,15 @@
 
 <% @resources.each do |item| %>
   <div>
-    <%= link_to t('views.inventory_objects.drop'), inventory_object_drop_path(item.id) %>
-    <%= link_to t('views.inventory_objects.add_to_project'), inventory_object_add_path(item.id) %>
+    <%= link_to t('views.inventory_objects.drop'), inventory_object_drop_url(item.id) %>
+    <%= link_to t('views.inventory_objects.add_to_project'), inventory_object_add_url(item.id) %>
     
     <%= item.amount.to_i %> <%= td(item.subject.unit) %> <%= td("resources.#{item.subject.key}") %></div>
 <% end %>
 <% @items.each do |item| %>
   <div>
-    <%= link_to t('views.inventory_objects.drop'), inventory_object_drop_item_path(item.id) %>
-    <%= link_to t('views.inventory_objects.add_to_project'), inventory_object_add_path(item.id) %>
+    <%= link_to t('views.inventory_objects.drop'), inventory_object_drop_item_url(item.id) %>
+    <%= link_to t('views.inventory_objects.add_to_project'), inventory_object_add_url(item.id) %>
     
     <%= t("items.damage.#{item.subject.damage_key}") %> <%= t("items.#{item.subject.item_type.key}") %></div>
 <% end %>

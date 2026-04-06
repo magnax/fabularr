@@ -32,7 +32,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
   test 'signed-in user with some characters' do
     fabular_city = create(:location, name: 'Fabular City')
     other_city = create(:location, name: 'Other City')
-    create(:character, name: 'Magnus', location: fabular_city, user: @user)
+    magnus = create(:character, name: 'Magnus', location: fabular_city, user: @user)
     create(:character, name: 'Ella', gender: 'K', location: fabular_city, user: @user)
     create(:character, name: 'Sid', location: other_city, user: @user)
 
@@ -41,13 +41,16 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     assert_content('Events for: Magnus')
     assert_content('Location: unnamed place')
-    assert_link('Magnus')
+    assert_link('Magnus', href: "#{host}/en/characters/#{magnus.id}")
     assert_link('unknown woman')
     assert_no_link('Sid')
     assert_content('Resources')
     assert_content('Items')
     assert_content('Projects')
-    assert_link('Discover new resource')
+    assert_link('Discover new resource',
+                href: "#{host}/en/locations/#{fabular_city.id}/location_resources/new")
+    assert_link('Build menu', href: "#{host}/en/recipes")
+    assert_link('Inventory', href: "#{host}/en/inventory_objects")
   end
 
   test 'link to collect resource on events page' do
@@ -61,7 +64,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     assert_content('mushrooms')
     assert_link(
-      'Collect', href: "http://www.example.com/en/projects/new/collect/#{lr.id}"
+      'Collect', href: "#{host}/en/projects/new/collect/#{lr.id}"
     )
   end
 

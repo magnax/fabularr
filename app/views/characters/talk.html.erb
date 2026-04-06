@@ -1,6 +1,6 @@
 <%= t 'views.characters.talk.talk_to', charname: @charname.display_name %>
 
-<%= form_for(:event, url: events_path) do |f| %>
+<%= form_for(:event, url: events_url) do |f| %>
 
   <%= f.text_field :body, id: 'submit-body' %>
   <%= f.hidden_field :receiver_character_id, value: @named_character.id %>

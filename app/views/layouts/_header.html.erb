@@ -1,12 +1,12 @@
 <nav>
-  <%= link_to t('views.layout.homepage_link'), root_path %>
+  <%= link_to t('views.layout.homepage_link'), root_url %>
 
   <% if signed_in? %>
-  	<%= link_to t('views.layout.nav.profile'), list_path %>
+  	<%= link_to t('views.layout.nav.profile'), list_url %>
   	<%= link_to t('views.layout.nav.settings_link'), '#' %>
-  	<%= link_to t('views.layout.logout'), logout_path, method: "delete" %>
+  	<%= link_to t('views.layout.logout'), logout_url, method: "delete" %>
   <% else %>
-  	<%= link_to t('views.layout.login'), login_path %>
-  	<%= link_to t('views.layout.register'), register_path %>
+  	<%= link_to t('views.layout.login'), login_url %>
+  	<%= link_to t('views.layout.register'), register_url %>
   <% end %>
 </nav>

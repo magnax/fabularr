@@ -10,7 +10,7 @@
       <span style="display: inline-block;">
         <%= 
           button_to(
-            t('views.recipes.index.continue'), projects_path(
+            t('views.recipes.index.continue'), projects_url(
               project: { 
                 project_type_id: @project_type_id,
                 recipe_id: recipe.id

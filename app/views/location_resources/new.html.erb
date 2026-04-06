@@ -1,6 +1,6 @@
 <p><%= t('views.location_resources.new.title') %></p>
 
-<%= form_for :project, url: projects_path, method: 'POST' do |form| %>
+<%= form_for :project, url: projects_url, method: 'POST' do |form| %>
   <%= form.hidden_field :project_type_id, value: @project_type_id %>
   <%= form.submit t('views.projects.discover') %>
 <% end %>
