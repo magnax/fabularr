@@ -187,6 +187,13 @@ pl:
       new:
         create: Utwórz postać
         title: Nowa postać
+      show:
+        actions: Akcje
+        current_state: Obecny stan
+        damage: Obrażenia
+        description: Imię i opis
+        info: Informacje o postaci
+        skills: Umiejętności
       talk:
         talk_to: Powiedz coś do %{charname}
     events:

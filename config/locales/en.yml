@@ -187,6 +187,13 @@ en:
       new:
         create: Create character
         title: New character
+      show:
+        actions: Actions
+        current_state: Current status
+        damage: Damage
+        description: Name & description
+        info: Character info
+        skills: Skills
       talk:
         talk_to: Say something to %{charname}
     events:

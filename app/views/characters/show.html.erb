@@ -1,23 +1,24 @@
 <div class="main">
   <section id="description">
-    Character info
+    <%= t('views.characters.show.info') %>
   </section>
   <section id="actions">
-    Actions
+    <%= t('views.characters.show.actions') %>
   </section>
   <section id="status">
-    <div class="title-bar"><%= t('views.characters.current_state') %></div>
+    <div class="title-bar"><%= t('views.characters.show.current_state') %></div>
     <table>
       <tr>
-        <td><%= t('views.characters.damage') %></td>
+        <td><%= t('views.characters.show.damage') %></td>
         <td><%= @character.damage %>%</td>
       </tr>
     </table>
   </section>
   <section id="skills">
-    Skills
+    <%= t('views.characters.show.skills') %>
   </section>
   <section id="description">
-    Name & description
+    <div class="title-bar"><%= t('views.characters.show.description') %></div>
+    <%= render 'characters/name_form' %>
   </section>
 </div>
