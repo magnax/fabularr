@@ -6,8 +6,11 @@
 #
 #  id                :integer          not null, primary key
 #  coords            :point
+#  damage            :float            default(0.0)
 #  gender            :string
+#  hunger            :float            default(0.0)
 #  name              :string
+#  tiredness         :float            default(0.0)
 #  created_at        :datetime
 #  updated_at        :datetime
 #  location_id       :integer

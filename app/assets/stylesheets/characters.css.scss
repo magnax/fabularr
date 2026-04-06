@@ -1,3 +1,15 @@
 // Place all the styles related to the Characters controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.main {
+  width: 800px;
+  margin: auto;
+}
+
+.title-bar {
+  background-color: bisque;
+  padding: 3px;
+  width: 800px;
+  margin: auto;
+  text-align: center;
+}

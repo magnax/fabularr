@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_04_171435) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_06_094228) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -29,10 +29,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_04_171435) do
   create_table "characters", id: :serial, force: :cascade do |t|
     t.point "coords"
     t.datetime "created_at"
+    t.float "damage", default: 0.0
     t.string "gender"
+    t.float "hunger", default: 0.0
     t.integer "location_id"
     t.string "name"
     t.integer "spawn_location_id"
+    t.float "tiredness", default: 0.0
     t.datetime "updated_at"
     t.integer "user_id"
   end
