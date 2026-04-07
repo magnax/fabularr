@@ -213,6 +213,7 @@ en:
         no_buildings_here: No buildings nor vehicles here
         projects_here: Projects
         resources_here: Resources
+        travel: Start travel
       send: Send
       title: Events for
     inventory_objects:
@@ -264,6 +265,10 @@ en:
     sessions:
       new:
         title: Fabular login
+    travellers:
+      new:
+        direction: 'Direction in degrees (0-360): '
+        go: Go now!
     users:
       new:
         create: Create my account

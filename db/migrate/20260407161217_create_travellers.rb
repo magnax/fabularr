@@ -7,6 +7,7 @@ class CreateTravellers < ActiveRecord::Migration[8.1]
       t.float :direction
       t.float :speed, default: 100
       t.datetime :checked_at
+      t.boolean :status, default: true
 
       t.timestamps
     end

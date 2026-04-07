@@ -238,6 +238,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_07_161217) do
     t.bigint "end_location_id"
     t.float "speed", default: 100.0
     t.bigint "start_location_id"
+    t.boolean "status", default: true
     t.bigint "subject_id"
     t.string "subject_type"
     t.datetime "updated_at", null: false

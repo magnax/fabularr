@@ -213,6 +213,7 @@ pl:
         no_buildings_here: Nie ma żadnych budynków ani pojazdów
         projects_here: Projekty
         resources_here: Zasoby
+        travel: Wyrusz w podróż
       send: Wyślij
       title: Zdarzenia dla
     inventory_objects:
@@ -264,6 +265,10 @@ pl:
     sessions:
       new:
         title: Logowanie do Fabular
+    travellers:
+      new:
+        direction: 'Kierunek w stopniach (0-360): '
+        go: Wyrusz teraz!
     users:
       new:
         create: Utwórz konto

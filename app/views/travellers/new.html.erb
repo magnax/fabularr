@@ -1,0 +1,6 @@
+<section id="map"><img src="/maps" width=200 height=200></section>
+<%= form_for :traveller, url: travellers_url, method: 'POST' do |form| %>
+  <%= form.label t('views.travellers.new.direction') %>
+  <%= form.text_field :direction %>
+  <%= form.submit t('views.travellers.new.go') %>
+<% end %>

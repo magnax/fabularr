@@ -8,6 +8,7 @@
 #  checked_at        :datetime
 #  direction         :float
 #  speed             :float            default(100.0)
+#  status            :boolean          default(TRUE)
 #  subject_type      :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
@@ -27,4 +28,7 @@
 #  fk_rails_...  (start_location_id => locations.id)
 #
 class Traveller < ApplicationRecord
+  belongs_to :subject, polymorphic: true
+
+  scope :active, -> { where(status: true) }
 end
