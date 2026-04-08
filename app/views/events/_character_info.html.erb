@@ -8,14 +8,23 @@
     [<%= link_to t('views.events.index.inventory_page'), inventory_objects_url %>]
   </div>
   <div>
-    <%= t 'views.events.index.location' %>: <%= link_to @location.display_name(@character, parent: true), location_name_url(@location.id) %>
-    [<%= t "locations.#{@location.location_type.key}" %>]
-    [<%= "#{@location.x}, #{@location.y}" %>]
+    <% location_link = link_to @location.display_name(@character, parent: true), location_name_url(@location.id) %>
+    <%= t 'views.events.index.location' %>: 
+    <% if @character.travelling? %>
+      <%= t('views.events.index.travel_info_html', location_link: location_link) %>
+    <% else %>
+      <%= location_link %>
+      [<%= t "locations.#{@location.location_type.key}" %>]
+      [<%= "#{@location.x}, #{@location.y}" %>]
+    <% end %>
   </div>
+
   <div>
     <%= link_to t('views.events.index.build_menu'), recipes_url %>
   </div>
-  <div>
-    <%= link_to t('views.events.index.travel'), new_traveller_url %>
-  </div>
+  <% unless @character.travelling? %>
+    <div>
+      <%= link_to t('views.events.index.travel'), new_traveller_url %>
+    </div>
+  <% end %>
 </section>

@@ -216,6 +216,7 @@ en:
         projects_here: Projects
         resources_here: Resources
         travel: Start travel
+        travel_info_html: "Travelling from %{location_link}"
       send: Send
       title: Events for
     inventory_objects:

@@ -216,6 +216,7 @@ pl:
         projects_here: Projekty
         resources_here: Zasoby
         travel: Wyrusz w podróż
+        travel_info_html: "Podróżuje z %{location_link}"
       send: Wyślij
       title: Zdarzenia dla
     inventory_objects:
