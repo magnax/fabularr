@@ -1,37 +1,38 @@
 <% provide(:js_name, 'events') %>
-<%= turbo_stream_from @location, "location_#{@location.id}" %>
-<section id="current_character" data-id="<%= @character.id %>">
+<%= turbo_stream_from @response[:location], "location_#{@response[:location]&.id}" %>
+<section id="current_character" data-id="<%= @response[:character].id %>">
   <h1>
-    <%= t 'views.events.title' %>: <%= @character.name_for(@character) %>
+    <%= t 'views.events.title' %>: <%= @response[:character].name_for(@response[:character]) %>
   </h1>
 </section>
 
-<%= render partial: 'events/character_info' %>
+<%= render partial: 'events/character_info', locals: { character: @response[:character], location: @response[:location], travel_info: @response[:travel_info] } %>
 
 <section id="map"  style="float: right; width: 50%;"><img src="maps" width=200 height=200></section>
 
-<section id="events" data-location-id="<%= @location.id %>" style="clear: both;">
-  <%= render partial: 'events/events', locals: { events: @events } %>
+<section id="events" data-location-id="<%= @response[:location]&.id %>" style="clear: both;">
+  <%= render partial: 'events/events', locals: { events: @response[:events] } %>
 </section>
 
-<%= render partial: "events/characters", locals: { characters: @location.characters } %>
+<%= render partial: "events/characters", locals: { characters: @response[:characters] } %>
 <%= 
   render partial: "events/items", locals: { 
-    resources: @items[:resources], items: @items[:items] 
+    resources: @response[:items][:resources], items: @response[:items][:items] 
   } 
 %>
-<%= render partial: "events/buildings", locals: { buildings: @buildings } %>
+<%= render partial: "events/buildings", locals: { buildings: @response[:buildings] } %>
 
-<% if @location.town? %>
+<% if @response[:location]&.town? %>
   <%= render partial: "events/resources", locals: { 
-      location_resources: @location_resources 
+      location: @response[:location],
+      location_resources: @response[:location_resources] 
     } %>
-<% elsif @location.parent_location_id %>
+<% elsif @response[:location]&.parent_location_id %>
   <div>
     <%= link_to fa_icon('arrow-right'),
-        location_enter_url(@location.parent_location.id),                                title: t('views.buildings.enter')
+        location_enter_url(@response[:location].parent_location.id),                                title: t('views.buildings.enter')
     %>
-    <%= link_to @location.parent_location.display_name(@character), location_name_url(@location.parent_location.id) %>
+    <%= link_to @response[:location].parent_location.display_name(@response[:character]), location_name_url(@response[:location].parent_location.id) %>
   </div>
 <% end %>
-<%= render partial: "events/projects", locals: { projects: @projects } %>
+<%= render partial: "events/projects", locals: { projects: @response[:projects] } %>

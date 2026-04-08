@@ -1,5 +1,5 @@
 <h2><%= t 'views.events.index.projects_here' %></h2>
-<% if projects.any? %>
+<% if projects.present? %>
   <% projects.each do |project| %>
     <div data-project-id="<%= project.id %>">
       <%= project.short_name %>

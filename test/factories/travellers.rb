@@ -29,5 +29,6 @@
 #
 FactoryBot.define do
   factory :traveller do
+    start_location { FactoryBot.create(:location) }
   end
 end

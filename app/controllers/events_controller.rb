@@ -4,16 +4,7 @@ class EventsController < ApplicationController
   before_action :current_character_set
 
   def index
-    @character = current_character
-    @location = @character.location
-    @events = Events::FetchEvents.call(@character)
-    @items = {
-      resources: @location.location_objects.includes(:subject).resource,
-      items: @location.location_objects.item
-    }
-    @location_resources = @location.location_resources
-    @buildings = @location.buildings
-    @projects = @location.projects.pending.includes(:starting_character, :project_type)
+    @response = Events::ShowService.call(current_character)
   end
 
   def create

@@ -1,5 +1,5 @@
 <h2><%= t 'views.events.index.items_here' %></h2>
-<% if items.any? || resources.any? %>
+<% if items.present? || resources.present? %>
   <% resources.each do |item| %>
     <div>
       <%= link_to fa_icon('upload'), location_object_take_url(item.id), title: t('views.location_objects.take') %>

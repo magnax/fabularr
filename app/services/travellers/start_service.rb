@@ -10,7 +10,11 @@ module Travellers
 
     def call
       @character.update!(coords: @location.coords, location: nil)
-      Traveller.create!(subject: @character, direction: @params[:direction])
+      Traveller.create!(
+        subject: @character,
+        direction: @params[:direction],
+        start_location: @location
+      )
 
       create_event!
     end

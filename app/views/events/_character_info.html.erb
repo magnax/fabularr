@@ -1,28 +1,27 @@
 <section id="character_information" style="float: left; width: 50%;">
   <div>
-    <%= t 'views.events.index.name_title' %>: <%= link_to @character.name_for(@character), character_url(@character.id) %>
-    (<%= t "views.events.age", age: @character.age %>)
+    <%= t 'views.events.index.name_title' %>: <%= link_to character.name_for(character), character_url(character.id) %>
+    (<%= t "views.events.age", age: character.age %>)
   </div>
   <div>
-    <%= t 'views.events.index.carrying' %>: <%= @character.carrying_weight %>
+    <%= t 'views.events.index.carrying' %>: <%= character.carrying_weight %>
     [<%= link_to t('views.events.index.inventory_page'), inventory_objects_url %>]
   </div>
   <div>
-    <% location_link = link_to @location.display_name(@character, parent: true), location_name_url(@location.id) %>
     <%= t 'views.events.index.location' %>: 
-    <% if @character.travelling? %>
-      <%= t('views.events.index.travel_info_html', location_link: location_link) %>
+    <% if travel_info.present? %>
+      <%= t('views.events.index.travel_info_html', location_link: link_to(travel_info[:location].display_name(character, parent: true), location_name_url(travel_info[:location].id))) %>
     <% else %>
-      <%= location_link %>
-      [<%= t "locations.#{@location.location_type.key}" %>]
-      [<%= "#{@location.x}, #{@location.y}" %>]
+      <%= link_to location.display_name(character, parent: true), location_name_url(location.id) %>
+      [<%= t "locations.#{location.location_type.key}" %>]
+      [<%= "#{location.x}, #{location.y}" %>]
     <% end %>
   </div>
 
   <div>
     <%= link_to t('views.events.index.build_menu'), recipes_url %>
   </div>
-  <% unless @character.travelling? %>
+  <% unless character.travelling? %>
     <div>
       <%= link_to t('views.events.index.travel'), new_traveller_url %>
     </div>

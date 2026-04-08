@@ -105,4 +105,8 @@ class Character < ApplicationRecord
   def travelling?
     travellers.active.length == 1
   end
+
+  def traveller
+    travellers.active.first
+  end
 end

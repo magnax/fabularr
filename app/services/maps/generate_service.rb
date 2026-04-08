@@ -31,7 +31,7 @@ module Maps
     end
 
     def draw_character(draw, canvas)
-      draw.fill('yellow')
+      draw.fill(@character.travelling? ? 'yellow' : 'black')
       draw.circle(100, 100, 97, 100)
       draw.draw(canvas)
     end

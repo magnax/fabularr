@@ -29,6 +29,7 @@
 #
 class Traveller < ApplicationRecord
   belongs_to :subject, polymorphic: true
+  belongs_to :start_location, class_name: 'Location'
 
   scope :active, -> { where(status: true) }
 end

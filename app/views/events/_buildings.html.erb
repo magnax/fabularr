@@ -1,5 +1,5 @@
 <h2><%= t 'views.events.index.buildings_here' %></h2>
-<% if buildings.any? %>
+<% if buildings.present? %>
   <% buildings.each do |item| %>
     <div>
       <%= link_to fa_icon('arrow-right'), location_enter_url(item.id), title: t('views.buildings.enter') %>

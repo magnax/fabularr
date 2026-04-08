@@ -5,10 +5,16 @@
 		<%= fa_icon(character.male? ? 'mars' : 'venus', title: t("genders.#{character.gender}")) %>
 	</td>
 	<td>
-		<%= character.location.display_name(character, parent: true) %>
+		<% if character.travelling? %>
+			Travelling
+		<% else %>
+			<%= character.location.display_name(character, parent: true) %>
+		<% end %>
 	</td>
 	<td>
-		<%= character.location.location_type.key %>
+		<% if character.location.present? %>
+			<%= character.location.location_type.key %>
+		<% end %>
 	</td>
 	<td>
 		<% if character.project_info %>
