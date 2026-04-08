@@ -19,7 +19,7 @@ class Event < ApplicationRecord
   LOCID_REGEX_TEXT = '<!--LOCID:(\d+)-->'
   LOCID_REGEX = /#{LOCID_REGEX_TEXT}/
 
-  belongs_to :location
+  belongs_to :location, optional: true
   belongs_to :character, optional: true
   belongs_to :receiver_character, class_name: 'Character', optional: true
 

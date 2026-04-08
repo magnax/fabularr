@@ -22,7 +22,7 @@ class Character < ApplicationRecord
 
   delegate :x, :y, to: :coords
 
-  belongs_to :location
+  belongs_to :location, optional: true
   belongs_to :spawn_location, class_name: 'Location'
   belongs_to :user
 
@@ -32,15 +32,15 @@ class Character < ApplicationRecord
   has_many :visible_events, dependent: :destroy,
                             class_name: 'Event',
                             inverse_of: :receiver_character
-  has_many :workers, dependent: :destroy
   has_many :inventory_objects, dependent: :destroy
+  has_many :workers, dependent: :destroy
+  has_many :travellers, dependent: :destroy, inverse_of: :subject
 
   has_many :projects, through: :workers
 
   before_save { self.gender = gender.upcase }
 
   validates :gender, presence: true, format: { with: /\A[km]\z/i }
-  validates :location_id, presence: true
   validates :name, presence: true
   validates :spawn_location_id, presence: true
   validates :user_id, presence: true
@@ -100,5 +100,9 @@ class Character < ApplicationRecord
       name: project.short_name,
       percent: ((project.elapsed.to_f / project.duration) * 100.0).round(1)
     }
+  end
+
+  def travelling?
+    travellers.active.length == 1
   end
 end

@@ -5,6 +5,8 @@ class TravellersController < ApplicationController
 
   def create
     Travellers::StartService.call(current_character, traveller_params)
+
+    redirect_to events_path
   end
 
   private

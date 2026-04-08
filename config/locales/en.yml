@@ -70,6 +70,8 @@ en:
     take_item_others: You see that %{character_link} is taking %{item}
     take_resource: "You're taking %{amount} %{unit} of %{res} from the ground"
     take_resource_others: 'You see that %{character_link} is taking some %{res} from the ground'
+    travel:
+      start: "You're leaving %{location_link} heading in direction: %{direction}"
   flash:
     errors:
       cannot_create: You cannot create more than 15 characters

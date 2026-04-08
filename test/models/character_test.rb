@@ -69,11 +69,11 @@ class CharacterTest < ActiveSupport::TestCase
     assert_includes character.errors[:gender], 'should be given'
   end
 
-  test 'invalid without location' do
-    character = build(:character, location_id: nil)
+  test 'valid without location - ie. can travel' do
+    character = build(:character, location_id: nil, user: create(:user), name: 'Magnus',
+                                  gender: 'M', spawn_location: create(:location))
 
-    assert_not character.valid?
-    assert_includes character.errors[:location_id], "can't be blank"
+    assert character.valid?
   end
 
   test 'invalid without spawn location' do
