@@ -9,4 +9,7 @@
 #  value :string
 #
 class Setting < ApplicationRecord
+  def self.setup(key, value = '1')
+    Setting.where(key: key).first_or_create.update(value: value)
+  end
 end
