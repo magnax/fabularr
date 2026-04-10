@@ -2,13 +2,13 @@
 
 require 'test_helper'
 
-class TravellersUpdateServiceTest < ActiveSupport::TestCase
+class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
   def setup
     @character = create(:character, coords: { x: 100, y: 100 })
   end
 
   def call_service(traveller)
-    Travellers::UpdateService.call(traveller)
+    Travellers::UpdatePositionService.call(traveller)
   end
 
   test 'simple update - north (straight up)' do

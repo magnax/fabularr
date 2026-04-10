@@ -5,7 +5,7 @@ class TravellersUpdateJob
 
   def perform
     Traveller.active.find_each do |traveller|
-      Travellers::UpdateService.call(traveller)
+      Travellers::UpdatePositionService.call(traveller)
     end
 
     s = Setting.find_by key: 'travels'
