@@ -38,7 +38,10 @@ Fabularr::Application.routes.draw do
     end
     resources :recipes, only: [:index]
     resources :sessions, only: %i[new create destroy]
-    resources :travellers, only: %i[new create]
+    resources :travellers, only: %i[new create update] do
+      get :stop
+      get :reverse
+    end
     resources :users
 
     match '/register', to: 'users#new', via: 'get'

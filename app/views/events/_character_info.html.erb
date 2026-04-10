@@ -10,7 +10,7 @@
   <div>
     <%= t 'views.events.index.location' %>: 
     <% if travel_info.present? %>
-      <%= t('views.events.index.travel_info_html', location_link: link_to(travel_info[:location].display_name(character, parent: true), location_name_url(travel_info[:location].id))) %>
+      <%= render 'travellers/travel_info', travel_info: travel_info, character: character %>
     <% else %>
       <%= link_to location.display_name(character, parent: true), location_name_url(location.id) %>
       [<%= t "locations.#{location.location_type.key}" %>]
@@ -18,9 +18,11 @@
     <% end %>
   </div>
 
-  <div>
-    <%= link_to t('views.events.index.build_menu'), recipes_url %>
-  </div>
+  <% if character.location %>
+    <div>
+      <%= link_to t('views.events.index.build_menu'), recipes_url %>
+    </div>
+  <% end %>
   <% unless character.travelling? %>
     <div>
       <%= link_to t('views.events.index.travel'), new_traveller_url %>

@@ -32,6 +32,7 @@ module Maps
 
     def draw_character(draw, canvas)
       draw.fill(@character.travelling? ? 'yellow' : 'black')
+      draw.stroke(@character.travelling? ? 'black' : 'none')
       draw.circle(100, 100, 97, 100)
       draw.draw(canvas)
     end

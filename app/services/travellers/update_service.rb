@@ -2,64 +2,55 @@
 
 module Travellers
   class UpdateService < ApplicationService
-    def initialize(traveller)
-      @traveller = traveller
+    def initialize(character, params)
+      @character = character
+      @params = params
     end
 
     def call
-      x = subject.x
-      y = subject.y
-
-      subject.update!(
-        coords: {
-          x: new_x(x),
-          y: new_y(y)
-        }
-      )
-      @traveller.update!(checked_at: current_time)
+      traveller.update!(update_params)
     end
 
     private
 
-    def subject
-      @subject ||= @traveller.subject
+    def traveller
+      @traveller ||= Traveller.find_by(id: @params[:id])
     end
 
-    def radians
-      @radians ||= @traveller.direction * Math::PI / 180.0
+    def update_params
+      {
+        speed: speed,
+        direction: direction
+      }
     end
 
-    def new_x(val)
-      val + (distance * Math.sin(radians))
+    def speed
+      return 0 if stop?
+      return traveller.speed if @params[:speed].blank?
+
+      s = @params[:speed].to_f
+      s >= 0 && s <= 100 ? s : traveller.speed
     end
 
-    def new_y(val)
-      # graphics coordinate system has (0,0) in upper left corner
-      # so vertical coordinate is always negated
-      val - (distance * Math.cos(radians))
+    def direction
+      return reversed_direction if reverse?
+      return traveller.direction if @params[:direction].blank?
+
+      dir = @params[:direction].to_f
+      dir >= 0 && dir <= 360 ? dir : traveller.direction
     end
 
-    def distance
-      @distance ||= real_speed * (time_elapsed / 60.0)
+    def stop?
+      @params[:order] == 'stop'
     end
 
-    # TODO: temporarily hardcoded 3 x base speed (so for characters without any load)
-    def real_speed
-      @real_speed ||= 3 * base_speed * (@traveller.speed / 100.0)
+    def reverse?
+      @params[:order] == 'reverse'
     end
 
-    def time_elapsed
-      @time_elapsed ||= current_time.to_f - (@traveller.checked_at&.to_f || @traveller.created_at.to_f)
-    end
-
-    def current_time
-      @current_time ||= DateTime.current
-    end
-
-    # TODO: temporarily hardcoded and only for characters
-    # vehicles will be added with more complex configuration
-    def base_speed
-      0.01736 # pixels for 1 minute (60 sec.)
+    def reversed_direction
+      rev = traveller.direction - 180
+      rev.negative? ? rev + 360 : rev
     end
   end
 end

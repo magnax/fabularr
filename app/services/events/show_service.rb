@@ -35,7 +35,10 @@ module Events
       return unless @character.travelling?
 
       {
-        location: @character.traveller.start_location
+        location: @character.traveller.start_location,
+        traveller_id: @character.traveller.id,
+        speed: @character.traveller.speed,
+        direction: @character.traveller.direction
       }
     end
 

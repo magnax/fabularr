@@ -1,0 +1,8 @@
+<%= t('views.events.index.travel_info_html', location_link: link_to(travel_info[:location].display_name(character, parent: true), location_name_url(travel_info[:location].id))) %>
+<%= form_for :traveller, url: traveller_url(travel_info[:traveller_id]), method: 'PUT' do |form| %>
+  Speed: <%= form.text_field :speed, value: travel_info[:speed], style: 'width:3em;' %>%
+  Direction: <%= form.text_field :direction, value: travel_info[:direction], style: 'width:3em;' %>
+  <%= form.submit 'Set' %>
+<% end %>
+<%= link_to 'Stop', traveller_stop_url(travel_info[:traveller_id]) %>
+<%= link_to 'Reverse', traveller_reverse_url(travel_info[:traveller_id]) %>
