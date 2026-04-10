@@ -7,15 +7,8 @@ module Travellers
     end
 
     def call
-      x = subject.x
-      y = subject.y
+      subject.update!(coords: new_coords(subject.coords))
 
-      subject.update!(
-        coords: {
-          x: new_x(x),
-          y: new_y(y)
-        }
-      )
       @traveller.update!(checked_at: current_time)
     end
 
@@ -29,14 +22,13 @@ module Travellers
       @radians ||= @traveller.direction * Math::PI / 180.0
     end
 
-    def new_x(val)
-      val + (distance * Math.sin(radians))
-    end
-
-    def new_y(val)
-      # graphics coordinate system has (0,0) in upper left corner
-      # so vertical coordinate is always negated
-      val - (distance * Math.cos(radians))
+    def new_coords(coords)
+      {
+        x: coords.x + (distance * Math.sin(radians)),
+        # graphics coordinate system has (0,0) in upper left corner
+        # so vertical coordinate is always negated
+        y: coords.y - (distance * Math.cos(radians))
+      }
     end
 
     def distance
