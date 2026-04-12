@@ -11,6 +11,28 @@ class ProjectsCreateServiceTest < ActiveSupport::TestCase
     Projects::CreateService.call(@current_character, params)
   end
 
+  test 'raise exception when project type is wrong' do
+    params = {
+      project_type_id: 0
+    }
+
+    assert_raises Projects::CreateService::InvalidProjectTypeError do
+      call_service(params)
+    end
+  end
+
+  test 'raise exception when class not implemented' do
+    project_type = create(:project_type, key: 'not_implemented_type')
+
+    params = {
+      project_type_id: project_type.id
+    }
+
+    assert_raises NotImplementedError do
+      call_service(params)
+    end
+  end
+
   test 'discover new location resource' do
     project_type = create(:project_type, key: 'discover_resource',
                                          base_speed: 1000, fixed: true)

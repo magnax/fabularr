@@ -8,7 +8,7 @@ module ProjectTypes
 
     def call
       LocationObject.create!(
-        location_id: project.location_id, subject: resource, amount: amount, unit: resource.unit
+        location_id: location.id, subject: resource, amount: amount, unit: resource.unit
       )
 
       resource_description.update!(amount: amount)

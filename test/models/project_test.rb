@@ -47,4 +47,32 @@ class ProjectTest < ActiveSupport::TestCase
 
     assert_equal 'Discovering new resources', project.short_name
   end
+
+  test 'proper #name for project with recipe - tool' do
+    character = create(:character)
+    second_character = create(:character)
+    create(:char_name, character: second_character, named: character, name: 'Magnus')
+    project_type = create(:project_type, key: 'build')
+    recipe = create(:recipe, recipe_type: Recipe::BUILD)
+    project = create(:project, starting_character: character,
+                               project_type: project_type, recipe: recipe)
+
+    name = project.name(second_character)
+
+    assert_equal 'Building: stone knife, started by: Magnus', name
+  end
+
+  test 'proper #name for project with recipe - building' do
+    character = create(:character)
+    second_character = create(:character)
+    create(:char_name, character: second_character, named: character, name: 'Magnus')
+    project_type = create(:project_type, key: 'build')
+    recipe = create(:recipe, recipe_type: Recipe::BUILDING, key: 'wood_shack')
+    project = create(:project, starting_character: character,
+                               project_type: project_type, recipe: recipe)
+
+    name = project.name(second_character)
+
+    assert_equal 'Building: Wood shack, started by: Magnus', name
+  end
 end

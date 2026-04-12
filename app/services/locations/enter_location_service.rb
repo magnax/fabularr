@@ -58,10 +58,6 @@ module Locations
       }
     end
 
-    def name_for(location)
-      location.name || I18n.t("#{location.location_class.key}s.#{location.location_type.key}")
-    end
-
     def previous_location
       @previous_location ||= Location.find_by(id: @previous_location_id)
     end

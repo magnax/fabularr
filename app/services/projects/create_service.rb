@@ -2,6 +2,8 @@
 
 module Projects
   class CreateService < ApplicationService
+    class InvalidProjectTypeError < StandardError; end
+
     TYPE_CLASSES = {
       'build' => 'Create::Build',
       'collect' => 'Create::Collect',

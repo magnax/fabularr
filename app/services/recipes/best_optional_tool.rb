@@ -24,9 +24,5 @@ module Recipes
     def recipe_tools
       @recipe_tools ||= Recipes::FetchOptionalTools.call(@recipe)
     end
-
-    def project
-      @project ||= @recipe.project
-    end
   end
 end

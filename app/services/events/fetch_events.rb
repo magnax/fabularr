@@ -17,9 +17,5 @@ module Events
     def events
       @events ||= @character.visible_events.order(created_at: :desc)
     end
-
-    def location
-      @location ||= @character.location
-    end
   end
 end

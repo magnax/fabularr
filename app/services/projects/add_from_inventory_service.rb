@@ -21,25 +21,29 @@ module Projects
     end
 
     def add_resource_to_project!
-      new_amount = form.inventory_object.amount - transferred_amount
-      new_req_amount = form.project_description_object.amount + transferred_amount
-      form.inventory_object.update!(amount: new_amount)
-      form.project_description_object.update!(amount: new_req_amount)
+      new_amount = inventory_object.amount - transferred_amount
+      new_req_amount = description_object.amount + transferred_amount
+      inventory_object.update!(amount: new_amount)
+      description_object.update!(amount: new_req_amount)
     end
 
     def transferred_amount
       amount = needed_by_product_amount
       amount = form.amount if amount > form.amount
-      amount = form.inventory_object.amount if amount > form.inventory_object.amount
+      amount = inventory_object.amount if amount > inventory_object.amount
       amount
     end
 
     def needed_by_product_amount
-      form.project_description_object.amount_needed - form.project_description_object.amount
+      description_object.amount_needed - description_object.amount
     end
 
-    def project
-      @project ||= Project.find_by(id: @params[:project_id])
+    def inventory_object
+      @inventory_object ||= form.inventory_object
+    end
+
+    def description_object
+      @description_object ||= form.project_description_object
     end
   end
 end

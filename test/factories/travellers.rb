@@ -29,6 +29,7 @@
 #
 FactoryBot.define do
   factory :traveller do
+    direction { 90 }
     start_location { FactoryBot.create(:location) }
   end
 end

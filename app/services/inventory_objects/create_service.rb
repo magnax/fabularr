@@ -49,10 +49,6 @@ module InventoryObjects
       )
     end
 
-    def project
-      @project ||= current_worker.project
-    end
-
     def current_worker
       @current_worker ||= @character.workers.active.first
     end

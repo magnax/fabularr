@@ -58,11 +58,10 @@ class Project < ApplicationRecord
       case recipe.recipe_type
       when 'build'
         tool_name = I18n.t("items.#{recipe.key}")
-        "#{type_name}: #{tool_name}"
       when 'building'
         tool_name = I18n.t("buildings.#{recipe.key}")
-        "#{type_name}: #{tool_name}"
       end
+      "#{type_name}: #{tool_name}"
     when ProjectType::DISCOVER_RESOURCE
       type_name
     end

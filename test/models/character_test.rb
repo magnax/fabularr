@@ -38,6 +38,7 @@ class CharacterTest < ActiveSupport::TestCase
 
     assert_respond_to character, :x
     assert_respond_to character, :y
+    assert_respond_to character, :traveller
   end
 
   test 'valid character' do
