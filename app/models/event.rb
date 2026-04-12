@@ -23,8 +23,5 @@ class Event < ApplicationRecord
   belongs_to :character, optional: true
   belongs_to :receiver_character, class_name: 'Character', optional: true
 
-  scope :visible_for, lambda { |character_id|
-    where(receiver_character_id: [nil, character_id]).or(Event.where(character_id: character_id)).newest
-  }
   scope :newest, -> { order(created_at: :desc).first(NEWEST_COUNT) }
 end

@@ -14,7 +14,7 @@ module Projects
     private
 
     def worker
-      project.workers.where(character: @character, left_at: nil)
+      project.workers.where(character: @character, left_at: nil).last
     end
 
     def project

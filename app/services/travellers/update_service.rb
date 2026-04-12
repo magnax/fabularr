@@ -9,19 +9,31 @@ module Travellers
 
     def call
       traveller.update!(update_params)
+
+      create_event!
     end
 
     private
-
-    def traveller
-      @traveller ||= Traveller.find_by(id: @params[:id])
-    end
 
     def update_params
       {
         speed: speed,
         direction: direction
       }
+    end
+
+    def create_event!
+      Event.create!(
+        receiver_character: traveller.subject,
+        body: I18n.t("events.travel.#{body}")
+      )
+    end
+
+    def body
+      return 'reverse' if reverse?
+      return 'stop' if stop?
+
+      'update'
     end
 
     def speed
@@ -51,6 +63,10 @@ module Travellers
     def reversed_direction
       rev = traveller.direction - 180
       rev.negative? ? rev + 360 : rev
+    end
+
+    def traveller
+      @traveller ||= Traveller.find_by(id: @params[:id])
     end
   end
 end

@@ -71,7 +71,10 @@ pl:
     take_resource: Podnosisz %{amount} %{unit} %{res} z ziemi
     take_resource_others: Widzisz jak %{character_link} podnosi trochę %{res} z ziemi
     travel:
+      reverse: Zawracasz
       start: "Opuszczasz %{location_link} idąc w kierunku: %{direction}"
+      stop: Zatrzymujesz się
+      update: Zmieniasz parametry podróży
   flash:
     errors:
       cannot_create: Nie możesz mieć więcej niż 15 postaci

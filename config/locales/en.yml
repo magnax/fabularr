@@ -71,7 +71,10 @@ en:
     take_resource: "You're taking %{amount} %{unit} of %{res} from the ground"
     take_resource_others: 'You see that %{character_link} is taking some %{res} from the ground'
     travel:
+      reverse: You turn back
       start: "You're leaving %{location_link} heading in direction: %{direction}"
+      stop: You stop
+      update: You're updating travel settings
   flash:
     errors:
       cannot_create: You cannot create more than 15 characters
