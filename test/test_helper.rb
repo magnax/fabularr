@@ -1,17 +1,31 @@
 # frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
+require 'simplecov'
+SimpleCov.start 'rails'
+
 require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'
 require 'mocha/minitest'
 require 'capybara/minitest'
 require 'capybara/rails'
 require 'minitest/reporters'
+
 Minitest::Reporters.use!
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
   include Capybara::Minitest::Assertions
+
+  # parallelize(workers: :number_of_processors)
+
+  # parallelize_setup do |worker|
+  #   SimpleCov.command_name "#{SimpleCov.command_name}-#{worker}"
+  # end
+
+  # parallelize_teardown do
+  #   SimpleCov.result
+  # end
 
   teardown do
     Capybara.reset_sessions!
@@ -27,7 +41,15 @@ module ActiveSupport
   class TestCase
     include FactoryBot::Syntax::Methods
 
-    parallelize(workers: :number_of_processors)
+    # parallelize(workers: :number_of_processors)
+
+    # parallelize_setup do |worker|
+    #   SimpleCov.command_name "#{SimpleCov.command_name}-#{worker}"
+    # end
+
+    # parallelize_teardown do
+    #   SimpleCov.result
+    # end
 
     ActiveRecord::Migration.check_all_pending!
 

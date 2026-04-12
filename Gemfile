@@ -38,7 +38,6 @@ group :development, :test do
   gem 'rubocop-minitest'
   gem 'rubocop-rails'
   gem 'rubocop-rake'
-  gem 'simplecov', require: false
 end
 
 group :test do
@@ -52,5 +51,6 @@ group :test do
   gem 'mocha'
   gem 'mutex_m'
   gem 'ostruct'
+  gem 'simplecov', require: false
   gem 'timecop'
 end
