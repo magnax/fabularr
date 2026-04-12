@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :current_character_set
 
   def index
-    @response = Events::ShowService.call(current_character)
+    render locals: Events::ShowService.call(current_character)
   end
 
   def create
