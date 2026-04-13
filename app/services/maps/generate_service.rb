@@ -12,7 +12,8 @@ module Maps
     def call
       {
         data: image_data,
-        content_type: 'image/png'
+        content_type: 'image/png',
+        locations: locations.pluck(:id)
       }
     end
 
@@ -39,6 +40,7 @@ module Maps
 
     def draw_locations(draw, canvas)
       draw.fill('black')
+
       locations.each do |location|
         draw_position(draw, location.coords, position[:x], position[:y])
       end
@@ -48,7 +50,7 @@ module Maps
     def locations
       @locations ||= Location.where(
         'coords[0] > ? and coords[0] < ? and coords[1] > ? and coords[1] < ?',
-        position[:x], position[:y], position[:x] + IMAGE_WIDTH, position[:y] + IMAGE_HEIGHT
+        position[:x], position[:x] + IMAGE_WIDTH, position[:y], position[:y] + IMAGE_HEIGHT
       )
     end
 
