@@ -47,7 +47,7 @@ Definitions::Recipes::RECIPES.each do |recipe| # rubocop:disable Metrics/BlockLe
   end
 end
 
-puts "Created #{Recipe.count} recipes: #{Recipe.all.pluck(:key).join(', ')}"
+Log.say "Created #{Recipe.count} recipes: #{Recipe.all.pluck(:key).join(', ')}"
 stone = Resource.find_by(key: 'stone')
 wood = Resource.find_by(key: 'wood')
 knife = ItemType.find_by(key: 'stone_knife')
@@ -57,4 +57,4 @@ Location.find_each do |loc|
   i = Item.create(item_type: knife)
   loc.location_objects.create(subject: i)
 end
-puts "Added resources & items to locations (#{LocationObject.count} total)"
+Log.say "Added resources & items to locations (#{LocationObject.count} total)"

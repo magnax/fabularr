@@ -53,4 +53,4 @@ resources.each do |res|
   Resource.create!(key: res[:key], unit: 'grams', base_speed_per_unit: res[:bs], resource_type_id: res[:types])
 end
 
-puts "ResourceTypes (#{ResourceType.count}), Resources: #{Resource.pluck(:key).join(', ')} loaded"
+Log.say "ResourceTypes (#{ResourceType.count}), Resources: #{Resource.pluck(:key).join(', ')} created"

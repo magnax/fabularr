@@ -36,5 +36,5 @@ Definitions::LocationTypes::CONFIG_TOWNS.each do |key|
     spawn_location: location,
     gender: %w[K M].sample
   )
-  puts "Created location #{location.id}, type: #{lt.key}, position: #{position}"
+  Log.say "Created location #{location.id}, type: #{lt.key}, position: #{position}"
 end
