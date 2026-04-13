@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
-require 'simplecov'
-SimpleCov.start 'rails'
+if ENV['COVERAGE'] == '1'
+  require 'simplecov'
+  SimpleCov.start 'rails'
+end
 
 require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'
@@ -17,15 +19,7 @@ class ActionDispatch::IntegrationTest
   include Capybara::DSL
   include Capybara::Minitest::Assertions
 
-  # parallelize(workers: :number_of_processors)
-
-  # parallelize_setup do |worker|
-  #   SimpleCov.command_name "#{SimpleCov.command_name}-#{worker}"
-  # end
-
-  # parallelize_teardown do
-  #   SimpleCov.result
-  # end
+  parallelize(workers: :number_of_processors) unless ENV['COVERAGE'] == '1'
 
   teardown do
     Capybara.reset_sessions!
@@ -41,15 +35,7 @@ module ActiveSupport
   class TestCase
     include FactoryBot::Syntax::Methods
 
-    # parallelize(workers: :number_of_processors)
-
-    # parallelize_setup do |worker|
-    #   SimpleCov.command_name "#{SimpleCov.command_name}-#{worker}"
-    # end
-
-    # parallelize_teardown do
-    #   SimpleCov.result
-    # end
+    parallelize(workers: :number_of_processors) unless ENV['COVERAGE'] == '1'
 
     ActiveRecord::Migration.check_all_pending!
 
@@ -58,7 +44,9 @@ module ActiveSupport
     DatabaseCleaner.strategy = :transaction
 
     def login(character = nil)
-      ApplicationController.any_instance.expects(:require_authentication).returns(true)
+      ApplicationController.any_instance
+                           .expects(:require_authentication)
+                           .returns(true)
       return if character.blank?
 
       ApplicationController.any_instance
