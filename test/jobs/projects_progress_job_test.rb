@@ -18,6 +18,7 @@ class ProjectsProgressJobTest < ActiveSupport::TestCase
     call_job
 
     assert_equal 420, project.reload.elapsed
+    Timecop.unfreeze
   end
 
   test 'schedule next run' do

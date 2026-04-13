@@ -16,6 +16,7 @@ class TravellersUpdateJobTest < ActiveSupport::TestCase
 
     assert_equal 202.2, character.reload.x.round(1)
     assert_equal 302.2, character.y.round(1)
+    Timecop.unfreeze
   end
 
   test 'schedule next run' do

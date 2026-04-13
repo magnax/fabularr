@@ -34,6 +34,7 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
         call_service(project.id)
       end
     end
+    Timecop.unfreeze
   end
 
   test 'project started, some work was done and finished from last check' do
@@ -56,6 +57,7 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
         call_service(project.id)
       end
     end
+    Timecop.unfreeze
   end
 
   test 'project ongoing and checked for the first time' do
@@ -77,6 +79,7 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
     project.reload
 
     assert_equal time + 10.minutes, project.checked_at
+    Timecop.unfreeze
   end
 
   test 'project checked after expected duration' do
@@ -101,5 +104,6 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
 
     assert_equal time + 20.minutes, project.checked_at
     assert_equal project.elapsed, project.duration
+    Timecop.unfreeze
   end
 end

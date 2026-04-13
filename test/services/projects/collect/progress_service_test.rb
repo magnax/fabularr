@@ -30,5 +30,6 @@ class ProjectsCollectProgressServiceTest < ActiveSupport::TestCase
     project.reload
 
     assert_equal time + 10.minutes, project.checked_at
+    Timecop.unfreeze
   end
 end

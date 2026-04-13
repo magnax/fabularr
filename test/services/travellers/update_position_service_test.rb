@@ -22,6 +22,7 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 100, @character.reload.x.round(4)
     assert_equal 94.792, @character.y.round(4)
     assert_equal time + 100.minutes, traveller.reload.checked_at
+    Timecop.unfreeze
   end
 
   test 'simple update - north-east (up and right)' do
@@ -35,6 +36,7 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 103.6826, @character.reload.x.round(4)
     assert_equal 96.3174, @character.y.round(4)
     assert_equal time + 100.minutes, traveller.reload.checked_at
+    Timecop.unfreeze
   end
 
   test 'simple update - east (straight right)' do
@@ -48,6 +50,7 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 105.208, @character.reload.x.round(4)
     assert_equal 100, @character.y.round(4)
     assert_equal time + 100.minutes, traveller.reload.checked_at
+    Timecop.unfreeze
   end
 
   test 'simple update - south-east (down and right)' do
@@ -61,6 +64,7 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 103.6826, @character.reload.x.round(4)
     assert_equal 103.6826, @character.y.round(4)
     assert_equal time + 100.minutes, traveller.reload.checked_at
+    Timecop.unfreeze
   end
 
   test 'simple update - south (straight down)' do
@@ -74,6 +78,7 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 100, @character.reload.x.round(4)
     assert_equal 105.208, @character.y.round(4)
     assert_equal time + 100.minutes, traveller.reload.checked_at
+    Timecop.unfreeze
   end
 
   test 'simple update - south-west (down and left)' do
@@ -87,6 +92,7 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 96.3174, @character.reload.x.round(4)
     assert_equal 103.6826, @character.y.round(4)
     assert_equal time + 100.minutes, traveller.reload.checked_at
+    Timecop.unfreeze
   end
 
   test 'simple update - west (straight left)' do
@@ -100,6 +106,7 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 94.792, @character.reload.x.round(4)
     assert_equal 100, @character.y.round(4)
     assert_equal time + 100.minutes, traveller.reload.checked_at
+    Timecop.unfreeze
   end
 
   test 'simple update - north-west (up and left)' do
@@ -113,6 +120,7 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 96.3174, @character.reload.x.round(4)
     assert_equal 96.3174, @character.y.round(4)
     assert_equal time + 100.minutes, traveller.reload.checked_at
+    Timecop.unfreeze
   end
 
   test 'simple update - direction > 360' do
@@ -126,5 +134,6 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 96.3174, @character.reload.x.round(4)
     assert_equal 96.3174, @character.y.round(4)
     assert_equal time + 100.minutes, traveller.reload.checked_at
+    Timecop.unfreeze
   end
 end
