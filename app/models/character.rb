@@ -19,6 +19,7 @@
 #
 class Character < ApplicationRecord
   MAX_CAPACITY = 15_000
+  MIN_HEARABLE_DISTANCE = 3
 
   delegate :x, :y, to: :coords
 

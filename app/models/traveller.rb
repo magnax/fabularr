@@ -32,4 +32,5 @@ class Traveller < ApplicationRecord
   belongs_to :start_location, class_name: 'Location'
 
   scope :active, -> { where(status: true) }
+  scope :character, -> { where(subject_type: 'Character') }
 end

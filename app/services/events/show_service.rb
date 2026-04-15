@@ -10,7 +10,7 @@ module Events
       {
         character: @character,
         location: location,
-        characters: characters,
+        characters: characters.uniq,
         events: Events::FetchEvents.call(@character),
         items: items,
         location_resources: location&.location_resources,
@@ -43,7 +43,19 @@ module Events
     end
 
     def characters
-      @characters ||= location&.characters || []
+      @characters ||= [@character] + (location&.characters || []) + travelling_characters
+    end
+
+    def travelling_characters
+      return [] unless @character.travelling?
+
+      Character
+        .where(id: Traveller.character.pluck(:subject_id) - [@character.id])
+        .where(
+          "length(
+            lseg(coords::point, point(#{@character.x},#{@character.y}))
+          ) <= ? ", Character::MIN_HEARABLE_DISTANCE
+        )
     end
 
     def location

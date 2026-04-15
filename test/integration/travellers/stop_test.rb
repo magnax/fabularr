@@ -5,7 +5,8 @@ require 'test_helper'
 class TravellersStopTest < ActionDispatch::IntegrationTest
   def setup
     @user = create(:user)
-    @character = create(:character, name: 'Magnus', user: @user)
+    @character = create(:character, name: 'Magnus', user: @user,
+                                    location: nil, coords: { x: 100, y: 100 })
   end
 
   def sign_in
