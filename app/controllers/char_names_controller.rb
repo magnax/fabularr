@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class CharNamesController < ApplicationController
-  before_action :update_blank_name
-
   def create
     CharNames::UpsertService.call(current_character, charname_params)
 
