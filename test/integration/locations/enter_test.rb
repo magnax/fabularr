@@ -8,17 +8,8 @@ class LocationsEnterTest < ActionDispatch::IntegrationTest
     @character = create(:character, user: @user, name: 'Magnus')
   end
 
-  def sign_in
-    visit login_path
-
-    fill_in 'E-mail', with: @user.email
-    fill_in 'Password', with: @user.password
-
-    click_on 'Login'
-  end
-
   test 'preserves old events and adds new' do
-    sign_in
+    sign_in(@user)
     building = create(:location, :building, parent_location: @character.location)
     create_list(:event, 3, location: @character.location, receiver_character: @character)
 

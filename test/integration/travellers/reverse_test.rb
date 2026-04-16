@@ -9,17 +9,9 @@ class TravellersStopTest < ActionDispatch::IntegrationTest
                                     location: nil, coords: { x: 100, y: 100 })
   end
 
-  def sign_in
-    visit new_session_url
-    fill_in 'E-mail', with: @user.email
-    fill_in 'Password', with: @user.password
-
-    click_on 'Login'
-  end
-
   test 'reverses travel' do
     traveller = create(:traveller, subject: @character, speed: 100, direction: 200)
-    sign_in
+    sign_in(@user)
     click_link 'Magnus'
     click_link 'Reverse'
 

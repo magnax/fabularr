@@ -29,6 +29,14 @@ class ActionDispatch::IntegrationTest
   def host
     @host ||= Capybara.default_host
   end
+
+  def sign_in(user)
+    visit new_session_url
+    fill_in 'E-mail', with: user.email
+    fill_in 'Password', with: user.password
+
+    click_on 'Login'
+  end
 end
 
 module ActiveSupport

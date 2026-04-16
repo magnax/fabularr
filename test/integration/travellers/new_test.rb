@@ -9,17 +9,9 @@ class TravellersNewTest < ActionDispatch::IntegrationTest
                                     location: nil, coords: { x: 100, y: 100 })
   end
 
-  def sign_in
-    visit new_session_url
-    fill_in 'E-mail', with: @user.email
-    fill_in 'Password', with: @user.password
-
-    click_on 'Login'
-  end
-
   test 'travellers info' do
     traveller = create(:traveller, subject: @character)
-    sign_in
+    sign_in(@user)
     click_link 'Magnus'
 
     assert_content 'Travelling from unnamed place'

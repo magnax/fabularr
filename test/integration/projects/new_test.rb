@@ -6,16 +6,8 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
   def setup
     @user = create(:user)
     @character = create(:character, name: 'Magnus', user: @user)
-    sign_in
+    sign_in(@user)
     click_link 'Magnus'
-  end
-
-  def sign_in
-    visit new_session_url
-    fill_in 'E-mail', with: @user.email
-    fill_in 'Password', with: @user.password
-
-    click_on 'Login'
   end
 
   test 'no recipes available' do
