@@ -10,19 +10,25 @@ class TravellersController < ApplicationController
   end
 
   def update
-    Travellers::UpdateService.call(current_character, traveller_params.merge(id: params[:id]))
+    Travellers::UpdateService.call(
+      current_character, traveller_params.merge(id: params[:id])
+    )
 
     redirect_to events_path
   end
 
   def stop
-    Travellers::UpdateService.call(current_character, { id: params[:traveller_id], order: 'stop' })
+    Travellers::UpdateService.call(
+      current_character, { id: params[:traveller_id], order: 'stop' }
+    )
 
     redirect_to events_path
   end
 
   def reverse
-    Travellers::UpdateService.call(current_character, { id: params[:traveller_id], order: 'reverse' })
+    Travellers::UpdateService.call(
+      current_character, { id: params[:traveller_id], order: 'reverse' }
+    )
 
     redirect_to events_path
   end

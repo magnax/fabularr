@@ -28,6 +28,7 @@ Fabularr::Application.routes.draw do
     resources :locations do
       get :enter
       get :name
+      get :examine, on: :collection
       resources :location_resources, only: :new
     end
     resources :maps, only: :index

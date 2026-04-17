@@ -16,5 +16,7 @@ class TravellersStopTest < ActionDispatch::IntegrationTest
     click_link 'Stop'
 
     assert_equal 0, traveller.reload.speed
+    assert_no_link 'Stop'
+    assert_link 'Examine location', href: "#{host}/en/locations/examine"
   end
 end

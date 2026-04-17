@@ -4,5 +4,9 @@
   Direction: <%= form.text_field :direction, value: travel_info[:direction], style: 'width:3em;' %>
   <%= form.submit 'Set' %>
 <% end %>
-<%= link_to 'Stop', traveller_stop_url(travel_info[:traveller_id]) %>
+<% if travel_info[:speed].zero? %>
+  <%= link_to t('views.travel_info.examine'), examine_locations_url %>
+<% else %>
+  <%= link_to 'Stop', traveller_stop_url(travel_info[:traveller_id]) %>
+<% end %>
 <%= link_to 'Reverse', traveller_reverse_url(travel_info[:traveller_id]) %>
