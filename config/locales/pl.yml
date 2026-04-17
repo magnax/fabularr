@@ -145,6 +145,7 @@ pl:
     leave: Opuść projekt
     name:
       build: produkcja
+      create_location: tworzenie nowej osady
       discover_resource: odkrywanie nowych zasobów
       started_by: 'zaczęty przez: '
     nothing_here: Nie ma żadnych projektów

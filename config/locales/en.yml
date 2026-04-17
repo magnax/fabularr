@@ -145,6 +145,7 @@ en:
     leave: Leave project
     name:
       build: building
+      create_location: creating new location
       discover_resource: discovering new resources
       started_by: 'started by: '
     nothing_here: No projects

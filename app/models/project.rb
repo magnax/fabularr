@@ -62,7 +62,7 @@ class Project < ApplicationRecord
         tool_name = I18n.t("buildings.#{recipe.key}")
       end
       "#{type_name}: #{tool_name}"
-    when ProjectType::DISCOVER_RESOURCE
+    when ProjectType::DISCOVER_RESOURCE, ProjectType::CREATE_LOCATION
       type_name
     end
   end

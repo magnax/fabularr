@@ -14,5 +14,6 @@
 class ProjectType < ApplicationRecord
   BUILD = 'build'
   COLLECT = 'collect'
+  CREATE_LOCATION = 'create_location'
   DISCOVER_RESOURCE = 'discover_resource'
 end

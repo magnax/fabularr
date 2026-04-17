@@ -7,6 +7,7 @@ module Projects
     TYPE_CLASSES = {
       'build' => 'Create::Build',
       'collect' => 'Create::Collect',
+      'create_location' => 'Create::CreateLocation',
       'discover_resource' => 'Create::DiscoverResource'
     }.freeze
 
