@@ -88,6 +88,8 @@ en:
       character_name_changed: Successfully changed character name
       character_name_created: Successfully created new character name
     notice:
+      character_not_standing: You have to stand still
+      character_not_travelling: You have to travel to do this
       please_login: Please login!
       please_choose_char: Please choose one character
   genders:
@@ -257,6 +259,7 @@ en:
       collect: Collect
       collect_info: One character can collect only %{amount} grams in one day. Turns number will be rounded up. The final amount can differ by max 20% depending on provided amount.
       collect_info_tool: If you have %{key}, you can collect %{amount} grams in one day.
+      create_location: Create new location!
       discover: Discover
       start: Start project
     recipes:

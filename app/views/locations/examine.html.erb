@@ -1,0 +1,4 @@
+<%= form_for :project, url: projects_url, method: 'POST' do |form| %>
+  <%= form.hidden_field :project_type_id, value: @project_type_id %>
+  <%= form.submit t('views.projects.create_location') %>
+<% end %>

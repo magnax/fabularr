@@ -88,6 +88,8 @@ pl:
       character_name_changed: Zmieniono nazwę postaci
       character_name_created: Utworzono nazwę dla postaci
     notice:
+      character_not_standing: Musisz być zatrzymany
+      character_not_travelling: Musisz podróżować
       please_login: Zaloguj się, proszę
       please_choose_char: Musisz najpierw wybrać którąś postać
   genders:
@@ -257,6 +259,7 @@ pl:
       collect: Zbieraj
       collect_info: W ciągu jednego dnia jedna postać może zebrać tylko %{amount} gram. Liczba tur będzie zaokrąglona w górę. To ile otrzymasz na koniec podlega losowym odchyłom (maks. 20%) od ilości jaką podasz.
       collect_info_tool: Jeśli masz %{key}, możesz zebrać %{amount} gram jednego dnia.
+      create_location: Utwórz nową lokację!
       discover: Odkrywaj
       start: Rozpocznij projekt
     recipes:
