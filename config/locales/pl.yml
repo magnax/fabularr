@@ -139,6 +139,7 @@ pl:
   project_types:
     build: produkcja
     collect: zbieranie
+    create_location: zakładanie nowej osady
     discover_resource: Poszukiwanie nowych zasobów
   projects:
     join: Dołącz do projektu

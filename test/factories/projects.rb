@@ -37,7 +37,7 @@ FactoryBot.define do
     amount { 1 }
     unit { 'g' }
 
-    %i[discover_resource collect build].each do |key|
+    %i[discover_resource collect create_location build].each do |key|
       trait key do
         project_type { FactoryBot.create(:project_type, key: key.to_s) }
       end

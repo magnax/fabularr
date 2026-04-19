@@ -43,4 +43,26 @@ class EventsShowServiceTest < ActiveSupport::TestCase
 
     assert_equal [@character.id, nearby_char.id].sort, res[:characters].pluck(:id).sort
   end
+
+  test 'show create_location project after starting' do
+    @character.update!(location: nil, coords: { x: 100, y: 100 })
+    project = create(:project, :create_location, starting_character: @character)
+
+    res = call_service
+
+    assert_equal [project.id], res[:projects].pluck(:id)
+  end
+
+  test 'show projects from nearby character' do
+    @character.update!(location: nil, coords: { x: 100, y: 100 })
+    near_character = create(:character, location: nil, coords: { x: 100, y: 101 })
+    far_character = create(:character, location: nil, coords: { x: 105, y: 101 })
+    project = create(:project, :create_location, starting_character: near_character)
+    create(:project, :create_location, starting_character: far_character)
+
+    res = call_service
+
+    assert_equal 1, res[:projects].length
+    assert_equal [project.id], res[:projects].pluck(:id)
+  end
 end

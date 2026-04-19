@@ -28,6 +28,7 @@ class ProjectsCreateLocationCreateServiceTest < ActiveSupport::TestCase
     assert_equal 0, project.elapsed
     assert project.ready
     assert_equal 'Creating new location', project.short_name
-    assert_equal "Creating new location, started by: #{@current_character.name}", project.name(@current_character)
+    assert_equal "Creating new location, started by: #{@current_character.name}",
+                 project.name(@current_character)
   end
 end

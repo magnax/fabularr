@@ -15,7 +15,7 @@ module Events
         items: items,
         location_resources: location&.location_resources,
         buildings: location&.buildings,
-        projects: location&.projects&.pending&.includes(:starting_character, :project_type),
+        projects: projects,
         travel_info: travel_info
       }
     end
@@ -29,6 +29,16 @@ module Events
         resources: location&.location_objects&.includes(:subject)&.resource,
         items: location&.location_objects&.item
       }
+    end
+
+    def projects
+      if @character.location
+        location&.projects&.pending&.includes(:starting_character, :project_type)
+      else
+        Project.pending.joins(:starting_character).where(starting_character: { location_id: nil }).where(
+          "length(lseg(starting_character.coords::point, point(#{@character.x}, #{@character.y}))) < ?", Character::MIN_HEARABLE_DISTANCE
+        )
+      end
     end
 
     def travel_info

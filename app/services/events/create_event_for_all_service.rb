@@ -2,24 +2,33 @@
 
 module Events
   class CreateEventForAllService < ApplicationService
-    def initialize(location, body, except: nil)
-      @location = location
+    def initialize(characters, body, except: nil)
+      @characters = characters
       @body = body
       @except = except
+      @locations = []
     end
 
     def call
-      @location.characters.each do |ch|
+      @characters.each do |ch|
         next if ch == @except
 
-        @location.events.create!(
+        Event.create!(
           character_id: nil,
           receiver_character_id: ch.id,
           body: @body
         )
+
+        if ch.location
+          @locations << ch.location
+        else
+          ActionCable.server.broadcast("char_#{ch.id}", { type: 'event', body: @body })
+        end
       end
 
-      ActionCable.server.broadcast("location_#{@location.id}", { type: 'event', body: @body })
+      @locations.uniq.each do |location|
+        ActionCable.server.broadcast("location_#{location.id}", { type: 'event', body: @body })
+      end
     end
   end
 end

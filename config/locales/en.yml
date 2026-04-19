@@ -139,6 +139,7 @@ en:
   project_types:
     build: building
     collect: collecting
+    create_location: creating new location
     discover_resource: Discovering new resources
   projects:
     join: Join project

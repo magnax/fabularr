@@ -32,7 +32,7 @@ module Projects
     end
 
     def create_creator_event!
-      location.events.create!(
+      Event.create!(
         character_id: nil,
         receiver_character_id: @character.id,
         body: I18n.t('events.projects.starting_me', info: project_info)
@@ -44,7 +44,7 @@ module Projects
         'events.projects.starting_other',
         character_link: @character.char_id
       )
-      Events::CreateEventForAllService.call(location, body, except: @character)
+      Events::CreateEventForAllService.call(location.characters, body, except: @character)
     end
 
     def location
