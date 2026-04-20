@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      sign_in @user
+      start_new_session_for @user
       flash[:success] = I18n.t 'flash.success.welcome'
       redirect_to list_path
     else

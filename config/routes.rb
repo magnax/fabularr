@@ -43,7 +43,7 @@ Fabularr::Application.routes.draw do
       get :stop
       get :reverse
     end
-    resources :users
+    resources :users, only: %i[create edit update]
 
     match '/register', to: 'users#new', via: 'get'
     match '/login', to: 'sessions#new', via: 'get'
