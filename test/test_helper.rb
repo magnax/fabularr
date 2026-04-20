@@ -51,16 +51,22 @@ module ActiveSupport
 
     DatabaseCleaner.strategy = :transaction
 
-    def login(character = nil)
+    def login(user, character = nil)
       ApplicationController.any_instance
                            .expects(:require_authentication)
                            .returns(true)
-      return if character.blank?
+      if character.blank?
+        ApplicationController.any_instance
+                             .expects(:current_user)
+                             .times(1..10)
+                             .returns(user || create(:user))
+      else
 
-      ApplicationController.any_instance
-                           .expects(:current_character)
-                           .times(1..10)
-                           .returns(character)
+        ApplicationController.any_instance
+                             .expects(:current_character)
+                             .times(1..10)
+                             .returns(character)
+      end
     end
   end
 end

@@ -243,7 +243,7 @@ en:
       register: Register
     locations:
       name:
-        create: 'Create'
+        create: 'Rename'
         current_name: 'Current name:'
         new_name: 'New name:'
     location_objects:

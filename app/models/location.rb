@@ -46,11 +46,9 @@ class Location < ApplicationRecord
   scope :random, -> { order('RANDOM()').limit(1) }
 
   def visible_characters
-    characters
-  end
-
-  def hearable_characters
-    # not final implementation!
+    # not final implementation, there will be probably some refinement to
+    # distinguish between visible and hearable characters
+    # (ie. inside/outside locations)
     characters
   end
 
@@ -64,10 +62,6 @@ class Location < ApplicationRecord
     return remembered_name unless parent && parent_location.present?
 
     "#{parent_name} (#{remembered_name})"
-  end
-
-  def display_name_links
-    name
   end
 
   def default_name

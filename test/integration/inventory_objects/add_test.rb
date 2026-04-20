@@ -8,7 +8,7 @@ class InventoryObjectsDropTest < ActionDispatch::IntegrationTest
     user = create(:user)
     @character = create(:character, user: user, location: @location)
 
-    login(@character)
+    login(user, @character)
   end
 
   test 'show add to project page' do

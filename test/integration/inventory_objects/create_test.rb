@@ -7,7 +7,7 @@ class InventoryObjectsCreateTest < ActionDispatch::IntegrationTest
     @user = create(:user)
     @location = create(:location)
     @character = create(:character, location: @location, user: @user)
-    login(@character)
+    login(@user, @character)
   end
 
   test 'show page' do

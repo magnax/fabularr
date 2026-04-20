@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class CharacterNameTest < ActionDispatch::IntegrationTest
+class CharactersNameTest < ActionDispatch::IntegrationTest
   def setup
     @user = create(:user)
     @current_character = create(:character, user: @user, name: 'Magnus')

@@ -8,7 +8,7 @@ class LocationObjectsTakeItemTest < ActionDispatch::IntegrationTest
     user = create(:user)
     @character = create(:character, user: user, location: @location)
 
-    login(@character)
+    login(user, @character)
   end
 
   def take_item_route(id)

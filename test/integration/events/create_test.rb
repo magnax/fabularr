@@ -9,7 +9,7 @@ class EventsCreateTest < ActionDispatch::IntegrationTest
     @character = create(:character, user: user, location: @location)
     @other_character = create(:character, location: @location)
 
-    login(@character)
+    login(user, @character)
   end
 
   def events_route

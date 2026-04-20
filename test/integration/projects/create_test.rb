@@ -6,7 +6,7 @@ class ProjectsCreateTest < ActionDispatch::IntegrationTest
   def setup
     @user = create(:user)
     @character = create(:character, name: 'Magnus', user: @user)
-    login(@character)
+    login(@user, @character)
   end
 
   test 'create project' do
