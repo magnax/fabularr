@@ -2,8 +2,9 @@
   <%= link_to t('views.layout.homepage_link'), root_url %>
 
   <% if signed_in? %>
-  	<%= link_to t('views.layout.nav.profile'), list_url %>
+  	<%= link_to t('views.layout.nav.profile'), edit_user_url(@current_user.id) %>
   	<%= link_to t('views.layout.nav.settings_link'), '#' %>
+		<%= link_to t('views.layout.back_to_char_list'), list_url %>
   	<%= link_to t('views.layout.logout'), logout_url, method: "delete" %>
   <% else %>
   	<%= link_to t('views.layout.login'), login_url %>

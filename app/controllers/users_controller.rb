@@ -29,12 +29,10 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-    if @user.update(user_params)
-      flash[:success] = I18n.t 'flash.success.profile_saved'
-      redirect_to list_path
-    else
-      render 'edit'
-    end
+    @user.update!(user_params)
+    flash[:success] = I18n.t 'flash.success.profile_saved'
+
+    redirect_to list_path
   end
 
   private
@@ -43,12 +41,12 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
-  def signed_in_user
-    redirect_to login_url, notice: I18n.t('flash.notice.please_login') unless signed_in?
-  end
+  # def signed_in_user
+  #   redirect_to login_url, notice: I18n.t('flash.notice.please_login') unless signed_in?
+  # end
 
   def correct_user
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
     redirect_to(root_url) unless current_user == @user
   end
 end

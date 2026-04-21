@@ -36,6 +36,12 @@ pl:
               invalid: nieprawidłowa
             name:
               blank: musi być podane
+        user:
+          attributes:
+            password:
+              too_short: za krótkie (minimum to 6 znaków)
+            password_confirmation:
+              confirmation: musi być takie jak hasło
   buildings:
     wood_shack: Drewniana chata
   events:
@@ -283,6 +289,8 @@ pl:
         direction: 'Kierunek w stopniach (0-360): '
         go: Wyrusz teraz!
     users:
+      edit:
+        save: Zapisz
       new:
         create: Utwórz konto
         title: Rejestracja nowego użytkownika
