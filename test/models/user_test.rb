@@ -81,7 +81,7 @@ class UserTest < ActiveSupport::TestCase
     user = build(:user, password: 'abc123', password_confirmation: '321cba')
 
     assert_not user.valid?
-    assert_includes user.errors[:password_confirmation], "doesn't match Password"
+    assert_includes user.errors[:password_confirmation], 'should match password'
   end
 
   test 'authenticate with valid password' do

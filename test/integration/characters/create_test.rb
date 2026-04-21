@@ -40,4 +40,36 @@ class CharactersCreateTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to '/en/list'
   end
+
+  test 'invalid data with redirect' do
+    params = {
+      character: {
+        name: '',
+        gender: ''
+      }
+    }
+
+    assert_difference -> { Character.count } => 0 do
+      post '/en/characters', params: params
+    end
+
+    assert_redirected_to '/?locale=en'
+  end
+
+  test 'invalid data with render' do
+    ApplicationController.any_instance.expects(:render_new?).returns(true)
+
+    params = {
+      character: {
+        name: '',
+        gender: ''
+      }
+    }
+
+    assert_difference -> { Character.count } => 0 do
+      post '/en/characters', params: params
+    end
+
+    assert_response :ok
+  end
 end

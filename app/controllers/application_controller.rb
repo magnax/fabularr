@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
 
   def flash_errors_and_redirect(obj)
     flash[:errors] = obj.errors.full_messages.join("\n")
-    redirect_to request.referer, params: request.params
+    redirect_to request.referer || root_url, params: request.params
   end
 
   def default_url_options

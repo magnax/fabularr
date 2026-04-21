@@ -32,4 +32,23 @@ class InventoryObjectsUpdateTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to '/en/events'
   end
+
+  test 'invalid form data' do
+    stone = create(:resource, key: 'stone')
+    inv_object = create(:inventory_object, character: @character,
+                                           subject: stone, amount: 200)
+
+    params = {
+      subject_id: stone.id,
+      subject_type: 'Resource',
+      amount: '50',
+      project_id: 0
+    }
+
+    put "/inventory_objects/#{inv_object.id}", params: params
+
+    assert_response :found
+
+    assert_redirected_to '/?locale=en'
+  end
 end
