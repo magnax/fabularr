@@ -10,7 +10,9 @@ module Projects
       Projects::Dispatcher.call(@project_id)
       update_workers
       broadcast_to_location
-      return unless project.starting_character.location == project.location
+
+      return unless project.location.nil? ||
+                    project.starting_character.location == project.location
 
       update_starting_character
     end
@@ -20,23 +22,36 @@ module Projects
     def update_workers
       project.workers.active.find_each do |worker|
         worker.update!(left_at: DateTime.current)
-        event = Event.create!(
-          body: I18n.t('events.projects.ended'),
-          location: project.location,
-          receiver_character: worker.character
-        )
+        next if worker.character == project.starting_character
 
-        broadcast_to_receiver(event.id, worker.character.id)
+        create_event_and_broadcast!(worker)
       end
+    end
+
+    def create_event_and_broadcast!(worker)
+      event = Event.create!(
+        body: I18n.t('events.projects.ended'),
+        location: project.location,
+        receiver_character: worker.character
+      )
+      broadcast_to_receiver(event.id, worker.character.id)
     end
 
     def update_starting_character
       event = Event.create!(
-        body: I18n.t('events.projects.my_ended', project_info: project_info),
+        body: body,
         location: project.location,
         receiver_character: project.starting_character
       )
       broadcast_to_receiver(event.id, project.starting_character.id)
+    end
+
+    def body
+      if project.project_type.key == ProjectType::CREATE_LOCATION
+        I18n.t('events.projects.create_location_ended', location_info: location_info)
+      else
+        I18n.t('events.projects.my_ended', project_info: project_info)
+      end
     end
 
     def broadcast_to_receiver(event_id, receiver_id)
@@ -53,6 +68,12 @@ module Projects
 
     def channel
       @channel ||= "location_#{project.location_id}"
+    end
+
+    def location_info
+      @location_info ||= I18n.t(
+        "locations.#{location_description.subject.location_type.key}"
+      )
     end
 
     def project_info
@@ -88,6 +109,10 @@ module Projects
 
     def resource_description
       @resource_description ||= project.project_descriptions.first
+    end
+
+    def location_description
+      @location_description ||= project.project_descriptions.location.first
     end
 
     def project

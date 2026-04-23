@@ -68,6 +68,7 @@ en:
     people:
       spawn_info: "You see a new person, it's %{character_link}."
     projects:
+      create_location_ended: New location (%{location_info}) is successfully created
       ended: Project has ended.
       my_ended: Project started by you has just ended. %{project_info}
       starting_me: "You're starting new project: %{info}."

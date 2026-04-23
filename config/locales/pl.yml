@@ -68,6 +68,7 @@ pl:
     people:
       spawn_info: Widzisz nową osobę, to %{character_link}.
     projects:
+      create_location_ended: Nowa osada (%{location_info}) została utworzona
       ended: Projekt zakończył się
       my_ended: Projekt rozpoczęty przez Ciebie właśnie się zakończył. %{project_info}
       starting_me: "Rozpoczynasz nowy projekt: %{info}."

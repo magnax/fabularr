@@ -41,6 +41,7 @@ class Project < ApplicationRecord
     'build' => 'Build',
     'building' => 'Building',
     'collect' => 'Collect',
+    'create_location' => 'CreateLocation',
     'discover_resource' => 'DiscoverResource'
   }.freeze
 
