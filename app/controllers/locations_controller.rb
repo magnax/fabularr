@@ -11,7 +11,7 @@ class LocationsController < ApplicationController
   end
 
   def examine
-    @project_type_id = ProjectType.find_by(key: 'create_location').id
+    render locals: Locations::ExamineShowService.call(current_character)
   end
 
   def name

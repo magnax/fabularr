@@ -1,5 +1,13 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: settings
+#
+#  id    :bigint           not null, primary key
+#  key   :string
+#  value :string
+#
 require 'test_helper'
 
 class SettingTest < ActiveSupport::TestCase

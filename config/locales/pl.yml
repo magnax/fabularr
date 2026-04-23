@@ -249,6 +249,9 @@ pl:
         settings_link: Ustawienia konta
       register: Zarejestruj się
     locations:
+      examine:
+        cannot_create: Nie możesz utworzyć osady - już istnieje projekt na jej tworzenie
+        location_type: 'Typ terenu: %{type}'
       name:
         create: 'Zmień nazwę'
         current_name: 'Obecna nazwa:'

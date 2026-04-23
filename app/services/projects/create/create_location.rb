@@ -2,7 +2,26 @@
 
 module Projects
   class Create::CreateLocation < Projects::Create::Base
+    def call
+      super
+
+      create_description!
+    end
+
     private
+
+    def create_description!
+      @project.project_descriptions.create!(
+        description_type: ProjectDescription::LOCATION,
+        subject: nil,
+        metadata: {
+          coords: {
+            x: @character.x,
+            y: @character.y
+          }
+        }
+      )
+    end
 
     def project_attributes
       project_base_attributes.merge(

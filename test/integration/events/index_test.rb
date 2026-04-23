@@ -51,6 +51,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
                 href: "#{host}/en/locations/#{fabular_city.id}/location_resources/new")
     assert_link('Build menu', href: "#{host}/en/recipes")
     assert_link('Inventory', href: "#{host}/en/inventory_objects")
+    assert_selector 'section#map'
   end
 
   test 'link to collect resource on events page' do

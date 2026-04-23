@@ -249,6 +249,9 @@ en:
         settings_link: Account settings
       register: Register
     locations:
+      examine:
+        cannot_create: Cannot create location - there is already project for that
+        location_type: 'Location type: %{type}'
       name:
         create: 'Rename'
         current_name: 'Current name:'

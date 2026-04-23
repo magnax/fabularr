@@ -12,8 +12,11 @@ module ProjectTypes
                                   coords: character.coords)
       character.update!(location: location)
       character.traveller.destroy
-      project.project_descriptions.create!(
-        description_type: ProjectDescription::LOCATION, subject: location
+      pd = project.project_descriptions.where(
+        description_type: ProjectDescription::LOCATION
+      ).first_or_create
+      pd.update!(
+        subject: location
       )
     end
 
