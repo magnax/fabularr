@@ -8,7 +8,7 @@
 #  amount           :float
 #  amount_needed    :float
 #  description_type :string
-#  metadata         :json
+#  metadata         :jsonb
 #  subject_type     :string
 #  unit             :string
 #  created_at       :datetime         not null
