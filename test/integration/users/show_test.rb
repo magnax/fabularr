@@ -20,4 +20,12 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     visit list_url
     assert_selector 'h1', text: "Hello #{@user.email}"
   end
+
+  test 'proper gender info for character' do
+    create(:character, user: @user, gender: 'M')
+
+    visit list_url
+
+    assert_selector 'i.fa-mars'
+  end
 end

@@ -4,7 +4,7 @@
   <table class="characters">
     <% characters.each do |character| %>
       <tr>
-        <%= render character %>
+        <%= render 'characters/character', character: character %>
       </tr>
     <% end %>
   </table>

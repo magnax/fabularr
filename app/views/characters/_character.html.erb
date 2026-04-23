@@ -1,23 +1,23 @@
   <td>
-		<%= link_to character.name_for(character), character_set_url(character.id) %>
+		<%= link_to character[:name], character_set_url(character[:id]) %>
 	</td>
 	<td>
-		<%= fa_icon(character.male? ? 'mars' : 'venus', title: t("genders.#{character.gender}")) %>
+		<%= fa_icon(character[:male] ? 'mars' : 'venus', title: t("genders.#{character[:gender]}")) %>
 	</td>
 	<td>
-		<% if character.travelling? %>
-			Travelling
+		<% if character[:travel_info].present? %>
+			<%= t('views.events.index.travel_info_html', location_link: link_to(character[:travel_info][:location_name], location_name_url(character[:travel_info][:location_id]))) %>
 		<% else %>
-			<%= character.location.display_name(character, parent: true) %>
+			<%= character[:location_name] %>
 		<% end %>
 	</td>
 	<td>
-		<% if character.location.present? %>
-			<%= character.location.location_type.key %>
+		<% if character[:location_type].present? %>
+			<%= character[:location_type] %>
 		<% end %>
 	</td>
 	<td>
-		<% if character.project_info %>
-			<a title="<%= character.project_info[:name] %>"><%= fa_icon('cogs') %></a> (P <%= character.project_info[:percent]%>%)</a>
+		<% if character[:project_info] %>
+			<a title="<%= character[:project_info][:name] %>"><%= fa_icon('cogs') %></a> (P <%= character[:project_info][:percent]%>%)</a>
 		<% end %>
 	</td>
