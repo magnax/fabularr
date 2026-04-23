@@ -22,8 +22,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-    @characters = @user.characters.includes(location: %i[location_type parent_location])
+    render locals: Users::ShowService.call(current_user)
   end
 
   def edit; end
@@ -40,10 +39,6 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
-
-  # def signed_in_user
-  #   redirect_to login_url, notice: I18n.t('flash.notice.please_login') unless signed_in?
-  # end
 
   def correct_user
     @user = User.find_by(id: params[:id])

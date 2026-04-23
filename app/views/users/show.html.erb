@@ -1,8 +1,8 @@
-<h1><%= t 'hello' %> <%= @user.email %></h1>
-<% if @characters.any? %>
-  <h3><%= t 'views.users.show.characters' %> (<%= @characters.count %>)</h3>
+<h1><%= t 'hello' %> <%= user.email %></h1>
+<% if characters.any? %>
+  <h3><%= t 'views.users.show.characters' %> (<%= characters.count %>)</h3>
   <table class="characters">
-    <% @characters.each do |character| %>
+    <% characters.each do |character| %>
       <tr>
         <%= render character %>
       </tr>
@@ -11,7 +11,7 @@
 <% else %>
   <%= t 'views.users.show.no_chars' %>
 <% end %>
-<% if @user.can_create_character? %>
+<% if user.can_create_character? %>
 	<%= link_to I18n.t('views.users.show.create_char'), new_character_url %>
 <% else %>
 	<%= t 'views.users.show.cannot_create_char' %>
