@@ -9,9 +9,8 @@ module ProjectTypes
     def call
       location = Location.create!(location_type: location_type,
                                   location_class: LocationClass.find_by(key: 'town'),
-                                  coords: character.coords)
-      character.update!(location: location)
-      character.traveller.destroy
+                                  coords: starting_character.coords)
+      update_travellers!(location)
       pd = project.project_descriptions.where(
         description_type: ProjectDescription::LOCATION
       ).first_or_create
@@ -27,11 +26,40 @@ module ProjectTypes
     end
 
     def position
-      [character.x, character.y]
+      [starting_character.x, starting_character.y]
     end
 
-    def character
-      @character ||= project.starting_character
+    def update_travellers!(location)
+      travellers.each do |traveller|
+        character = traveller.subject
+        character.update!(location: location)
+        character.traveller.destroy
+        next if character == starting_character
+
+        create_event_and_broadcast!(character, location)
+      end
+    end
+
+    def create_event_and_broadcast!(character)
+      event = Event.create!(
+        receiver_character: character,
+        body: I18n.t('events.locations.arrive_created')
+      )
+      ActionCable.server.broadcast("character_#{character.id}", { type: 'event', event_id: event.id })
+    end
+
+    def travellers
+      @travellers ||=
+        Traveller.joins('inner join characters ch on ch.id = travellers.subject_id')
+                 .where(
+                   "length(
+                    lseg(ch.coords::point, point(#{starting_character.x}, #{starting_character.y}))
+                  ) < ?", Character::MIN_HEARABLE_DISTANCE
+                 )
+    end
+
+    def starting_character
+      @starting_character ||= project.starting_character
     end
 
     def project

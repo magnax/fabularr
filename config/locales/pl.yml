@@ -65,6 +65,8 @@ pl:
         one: W pobliżu widzisz jedną osobę.
         other: W pobliżu widzisz %{count} innych osób.
       projects_info: Widzisz %{ongoing} rozpoczętych projektów lub innych czynności, z czego nad %{working} ktoś obecnie pracuje.
+    locations:
+      arrive_created: Przybyłeś do nowo utworzonej osady
     people:
       spawn_info: Widzisz nową osobę, to %{character_link}.
     projects:

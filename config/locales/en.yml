@@ -65,6 +65,8 @@ en:
         one: You see one other person nearby.
         other: You see %{count} other people nearby.
       projects_info: You see %{ongoing} ongoing projects, %{working} of which someone is currently working on.
+    locations:
+      arrive_created: You arrived at newly created town
     people:
       spawn_info: "You see a new person, it's %{character_link}."
     projects:
