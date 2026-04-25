@@ -6,6 +6,7 @@
 #
 #  id              :integer          not null, primary key
 #  email           :string
+#  god             :boolean          default(FALSE)
 #  password_digest :string
 #  remember_token  :string
 #  created_at      :datetime
