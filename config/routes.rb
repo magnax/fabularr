@@ -57,5 +57,7 @@ Fabularr::Application.routes.draw do
 
   namespace :admin do
     get '/', to: 'index#index'
+
+    resources :characters
   end
 end

@@ -1,0 +1,21 @@
+<h2>Characters (<%= characters.length %>)</h2>
+<table>
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>User ID</td>
+      <td>Gender</td>
+      <td>Coords</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% characters.each do |character| %>
+      <tr>
+        <td><%= character.id %></td>
+        <td><%= character.user_id %></td>
+        <td><%= character.gender %></td>
+        <td><%= character.coords.present? ? "(#{character.x}, #{character.y})" : '-' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
