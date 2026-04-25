@@ -1,0 +1,17 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#breadcrumbs {
+  border-bottom: solid 1px lightgrey;
+}
+
+#menu {
+  float: left;
+  min-width: 120px;
+  border-right: solid 1px lightgrey;
+}
+
+#main {
+  float: left;
+}
