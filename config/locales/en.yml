@@ -241,6 +241,7 @@ en:
       max_drop: You can drop max.
       title: Inventory
     layout:
+      admin: Admin
       back_to_char_list: Characters list
       events_link: Back to events
       homepage_link: Home

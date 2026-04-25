@@ -241,6 +241,7 @@ pl:
       max_drop: Możesz upuścić
       title: Inwentarz
     layout:
+      admin: Admin
       back_to_char_list: Lista postaci
       events_link: Powrót do zdarzeń
       homepage_link: Główna

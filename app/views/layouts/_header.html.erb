@@ -6,6 +6,9 @@
   	<%= link_to t('views.layout.nav.settings_link'), '#' %>
 		<%= link_to t('views.layout.back_to_char_list'), list_url %>
   	<%= link_to t('views.layout.logout'), logout_url, method: "delete" %>
+		<% if @current_user.god %>
+  		<%= link_to t('views.layout.admin'), admin_url %>
+		<% end %>
   <% else %>
   	<%= link_to t('views.layout.login'), login_url %>
   	<%= link_to t('views.layout.register'), register_url %>

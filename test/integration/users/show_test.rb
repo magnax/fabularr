@@ -28,4 +28,12 @@ class UsersShowTest < ActionDispatch::IntegrationTest
 
     assert_selector 'i.fa-mars'
   end
+
+  test 'show admin menu when logged as admin' do
+    @user.update!(god: true)
+
+    visit list_url
+
+    assert_link 'Admin', href: "#{host}/admin?locale=en"
+  end
 end

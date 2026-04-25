@@ -54,4 +54,8 @@ Fabularr::Application.routes.draw do
       resources :events, only: :show
     end
   end
+
+  namespace :admin do
+    get '/', to: 'index#index'
+  end
 end
