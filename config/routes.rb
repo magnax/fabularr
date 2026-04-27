@@ -59,5 +59,6 @@ Fabularr::Application.routes.draw do
     get '/', to: 'index#index'
 
     resources :characters
+    resources :locations
   end
 end

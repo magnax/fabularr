@@ -4,6 +4,7 @@
     <tr>
       <td>ID</td>
       <td>User ID</td>
+      <td>Location ID</td>
       <td>Gender</td>
       <td>Coords</td>
     </tr>
@@ -13,8 +14,9 @@
       <tr>
         <td><%= character.id %></td>
         <td><%= character.user_id %></td>
+        <td><%= link_to character.location_id, admin_location_url(character.location_id) %></td>
         <td><%= character.gender %></td>
-        <td><%= character.coords.present? ? "(#{character.x}, #{character.y})" : '-' %></td>
+        <td><%= coords(character) %></td>
       </tr>
     <% end %>
   </tbody>
