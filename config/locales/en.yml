@@ -220,6 +220,7 @@ en:
       discover_new_resource: Discover new resource
       events: Events
       index:
+        build_road: Build a road
         build_menu: Build menu
         buildings_here: Buildings & vehicles
         carrying: Carrying
@@ -276,6 +277,9 @@ en:
       collect_info_tool: If you have %{key}, you can collect %{amount} grams in one day.
       create_location: Create new location!
       discover: Discover
+      new:
+        road:
+          impossible: You cannot build any new road at the moment
       start: Start project
     recipes:
       index:

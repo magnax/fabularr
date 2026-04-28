@@ -101,4 +101,14 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     assert_link 'unnamed place', href: "#{host}/en/locations/#{fabular_city.id}/name"
     assert_link 'Town Hall', href: "#{host}/en/locations/#{town_hall.id}/name"
   end
+
+  test 'show road building link' do
+    fabular_city = create(:location, name: 'Fabular City')
+    create(:character, name: 'Magnus', location: fabular_city, user: @user)
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_link 'Build a road', href: "#{host}/en/projects/new/road/#{fabular_city.id}"
+  end
 end

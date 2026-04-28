@@ -22,6 +22,9 @@
     <div>
       <%= link_to t('views.events.index.build_menu'), recipes_url %>
     </div>
+    <div>
+      <%= link_to t('views.events.index.build_road'), new_road_projects_url(location_id: character.location_id) %>
+    </div>
   <% end %>
   <% unless character.travelling? %>
     <div>

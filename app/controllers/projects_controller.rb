@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   before_action :current_character_set
 
   def new
-    @project_info = Projects::ProjectInfoService.call(project_info_params)
+    render locals: Projects::ProjectInfoService.call(project_info_params).merge(type: params[:type])
   end
 
   def create
@@ -34,6 +34,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_info_params
-    params.permit(:location_resource_id, :type)
+    params.permit(:type, :location_id, :location_resource_id)
   end
 end

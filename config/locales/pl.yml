@@ -220,6 +220,7 @@ pl:
       discover_new_resource: Odkryj nowy zasób
       events: Zdarzenia
       index:
+        build_road: Buduj drogę
         build_menu: Menu budowania
         buildings_here: Budynki i pojazdy
         carrying: Dźwiga
@@ -276,6 +277,9 @@ pl:
       collect_info_tool: Jeśli masz %{key}, możesz zebrać %{amount} gram jednego dnia.
       create_location: Utwórz nową lokację!
       discover: Odkrywaj
+      new:
+        road:
+          impossible: W tej chwili nie możesz wybudować żadnej nowej drogi
       start: Rozpocznij projekt
     recipes:
       index:

@@ -36,7 +36,7 @@ module ProjectTypes
         character.traveller.destroy
         next if character == starting_character
 
-        create_event_and_broadcast!(character, location)
+        create_event_and_broadcast!(character)
       end
     end
 

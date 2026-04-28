@@ -1,15 +1,3 @@
 <p>Start project</p>
 
-<p><%= t('views.projects.collect_info', amount: @project_info[:amount].to_i) %></p>
-<% @project_info[:tools].each do |tool| %>
-  <p>
-    <%= t('views.projects.collect_info_tool', key: tool[:key], amount: tool[:amount].to_i) %></p>
-
-<% end %>
-
-<%= form_for :project, url: projects_url, method: 'POST' do |form| %>
-  <%= form.hidden_field :project_type_id, value: @project_info[:project_type_id] %>
-  <%= form.hidden_field :location_resource_id, value: @project_info[:location_resource].id %>
-  <%= form.text_field :amount %>
-  <%= form.submit t('views.projects.start') %>
-<% end %>
+<%= render type, local_assigns %>

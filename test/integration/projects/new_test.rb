@@ -10,6 +10,13 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
     click_link 'Magnus'
   end
 
+  test 'building road - no locations available' do
+    visit "/en/projects/new/road/#{@character.location_id}"
+
+    assert_equal 200, page.status_code
+    assert_content 'You cannot build any new road at the moment'
+  end
+
   test 'no recipes available' do
     wood = create(:resource, key: 'wood', base_speed_per_unit: 144)
     create(:project_type, key: 'collect')

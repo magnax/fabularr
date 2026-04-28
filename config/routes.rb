@@ -35,7 +35,12 @@ Fabularr::Application.routes.draw do
     resources :projects, only: :create do
       get :join
       get :leave
-      get 'new/:type/:location_resource_id', to: 'projects#new', as: :new, on: :collection
+      collection do
+        get 'new/collect/:location_resource_id', to: 'projects#new', as: :new,
+                                                 defaults: { type: 'collect' }
+        get 'new/road/:location_id', to: 'projects#new', as: :new_road,
+                                     defaults: { type: 'road' }
+      end
     end
     resources :recipes, only: [:index]
     resources :sessions, only: %i[new create destroy]

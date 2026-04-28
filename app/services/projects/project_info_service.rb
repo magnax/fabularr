@@ -7,6 +7,8 @@ module Projects
     end
 
     def call
+      return Projects::Info::Road.call(@params) if @params[:type] == 'road'
+
       {
         location_resource: location_resource,
         location: location_resource.location,
