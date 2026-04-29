@@ -1,1 +1,8 @@
-<%= t('views.projects.new.road.impossible') %>
+<% if locations.any? %>
+  <%= t('views.projects.new.road.available_locations', count: locations.length) %>
+  <% locations.each do |location| %>
+    <p><%= t('views.projects.new.road.location_html', location_link: link_to(location[:name], location_name_url(location[:id])), direction: location[:direction]) %>
+  <% end %>
+<% else %>
+  <%= t('views.projects.new.road.impossible') %>
+<% end %>

@@ -44,6 +44,23 @@ pl:
               confirmation: musi być takie jak hasło
   buildings:
     wood_shack: Drewniana chata
+  directions:
+    e: wschodni
+    ene: wschodnio-północno-wschodni
+    ese: wschodnio-południowo-wschodni
+    n: północny
+    ne: północno-wschodni
+    nne: północno-północno-wschodni
+    nnw: północno-północno-zachodni
+    nw: północno-zachodni
+    s: południowy
+    se: południowo-wschodni
+    sse: południowo-południowo-wschodni
+    ssw: południowo-południowo-zachodni
+    sw: południowo-zachodni
+    w: zachodni
+    wnw: zachodnio-północno-zachodni
+    wsw: zachodnio-południowo-zachodni
   events:
     character:
       talking:
@@ -279,7 +296,9 @@ pl:
       discover: Odkrywaj
       new:
         road:
+          available_locations: 'Dostępne lokacje: %{count}'
           impossible: W tej chwili nie możesz wybudować żadnej nowej drogi
+          location_html: 'Osada: %{location_link}, kierunek: %{direction}'
       start: Rozpocznij projekt
     recipes:
       index:

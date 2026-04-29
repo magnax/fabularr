@@ -2,12 +2,13 @@
 
 module Projects
   class ProjectInfoService < ApplicationService
-    def initialize(params)
+    def initialize(character, params)
+      @character = character
       @params = params
     end
 
     def call
-      return Projects::Info::Road.call(@params) if @params[:type] == 'road'
+      return Projects::Info::Road.call(@character, @params) if @params[:type] == 'road'
 
       {
         location_resource: location_resource,

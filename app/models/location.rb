@@ -24,6 +24,8 @@
 #  fk_rails_...  (location_class_id => location_classes.id)
 #
 class Location < ApplicationRecord
+  ROAD_BUILD_DISTANCE = 100
+
   delegate :x, :y, to: :coords
 
   has_many :characters, dependent: :destroy

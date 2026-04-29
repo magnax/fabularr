@@ -5,7 +5,8 @@ require 'test_helper'
 class ProjectsNewTest < ActionDispatch::IntegrationTest
   def setup
     @user = create(:user)
-    @character = create(:character, name: 'Magnus', user: @user)
+    @location = create(:location)
+    @character = create(:character, name: 'Magnus', user: @user, location: @location, spawn_location: @location)
     sign_in(@user)
     click_link 'Magnus'
   end
@@ -15,6 +16,20 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
 
     assert_equal 200, page.status_code
     assert_content 'You cannot build any new road at the moment'
+  end
+
+  test 'building road - one location is available (< 100 px)' do
+    @character.location.update!(coords: { x: 300, y: 300 })
+    available_location = create(:location, coords: { x: 350, y: 250 })
+    unavailable_location = create(:location, coords: { x: 400, y: 270 })
+
+    visit "/en/projects/new/road/#{@character.location_id}"
+
+    assert_equal 200, page.status_code
+    assert_content 'Available locations: 1'
+    assert_content 'Location: unnamed place, direction: north-east'
+    assert_link 'unnamed place', href: "#{host}/en/locations/#{available_location.id}/name"
+    assert_no_link 'unnamed place', href: "#{host}/en/locations/#{unavailable_location.id}/name"
   end
 
   test 'no recipes available' do

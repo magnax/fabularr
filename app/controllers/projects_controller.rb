@@ -4,7 +4,9 @@ class ProjectsController < ApplicationController
   before_action :current_character_set
 
   def new
-    render locals: Projects::ProjectInfoService.call(project_info_params).merge(type: params[:type])
+    render locals: Projects::ProjectInfoService.call(
+      current_character, project_info_params
+    ).merge(type: params[:type])
   end
 
   def create

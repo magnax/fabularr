@@ -44,6 +44,23 @@ en:
               confirmation: should match password
   buildings:
     wood_shack: Wood shack
+  directions:
+    e: east
+    ene: east-north-east
+    ese: east-south-east
+    n: north
+    ne: north-east
+    nne: north-north-east
+    nnw: north-north-west
+    nw: north-west
+    s: south
+    se: south-east
+    sse: south-south-east
+    ssw: south-south-west
+    sw: south-west
+    w: west
+    wnw: west-north-west
+    wsw: west-south-west
   events:
     character:
       talking:
@@ -279,7 +296,9 @@ en:
       discover: Discover
       new:
         road:
+          available_locations: 'Available locations: %{count}'
           impossible: You cannot build any new road at the moment
+          location_html: 'Location: %{location_link}, direction: %{direction}'
       start: Start project
     recipes:
       index:
