@@ -297,6 +297,7 @@ pl:
       new:
         road:
           available_locations: 'Dostępne lokacje: %{count}'
+          create: Zacznij budowę
           impossible: W tej chwili nie możesz wybudować żadnej nowej drogi
           location_html: 'Osada: %{location_link}, kierunek: %{direction}'
       start: Rozpocznij projekt

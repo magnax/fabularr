@@ -13,18 +13,20 @@ module Projects
       raise InvalidLocationError if location.blank?
 
       {
-        locations: nearby_locations_map
+        locations: nearby_locations_map,
+        order: nearby_locations.map { |l| "order[]=#{l[:id]}" }.join('&')
       }
     end
 
     private
 
     def nearby_locations_map
-      nearby_locations.map do |nearby_location|
+      nearby_locations.map.with_index do |nearby_location, index|
         {
           id: nearby_location.id,
-          name: nearby_location.display_name(@character),
-          direction: Maps.locations_direction_text(location, nearby_location)
+          index: index + 1,
+          direction: Maps.locations_direction_text(location, nearby_location),
+          name: nearby_location.display_name(@character)
         }
       end
     end
@@ -33,6 +35,7 @@ module Projects
       Location
         .where.not(id: location.id)
         .where("length(lseg(coords::point, point(#{location.x}, #{location.y}))) < ?", Location::ROAD_BUILD_DISTANCE)
+        .order(Arel.sql('atan2(coords[1]-?, coords[0]-?)', location.y, location.x))
     end
 
     def location

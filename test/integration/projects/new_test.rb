@@ -30,6 +30,8 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
     assert_content 'Location: unnamed place, direction: north-east'
     assert_link 'unnamed place', href: "#{host}/en/locations/#{available_location.id}/name"
     assert_no_link 'unnamed place', href: "#{host}/en/locations/#{unavailable_location.id}/name"
+    assert_element 'input', value: 'Start building'
+    assert_selector 'section#map'
   end
 
   test 'no recipes available' do

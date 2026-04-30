@@ -2,7 +2,7 @@
 
 class MapsController < ApplicationController
   def index
-    image = Maps::GenerateService.call(current_character)
+    image = Maps::GenerateService.call(current_character, params)
 
     send_data image[:data], type: image[:content_type], disposition: 'inline'
   end

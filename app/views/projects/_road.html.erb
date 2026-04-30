@@ -1,7 +1,13 @@
+<section id="map"><img src="/maps?for=road&<%= order %>" width=200 height=200></section>
 <% if locations.any? %>
   <%= t('views.projects.new.road.available_locations', count: locations.length) %>
   <% locations.each do |location| %>
-    <p><%= t('views.projects.new.road.location_html', location_link: link_to(location[:name], location_name_url(location[:id])), direction: location[:direction]) %>
+    <p>
+      <%= form_for :project, method: 'POST' do |f| %>
+        <%= location[:index] %>. <%= t('views.projects.new.road.location_html', location_link: link_to(location[:name], location_name_url(location[:id])), direction: location[:direction]) %>
+        <%= f.hidden_field :location_id, value: location[:id] %>
+        <%= f.submit t('views.projects.new.road.create'), data: { disable_with: false } %>
+      <% end %>
   <% end %>
 <% else %>
   <%= t('views.projects.new.road.impossible') %>

@@ -33,6 +33,20 @@ class ProjectsInfoRoadTest < ActiveSupport::TestCase
     assert_equal near_location.id, res[:locations].sole[:id]
   end
 
+  test '2 locations within building distance, ordered by direction' do
+    near_location_1 = create(:location, coords: { x: 370, y: 320 })
+    near_location_2 = create(:location, coords: { x: 350, y: 250 })
+
+    res = call_service(@location.id)
+
+    assert_equal 2, res[:locations].length
+    first_location = res[:locations].find { |l| l[:id] == near_location_2.id }
+    assert_equal 1, first_location[:index]
+
+    second_location = res[:locations].find { |l| l[:id] == near_location_1.id }
+    assert_equal 2, second_location[:index]
+  end
+
   test 'location beyond building distance' do
     create(:location, coords: { x: 400, y: 290 })
 

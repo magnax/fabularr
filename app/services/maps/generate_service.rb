@@ -5,8 +5,9 @@ module Maps
     IMAGE_WIDTH = 200
     IMAGE_HEIGHT = 200
 
-    def initialize(character)
+    def initialize(character, params = {})
       @character = character
+      @params = params
     end
 
     def call
@@ -20,11 +21,16 @@ module Maps
     private
 
     def image_data
-      @image_data ||= result.to_blob
+      @image_data ||= result.to_blob { |b| b.format = 'PNG' }
     end
 
     def result
-      canvas = full_map.crop(position[:x], position[:y], 200, 200)
+      canvas = full_map.first.crop(
+        position[:x], position[:y], IMAGE_WIDTH, IMAGE_HEIGHT
+      )
+      base = Magick::Image.new(canvas.columns, canvas.rows)
+      canvas = base.composite(canvas, 0, 0, Magick::OverCompositeOp)
+
       draw = Magick::Draw.new
       draw_locations(draw, canvas)
       draw_character(draw, canvas)
@@ -35,16 +41,26 @@ module Maps
       draw.fill(@character.travelling? ? 'yellow' : 'black')
       draw.stroke(@character.travelling? ? 'black' : 'none')
       draw.circle(100, 100, 97, 100)
+      if @params[:for] == 'road'
+        draw.fill('none')
+        draw.stroke('red')
+        draw.circle(100, 100, 95, 100)
+      end
       draw.draw(canvas)
     end
 
     def draw_locations(draw, canvas)
-      draw.fill('black')
-
       locations.each do |location|
-        draw_position(draw, location.coords, position[:x], position[:y])
+        x = location.x - position[:x]
+        y = location.y - position[:y]
+        draw_position(draw, x, y)
+        draw_index(draw, location, x, y) if show_indexes?
       end
       draw.draw(canvas)
+    end
+
+    def show_indexes?
+      @show_indexes ||= @params[:for] == 'road' && @params[:order].is_a?(Array)
     end
 
     def locations
@@ -54,13 +70,22 @@ module Maps
       )
     end
 
-    def draw_position(draw, coords, offset_x, offset_y)
-      draw.circle(
-        coords.x - offset_x,
-        coords.y - offset_y,
-        coords.x - offset_x - 3,
-        coords.y - offset_y
-      )
+    def draw_index(draw, location, pos_x, pos_y)
+      index = @params[:order].index(location.id.to_s)
+      return if index.blank?
+
+      draw.stroke('none')
+      draw.fill('black')
+      draw.font_weight(Magick::NormalWeight)
+      draw.pointsize(14)
+      draw.font_style(Magick::NormalStyle)
+      pos_y += 20 if pos_y < 20
+      pos_x += 20 if pos_x < 20
+      draw.text(pos_x - 10, pos_y - 3, (index + 1).to_s)
+    end
+
+    def draw_position(draw, pos_x, pos_y)
+      draw.circle(pos_x, pos_y, pos_x - 3, pos_y)
     end
 
     def position

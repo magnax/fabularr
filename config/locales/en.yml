@@ -297,6 +297,7 @@ en:
       new:
         road:
           available_locations: 'Available locations: %{count}'
+          create: Start building
           impossible: You cannot build any new road at the moment
           location_html: 'Location: %{location_link}, direction: %{direction}'
       start: Start project
