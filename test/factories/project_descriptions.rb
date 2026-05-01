@@ -39,5 +39,9 @@ FactoryBot.define do
     trait :settings do
       description_type { ProjectDescription::SETTINGS }
     end
+
+    trait :road do
+      description_type { ProjectDescription::ROAD }
+    end
   end
 end

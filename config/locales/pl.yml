@@ -175,6 +175,7 @@ pl:
       build: produkcja
       create_location: tworzenie nowej osady
       discover_resource: odkrywanie nowych zasobów
+      road: budowa drogi
       started_by: 'zaczęty przez: '
     nothing_here: Nie ma żadnych projektów
     started_by: Rozpoczęty przez %{char_url}
@@ -213,6 +214,8 @@ pl:
     wood: 
       n: drewno
       gen: drewna
+  roads:
+    path: ścieżka z %{location_1} do %{location_2}
   select: --- wybierz ---
   views:
     characters:

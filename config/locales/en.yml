@@ -175,6 +175,7 @@ en:
       build: building
       create_location: creating new location
       discover_resource: discovering new resources
+      road: building road
       started_by: 'started by: '
     nothing_here: No projects
     started_by: Started by %{char_url}
@@ -213,6 +214,8 @@ en:
     wood: wood
 
 
+  roads:
+    path: path from %{location_1} to %{location_2}
   select: --- select ---
   views:
     characters:

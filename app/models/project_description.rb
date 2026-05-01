@@ -32,6 +32,7 @@ class ProjectDescription < ApplicationRecord
   scope :tool, -> { where(description_type: TOOL) }
   scope :settings, -> { where(description_type: SETTINGS) }
   scope :location, -> { where(description_type: LOCATION) }
+  scope :road, -> { where(description_type: ROAD) }
   # Types:
 
   ITEM_IN = 'item_in'

@@ -45,13 +45,21 @@ class Project < ApplicationRecord
     'discover_resource' => 'DiscoverResource'
   }.freeze
 
-  def name(for_character)
-    char_name = for_character.name_for(starting_character)
-    "#{short_name}, #{I18n.t('projects.name.started_by')}#{char_name}"
+  def name(character, short: false)
+    name = if project_type.key == ProjectType::ROAD
+             Projects::NameService.call(self, character)
+           else
+             short_name
+           end
+    return name if short
+
+    char_name = character.name_for(starting_character)
+    "#{name}, #{I18n.t('projects.name.started_by')}#{char_name}"
   end
 
   def short_name
     type_name = I18n.t("projects.name.#{project_type.key}").capitalize
+
     case project_type.key
     when ProjectType::BUILD
       return type_name unless recipe

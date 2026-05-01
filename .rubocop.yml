@@ -14,7 +14,6 @@ Metrics/BlockLength:
     - 'test/**/*_test.rb'
     - 'db/schema.rb'
     - 'config/routes.rb'
-  AllowedMethods: ['describe', 'context']
   CountAsOne:
     - hash
 
