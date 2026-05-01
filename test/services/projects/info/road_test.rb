@@ -6,7 +6,7 @@ class ProjectsInfoRoadTest < ActiveSupport::TestCase
   def setup
     @location = create(:location, coords: { x: 300, y: 300 })
     @character = create(:character, location: @location)
-    create(:project_type, key: 'road')
+    @project_type = create(:project_type, key: 'road')
   end
 
   def call_service(location_id)
@@ -32,6 +32,19 @@ class ProjectsInfoRoadTest < ActiveSupport::TestCase
     res = call_service(@location.id)
 
     assert_equal near_location.id, res[:locations].sole[:id]
+  end
+
+  test 'location within building distance, but with project started' do
+    near_location = create(:location, coords: { x: 350, y: 250 })
+
+    project = create(:project, project_type: @project_type,
+                               location: @character.location)
+    create(:project_description, :road, project: project, subject: near_location)
+
+    res = call_service(@location.id)
+
+    assert_equal near_location.id, res[:locations].sole[:id]
+    assert_equal project.id, res[:locations].sole[:project_id]
   end
 
   test '2 locations within building distance, ordered by direction' do

@@ -37,6 +37,26 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
     assert_selector 'section#map'
   end
 
+  test 'building road - project is already created' do
+    @character.location.update!(coords: { x: 300, y: 300 })
+    project_type = create(:project_type, key: 'road')
+    location = create(:location, coords: { x: 350, y: 250 })
+    project = create(:project, project_type: project_type,
+                               location: @character.location)
+    create(:project_description, :road, project: project, subject: location)
+
+    visit "/en/projects/new/road/#{@character.location_id}"
+
+    assert_equal 200, page.status_code
+    assert_content 'Available locations: 0'
+    assert_content 'Location: unnamed place, direction: north-east - '\
+                   'there is a building project already started'
+    assert_link 'unnamed place',
+                href: "#{host}/en/locations/#{location.id}/name"
+    assert_no_element 'input', value: 'Start building'
+    assert_selector 'section#map'
+  end
+
   test 'no recipes available' do
     wood = create(:resource, key: 'wood', base_speed_per_unit: 144)
     create(:project_type, key: 'collect')

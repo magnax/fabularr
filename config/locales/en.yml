@@ -304,6 +304,7 @@ en:
           create: Start building
           impossible: You cannot build any new road at the moment
           location_html: 'Location: %{location_link}, direction: %{direction}'
+          started: '- there is a building project already started'
       start: Start project
     recipes:
       index:

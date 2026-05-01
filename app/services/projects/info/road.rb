@@ -27,7 +27,8 @@ module Projects
           id: nearby_location.id,
           index: index + 1,
           direction: Maps.locations_direction_text(location, nearby_location),
-          name: nearby_location.display_name(@character)
+          name: nearby_location.display_name(@character),
+          project_id: project(nearby_location)&.id
         }
       end
     end
@@ -45,6 +46,15 @@ module Projects
 
     def project_type
       @project_type ||= ProjectType.find_by(key: @params[:type])
+    end
+
+    def project(dest_location)
+      @project ||= @character.location.projects
+                             .joins(:project_descriptions)
+                             .where(project_type_id: project_type.id,
+                                    project_descriptions: {
+                                      description_type: ProjectDescription::ROAD, subject_id: dest_location.id
+                                    }).first
     end
   end
 end

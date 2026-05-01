@@ -304,6 +304,7 @@ pl:
           create: Zacznij budowę
           impossible: W tej chwili nie możesz wybudować żadnej nowej drogi
           location_html: 'Osada: %{location_link}, kierunek: %{direction}'
+          started: '- już istnieje projekt budowy tej drogi'
       start: Rozpocznij projekt
     recipes:
       index:

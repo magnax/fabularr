@@ -1,14 +1,21 @@
 <section id="map"><img src="/maps?for=road&<%= order %>" width=200 height=200></section>
 <% if locations.any? %>
-  <%= t('views.projects.new.road.available_locations', count: locations.length) %>
+  <%= t('views.projects.new.road.available_locations', count: locations.filter { |l| l[:project_id].nil? }.length) %>
   <% locations.each do |location| %>
-    <p>
-      <%= form_for :project, url: projects_url, method: 'POST' do |f| %>
-        <%= location[:index] %>. <%= t('views.projects.new.road.location_html', location_link: link_to(location[:name], location_name_url(location[:id])), direction: location[:direction]) %>
-        <%= f.hidden_field :project_type_id, value: project_type_id %>
-        <%= f.hidden_field :location_id, value: location[:id] %>
-        <%= f.submit t('views.projects.new.road.create'), data: { disable_with: false } %>
+    <div>
+      <span><%= location[:index] %>. <%= t('views.projects.new.road.location_html', location_link: link_to(location[:name], location_name_url(location[:id])), direction: location[:direction]) %></span>
+      <% if location[:project_id] %>
+        <span><%= t('views.projects.new.road.started') %></span>
+      <% else %>
+        <span>
+          <%= form_for :project, url: projects_url, method: 'POST', html: { style: 'display: inline-block;' } do |f| %>
+            <%= f.hidden_field :project_type_id, value: project_type_id %>
+            <%= f.hidden_field :location_id, value: location[:id] %>
+            <%= f.submit t('views.projects.new.road.create'), data: { disable_with: false } %>
+          <% end %>
+        </span>
       <% end %>
+    </div>
   <% end %>
 <% else %>
   <%= t('views.projects.new.road.impossible') %>
