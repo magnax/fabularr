@@ -40,6 +40,7 @@ class ProjectDescription < ApplicationRecord
   MACHINE = 'machine'
   RESOURCE_IN = 'resource_in' # input
   RESOURCE_OUT = 'resource_out' # output
+  ROAD = 'road' # params to road building/upgrading, ie. type, location
   SETTINGS = 'settings' # additional params to the project, ie. name of building
   TOOL = 'tool'
 end

@@ -167,6 +167,7 @@ pl:
     collect: zbieranie
     create_location: zakładanie nowej osady
     discover_resource: Poszukiwanie nowych zasobów
+    road: budowa drogi
   projects:
     join: Dołącz do projektu
     leave: Opuść projekt

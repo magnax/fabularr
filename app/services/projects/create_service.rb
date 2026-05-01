@@ -8,7 +8,8 @@ module Projects
       'build' => 'Create::Build',
       'collect' => 'Create::Collect',
       'create_location' => 'Create::CreateLocation',
-      'discover_resource' => 'Create::DiscoverResource'
+      'discover_resource' => 'Create::DiscoverResource',
+      'road' => 'Create::Road'
     }.freeze
 
     def initialize(character, params)

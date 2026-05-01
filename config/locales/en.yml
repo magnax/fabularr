@@ -167,6 +167,7 @@ en:
     collect: collecting
     create_location: creating new location
     discover_resource: Discovering new resources
+    road: building road
   projects:
     join: Join project
     leave: Leave project
