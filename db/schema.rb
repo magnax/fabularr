@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_194040) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_01_084230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -207,6 +207,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_194040) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "roads", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "location_1_id"
+    t.bigint "location_2_id"
+    t.string "road_type"
+    t.datetime "updated_at", null: false
+    t.index ["location_1_id"], name: "index_roads_on_location_1_id"
+    t.index ["location_2_id"], name: "index_roads_on_location_2_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -275,6 +285,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_194040) do
   add_foreign_key "project_descriptions", "projects"
   add_foreign_key "projects", "recipes"
   add_foreign_key "recipe_instructions", "recipes"
+  add_foreign_key "roads", "locations", column: "location_1_id"
+  add_foreign_key "roads", "locations", column: "location_2_id"
   add_foreign_key "sessions", "users"
   add_foreign_key "travellers", "locations", column: "end_location_id"
   add_foreign_key "travellers", "locations", column: "start_location_id"
