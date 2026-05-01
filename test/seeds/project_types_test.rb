@@ -4,11 +4,11 @@ require 'test_helper'
 
 class SeedsProjectTypesTest < ActiveSupport::TestCase
   test 'works' do
-    assert_difference -> { ProjectType.count } => 4 do
+    assert_difference -> { ProjectType.count } => 5 do
       require_relative '../../db/seeds/project_types'
     end
 
-    keys = %w[build collect create_location discover_resource]
+    keys = %w[build collect create_location discover_resource road]
     assert_equal keys.sort, ProjectType.pluck(:key).sort
   end
 end

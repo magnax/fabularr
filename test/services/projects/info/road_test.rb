@@ -6,6 +6,7 @@ class ProjectsInfoRoadTest < ActiveSupport::TestCase
   def setup
     @location = create(:location, coords: { x: 300, y: 300 })
     @character = create(:character, location: @location)
+    create(:project_type, key: 'road')
   end
 
   def call_service(location_id)

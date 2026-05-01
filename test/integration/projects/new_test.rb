@@ -12,6 +12,8 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
   end
 
   test 'building road - no locations available' do
+    create(:project_type, key: 'road')
+
     visit "/en/projects/new/road/#{@character.location_id}"
 
     assert_equal 200, page.status_code
@@ -20,6 +22,7 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
 
   test 'building road - one location is available (< 100 px)' do
     @character.location.update!(coords: { x: 300, y: 300 })
+    create(:project_type, key: 'road')
     available_location = create(:location, coords: { x: 350, y: 250 })
     unavailable_location = create(:location, coords: { x: 400, y: 270 })
 

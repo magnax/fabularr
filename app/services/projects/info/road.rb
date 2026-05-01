@@ -14,6 +14,7 @@ module Projects
 
       {
         locations: nearby_locations_map,
+        project_type_id: project_type.id,
         order: nearby_locations.map { |l| "order[]=#{l[:id]}" }.join('&')
       }
     end
@@ -40,6 +41,10 @@ module Projects
 
     def location
       Location.find_by(id: @params[:location_id])
+    end
+
+    def project_type
+      @project_type ||= ProjectType.find_by(key: @params[:type])
     end
   end
 end
