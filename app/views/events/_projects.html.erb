@@ -2,6 +2,7 @@
 <% if projects.present? %>
   <% projects.each do |project| %>
     <div data-project-id="<%= project.id %>">
+      <%= link_to fa_icon('info-circle'), project_url(project.id) %>
       <%= project.name(@current_character, short: true).html_safe %>
       <% if project.ready %>
         <%= "\u2714" %>

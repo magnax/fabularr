@@ -32,7 +32,7 @@ Fabularr::Application.routes.draw do
       resources :location_resources, only: :new
     end
     resources :maps, only: :index
-    resources :projects, only: :create do
+    resources :projects, only: %i[create show] do
       get :join
       get :leave
       collection do
