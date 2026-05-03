@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_01_084230) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_03_194940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -245,14 +245,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_01_084230) do
     t.datetime "checked_at"
     t.datetime "created_at", null: false
     t.float "direction"
-    t.bigint "end_location_id"
+    t.bigint "road_id"
     t.float "speed", default: 100.0
     t.bigint "start_location_id"
     t.boolean "status", default: true
     t.bigint "subject_id"
     t.string "subject_type"
     t.datetime "updated_at", null: false
-    t.index ["end_location_id"], name: "index_travellers_on_end_location_id"
+    t.index ["road_id"], name: "index_travellers_on_road_id"
     t.index ["start_location_id"], name: "index_travellers_on_start_location_id"
     t.index ["subject_type", "subject_id"], name: "index_travellers_on_subject"
   end
@@ -288,6 +288,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_01_084230) do
   add_foreign_key "roads", "locations", column: "location_1_id"
   add_foreign_key "roads", "locations", column: "location_2_id"
   add_foreign_key "sessions", "users"
-  add_foreign_key "travellers", "locations", column: "end_location_id"
   add_foreign_key "travellers", "locations", column: "start_location_id"
+  add_foreign_key "travellers", "roads"
 end
