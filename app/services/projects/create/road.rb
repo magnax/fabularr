@@ -25,7 +25,7 @@ module Projects
         {
           duration: project_type.base_speed,
           amount: nil,
-          ready: false
+          ready: true
         }
       )
     end

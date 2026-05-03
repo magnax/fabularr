@@ -45,6 +45,7 @@ class ProjectsCreateTest < ActionDispatch::IntegrationTest
 
     p = Project.last
     assert_equal ProjectType::ROAD, p.project_type.key
+    assert p.ready
 
     pd = p.project_descriptions.sole
     assert_equal ProjectDescription::ROAD, pd.description_type
