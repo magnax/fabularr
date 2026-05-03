@@ -1,0 +1,6 @@
+<h2><%= t 'views.events.index.roads_here' %></h2>
+<% if roads.present? %>
+  <% roads.each do |road| %>
+    <span><%= t('views.roads.name_html', type: road[:type], location_link: link_to(road[:location_name], location_name_url(road[:location_id])), direction: road[:direction]) %></span>
+  <% end %>
+<% end %>

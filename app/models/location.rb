@@ -36,6 +36,12 @@ class Location < ApplicationRecord
   has_many :location_resources, dependent: :destroy
   has_many :resources, through: :location_resources
   has_many :projects, dependent: :destroy
+  has_many :roads_from, dependent: :destroy,
+                        class_name: 'Road',
+                        inverse_of: :location_1
+  has_many :roads_to, dependent: :destroy,
+                      class_name: 'Road',
+                      inverse_of: :location_2
   has_many :workers, through: :projects
   has_many :buildings, dependent: :destroy,
                        class_name: 'Building',
@@ -56,6 +62,10 @@ class Location < ApplicationRecord
 
   def town?
     location_class.key == 'town'
+  end
+
+  def roads
+    roads_from + roads_to
   end
 
   def display_name(character, parent: false)

@@ -8,14 +8,15 @@ module Events
 
     def call
       {
+        buildings: location&.buildings,
         character: @character,
-        location: location,
         characters: characters.uniq,
         events: Events::FetchEvents.call(@character),
         items: items,
+        location: location,
         location_resources: location&.location_resources,
-        buildings: location&.buildings,
         projects: projects,
+        roads: roads,
         travel_info: travel_info
       }
     end
@@ -39,6 +40,30 @@ module Events
           "length(lseg(starting_character.coords::point, point(#{@character.x}, #{@character.y}))) < ?", Character::MIN_HEARABLE_DISTANCE
         )
       end
+    end
+
+    def roads
+      return if @character.travelling? || !town?
+
+      location.roads.map do |road|
+        to_location = dest_location(road)
+        {
+          location_id: to_location.id,
+          location_name: to_location.display_name(@character),
+          type: I18n.t("roads.types.#{road.road_type}"),
+          direction: Maps.locations_direction_text(location, to_location)
+        }
+      end
+    end
+
+    def dest_location(road)
+      return road.location_1 if road.location_2 == location
+
+      road.location_2
+    end
+
+    def town?
+      location.present? && location.town?
     end
 
     def travel_info

@@ -216,6 +216,8 @@ en:
 
   roads:
     path: path from %{location_1} to %{location_2}
+    types:
+      path: path
   select: --- select ---
   views:
     characters:
@@ -253,6 +255,7 @@ en:
         no_buildings_here: No buildings nor vehicles here
         projects_here: Projects
         resources_here: Resources
+        roads_here: Exits (roads)
         travel: Start travel
         travel_info_html: "Travelling from %{location_link}"
       send: Send
@@ -317,6 +320,8 @@ en:
         time: Time needed
         title: Building & production
         tools: Tools needed
+    roads:
+      name_html: '%{type} to %{location_link}, direction: %{direction}'
     sessions:
       new:
         title: Fabular login

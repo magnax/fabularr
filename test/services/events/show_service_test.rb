@@ -65,4 +65,33 @@ class EventsShowServiceTest < ActiveSupport::TestCase
     assert_equal 1, res[:projects].length
     assert_equal [project.id], res[:projects].pluck(:id)
   end
+
+  test 'show roads (exits)' do
+    @character.location.update!(coords: { x: 100, y: 100 })
+    unnamed_location = create(:location, coords: { x: 50, y: 100 }) # west
+    named_location = create(:location, coords: { x: 100, y: 50 }) # north
+    create(:location_name, character: @character, location: named_location,
+                           name: 'Someplace')
+    create(:road, location_1_id: @character.location.id,
+                  location_2_id: unnamed_location.id)
+    create(:road, location_1_id: named_location.id,
+                  location_2_id: @character.location.id)
+
+    res = call_service
+
+    assert_equal 2, res[:roads].length
+
+    r = res[:roads].first
+    assert_equal %i[direction location_id location_name type], r.keys.sort
+
+    named = res[:roads].find { |r| r[:location_id] == named_location.id }
+    assert_equal 'Someplace', named[:location_name]
+    assert_equal 'path', named[:type]
+    assert_equal 'north', named[:direction]
+
+    unnamed = res[:roads].find { |r| r[:location_id] == unnamed_location.id }
+    assert_equal 'unnamed place', unnamed[:location_name]
+    assert_equal 'path', unnamed[:type]
+    assert_equal 'west', unnamed[:direction]
+  end
 end

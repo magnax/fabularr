@@ -7,7 +7,11 @@ module ProjectTypes
     end
 
     def call
-      Road.create!(location_1: project_location, location_2: dest_location, road_type: road_type)
+      Road.create!(
+        location_1: project_location,
+        location_2: dest_location,
+        road_type: road_type
+      )
     end
 
     private

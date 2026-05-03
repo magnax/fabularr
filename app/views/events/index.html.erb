@@ -21,6 +21,7 @@
     resources: items[:resources], items: items[:items] 
   } 
 %>
+<%= render partial: "events/roads", locals: { roads: roads } %>
 <%= render partial: "events/buildings", locals: { buildings: buildings } %>
 
 <% if location&.town? %>

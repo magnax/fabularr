@@ -216,6 +216,8 @@ pl:
       gen: drewna
   roads:
     path: ścieżka z %{location_1} do %{location_2}
+    types:
+      path: ścieżka
   select: --- wybierz ---
   views:
     characters:
@@ -253,6 +255,7 @@ pl:
         no_buildings_here: Nie ma żadnych budynków ani pojazdów
         projects_here: Projekty
         resources_here: Zasoby
+        roads_here: Wyjścia (drogi)
         travel: Wyrusz w podróż
         travel_info_html: "Podróżuje z %{location_link}"
       send: Wyślij
@@ -317,6 +320,8 @@ pl:
         time: Potrzebny czas
         title: Budowanie i produkcja
         tools: Potrzebne narzędzia
+    roads:
+      name_html: '%{type} do %{location_link}, kierunek: %{direction}'
     sessions:
       new:
         title: Logowanie do Fabular
