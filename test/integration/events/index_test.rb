@@ -111,4 +111,16 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     assert_link 'Build a road', href: "#{host}/en/projects/new/road/#{fabular_city.id}"
   end
+
+  test 'show exit and link to start travel on the road' do
+    fabular_city = create(:location, name: 'Fabular City')
+    other_location = create(:location)
+    create(:road, location_1: fabular_city, location_2: other_location)
+    create(:character, name: 'Magnus', location: fabular_city, user: @user)
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_content 'path to unnamed place'
+  end
 end

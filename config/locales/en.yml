@@ -99,6 +99,7 @@ en:
     travel:
       reverse: You turn back
       start: "You're leaving %{location_link} heading in direction: %{direction}"
+      start_road: "You're leaving %{location_from_link} taking %{type} to %{location_to_link}"
       stop: You stop
       update: You're updating travel settings
   flash:

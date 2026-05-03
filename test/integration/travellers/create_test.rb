@@ -25,6 +25,31 @@ class TravellersCreateTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'starts new travel using road' do
+    other_location = create(:location, coords: { x: @location.x + 50, y: @location.y })
+    road = create(:road, location_1: @location, location_2: other_location)
+
+    login(@user, @character)
+
+    params = {
+      traveller: {
+        road_id: road.id
+      }
+    }
+
+    assert_difference -> { Traveller.count } => 1,
+                      -> { Event.count } => 1 do
+      post '/en/travellers', params: params
+    end
+
+    traveller = Traveller.last
+    assert_equal 0, traveller.direction
+    assert_equal road.id, traveller.road_id
+
+    e = Event.last
+    assert_equal "You're leaving <!--LOCID:#{@location.id}--> taking path to <!--LOCID:#{other_location.id}-->", e.body
+  end
+
   test 'other characters in location are not visible after starting travel' do
     other_character = create(:character, location: @location)
     other_travelling_character = create(:character, location: nil,

@@ -48,6 +48,7 @@ module Events
       location.roads.map do |road|
         to_location = dest_location(road)
         {
+          id: road.id,
           location_id: to_location.id,
           location_name: to_location.display_name(@character),
           type: I18n.t("roads.types.#{road.road_type}"),

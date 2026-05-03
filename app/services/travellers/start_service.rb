@@ -10,10 +10,12 @@ module Travellers
 
     def call
       @character.update!(coords: @location.coords, location: nil)
+
       Traveller.create!(
-        subject: @character,
-        direction: @params[:direction],
-        start_location: @location
+        direction: direction,
+        road: road,
+        start_location: @location,
+        subject: @character
       )
 
       create_event!
@@ -21,12 +23,39 @@ module Travellers
 
     private
 
+    def direction
+      @direction ||= road.present? ? road_direction : @params[:direction]
+    end
+
+    def road_direction
+      @road_direction ||= Maps.road_direction(road, @location)
+    end
+
     def create_event!
       Event.create!(
-        body: I18n.t('events.travel.start', location_link: @location.loc_id,
-                                            direction: @params[:direction]),
+        body: body,
         receiver_character: @character
       )
+    end
+
+    def body
+      if road.present?
+        I18n.t('events.travel.start_road', location_from_link: @location.loc_id,
+                                           location_to_link: dest_location.loc_id,
+                                           type: I18n.t("roads.types.#{road.road_type}"))
+      else
+        I18n.t('events.travel.start', location_link: @location.loc_id,
+                                      direction: @params[:direction])
+      end
+    end
+
+    def dest_location
+      @dest_location ||=
+        road.location_1 == @location ? road.location_2 : road.location_1
+    end
+
+    def road
+      @road ||= @params[:road_id].present? ? Road.find_by(id: @params[:road_id]) : nil
     end
   end
 end

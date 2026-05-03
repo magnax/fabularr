@@ -68,4 +68,11 @@ module Maps
       location_to.x - location_from.x
     ) * 180.0 / Math::PI) + 360) % 360
   end
+
+  def self.road_direction(road, location_from)
+    location_to_id = [road.location_1_id, road.location_2_id] - [location_from.id]
+    location_to = Location.find_by(id: location_to_id)
+
+    direction(location_from, location_to)
+  end
 end

@@ -82,7 +82,7 @@ class EventsShowServiceTest < ActiveSupport::TestCase
     assert_equal 2, res[:roads].length
 
     r = res[:roads].first
-    assert_equal %i[direction location_id location_name type], r.keys.sort
+    assert_equal %i[direction id location_id location_name type], r.keys.sort
 
     named = res[:roads].find { |r| r[:location_id] == named_location.id }
     assert_equal 'Someplace', named[:location_name]

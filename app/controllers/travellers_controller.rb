@@ -36,6 +36,6 @@ class TravellersController < ApplicationController
   private
 
   def traveller_params
-    params.require(:traveller).permit(:direction, :speed)
+    params.require(:traveller).permit(:direction, :road_id, :speed)
   end
 end
