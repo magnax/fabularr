@@ -42,7 +42,8 @@ class Project < ApplicationRecord
     'building' => 'Building',
     'collect' => 'Collect',
     'create_location' => 'CreateLocation',
-    'discover_resource' => 'DiscoverResource'
+    'discover_resource' => 'DiscoverResource',
+    'road' => 'BuildRoad'
   }.freeze
 
   def name(character, short: false)
