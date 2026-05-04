@@ -7,7 +7,9 @@
   </h1>
 </section>
 
-<%= render partial: 'events/character_info', locals: { character: character, location: location, travel_info: travel_info } %>
+<%= render partial: 'events/character_info', locals: { 
+  character: character, location: location, travel_info: travel_info 
+} %>
 
 <section id="map"  style="float: right; width: 50%;"><img src="maps" width=200 height=200></section>
 
@@ -16,25 +18,31 @@
 </section>
 
 <%= render partial: "events/characters", locals: { characters: characters } %>
-<%= 
-  render partial: "events/items", locals: { 
-    resources: items[:resources], items: items[:items] 
-  } 
-%>
+<%= render partial: "events/items", locals: { 
+  resources: items[:resources], items: items[:items] 
+} %>
 <%= render partial: "events/roads", locals: { roads: roads } %>
 <%= render partial: "events/buildings", locals: { buildings: buildings } %>
 
 <% if location&.town? %>
   <%= render partial: "events/resources", locals: { 
-      location: location,
-      location_resources: location_resources 
-    } %>
+    location: location,
+    location_resources: location_resources 
+  } %>
 <% elsif location&.parent_location_id %>
   <div>
-    <%= link_to fa_icon('arrow-right'),
-        location_enter_url(location.parent_location.id),                                title: t('views.buildings.enter')
-    %>
-    <%= link_to location.parent_location.display_name(character), location_name_url(location.parent_location.id) %>
+    <%= link_to(
+          fa_icon('arrow-right'),
+          location_enter_url(location.parent_location.id), 
+          title: t('views.buildings.enter')
+    ) %>
+    <%= link_to(
+      location.parent_location.display_name(character), 
+      location_name_url(location.parent_location.id)
+    ) %>
   </div>
 <% end %>
-<%= render partial: "events/projects", locals: { projects: projects } %>
+
+<% if location.present? || projects.present? %>
+  <%= render partial: "events/projects", locals: { projects: projects } %>
+<% end %>

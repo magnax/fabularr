@@ -99,6 +99,7 @@ pl:
     travel:
       reverse: Zawracasz
       start: "Opuszczasz %{location_link} idąc w kierunku: %{direction}"
+      start_road: "Opuszczasz %{location_from_link} drogą typu %{type} do %{location_to_link}"
       stop: Zatrzymujesz się
       update: Zmieniasz parametry podróży
   flash:
@@ -258,6 +259,7 @@ pl:
         roads_here: Wyjścia (drogi)
         travel: Wyrusz w podróż
         travel_info_html: "Podróżuje z %{location_link}"
+        travel_info_road_html: "Podróżuje z %{location_from_link} do %{location_to_link}"
       send: Wyślij
       title: Zdarzenia dla
     inventory_objects:

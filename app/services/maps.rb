@@ -73,6 +73,6 @@ module Maps
     location_to_id = [road.location_1_id, road.location_2_id] - [location_from.id]
     location_to = Location.find_by(id: location_to_id)
 
-    direction(location_from, location_to)
+    (direction(location_from, location_to) + 90) % 360
   end
 end

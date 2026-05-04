@@ -1,6 +1,6 @@
 <h2><%= t 'views.events.index.roads_here' %></h2>
 <% if roads.present? %>
   <% roads.each do |road| %>
-    <span><%= t('views.roads.name_html', type: road[:type], location_link: link_to(road[:location_name], location_name_url(road[:location_id])), direction: road[:direction]) %></span> <%= link_to fa_icon('road'), travellers_url(traveller: { road_id: road[:id] }), method: :post %>
+    <span><%= t('views.roads.name_html', type: road[:type], location_link: link_to(road[:location_name], location_name_url(road[:location_id])), direction: road[:direction]) %></span> <%= link_to fa_icon('road', title: 'Road'), travellers_url(traveller: { road_id: road[:id] }), method: :post %>
   <% end %>
 <% end %>

@@ -36,9 +36,14 @@ module Events
       if @character.location
         location&.projects&.pending&.includes(:starting_character, :project_type)
       else
-        Project.pending.joins(:starting_character).where(starting_character: { location_id: nil }).where(
-          "length(lseg(starting_character.coords::point, point(#{@character.x}, #{@character.y}))) < ?", Character::MIN_HEARABLE_DISTANCE
-        )
+        Project.pending
+               .joins(:starting_character, :project_type)
+               .where(
+                 project_types: { key: ProjectType::CREATE_LOCATION },
+                 starting_character: { location_id: nil }
+               ).where(
+                 "length(lseg(starting_character.coords::point, point(#{@character.x}, #{@character.y}))) < ?", Character::MIN_HEARABLE_DISTANCE
+               )
       end
     end
 
@@ -57,12 +62,6 @@ module Events
       end
     end
 
-    def dest_location(road)
-      return road.location_1 if road.location_2 == location
-
-      road.location_2
-    end
-
     def town?
       location.present? && location.town?
     end
@@ -71,11 +70,30 @@ module Events
       return unless @character.travelling?
 
       {
-        location: @character.traveller.start_location,
-        traveller_id: @character.traveller.id,
-        speed: @character.traveller.speed,
-        direction: @character.traveller.direction
+        location: traveller.start_location,
+        dest_location: traveller_dest_location,
+        traveller_id: traveller.id,
+        speed: traveller.speed,
+        direction: traveller.direction
       }
+    end
+
+    def dest_location(road)
+      return if road.blank?
+      return road.location_1 if road.location_2 == location
+
+      road.location_2
+    end
+
+    def traveller_dest_location
+      return if traveller.road.blank?
+      return traveller.road.location_1 if traveller.road.location_2 == traveller.start_location
+
+      traveller.road.location_2
+    end
+
+    def traveller
+      @traveller ||= @character.traveller
     end
 
     def characters

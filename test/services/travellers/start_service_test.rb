@@ -39,4 +39,38 @@ class TravellersStartServiceTest < ActiveSupport::TestCase
                  ' heading in direction: 90',
                  ev.body
   end
+
+  test 'create new traveller record when taking a road' do
+    @location.update!(coords: { x: 314, y: 518 })
+    other_location = create(:location, coords: { x: 283, y: 563 })
+    road = create(:road, location_1: @location, location_2: other_location)
+
+    params = {
+      road_id: road.id
+    }
+
+    assert_difference -> { Traveller.count } => 1,
+                      -> { Event.count } => 1 do
+      call_service(params)
+    end
+
+    t = Traveller.last
+    assert_equal @character, t.subject
+    assert_equal 214.56, t.direction.round(2)
+    assert_equal road.id, t.road_id
+
+    assert_equal 314, @character.reload.x
+    assert_equal 518, @character.y
+    assert_nil @character.location_id
+    assert @character.travelling?
+
+    assert_equal 1, Traveller.active.count
+
+    ev = Event.last
+    assert_equal "You're leaving "\
+                 "<!--LOCID:#{@location.id}-->"\
+                 ' taking path to '\
+                 "<!--LOCID:#{other_location.id}-->",
+                 ev.body
+  end
 end
