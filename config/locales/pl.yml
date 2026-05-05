@@ -97,6 +97,7 @@ pl:
     take_resource: Podnosisz %{amount} %{unit} %{res} z ziemi
     take_resource_others: Widzisz jak %{character_link} podnosi trochę %{res} z ziemi
     travel:
+      arrive: Przybywasz do %{location_link}
       reverse: Zawracasz
       start: "Opuszczasz %{location_link} idąc w kierunku: %{direction}"
       start_road: "Opuszczasz %{location_from_link} drogą typu %{type} do %{location_to_link}"

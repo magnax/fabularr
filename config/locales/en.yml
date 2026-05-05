@@ -97,6 +97,7 @@ en:
     take_resource: "You're taking %{amount} %{unit} of %{res} from the ground"
     take_resource_others: 'You see that %{character_link} is taking some %{res} from the ground'
     travel:
+      arrive: You arrived at %{location_link}
       reverse: You turn back
       start: "You're leaving %{location_link} heading in direction: %{direction}"
       start_road: "You're leaving %{location_from_link} taking %{type} to %{location_to_link}"

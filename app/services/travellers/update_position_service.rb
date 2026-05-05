@@ -9,13 +9,36 @@ module Travellers
     def call
       subject.update!(coords: new_coords(subject.coords))
 
-      @traveller.update!(checked_at: current_time)
+      check_arrive_to_location if @traveller.road.present?
+
+      @traveller.update!(checked_at: current_time) if @traveller.subject.location.blank?
     end
 
     private
 
     def subject
       @subject ||= @traveller.subject
+    end
+
+    def check_arrive_to_location
+      return unless @traveller.distance >= @traveller.road.distance
+
+      @traveller.subject.update!(
+        location: @traveller.destination_location, coords: nil
+      )
+      @traveller.update!(status: false)
+      create_events!
+    end
+
+    def create_events!
+      create_traveller_event!
+    end
+
+    def create_traveller_event!
+      Event.create!(
+        receiver_character: @traveller.subject, # TO DO: adjust when travelling in vehicle
+        body: I18n.t('events.travel.arrive', location_link: @traveller.subject.location.loc_id)
+      )
     end
 
     def radians

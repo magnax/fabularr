@@ -21,6 +21,28 @@ class TravellersUpdateJobTest < ActiveSupport::TestCase
     Timecop.unfreeze
   end
 
+  test 'arriving to location when travelling on road' do
+    time = DateTime.parse('2026-04-11 09:00')
+    character = create(:character, location: nil, coords: { x: 200, y: 299 })
+    location_1 = create(:location, coords: { x: 200, y: 200 })
+    location_2 = create(:location, coords: { x: 200, y: 300 })
+    road = create(:road, location_1: location_1, location_2: location_2)
+    create(:traveller, subject: character, start_location: location_1,
+                       direction: 180, speed: 100, road: road, checked_at: time)
+
+    Timecop.travel(time + 22.minutes)
+    assert_difference -> { Event.count } => 1 do
+      call_job
+    end
+    Timecop.unfreeze
+
+    assert_equal location_2, character.reload.location
+    assert_not character.travelling?
+
+    ev = Event.last
+    assert_equal "You arrived at <!--LOCID:#{location_2.id}-->", ev.body
+  end
+
   test 'schedule next run' do
     create(:setting, key: 'travels', value: '1')
 

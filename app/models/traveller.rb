@@ -40,4 +40,10 @@ class Traveller < ApplicationRecord
   def distance
     Maps.distance(start_location.coords, subject.coords)
   end
+
+  def destination_location
+    return if road.blank?
+
+    road.location_1 == start_location ? road.location_2 : road.location_1
+  end
 end
