@@ -159,6 +159,7 @@ en:
     swamp: swamp
     tundra: tundra
     unnamed_place: unnamed place
+    wood_shack: Wood shack
   new_user: New user
   project_info:
     build: 'Manufactured: %{item}'
@@ -308,6 +309,7 @@ en:
         road:
           available_locations: 'Available locations: %{count}'
           create: Start building
+          exists: there is road already
           impossible: You cannot build any new road at the moment
           location_html: 'Location: %{location_link}, direction: %{direction}'
           started: '- there is a building project already started'

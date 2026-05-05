@@ -159,6 +159,7 @@ pl:
     swamp: bagna
     tundra: tundra
     unnamed_place: nienazwane miejsce
+    wood_shack: Drewniana chata
   new_user: Nowy użytkownik
   project_info:
     build: 'Wyprodukowano: %{item}'
@@ -308,6 +309,7 @@ pl:
         road:
           available_locations: 'Dostępne lokacje: %{count}'
           create: Zacznij budowę
+          exists: już istnieje droga
           impossible: W tej chwili nie możesz wybudować żadnej nowej drogi
           location_html: 'Osada: %{location_link}, kierunek: %{direction}'
           started: '- już istnieje projekt budowy tej drogi'

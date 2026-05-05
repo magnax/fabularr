@@ -6,6 +6,8 @@
       <span><%= location[:index] %>. <%= t('views.projects.new.road.location_html', location_link: link_to(location[:name], location_name_url(location[:id])), direction: location[:direction]) %></span>
       <% if location[:project_id] %>
         <span><%= t('views.projects.new.road.started') %></span>
+      <% elsif location[:road] %>
+        <span> - <%= t('views.projects.new.road.exists') %></span>
       <% else %>
         <span>
           <%= form_for :project, url: projects_url, method: 'POST', html: { style: 'display: inline-block;' } do |f| %>

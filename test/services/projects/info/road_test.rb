@@ -68,4 +68,24 @@ class ProjectsInfoRoadTest < ActiveSupport::TestCase
 
     assert_empty res[:locations]
   end
+
+  test 'location connected with road is not showing up' do
+    near_location_1 = create(:location, coords: { x: 370, y: 320 })
+    create(:location, coords: { x: 350, y: 250 })
+    create(:road, location_1: @location, location_2: near_location_1)
+
+    res = call_service(@location.id)
+
+    assert_equal 2, res[:locations].length
+    location = res[:locations].find { |l| l[:id] == near_location_1.id }
+    assert location[:road]
+  end
+
+  test 'locations other than towns are not showing up' do
+    create(:location, :building, parent_location: @location, coords: @location.coords)
+
+    res = call_service(@location.id)
+
+    assert_equal 0, res[:locations].length
+  end
 end
