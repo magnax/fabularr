@@ -7,7 +7,7 @@ module Travellers
     end
 
     def call
-      subject.update!(coords: new_coords(subject.coords))
+      subject_update_coords!
 
       check_arrive_to_location if @traveller.road.present?
 
@@ -15,6 +15,44 @@ module Travellers
     end
 
     private
+
+    def subject_update_coords!
+      updated_coords = new_coords(subject.coords, distance)
+      if location_type(updated_coords).is_a?(LocationType)
+        subject.update!(coords: updated_coords)
+      elsif distance < 1
+        stop_travel!
+      else
+        update_coords_in_steps!(distance)
+      end
+    end
+
+    def update_coords_in_steps!(distance)
+      (1..distance.floor).each do |min_distance|
+        updated_coords = new_coords(subject.coords, min_distance)
+        next if location_type(updated_coords).is_a?(LocationType)
+
+        subject.update!(coords: new_coords(subject.coords, min_distance - 1))
+        stop_travel!
+        break
+      end
+    end
+
+    def location_type(coords)
+      Maps.location_type(coords[:x], coords[:y])
+    end
+
+    def stop_travel!
+      @traveller.update!(speed: 0)
+      create_event!
+    end
+
+    def create_event!
+      Event.create!(
+        receiver_character: subject,
+        body: I18n.t('events.travel.forced_stop')
+      )
+    end
 
     def subject
       @subject ||= @traveller.subject
@@ -45,7 +83,7 @@ module Travellers
       @radians ||= @traveller.direction * Math::PI / 180.0
     end
 
-    def new_coords(coords)
+    def new_coords(coords, distance)
       {
         x: coords.x + (distance * Math.sin(radians)),
         # graphics coordinate system has (0,0) in upper left corner

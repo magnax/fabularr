@@ -98,6 +98,7 @@ pl:
     take_resource_others: Widzisz jak %{character_link} podnosi trochę %{res} z ziemi
     travel:
       arrive: Przybywasz do %{location_link}
+      forced_stop: Zatrzymujesz się, bo nie możesz iść dalej w tym kierunku.
       reverse: Zawracasz
       start: "Opuszczasz %{location_link} idąc w kierunku: %{direction}"
       start_road: "Opuszczasz %{location_from_link} drogą typu %{type} do %{location_to_link}"

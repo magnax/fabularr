@@ -3,6 +3,12 @@
 require 'test_helper'
 
 class TravellersUpdateJobTest < ActiveSupport::TestCase
+  def setup
+    location_type = create(:location_type)
+    Maps.expects(:location_type).with(anything, anything)
+        .times(0..1).returns(location_type)
+  end
+
   def call_job
     TravellersUpdateJob.perform_sync
   end
