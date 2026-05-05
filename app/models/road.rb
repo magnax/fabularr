@@ -26,4 +26,8 @@ class Road < ApplicationRecord
   belongs_to :location_2, class_name: 'Location'
 
   PATH = 'path'
+
+  def distance
+    Maps.distance(location_1.coords, location_2.coords)
+  end
 end

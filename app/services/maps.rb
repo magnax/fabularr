@@ -75,4 +75,18 @@ module Maps
 
     (direction(location_from, location_to) + 90) % 360
   end
+
+  def self.calculate_percent(traveller, road)
+    return if traveller.road.blank?
+    return unless traveller.road == road
+
+    (traveller.distance / road.distance) * 100
+  end
+
+  def self.distance(coords_1, coords_2)
+    Math.sqrt(
+      (coords_2.y - coords_1.y)**2 +
+      (coords_2.x - coords_1.x)**2
+    )
+  end
 end

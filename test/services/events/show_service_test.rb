@@ -72,10 +72,10 @@ class EventsShowServiceTest < ActiveSupport::TestCase
     named_location = create(:location, coords: { x: 100, y: 50 }) # north
     create(:location_name, character: @character, location: named_location,
                            name: 'Someplace')
-    create(:road, location_1_id: @character.location.id,
-                  location_2_id: unnamed_location.id)
-    create(:road, location_1_id: named_location.id,
-                  location_2_id: @character.location.id)
+    create(:road, location_1: @character.location,
+                  location_2: unnamed_location)
+    create(:road, location_1: named_location,
+                  location_2: @character.location)
 
     res = call_service
 

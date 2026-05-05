@@ -24,7 +24,7 @@
 FactoryBot.define do
   factory :road do
     road_type { Road::PATH }
-    # location_1
-    # location_2
+    location_1 { FactoryBot.create(:location) }
+    location_2 { FactoryBot.create(:location) }
   end
 end

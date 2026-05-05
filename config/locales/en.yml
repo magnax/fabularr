@@ -259,7 +259,7 @@ en:
         roads_here: Exits (roads)
         travel: Start travel
         travel_info_html: "Travelling from %{location_link}"
-        travel_info_road_html: "Travelling from %{location_from_link} to %{location_to_link}"
+        travel_info_road_html: "Travelling from %{location_from_link} to %{location_to_link} (%{percent}%)"
       send: Send
       title: Events for
     inventory_objects:

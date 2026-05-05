@@ -259,7 +259,7 @@ pl:
         roads_here: Wyjścia (drogi)
         travel: Wyrusz w podróż
         travel_info_html: "Podróżuje z %{location_link}"
-        travel_info_road_html: "Podróżuje z %{location_from_link} do %{location_to_link}"
+        travel_info_road_html: "Podróżuje z %{location_from_link} do %{location_to_link} (%{percent}%)"
       send: Wyślij
       title: Zdarzenia dla
     inventory_objects:

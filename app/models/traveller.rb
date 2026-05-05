@@ -34,4 +34,10 @@ class Traveller < ApplicationRecord
 
   scope :active, -> { where(status: true) }
   scope :character, -> { where(subject_type: 'Character') }
+
+  delegate :x, :y, to: :subject
+
+  def distance
+    Maps.distance(start_location.coords, subject.coords)
+  end
 end

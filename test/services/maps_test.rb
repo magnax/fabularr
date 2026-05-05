@@ -73,4 +73,29 @@ class MapsTest < ActiveSupport::TestCase
       assert_equal result[1], Maps.direction_text(result[0])
     end
   end
+
+  test '#calculate_percent - nil if traveller not on any road' do
+    traveller = create(:traveller, road_id: nil)
+    road = create(:road)
+
+    assert_nil Maps.calculate_percent(traveller, road)
+  end
+
+  test '#calculate_percent - nil if traveller not on given road' do
+    road_1 = create(:road)
+    road_2 = create(:road)
+    traveller = create(:traveller, road: road_2)
+
+    assert_nil Maps.calculate_percent(traveller, road_1)
+  end
+
+  test '#calculate_percent - proper value' do
+    character = create(:character, coords: { x: 150, y: 100 })
+    location_1 = create(:location, coords: { x: 100, y: 100 })
+    location_2 = create(:location, coords: { x: 200, y: 100 })
+    road = create(:road, location_1: location_1, location_2: location_2)
+    traveller = create(:traveller, subject: character, road: road)
+
+    assert_equal 50, Maps.calculate_percent(traveller, road)
+  end
 end

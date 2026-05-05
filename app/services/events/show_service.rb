@@ -74,7 +74,8 @@ module Events
         dest_location: traveller_dest_location,
         traveller_id: traveller.id,
         speed: traveller.speed,
-        direction: traveller.direction
+        direction: traveller.direction,
+        percent: percent
       }
     end
 
@@ -90,6 +91,12 @@ module Events
       return traveller.road.location_1 if traveller.road.location_2 == traveller.start_location
 
       traveller.road.location_2
+    end
+
+    def percent
+      return if traveller.road.blank?
+
+      Maps.calculate_percent(traveller, traveller.road).round(1)
     end
 
     def traveller

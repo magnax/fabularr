@@ -8,7 +8,8 @@
     location_to_link: link_to(
       travel_info[:dest_location].display_name(character, parent: true), 
       location_name_url(travel_info[:dest_location].id)
-    )
+    ),
+    percent: travel_info[:percent]
   ) %>
 <% else %>
   <%= t('views.events.index.travel_info_html', location_link: link_to(travel_info[:location].display_name(character, parent: true), location_name_url(travel_info[:location].id))) %>
@@ -16,7 +17,9 @@
 
 <%= form_for :traveller, url: traveller_url(travel_info[:traveller_id]), method: 'PUT' do |form| %>
   Speed: <%= form.text_field :speed, value: travel_info[:speed], style: 'width:3em;' %>%
-  Direction: <%= form.text_field :direction, value: travel_info[:direction], style: 'width:3em;' %>
+  <% unless travel_info[:dest_location].present? %>
+    Direction: <%= form.text_field :direction, value: travel_info[:direction], style: 'width:3em;' %>
+  <% end %>
   <%= form.submit 'Set' %>
 <% end %>
 <% if travel_info[:speed].zero? %>
