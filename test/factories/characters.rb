@@ -28,5 +28,10 @@ FactoryBot.define do
     location
     spawn_location
     user
+
+    trait :travelling do
+      coords { { x: 100, y: 100 } }
+      location { nil }
+    end
   end
 end

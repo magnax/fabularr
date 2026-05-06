@@ -6,7 +6,19 @@
 	</td>
 	<td>
 		<% if character[:travel_info].present? %>
-			<%= t('views.events.index.travel_info_html', location_link: link_to(character[:travel_info][:location_name], location_name_url(character[:travel_info][:location_id]))) %>
+			<% if character[:travel_info][:end_location_name].present? %>
+				<%= t(
+					'views.users.show.travel_road_info_html', 
+					start_location_name: character[:travel_info][:start_location_name],
+					end_location_name: character[:travel_info][:end_location_name]
+				) %>
+			<% else %>
+				<%= t(
+					'views.users.show.travel_info_html', 
+					location_name: character[:travel_info][:start_location_name],
+					direction: character[:travel_info][:direction]
+				) %>
+			<% end %>
 		<% else %>
 			<%= character[:location_name] %>
 		<% end %>
@@ -19,5 +31,8 @@
 	<td>
 		<% if character[:project_info] %>
 			<a title="<%= character[:project_info][:name] %>"><%= fa_icon('cogs') %></a> (P <%= character[:project_info][:percent]%>%)</a>
+		<% end %>
+		<% if character[:travel_info] && character[:travel_info][:progress] %>
+			(T <%= character[:travel_info][:progress] %>%)
 		<% end %>
 	</td>

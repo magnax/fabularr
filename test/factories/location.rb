@@ -11,6 +11,7 @@ FactoryBot.define do
     trait :building do
       location_class { FactoryBot.create(:location_class, :building) }
       location_type { FactoryBot.create(:location_type, key: 'wood_shack') }
+      name { nil }
     end
   end
 end

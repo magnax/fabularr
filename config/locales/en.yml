@@ -348,5 +348,7 @@ en:
         characters: Your characters
         create_char: Create new character
         no_chars: You don't have any characters
+        travel_info_html: "Travelling from %{location_name} (%{direction})"
+        travel_road_info_html: "Travelling from %{start_location_name} to %{end_location_name}"
   unknown_man: unknown man
   unknown_woman: unknown woman

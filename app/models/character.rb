@@ -110,4 +110,12 @@ class Character < ApplicationRecord
   def traveller
     travellers.active.first
   end
+
+  def toplevel_location
+    return if location.blank?
+
+    loc = location
+    loc = loc.parent_location while loc.parent_location
+    loc
+  end
 end

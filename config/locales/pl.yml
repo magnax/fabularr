@@ -348,5 +348,7 @@ pl:
         characters: Twoje postacie
         create_char: Utwórz nową postać
         no_chars: Nie masz żadnych postaci
+        travel_info_html: "W podróży z %{location_name} (%{direction})"
+        travel_road_info_html: "W podróży z %{start_location_name} do %{end_location_name}"
   unknown_man: nieznana kobieta
   unknown_woman: nieznany mężczyzna
