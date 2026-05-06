@@ -9,8 +9,17 @@
 #  placeable_type :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  item_class_id  :bigint
 #  item_type_id   :integer
 #  placeable_id   :integer
+#
+# Indexes
+#
+#  index_items_on_item_class_id  (item_class_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (item_class_id => item_classes.id)
 #
 FactoryBot.define do
   factory :item do

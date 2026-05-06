@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_03_194940) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_06_151345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -60,6 +60,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_03_194940) do
     t.index ["character_id"], name: "index_inventory_objects_on_character_id"
   end
 
+  create_table "item_classes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "key"
+    t.jsonb "metadata"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "item_types", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "key"
@@ -70,10 +77,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_03_194940) do
   create_table "items", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.float "damage", default: 0.0
+    t.bigint "item_class_id"
     t.integer "item_type_id"
     t.integer "placeable_id"
     t.string "placeable_type"
     t.datetime "updated_at", null: false
+    t.index ["item_class_id"], name: "index_items_on_item_class_id"
   end
 
   create_table "location_classes", force: :cascade do |t|
@@ -278,6 +287,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_03_194940) do
   end
 
   add_foreign_key "inventory_objects", "characters"
+  add_foreign_key "items", "item_classes"
   add_foreign_key "location_names", "characters"
   add_foreign_key "location_names", "locations"
   add_foreign_key "location_objects", "locations"
