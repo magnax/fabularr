@@ -4,7 +4,8 @@ require 'test_helper'
 
 class SeedsRecipesTest < ActiveSupport::TestCase
   test 'works' do
-    assert_difference -> { Recipe.count } => 4 do
+    assert_difference -> { Recipe.count } => 5,
+                      -> { RecipeInstruction.count } => 7 do
       require_relative '../../db/seeds/recipes'
     end
   end

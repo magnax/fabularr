@@ -17,7 +17,7 @@ class RecipesCheckToolRequirementsServiceTest < ActiveSupport::TestCase
   end
 
   test 'project needs one tool, character does not have it' do
-    recipe = create(:recipe, recipe_type: Recipe::BUILD)
+    recipe = create(:recipe, recipe_type: Recipe::ITEM)
     create(:recipe_instruction, :tool, recipe: recipe)
 
     @project.update!(recipe: recipe)
@@ -26,7 +26,7 @@ class RecipesCheckToolRequirementsServiceTest < ActiveSupport::TestCase
   end
 
   test 'project needs one tool, character has it' do
-    recipe = create(:recipe, recipe_type: Recipe::BUILD)
+    recipe = create(:recipe, recipe_type: Recipe::ITEM)
     recipe_instruction = create(:recipe_instruction, :tool, recipe: recipe)
     tool = create(:item, item_type: recipe_instruction.subject)
     create(:inventory_object, character: @character, subject: tool)
@@ -37,7 +37,7 @@ class RecipesCheckToolRequirementsServiceTest < ActiveSupport::TestCase
   end
 
   test 'character has only one from many tools required' do
-    recipe = create(:recipe, recipe_type: Recipe::BUILD)
+    recipe = create(:recipe, recipe_type: Recipe::ITEM)
     recipe_instruction = create(:recipe_instruction, :tool, recipe: recipe)
     create(:recipe_instruction, :tool, recipe: recipe)
     tool = create(:item, item_type: recipe_instruction.subject)

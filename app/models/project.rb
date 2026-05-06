@@ -66,9 +66,9 @@ class Project < ApplicationRecord
       return type_name unless recipe
 
       case recipe.recipe_type
-      when 'build'
+      when Recipe::ITEM
         tool_name = I18n.t("items.#{recipe.key}")
-      when 'building'
+      when Recipe::BUILDING
         tool_name = I18n.t("buildings.#{recipe.key}")
       end
       "#{type_name}: #{tool_name}"

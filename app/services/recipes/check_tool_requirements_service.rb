@@ -24,7 +24,7 @@ module Recipes
     end
 
     def build_recipe?
-      recipe.recipe_type == Recipe::BUILD
+      recipe.recipe_type == Recipe::ITEM
     end
 
     def recipe

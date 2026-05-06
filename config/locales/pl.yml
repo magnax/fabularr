@@ -223,6 +223,8 @@ pl:
     types:
       path: ścieżka
   select: --- wybierz ---
+  vehicles:
+    small_wooden_cart: mały drewniany wózek
   views:
     characters:
       name:

@@ -25,14 +25,18 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
     assert_content 'Available formulas: 0'
   end
 
-  test 'only build recipes available' do
-    create(:recipe, recipe_type: 'build', key: 'stone_knife')
-    create(:recipe, recipe_type: 'collect', key: 'wood')
+  test 'show available recipes: items, buildings, vehicles' do
+    create(:recipe, recipe_type: Recipe::BUILDING, key: 'wood_shack')
+    create(:recipe, recipe_type: Recipe::ITEM, key: 'stone_knife')
+    create(:recipe, recipe_type: Recipe::VEHICLE, key: 'small_wooden_cart')
+    create(:recipe, recipe_type: Recipe::COLLECT, key: 'wood')
 
     visit '/en/recipes'
 
     assert_equal 200, page.status_code
-    assert_content 'Available formulas: 1'
+    assert_content 'Available formulas: 3'
     assert_content 'stone knife'
+    assert_content 'wood shack'
+    assert_content 'small wooden cart'
   end
 end

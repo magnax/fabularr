@@ -11,4 +11,7 @@
 #  updated_at :datetime         not null
 #
 class ItemType < ApplicationRecord
+  BUILDING = 'building'
+  TOOL = 'tool'
+  VEHICLE = 'vehicle'
 end

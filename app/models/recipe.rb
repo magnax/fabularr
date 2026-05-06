@@ -14,9 +14,10 @@
 class Recipe < ApplicationRecord
   has_many :recipe_instructions, dependent: :destroy
 
-  BUILD = 'build'
+  ITEM = 'item'
   BUILDING = 'building'
   COLLECT = 'collect'
+  VEHICLE = 'vehicle'
 
   scope :by_type, ->(type) { where(recipe_type: type) }
 end

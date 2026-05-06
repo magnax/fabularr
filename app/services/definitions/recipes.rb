@@ -3,8 +3,16 @@
 module Definitions::Recipes
   RECIPES = [
     {
+      key: 'small_wooden_cart',
+      type: 'vehicle',
+      base_speed: 3000,
+      instructions: [
+        { type: 'resource', key: 'wood', amount: 500 }
+      ]
+    },
+    {
       key: 'stone_knife',
-      type: 'build',
+      type: 'item',
       base_speed: 3600,
       instructions: [
         { type: 'resource', key: 'stone', amount: 100 }
@@ -12,7 +20,7 @@ module Definitions::Recipes
     },
     {
       key: 'wooden_shaft',
-      type: 'build',
+      type: 'item',
       base_speed: 3600,
       instructions: [
         { type: 'resource', key: 'wood', amount: 80 },

@@ -5,8 +5,7 @@
 <ul>
   <% @recipes.each do |recipe| %>
     <li style="margin-bottom: 8px; border-bottom: 1px solid black;">
-      <% key = recipe.recipe_type == 'building' ? 'buildings' : 'items' %>
-      <span><%= t("#{key}.#{recipe.key}") %></span>
+      <span><%= t("#{recipe.recipe_type.pluralize}.#{recipe.key}") %></span>
       <span style="display: inline-block;">
         <%= 
           button_to(

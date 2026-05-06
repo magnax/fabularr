@@ -1,49 +1,19 @@
 # frozen_string_literal: true
 
-Definitions::Recipes::RECIPES.each do |recipe| # rubocop:disable Metrics/BlockLength
-  case recipe[:type]
-  when 'build'
-    ItemType.where(key: recipe[:key]).first_or_create
-    r = Recipe.where(key: recipe[:key])
-              .first_or_create(recipe_type: 'build', base_speed: recipe[:base_speed])
-    recipe[:instructions].each do |i|
-      case i[:type]
-      when 'resource'
-        res = Resource.where(key: i[:key]).first_or_create
-        RecipeInstruction.create!(
-          recipe_id: r.id, subject: res, amount: i[:amount],
-          unit: 'grams', instruction_type: RecipeInstruction::RESOURCE
-        )
-      when 'tool'
-        item_type = ItemType.where(key: i[:key]).first_or_create
-        RecipeInstruction.create!(
-          recipe_id: r.id, subject: item_type,
-          instruction_type: RecipeInstruction::TOOL
-        )
-      end
+Definitions::Recipes::RECIPES.each do |recipe|
+  r = Recipe.where(key: recipe[:key])
+            .first_or_create(recipe_type: recipe[:type], base_speed: recipe[:base_speed])
+  recipe[:instructions].each do |i|
+    case i[:type]
+    when RecipeInstruction::RESOURCE
+      subject = Resource.where(key: i[:key]).first_or_create
+    when RecipeInstruction::TOOL
+      subject = ItemType.where(key: i[:key]).first_or_create
     end
-  when 'collect'
-    r = Recipe.where(key: recipe[:key])
-              .first_or_create(recipe_type: 'collect')
-    recipe[:instructions].each do |i|
-      item_type = ItemType.where(key: i[:key]).first_or_create
-      r.recipe_instructions.create!(
-        subject: item_type,
-        instruction_type: RecipeInstruction::TOOL,
-        speed: i[:speed]
-      )
-    end
-  when 'building'
-    r = Recipe.where(key: recipe[:key])
-              .first_or_create(recipe_type: 'building', base_speed: recipe[:base_speed])
-    recipe[:instructions].each do |i|
-      res = Resource.where(key: i[:key]).first_or_create
-      r.recipe_instructions.create!(
-        subject: res,
-        instruction_type: RecipeInstruction::RESOURCE,
-        unit: 'grams', amount: i[:amount]
-      )
-    end
+    RecipeInstruction.create!(
+      recipe_id: r.id, subject: subject, amount: i[:amount],
+      instruction_type: i[:type], speed: i[:speed]
+    )
   end
 end
 

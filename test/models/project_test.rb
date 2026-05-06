@@ -53,7 +53,7 @@ class ProjectTest < ActiveSupport::TestCase
     second_character = create(:character)
     create(:char_name, character: second_character, named: character, name: 'Magnus')
     project_type = create(:project_type, key: 'build')
-    recipe = create(:recipe, recipe_type: Recipe::BUILD)
+    recipe = create(:recipe, recipe_type: Recipe::ITEM)
     project = create(:project, starting_character: character,
                                project_type: project_type, recipe: recipe)
 

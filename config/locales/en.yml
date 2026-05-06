@@ -43,7 +43,7 @@ en:
             password_confirmation:
               confirmation: should match password
   buildings:
-    wood_shack: Wood shack
+    wood_shack: wood shack
   directions:
     e: east
     ene: east-north-east
@@ -223,6 +223,8 @@ en:
     types:
       path: path
   select: --- select ---
+  vehicles:
+    small_wooden_cart: small wooden cart
   views:
     characters:
       name:

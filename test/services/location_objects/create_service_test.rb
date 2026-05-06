@@ -148,7 +148,7 @@ class LocationObjectsCreateServiceTest < ActiveSupport::TestCase
     knife = create(:item, item_type: item_type)
     inv_knife = create(:inventory_object, character: @character, subject: knife)
 
-    recipe = create(:recipe, recipe_type: Recipe::BUILD)
+    recipe = create(:recipe, recipe_type: Recipe::ITEM)
     create(:recipe_instruction, :tool, recipe: recipe, subject: item_type)
     project = create(:project, :build, recipe: recipe)
     worker = create(:worker, :working, project: project, character: @character)
