@@ -11,6 +11,7 @@ FactoryBot.define do
 
     trait :vehicle do
       key { 'vehicle' }
+      moveable { true }
     end
   end
 end

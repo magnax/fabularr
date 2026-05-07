@@ -102,4 +102,23 @@ class EventsShowServiceTest < ActiveSupport::TestCase
 
     assert_equal 1, res[:vehicles].length
   end
+
+  test 'show exits when character in vehicle in location' do
+    main_location = @character.location
+    cart = create(:location, :vehicle, parent_location: @character.location)
+    main_location.update(coords: { x: 100, y: 100 })
+    @character.update!(location: cart, coords: { x: 100, y: 100 })
+    unnamed_location = create(:location, coords: { x: 50, y: 100 }) # west
+    named_location = create(:location, coords: { x: 100, y: 50 }) # north
+    create(:location_name, character: @character, location: named_location,
+                           name: 'Someplace')
+    create(:road, location_1: main_location,
+                  location_2: unnamed_location)
+    create(:road, location_1: named_location,
+                  location_2: main_location)
+
+    res = call_service
+
+    assert_equal 2, res[:roads].length
+  end
 end

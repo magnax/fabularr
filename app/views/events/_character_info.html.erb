@@ -13,7 +13,8 @@
       <%= render 'travellers/travel_info', travel_info: travel_info, character: character %>
     <% else %>
       <%= link_to location.display_name(character, parent: true), location_name_url(location.id) %>
-      [<%= t "locations.#{location.location_type.key}" %>]
+      <% key = location.town? ? 'locations' : location.location_class.key.pluralize %>
+      [<%= t "#{key}.#{location.location_type.key}" %>]
       [<%= "#{location.x}, #{location.y}" %>]
     <% end %>
   </div>
