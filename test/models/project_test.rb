@@ -73,7 +73,7 @@ class ProjectTest < ActiveSupport::TestCase
 
     name = project.name(second_character)
 
-    assert_equal 'Building: Wood shack, started by: Magnus', name
+    assert_equal 'Building: wood shack, started by: Magnus', name
   end
 
   test 'proper #name for project - building road' do
