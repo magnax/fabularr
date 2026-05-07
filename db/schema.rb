@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_06_151345) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_07_082820) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -135,6 +135,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_06_151345) do
     t.integer "location_type_id"
     t.integer "max_capacity"
     t.integer "max_characters"
+    t.jsonb "metadata"
     t.string "name"
     t.integer "parent_location_id"
     t.datetime "updated_at"

@@ -8,6 +8,7 @@
 #  coords             :point
 #  max_capacity       :integer
 #  max_characters     :integer
+#  metadata           :jsonb
 #  name               :string
 #  created_at         :datetime
 #  updated_at         :datetime
