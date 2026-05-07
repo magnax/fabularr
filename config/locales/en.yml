@@ -180,6 +180,8 @@ en:
       create_location: creating new location
       discover_resource: discovering new resources
       road: building road
+      start_building: constructing new building
+      start_vehicle: building new vehicle
       started_by: 'started by: '
     nothing_here: No projects
     started_by: Started by %{char_url}

@@ -43,6 +43,7 @@ class Project < ApplicationRecord
     'collect' => 'Collect',
     'create_location' => 'CreateLocation',
     'discover_resource' => 'DiscoverResource',
+    'item' => 'Build',
     'road' => 'BuildRoad'
   }.freeze
 
@@ -59,22 +60,26 @@ class Project < ApplicationRecord
   end
 
   def short_name
-    type_name = I18n.t("projects.name.#{project_type.key}").capitalize
-
     case project_type.key
     when ProjectType::BUILD
-      return type_name unless recipe
+      return base_type_name unless recipe
 
+      item_name = I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}")
       case recipe.recipe_type
-      when Recipe::ITEM
-        tool_name = I18n.t("items.#{recipe.key}")
       when Recipe::BUILDING
-        tool_name = I18n.t("buildings.#{recipe.key}")
+        "#{I18n.t('projects.name.start_building')} (#{item_name})"
+      when Recipe::VEHICLE
+        "#{I18n.t('projects.name.start_vehicle')} (#{item_name})"
+      else
+        "#{base_type_name}: #{item_name}"
       end
-      "#{type_name}: #{tool_name}"
     when ProjectType::DISCOVER_RESOURCE, ProjectType::CREATE_LOCATION
-      type_name
+      base_type_name
     end
+  end
+
+  def base_type_name
+    I18n.t("projects.name.#{project_type.key}").capitalize
   end
 
   def settings

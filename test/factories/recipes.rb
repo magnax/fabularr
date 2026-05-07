@@ -13,6 +13,7 @@
 #
 FactoryBot.define do
   factory :recipe do
+    recipe_type { Recipe::ITEM }
     key { 'stone_knife' }
     base_speed { 1000 }
   end

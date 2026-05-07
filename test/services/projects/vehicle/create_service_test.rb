@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ProjectsBuildingCreateServiceTest < ActiveSupport::TestCase
+class ProjectsVehicleCreateServiceTest < ActiveSupport::TestCase
   def setup
     @current_character = create(:character)
   end
@@ -15,15 +15,15 @@ class ProjectsBuildingCreateServiceTest < ActiveSupport::TestCase
     project_type = create(:project_type, key: 'build',
                                          base_speed: 0, fixed: true)
     wood = create(:resource, :material, key: 'wood')
-    recipe = create(:recipe, recipe_type: 'building', key: 'wood_shack', base_speed: 3600)
+    recipe = create(:recipe, recipe_type: 'vehicle', key: 'small_wooden_cart', base_speed: 3600)
     create(:recipe_instruction, recipe: recipe, subject: wood,
-                                amount: 100, unit: 'grams',
+                                amount: 500, unit: 'grams',
                                 instruction_type: 'resource')
 
     params = {
       project_type_id: project_type.id,
       recipe_id: recipe.id,
-      name: 'Town Hall'
+      name: 'My Cart'
     }
 
     assert_difference(
@@ -35,10 +35,10 @@ class ProjectsBuildingCreateServiceTest < ActiveSupport::TestCase
     end
 
     pd = ProjectDescription.where(description_type: 'settings').sole
-    assert_equal 'Town Hall', pd.metadata['name']
+    assert_equal 'My Cart', pd.metadata['name']
 
     event = Event.last
-    assert_equal "You're starting new project: constructing new building (wood shack).",
+    assert_equal "You're starting new project: building new vehicle (small wooden cart).",
                  event.body
   end
 end

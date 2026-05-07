@@ -180,6 +180,8 @@ pl:
       create_location: tworzenie nowej osady
       discover_resource: odkrywanie nowych zasobów
       road: budowa drogi
+      start_building: wznoszenie nowego budynku
+      start_vehicle: budowa nowego pojazdu
       started_by: 'zaczęty przez: '
     nothing_here: Nie ma żadnych projektów
     started_by: Rozpoczęty przez %{char_url}
