@@ -67,6 +67,13 @@ class LocationTest < ActiveSupport::TestCase
     assert_equal 'Town Hall', building.default_name
   end
 
+  test 'default name for vehicle' do
+    location = create(:location, name: 'Fabular City')
+    building = create(:location, :vehicle, parent_location: location, name: nil)
+
+    assert_equal 'small wooden cart', building.default_name
+  end
+
   test 'display_name for character' do
     location = create(:location, name: 'Fabular City')
     building = create(:location, :building, parent_location: location, name: 'Town Hall')

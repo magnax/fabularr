@@ -1,5 +1,18 @@
 <h2><%= t 'views.events.index.buildings_here' %></h2>
+<% if vehicles.present? %>
+  <h3><%= t('views.events.index.vehicles') %></h3>
+  <% vehicles.each do |item| %>
+    <div>
+      <%= link_to fa_icon('arrow-right'), location_enter_url(item.id), title: t('views.vehicles.enter') %>
+      <%= link_to item.display_name(@character), location_name_url(item.id) %>
+    </div>
+  <% end %>
+
+<% else %>
+  <%= t('views.events.index.no_vehicles_here') %>
+<% end %>
 <% if buildings.present? %>
+  <h3><%= t('views.events.index.buildings') %></h3>
   <% buildings.each do |item| %>
     <div>
       <%= link_to fa_icon('arrow-right'), location_enter_url(item.id), title: t('views.buildings.enter') %>

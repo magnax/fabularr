@@ -83,7 +83,7 @@ class Location < ApplicationRecord
   def default_name
     return I18n.t('locations.unnamed_place') if town?
 
-    name || I18n.t("locations.#{location_type.key}")
+    name || I18n.t("#{location_class.key.pluralize}.#{location_type.key}")
   end
 
   def location_name_or_build(character)

@@ -94,4 +94,12 @@ class EventsShowServiceTest < ActiveSupport::TestCase
     assert_equal 'path', unnamed[:type]
     assert_equal 'west', unnamed[:direction]
   end
+
+  test 'show vehicles in location' do
+    create(:location, :vehicle, parent_location: @character.location)
+
+    res = call_service
+
+    assert_equal 1, res[:vehicles].length
+  end
 end

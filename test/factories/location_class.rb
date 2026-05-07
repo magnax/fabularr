@@ -8,5 +8,9 @@ FactoryBot.define do
     trait :building do
       key { 'building' }
     end
+
+    trait :vehicle do
+      key { 'vehicle' }
+    end
   end
 end

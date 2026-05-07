@@ -253,6 +253,7 @@ pl:
       index:
         build_road: Buduj drogę
         build_menu: Menu budowania
+        buildings: 'Budynki:'
         buildings_here: Budynki i pojazdy
         carrying: Dźwiga
         characters_here: Postacie w tym miejscu
@@ -260,13 +261,15 @@ pl:
         items_here: Przedmioty
         location: Miejsce
         name_title: Nazwa
-        no_buildings_here: Nie ma żadnych budynków ani pojazdów
+        no_buildings_here: Nie ma żadnych budynków
+        no_vehicles_here: Nie ma żadnych pojazdów
         projects_here: Projekty
         resources_here: Zasoby
         roads_here: Wyjścia (drogi)
         travel: Wyrusz w podróż
         travel_info_html: "Podróżuje z %{location_link}"
         travel_info_road_html: "Podróżuje z %{location_from_link} do %{location_to_link} (%{percent}%)"
+        vehicles: 'Pojazdy:'
       send: Wyślij
       title: Zdarzenia dla
     inventory_objects:

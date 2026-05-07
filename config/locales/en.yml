@@ -253,6 +253,7 @@ en:
       index:
         build_road: Build a road
         build_menu: Build menu
+        buildings: 'Buildings:'
         buildings_here: Buildings & vehicles
         carrying: Carrying
         characters_here: Characters here
@@ -260,13 +261,15 @@ en:
         items_here: Items
         location: Location
         name_title: Name
-        no_buildings_here: No buildings nor vehicles here
+        no_buildings_here: No buildings here
+        no_vehicles_here: No vehicles here
         projects_here: Projects
         resources_here: Resources
         roads_here: Exits (roads)
         travel: Start travel
         travel_info_html: "Travelling from %{location_link}"
         travel_info_road_html: "Travelling from %{location_from_link} to %{location_to_link} (%{percent}%)"
+        vehicles: 'Vehicles:'
       send: Send
       title: Events for
     inventory_objects:

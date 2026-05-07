@@ -9,6 +9,7 @@ module Events
     def call
       {
         buildings: location&.buildings,
+        vehicles: location&.vehicles,
         character: @character,
         characters: characters.uniq,
         events: Events::FetchEvents.call(@character),
