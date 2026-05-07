@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
+class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase # rubocop:disable Metrics/ClassLength
   def setup
     @character = create(:character, location: nil, coords: { x: 100, y: 100 })
   end
@@ -176,6 +176,23 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 0, traveller.speed
     ev = Event.last
     assert_equal 'You stopped, because there is no possible to go further in that direction', ev.body
+    Timecop.unfreeze
+  end
+
+  test 'simplest update (straight up north) in vehicle' do
+    mock_maps
+    cart = create(:location, :vehicle, parent_location: nil, coords: { x: 100, y: 100 })
+    @character.update!(location: cart)
+    time = DateTime.parse('2026-02-01 11:00:00')
+    Timecop.freeze(time)
+    traveller = create(:traveller, subject: cart, speed: 100, direction: 0)
+
+    Timecop.freeze(time + 100.minutes)
+    call_service(traveller)
+
+    assert_equal 100, cart.reload.x.round(4)
+    assert_equal 94.792, cart.y.round(4)
+    assert_equal time + 100.minutes, traveller.reload.checked_at
     Timecop.unfreeze
   end
 end

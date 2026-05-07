@@ -11,7 +11,7 @@ module Travellers
 
       check_arrive_to_location if @traveller.road.present?
 
-      @traveller.update!(checked_at: current_time) if @traveller.subject.location.blank?
+      @traveller.update!(checked_at: current_time)
     end
 
     private
