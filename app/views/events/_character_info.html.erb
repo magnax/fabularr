@@ -26,7 +26,7 @@
       <%= link_to t('views.events.index.build_road'), new_road_projects_url(location_id: character.location_id) %>
     </div>
   <% end %>
-  <% unless character.travelling? %>
+  <% if character.can_start_travel? %>
     <div>
       <%= link_to t('views.events.index.travel'), new_traveller_url %>
     </div>

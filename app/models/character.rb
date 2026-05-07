@@ -107,6 +107,10 @@ class Character < ApplicationRecord
     travellers.active.length == 1
   end
 
+  def can_start_travel?
+    !travelling? && (location.town? || location.location_class.moveable)
+  end
+
   def traveller
     travellers.active.first
   end
