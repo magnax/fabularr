@@ -73,4 +73,41 @@ class TravellersStartServiceTest < ActiveSupport::TestCase
                  "<!--LOCID:#{other_location.id}-->",
                  ev.body
   end
+
+  test 'create new traveller record when taking a road (in vehicle)' do
+    @location.update!(coords: { x: 100, y: 100 })
+    other_location = create(:location, coords: { x: 150, y: 100 })
+    road = create(:road, location_1: @location, location_2: other_location)
+    cart = create(:location, :vehicle, parent_location: @location)
+    @character.update!(location: cart)
+
+    params = {
+      road_id: road.id
+    }
+
+    assert_difference -> { Traveller.count } => 1,
+                      -> { Event.count } => 1 do
+      call_service(params)
+    end
+
+    t = Traveller.last
+    assert_equal cart, t.subject
+    assert_equal 90, t.direction.round(2)
+    assert_equal road.id, t.road_id
+
+    assert_equal 100, cart.reload.x
+    assert_equal 100, cart.y
+    assert_nil cart.parent_location_id
+    assert_equal cart.id, @character.reload.location_id
+    assert @character.travelling?
+
+    assert_equal 1, Traveller.active.count
+
+    ev = Event.last
+    assert_equal "You're leaving "\
+                 "<!--LOCID:#{@location.id}-->"\
+                 ' taking path to '\
+                 "<!--LOCID:#{other_location.id}-->",
+                 ev.body
+  end
 end

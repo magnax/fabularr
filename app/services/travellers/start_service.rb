@@ -5,17 +5,18 @@ module Travellers
     def initialize(character, params)
       @character = character
       @params = params
+      @town = @character.toplevel_location
       @location = @character.location
     end
 
     def call
-      @character.update!(coords: @location.coords, location: nil)
+      subject_update!
 
       Traveller.create!(
         direction: direction,
         road: road,
-        start_location: @location,
-        subject: @character
+        start_location: @town,
+        subject: subject
       )
 
       create_event!
@@ -23,12 +24,24 @@ module Travellers
 
     private
 
+    def subject_update!
+      if subject.is_a?(Character)
+        subject.update!(coords: @town.coords, location: nil)
+      else
+        subject.update!(coords: @town.coords, parent_location: nil)
+      end
+    end
+
+    def subject
+      @subject ||= @location.moveable? ? @location : @character
+    end
+
     def direction
       @direction ||= road.present? ? road_direction : @params[:direction]
     end
 
     def road_direction
-      @road_direction ||= Maps.road_direction(road, @location)
+      @road_direction ||= Maps.road_direction(road, @town)
     end
 
     def create_event!
@@ -40,18 +53,18 @@ module Travellers
 
     def body
       if road.present?
-        I18n.t('events.travel.start_road', location_from_link: @location.loc_id,
+        I18n.t('events.travel.start_road', location_from_link: @town.loc_id,
                                            location_to_link: dest_location.loc_id,
                                            type: I18n.t("roads.types.#{road.road_type}"))
       else
-        I18n.t('events.travel.start', location_link: @location.loc_id,
+        I18n.t('events.travel.start', location_link: @town.loc_id,
                                       direction: @params[:direction])
       end
     end
 
     def dest_location
       @dest_location ||=
-        road.location_1 == @location ? road.location_2 : road.location_1
+        road.location_1 == @town ? road.location_2 : road.location_1
     end
 
     def road

@@ -104,11 +104,21 @@ class Character < ApplicationRecord
   end
 
   def travelling?
-    travellers.active.length == 1
+    if vehicle.present?
+      location.travellers.active.length == 1
+    else
+      travellers.active.length == 1
+    end
+  end
+
+  def vehicle
+    return unless location&.location_class&.moveable
+
+    location
   end
 
   def can_start_travel?
-    !travelling? && (location.town? || location.location_class.moveable)
+    !travelling? && (location&.town? || location&.location_class&.moveable)
   end
 
   def traveller

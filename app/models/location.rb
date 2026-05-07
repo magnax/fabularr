@@ -29,6 +29,9 @@ class Location < ApplicationRecord
 
   delegate :x, :y, to: :coords
 
+  has_many :buildings, dependent: :destroy,
+                       class_name: 'Building',
+                       inverse_of: :parent_location
   has_many :characters, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :items, dependent: :destroy
@@ -43,10 +46,8 @@ class Location < ApplicationRecord
   has_many :roads_to, dependent: :destroy,
                       class_name: 'Road',
                       inverse_of: :location_2
+  has_many :travellers, dependent: :destroy, inverse_of: :subject
   has_many :workers, through: :projects
-  has_many :buildings, dependent: :destroy,
-                       class_name: 'Building',
-                       inverse_of: :parent_location
   has_many :vehicles, dependent: :destroy,
                       class_name: 'Vehicle',
                       inverse_of: :parent_location
@@ -66,6 +67,10 @@ class Location < ApplicationRecord
 
   def town?
     location_class.key == 'town'
+  end
+
+  def moveable?
+    location_class.moveable
   end
 
   def roads
