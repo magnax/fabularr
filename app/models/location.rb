@@ -47,6 +47,9 @@ class Location < ApplicationRecord
   has_many :buildings, dependent: :destroy,
                        class_name: 'Building',
                        inverse_of: :parent_location
+  has_many :vehicles, dependent: :destroy,
+                      class_name: 'Vehicle',
+                      inverse_of: :parent_location
 
   belongs_to :location_type
   belongs_to :location_class

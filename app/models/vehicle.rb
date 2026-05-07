@@ -24,11 +24,11 @@
 #
 #  fk_rails_...  (location_class_id => location_classes.id)
 #
-class Building < Location
+class Vehicle < Location
   default_scope(
     lambda {
       joins(:location_class)
-      .where(location_class: { key: LocationClass::BUILDING })
+      .where(location_class: { key: LocationClass::VEHICLE })
     }
   )
 end

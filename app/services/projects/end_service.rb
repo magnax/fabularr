@@ -90,7 +90,10 @@ module Projects
     end
 
     def build_project_info
-      I18n.t('project_info.build', item: I18n.t("items.#{project.recipe.key}"))
+      I18n.t(
+        'project_info.build',
+        item: I18n.t("#{project.recipe.recipe_type.pluralize}.#{project.recipe.key}")
+      )
     end
 
     def collect_project_info
