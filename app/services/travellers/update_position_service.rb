@@ -67,24 +67,8 @@ module Travellers
     def check_arrive_to_location
       return unless @traveller.distance >= @traveller.road.distance
 
-      # @traveller.subject.update!(
-      #   location: @traveller.destination_location, coords: nil
-      # )
-      # @traveller.update!(status: false)
       Travellers::ArriveToLocationService.call(@traveller)
-      # create_events!
     end
-
-    # def create_events!
-    #   create_traveller_event!
-    # end
-
-    # def create_traveller_event!
-    #   Event.create!(
-    #     receiver_character: @traveller.subject, # TO DO: adjust when travelling in vehicle
-    #     body: I18n.t('events.travel.arrive', location_link: @traveller.subject.location.loc_id)
-    #   )
-    # end
 
     def radians
       @radians ||= @traveller.direction * Math::PI / 180.0
