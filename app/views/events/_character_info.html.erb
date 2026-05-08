@@ -1,4 +1,4 @@
-<section id="character_information" style="float: left; width: 50%;">
+<section id="character_information" style="float: left; width: 70%;">
   <div>
     <%= t 'views.events.index.name_title' %>: <%= link_to character.name_for(character), character_url(character.id) %>
     (<%= t "views.events.age", age: character.age %>)
@@ -15,7 +15,9 @@
       <%= link_to location.display_name(character, parent: true), location_name_url(location.id) %>
       <% key = location.town? ? 'locations' : location.location_class.key.pluralize %>
       [<%= t "#{key}.#{location.location_type.key}" %>]
-      [<%= "#{location.x}, #{location.y}" %>]
+      <% if character.location&.town? %>
+        [<%= "#{location.x}, #{location.y}" %>]
+      <% end %>
     <% end %>
   </div>
 
@@ -24,9 +26,12 @@
       <%= link_to t('views.events.index.build_menu'), recipes_url %>
     </div>
     <div>
-      <%= link_to t('views.events.index.build_road'), new_road_projects_url(location_id: character.location_id) %>
+      <% if character.location.town? %>
+        <%= link_to t('views.events.index.build_road'), new_road_projects_url(location_id: character.location_id) %>
+      <% end %>
     </div>
   <% end %>
+
   <% if character.can_start_travel? %>
     <div>
       <%= link_to t('views.events.index.travel'), new_traveller_url %>

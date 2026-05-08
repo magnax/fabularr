@@ -93,7 +93,7 @@ module Maps
     end
 
     def coords
-      @coords ||= @character.coords || @character.location.coords
+      @coords ||= @character.coords || @character.toplevel_location.coords
     end
 
     def full_map

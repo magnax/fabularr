@@ -51,16 +51,20 @@ module Events
     def roads
       return if @character.travelling? || !@character.can_start_travel?
 
-      @character.toplevel_location.roads.map do |road|
+      toplevel_location.roads.map do |road|
         to_location = dest_location(road)
         {
           id: road.id,
           location_id: to_location.id,
           location_name: to_location.display_name(@character),
           type: I18n.t("roads.types.#{road.road_type}"),
-          direction: Maps.locations_direction_text(location, to_location)
+          direction: Maps.locations_direction_text(toplevel_location, to_location)
         }
       end
+    end
+
+    def toplevel_location
+      @toplevel_location ||= @character.toplevel_location
     end
 
     def town?
