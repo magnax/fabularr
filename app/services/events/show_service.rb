@@ -101,7 +101,7 @@ module Events
     end
 
     def traveller
-      @traveller ||= @character.traveller
+      @traveller ||= @character.traveller || location.traveller
     end
 
     def characters

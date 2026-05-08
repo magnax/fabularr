@@ -21,8 +21,6 @@ class Character < ApplicationRecord
   MAX_CAPACITY = 15_000
   MIN_HEARABLE_DISTANCE = 3
 
-  delegate :x, :y, to: :coords
-
   belongs_to :location, optional: true
   belongs_to :spawn_location, class_name: 'Location'
   belongs_to :user
@@ -45,6 +43,14 @@ class Character < ApplicationRecord
   validates :name, presence: true
   validates :spawn_location_id, presence: true
   validates :user_id, presence: true
+
+  def x
+    location&.moveable? && location.coords ? location.coords.x : coords.x
+  end
+
+  def y
+    location&.moveable? && location.coords ? location.coords.y : coords.y
+  end
 
   def default_name
     gender == 'K' ? I18n.t('unknown_woman') : I18n.t('unknown_man')

@@ -73,6 +73,10 @@ class Location < ApplicationRecord
     location_class.moveable
   end
 
+  def traveller
+    travellers.active.first
+  end
+
   def roads
     roads_from + roads_to
   end
