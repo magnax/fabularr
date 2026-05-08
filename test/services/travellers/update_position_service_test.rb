@@ -195,4 +195,36 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase # rubocop:di
     assert_equal time + 100.minutes, traveller.reload.checked_at
     Timecop.unfreeze
   end
+
+  test 'arriving at location in vehicle' do
+    mock_maps
+    time = DateTime.parse('2026-02-01 11:00:00')
+    character = create(:character, location: nil)
+    location_1 = create(:location, coords: { x: 200, y: 200 })
+    location_2 = create(:location, coords: { x: 200, y: 100 })
+    road = create(:road, location_1: location_1, location_2: location_2)
+    create(:traveller, subject: character, start_location: location_1,
+                       direction: 180, speed: 100, road: road, checked_at: time)
+    cart = create(:location, :vehicle, parent_location: nil, coords: { x: 200, y: 101 })
+    @character.update!(location: cart)
+    Timecop.freeze(time)
+    traveller = create(:traveller, start_location: location_1,
+                                   subject: cart, speed: 100, road: road)
+
+    Timecop.freeze(time + 300.minutes)
+
+    assert_difference -> { Event.count } => 1 do
+      call_service(traveller)
+    end
+
+    assert_not @character.reload.travelling?
+    assert_equal location_2, cart.reload.parent_location
+    assert_equal cart, @character.location
+    assert_not traveller.reload.status
+
+    event = Event.last
+    assert_equal "You arrived at <!--LOCID:#{location_2.id}-->", event.body
+
+    Timecop.unfreeze
+  end
 end
