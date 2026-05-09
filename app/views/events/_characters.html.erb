@@ -1,10 +1,13 @@
 <h2><%= t 'views.events.index.characters_here' %></h2>
 <% characters.each do |character| %>
   <div>
-    <% if @character != character %>
-      <%= link_to t('character.actions.talk'), character_talk_url(character.id) %>
+    <% if current_character.id != character[:id] %>
+      <%= link_to t('character.actions.talk'), character_talk_url(character[:id]) %>
     <% end %>
 
-    <%= link_to current_character.name_for(character), character_name_url(character.id) %>
+    <%= link_to character[:name], character_name_url(character[:id]) %>
+    <% if character[:location] %>
+      (<%= link_to character[:location][:name], location_name_url(character[:location][:id]) %>)
+    <% end %>
   </div>
 <% end %>

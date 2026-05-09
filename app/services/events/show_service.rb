@@ -11,7 +11,7 @@ module Events
         buildings: location&.buildings,
         vehicles: location&.vehicles,
         character: @character,
-        characters: characters.uniq,
+        characters: map_characters,
         events: Events::FetchEvents.call(@character),
         items: items,
         location: location,
@@ -23,6 +23,33 @@ module Events
     end
 
     private
+
+    def map_characters
+      characters.uniq.map do |ch|
+        {
+          id: ch.id,
+          name: @character.name_for(ch),
+          location: other_location(ch)
+        }
+      end
+    end
+
+    def other_location(other_character)
+      return if other_character.location == @character.location
+
+      {
+        id: other_character.location_id,
+        name: location_display_name(other_character)
+      }
+    end
+
+    def location_display_name(other_character)
+      name = other_character.location.display_name(@character)
+      return name unless other_character.location.vehicle?
+
+      location_type = I18n.t("vehicles.#{other_character.location.location_type.key}")
+      "#{name} [#{location_type}]"
+    end
 
     def items
       return {} if location.blank?
@@ -109,7 +136,13 @@ module Events
     end
 
     def characters
-      @characters ||= [@character] + (location&.characters || []) + travelling_characters
+      @characters ||= [@character] + location_characters + travelling_characters
+    end
+
+    def location_characters
+      return [] if location.blank?
+
+      location.hearable_characters
     end
 
     def travelling_characters

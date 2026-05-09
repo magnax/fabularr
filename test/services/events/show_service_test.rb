@@ -18,13 +18,16 @@ class EventsShowServiceTest < ActiveSupport::TestCase
 
     assert_equal [@character.id, other_char.id].sort, res[:characters].pluck(:id).sort
   end
+
   test 'travel info' do
     traveller = create(:traveller, subject: @character)
     @character.update!(location: nil, coords: { x: 100, y: 100 })
 
     res = call_service
 
-    assert_equal [@character], res[:characters]
+    ch = res[:characters].sole
+    assert_equal @character.id, ch[:id]
+    assert_nil ch[:location]
     assert_equal traveller.speed, res[:travel_info][:speed]
     assert_equal traveller.direction, res[:travel_info][:direction]
     assert_equal traveller.id, res[:travel_info][:traveller_id]

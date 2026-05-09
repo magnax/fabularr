@@ -65,8 +65,23 @@ class Location < ApplicationRecord
     characters
   end
 
+  # in/out vehicles, in/out buildings with open windows
+  def hearable_characters
+    return characters + vehicles_characters unless vehicle?
+
+    characters + parent_location.characters + vehicles_characters
+  end
+
+  def vehicles_characters
+    vehicles.map(&:characters).flatten
+  end
+
   def town?
     location_class.key == 'town'
+  end
+
+  def vehicle?
+    location_class.key == 'vehicle'
   end
 
   def moveable?

@@ -123,4 +123,41 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     assert_content 'path to unnamed place'
   end
+
+  test 'show characters in main location by a character in a vehicle' do
+    fabular_city = create(:location, name: 'Fabular City')
+    vehicle = create(:location, :vehicle, parent_location: fabular_city)
+    create(:character, name: 'Magnus', location: vehicle, user: @user)
+    town_character = create(:character, location: fabular_city, gender: 'K')
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_content 'unknown woman (unnamed place)'
+    assert_link 'unknown woman', href: "#{host}/en/characters/#{town_character.id}/name"
+  end
+
+  test "don't show characters in main location by a character in a building" do
+    fabular_city = create(:location, name: 'Fabular City')
+    building = create(:location, :building, parent_location: fabular_city)
+    create(:character, name: 'Magnus', location: building, user: @user)
+    town_character = create(:character, location: fabular_city, gender: 'K')
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_no_link 'unknown woman', href: "#{host}/en/characters/#{town_character.id}/name"
+  end
+
+  test 'show characters in vehicles' do
+    fabular_city = create(:location, name: 'Fabular City')
+    vehicle = create(:location, :vehicle, parent_location: fabular_city, name: 'Turtle')
+    create(:character, name: 'Magnus', location: fabular_city, gender: 'M', user: @user)
+    create(:character, location: vehicle, gender: 'K')
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_content 'unknown woman (Turtle [small wooden cart])'
+  end
 end
