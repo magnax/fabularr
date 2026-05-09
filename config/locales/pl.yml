@@ -344,6 +344,12 @@ pl:
       new:
         direction: 'Kierunek w stopniach (0-360): '
         go: Wyrusz teraz!
+      reverse: Zawróć
+      stop: Zatrzymaj się
+      update:
+        direction: 'Kierunek:'
+        speed: 'Prędkość:'
+        submit: Zmień
     users:
       edit:
         save: Zapisz

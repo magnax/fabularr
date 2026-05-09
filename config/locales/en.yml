@@ -344,6 +344,12 @@ en:
       new:
         direction: 'Direction in degrees (0-360): '
         go: Go now!
+      reverse: Reverse
+      stop: Stop
+      update:
+        direction: 'Direction:'
+        speed: 'Speed:'
+        submit: Set
     users:
       edit:
         save: Save

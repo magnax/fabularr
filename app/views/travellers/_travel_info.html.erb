@@ -16,15 +16,15 @@
 <% end %>
 
 <%= form_for :traveller, url: traveller_url(travel_info[:traveller_id]), method: 'PUT' do |form| %>
-  Speed: <%= form.text_field :speed, value: travel_info[:speed], style: 'width:3em;' %>%
+  <%= t('views.travellers.update.speed') %> <%= form.text_field :speed, value: travel_info[:speed], style: 'width:3em;' %>%
   <% unless travel_info[:dest_location].present? %>
-    Direction: <%= form.text_field :direction, value: travel_info[:direction], style: 'width:3em;' %>
+    <%= t('views.travellers.update.direction') %> <%= form.text_field :direction, value: travel_info[:direction], style: 'width:3em;' %>
   <% end %>
-  <%= form.submit 'Set' %>
+  <%= form.submit t('views.travellers.update.submit') %>
 <% end %>
 <% if travel_info[:speed].zero? %>
   <%= link_to t('views.travel_info.examine'), examine_locations_url %>
 <% else %>
-  <%= link_to 'Stop', traveller_stop_url(travel_info[:traveller_id]) %>
+  <%= link_to t('views.travellers.stop'), traveller_stop_url(travel_info[:traveller_id]) %>
 <% end %>
-<%= link_to 'Reverse', traveller_reverse_url(travel_info[:traveller_id]) %>
+<%= link_to t('views.travellers.reverse'), traveller_reverse_url(travel_info[:traveller_id]) %>
