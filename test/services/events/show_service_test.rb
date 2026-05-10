@@ -124,4 +124,44 @@ class EventsShowServiceTest < ActiveSupport::TestCase
 
     assert_equal 2, res[:roads].length
   end
+
+  test 'location info - character in town' do
+    create(:location_name, location: @character.location, character: @character, name: 'Fabular City')
+    res = call_service
+
+    assert_equal 'Fabular City', res[:location_info][:toplevel_location_name]
+    assert_equal @character.location_id, res[:location_info][:toplevel_location_id]
+    assert_equal '[forest][100.0, 100.0]', res[:location_info][:location_type]
+  end
+
+  test 'location info - character in building in town' do
+    building = create(:location, :building, parent_location: @character.location,
+                                            name: 'Town Hall')
+    create(:location_name, location: @character.location, character: @character,
+                           name: 'Fabular City')
+    @character.update!(location: building)
+
+    res = call_service
+
+    assert_equal 'Fabular City', res[:location_info][:toplevel_location_name]
+    assert_equal building.parent_location_id, res[:location_info][:toplevel_location_id]
+    assert_equal '[wood shack]', res[:location_info][:location_type]
+
+    assert_equal 'Town Hall', res[:location_info][:sublocation_name]
+    assert_equal building.id, res[:location_info][:sublocation_id]
+  end
+
+  test 'location info - character in vehicle in town' do
+    vehicle = create(:location, :vehicle, parent_location: @character.location,
+                                          name: 'Turtle')
+    create(:location_name, location: @character.location, character: @character,
+                           name: 'Fabular City')
+    @character.update!(location: vehicle)
+
+    res = call_service
+
+    assert_equal 'Fabular City', res[:location_info][:toplevel_location_name]
+    assert_equal vehicle.parent_location_id, res[:location_info][:toplevel_location_id]
+    assert_equal '[small wooden cart]', res[:location_info][:location_type]
+  end
 end

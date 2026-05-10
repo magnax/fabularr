@@ -15,6 +15,7 @@ module Events
         events: Events::FetchEvents.call(@character),
         items: items,
         location: location,
+        location_info: location_info,
         location_resources: location&.location_resources,
         projects: projects,
         roads: roads,
@@ -88,6 +89,41 @@ module Events
           direction: Maps.locations_direction_text(toplevel_location, to_location)
         }
       end
+    end
+
+    def location_info
+      {
+        toplevel_location_name: toplevel_location&.display_name(@character),
+        toplevel_location_id: toplevel_location&.id,
+        sublocation_name: sublocation_name,
+        sublocation_id: sublocation_id,
+        location_type: location_type
+      }
+    end
+
+    def sublocation_name
+      return if location.blank? || town?
+
+      location.display_name(@character)
+    end
+
+    def sublocation_id
+      return if location.blank? || town?
+
+      location.id
+    end
+
+    def location_type
+      return if location.blank?
+
+      loc_type = I18n.t "#{location_type_i18n_key}.#{location.location_type.key}"
+      return "[#{loc_type}]" unless location.town?
+
+      "[#{loc_type}][#{location.x.round(1)}, #{location.y.round(1)}]"
+    end
+
+    def location_type_i18n_key
+      location.town? ? 'locations' : location.location_class.key.pluralize
     end
 
     def toplevel_location

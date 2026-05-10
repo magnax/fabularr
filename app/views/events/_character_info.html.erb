@@ -12,12 +12,11 @@
     <% if travel_info.present? %>
       <%= render 'travellers/travel_info', travel_info: travel_info, character: character %>
     <% else %>
-      <%= link_to location.display_name(character, parent: true), location_name_url(location.id) %>
-      <% key = location.town? ? 'locations' : location.location_class.key.pluralize %>
-      [<%= t "#{key}.#{location.location_type.key}" %>]
-      <% if character.location&.town? %>
-        [<%= "#{location.x}, #{location.y}" %>]
+      <%= link_to location_info[:toplevel_location_name], location_name_url(location_info[:toplevel_location_id]) %>
+      <% if location_info[:sublocation_id] %>
+        (<%= link_to location_info[:sublocation_name], location_name_url(location_info[:sublocation_id]) %>)
       <% end %>
+      <%= location_info[:location_type] %>
     <% end %>
   </div>
 
