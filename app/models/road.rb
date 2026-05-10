@@ -30,4 +30,8 @@ class Road < ApplicationRecord
   def distance
     Maps.distance(location_1.coords, location_2.coords)
   end
+
+  def destination_location(start_location)
+    location_2 == start_location ? location_1 : location_2
+  end
 end
