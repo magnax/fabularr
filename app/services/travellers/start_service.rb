@@ -53,13 +53,28 @@ module Travellers
 
     def body
       if road.present?
-        I18n.t('events.travel.start_road', location_from_link: @town.loc_id,
-                                           location_to_link: dest_location.loc_id,
-                                           type: I18n.t("roads.types.#{road.road_type}"))
+        if subject.is_a?(Character)
+          body_road
+        else
+          body_road_vehicle
+        end
       else
         I18n.t('events.travel.start', location_link: @town.loc_id,
                                       direction: @params[:direction])
       end
+    end
+
+    def body_road
+      I18n.t('events.travel.start_road', location_from_link: @town.loc_id,
+                                         location_to_link: dest_location.loc_id,
+                                         type: I18n.t("roads.types.#{road.road_type}"))
+    end
+
+    def body_road_vehicle
+      I18n.t('events.travel.start_road_vehicle', location_from_link: @town.loc_id,
+                                                 location_to_link: dest_location.loc_id,
+                                                 vehicle_link: subject.loc_id,
+                                                 type: I18n.t("roads.types.#{road.road_type}"))
     end
 
     def dest_location

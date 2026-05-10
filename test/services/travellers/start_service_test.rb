@@ -107,7 +107,9 @@ class TravellersStartServiceTest < ActiveSupport::TestCase
     assert_equal "You're leaving "\
                  "<!--LOCID:#{@location.id}-->"\
                  ' taking path to '\
-                 "<!--LOCID:#{other_location.id}-->",
+                 "<!--LOCID:#{other_location.id}-->"\
+                 ', using '\
+                 "<!--LOCID:#{cart.id}-->",
                  ev.body
   end
 end

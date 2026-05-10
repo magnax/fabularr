@@ -89,4 +89,24 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     assert_content 'Travelling from Fabular City to Other City'
     assert_content '(T 0%)'
   end
+
+  test 'character travelling in vehicle' do
+    cart = create(:location, :vehicle, parent_location: nil)
+    character = create(:character, location: cart, user: @user)
+    dest_location = create(:location, coords: { x: 150, y: 150 })
+    create(:location_name, location: character.spawn_location,
+                           character: character, name: 'Fabular City')
+    create(:location_name, location: dest_location,
+                           character: character, name: 'Other City')
+    road = create(:road, location_1: dest_location, location_2: character.spawn_location)
+    create(:traveller, subject: cart,
+                       start_location: character.spawn_location,
+                       road: road, direction: 45)
+
+    visit list_url
+
+    assert_equal 200, page.status_code
+    assert_content 'Travelling from Fabular City to Other City'
+    assert_content '(T 0%)'
+  end
 end

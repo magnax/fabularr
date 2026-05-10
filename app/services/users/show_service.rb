@@ -32,27 +32,34 @@ module Users
     def location_type(char)
       return if char.location.blank?
 
-      I18n.t("locations.#{char.toplevel_location.location_type.key}")
+      key = if char.location.town? || char.toplevel_location&.town?
+              'locations'
+            else
+              char.location.location_class.key.pluralize
+            end
+      I18n.t("#{key}.#{char.toplevel_location.location_type.key}")
     end
 
     def travel_info(character)
       return unless character.travelling?
 
+      traveller = character.traveller || character.location&.traveller
+
       {
-        start_location_name: character.traveller.start_location.display_name(
-          character.traveller.subject, parent: true
+        start_location_name: traveller.start_location.display_name(
+          character, parent: true
         ),
-        end_location_name: end_location_name(character.traveller),
-        speed: character.traveller.speed,
-        direction: Maps.direction_text(character.traveller.direction),
-        progress: progress(character.traveller)&.round(0)
+        end_location_name: end_location_name(traveller, character),
+        speed: traveller.speed,
+        direction: Maps.direction_text(traveller.direction),
+        progress: progress(traveller)&.round(0)
       }
     end
 
-    def end_location_name(traveller)
+    def end_location_name(traveller, character)
       return if traveller.road.blank?
 
-      traveller.destination_location.display_name(traveller.subject, parent: true)
+      traveller.destination_location.display_name(character, parent: true)
     end
 
     def progress(traveller)

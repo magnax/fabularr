@@ -102,6 +102,7 @@ pl:
       reverse: Zawracasz
       start: "Opuszczasz %{location_link} idąc w kierunku: %{direction}"
       start_road: "Opuszczasz %{location_from_link} drogą typu %{type} do %{location_to_link}"
+      start_road_vehicle: "Opuszczasz %{location_from_link} drogą typu %{type} do %{location_to_link}, używając %{vehicle_link}"
       stop: Zatrzymujesz się
       update: Zmieniasz parametry podróży
   flash:

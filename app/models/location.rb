@@ -69,7 +69,7 @@ class Location < ApplicationRecord
   def hearable_characters
     return characters + vehicles_characters unless vehicle?
 
-    characters + parent_location.characters + vehicles_characters
+    characters + (parent_location&.characters || []) + vehicles_characters
   end
 
   def vehicles_characters
