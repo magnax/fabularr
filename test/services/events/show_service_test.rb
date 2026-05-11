@@ -50,23 +50,35 @@ class EventsShowServiceTest < ActiveSupport::TestCase
   test 'show create_location project after starting' do
     @character.update!(location: nil, coords: { x: 100, y: 100 })
     project = create(:project, :create_location, starting_character: @character)
+    create(:project_description, description_type: ProjectDescription::LOCATION,
+                                 project: project, metadata: {
+                                   coords: { x: 100, y: 101 }
+                                 })
 
     res = call_service
 
     assert_equal [project.id], res[:projects].pluck(:id)
   end
 
-  test 'show projects from nearby character' do
+  test 'show projects nearby even if other character not present anymore' do
     @character.update!(location: nil, coords: { x: 100, y: 100 })
-    near_character = create(:character, location: nil, coords: { x: 100, y: 101 })
-    far_character = create(:character, location: nil, coords: { x: 105, y: 101 })
-    project = create(:project, :create_location, starting_character: near_character)
-    create(:project, :create_location, starting_character: far_character)
+    character_1 = create(:character, location: nil, coords: { x: 200, y: 101 })
+    character_2 = create(:character, location: nil, coords: { x: 100, y: 101 })
+    near_project = create(:project, :create_location, starting_character: character_1)
+    create(:project_description, description_type: ProjectDescription::LOCATION,
+                                 project: near_project, metadata: {
+                                   coords: { x: 100, y: 101 }
+                                 })
+    far_project = create(:project, :create_location, starting_character: character_2)
+    create(:project_description, description_type: ProjectDescription::LOCATION,
+                                 project: far_project, metadata: {
+                                   coords: { x: 200, y: 101 }
+                                 })
 
     res = call_service
 
     assert_equal 1, res[:projects].length
-    assert_equal [project.id], res[:projects].pluck(:id)
+    assert_equal [near_project.id], res[:projects].pluck(:id)
   end
 
   test 'show roads (exits)' do

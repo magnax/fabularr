@@ -17,7 +17,7 @@ module Events
         location: location,
         location_info: Locations::InfoService.call(@character),
         location_resources: location&.location_resources,
-        projects: projects,
+        projects: Projects::VisibleProjects.call(@character),
         roads: roads,
         travel_info: travel_info
       }
@@ -59,22 +59,6 @@ module Events
         resources: location&.location_objects&.includes(:subject)&.resource,
         items: location&.location_objects&.item
       }
-    end
-
-    def projects
-      if @character.location
-        location&.projects&.pending&.includes(:starting_character, :project_type)
-      else
-        Project.pending
-               .joins(:starting_character, :project_type)
-               .where(
-                 project_types: { key: ProjectType::CREATE_LOCATION },
-                 # TODO: issue - what if starting character is not present here?
-                 starting_character: { location_id: nil }
-               ).where(
-                 "length(lseg(starting_character.coords::point, point(#{@character.x}, #{@character.y}))) < ?", Character::MIN_HEARABLE_DISTANCE
-               )
-      end
     end
 
     def roads
