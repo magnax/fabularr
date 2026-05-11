@@ -98,6 +98,7 @@ en:
     take_resource_others: 'You see that %{character_link} is taking some %{res} from the ground'
     travel:
       arrive: You arrived at %{location_link}
+      arrive_other: You see that %{traveller_link} is arriving from %{location_link}
       forced_stop: You stopped, because there is no possible to go further in that direction
       reverse: You turn back
       start: "You're leaving %{location_link} heading in direction: %{direction}"

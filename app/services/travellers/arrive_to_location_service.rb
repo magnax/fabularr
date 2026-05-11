@@ -7,49 +7,74 @@ module Travellers
     end
 
     def call
+      create_location_events!
       update_subject_location!
 
       @traveller.update!(status: false)
 
-      create_events!
+      create_traveller_events!
     end
 
     private
 
     def update_subject_location!
-      params = if subject.is_a?(Character)
-                 { location: @traveller.destination_location }
+      params = if character?
+                 { location: destination_location }
                else
-                 { parent_location: @traveller.destination_location }
+                 { parent_location: destination_location }
                end
 
       subject.update!(params.merge(coords: nil))
     end
 
-    def create_events!
-      create_traveller_event!
-    end
-
-    def create_traveller_event!
-      Event.create!(
-        receiver_character: travelling_character,
-        body: I18n.t(
-          'events.travel.arrive', location_link: @traveller.destination_location.loc_id
+    def create_traveller_events!
+      travelling_characters.each do |char|
+        Event.create!(
+          receiver_character: char,
+          body: I18n.t(
+            'events.travel.arrive', location_link: destination_location.loc_id
+          )
         )
-      )
+      end
     end
 
-    def travelling_character
-      @travelling_character ||= begin
-        return subject if subject.is_a?(Character)
+    def create_location_events!
+      destination_location.visible_characters.each do |char|
+        Event.create!(
+          receiver_character: char,
+          body: I18n.t(
+            'events.travel.arrive_other',
+            traveller_link: subject_link,
+            location_link: @traveller.start_location.loc_id
+          )
+        )
+      end
+    end
 
-        # TODO: temporary solution, there could be more characters
-        subject.characters.first
+    def subject_link
+      return subject.char_id if character?
+
+      subject.loc_id
+    end
+
+    def character?
+      subject.is_a?(Character)
+    end
+
+    def travelling_characters
+      @travelling_characters ||= begin
+        return [subject] if subject.is_a?(Character)
+
+        subject.characters
       end
     end
 
     def subject
       @subject ||= @traveller.subject
+    end
+
+    def destination_location
+      @destination_location ||= @traveller.destination_location
     end
   end
 end

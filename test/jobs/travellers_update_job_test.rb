@@ -45,7 +45,7 @@ class TravellersUpdateJobTest < ActiveSupport::TestCase
     assert_equal location_2, character.reload.location
     assert_not character.travelling?
 
-    ev = Event.last
+    ev = Event.where(receiver_character: character).sole
     assert_equal "You arrived at <!--LOCID:#{location_2.id}-->", ev.body
   end
 
