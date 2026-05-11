@@ -48,16 +48,18 @@ module Travellers
     end
 
     def create_event!
-      Event.create!(
-        receiver_character: receiver_character,
-        body: I18n.t('events.travel.forced_stop')
-      )
+      receiver_characters.each do |receiver_character|
+        Event.create!(
+          receiver_character: receiver_character,
+          body: I18n.t('events.travel.forced_stop')
+        )
+      end
     end
 
-    def receiver_character
-      return subject if subject.is_a?(Character)
+    def receiver_characters
+      return [subject] if subject.is_a?(Character)
 
-      subject.characters.first # TODO: temporary solution, there could be more characters
+      subject.characters
     end
 
     def subject
