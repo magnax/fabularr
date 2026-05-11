@@ -227,4 +227,25 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase # rubocop:di
 
     Timecop.unfreeze
   end
+
+  test 'arrive to location in free travel when location is on the way' do
+    mock_maps
+    time = DateTime.parse('2026-02-01 11:00:00')
+    character = create(:character, location: nil, coords: { x: 200, y: 101.1 })
+    town = create(:location, coords: { x: 200, y: 100 })
+
+    Timecop.freeze(time)
+    traveller = create(:traveller, subject: character, speed: 100, direction: 0)
+
+    Timecop.freeze(time + 10.minutes)
+    call_service(traveller)
+
+    assert_equal town, character.reload.location
+    assert_not character.travelling?
+
+    event = Event.last
+    assert_equal "You arrived at <!--LOCID:#{town.id}-->", event.body
+
+    Timecop.unfreeze
+  end
 end

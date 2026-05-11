@@ -26,6 +26,7 @@
 #
 class Location < ApplicationRecord
   ROAD_BUILD_DISTANCE = 100
+  ARRIVE_DISTANCE = 1
 
   delegate :x, :y, to: :coords
 
@@ -57,6 +58,7 @@ class Location < ApplicationRecord
   belongs_to :parent_location, optional: true, class_name: 'Location'
 
   scope :random, -> { order('RANDOM()').limit(1) }
+  scope :town, -> { joins(:location_class).where(location_class: { key: 'town' }) }
 
   def visible_characters
     # not final implementation, there will be probably some refinement to

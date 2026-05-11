@@ -9,7 +9,7 @@ module Travellers
     def call
       subject_update_coords!
 
-      check_arrive_to_location if @traveller.road.present?
+      check_arrive_to_location
 
       @traveller.update!(checked_at: current_time)
     end
@@ -67,9 +67,25 @@ module Travellers
     end
 
     def check_arrive_to_location
-      return unless @traveller.distance >= @traveller.road.distance
+      if @traveller.road.present?
+        Travellers::ArriveToLocationService.call(@traveller) if nearby?
+      elsif nearby_location.present?
+        Travellers::ArriveToLocationService.call(@traveller, nearby_location)
+      end
+    end
 
-      Travellers::ArriveToLocationService.call(@traveller)
+    def nearby?
+      @traveller.distance >= @traveller.road.distance
+    end
+
+    def nearby_location
+      @nearby_location ||= Location.town.where(
+        'length('\
+          'lseg('\
+            "coords::point, point(#{subject.x}, #{subject.y})"\
+          ')'\
+        ') <= ?', Location::ARRIVE_DISTANCE
+      ).first
     end
 
     def radians

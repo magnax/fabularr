@@ -2,8 +2,9 @@
 
 module Travellers
   class ArriveToLocationService < ApplicationService
-    def initialize(traveller)
+    def initialize(traveller, location = nil)
       @traveller = traveller
+      @location = location
     end
 
     def call
@@ -74,7 +75,7 @@ module Travellers
     end
 
     def destination_location
-      @destination_location ||= @traveller.destination_location
+      @destination_location ||= @location || @traveller.destination_location
     end
   end
 end
