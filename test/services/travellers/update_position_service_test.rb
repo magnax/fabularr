@@ -11,11 +11,6 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase # rubocop:di
     Travellers::UpdatePositionService.call(traveller)
   end
 
-  def mock_maps
-    Maps.expects(:location_type).with(anything, anything)
-        .times(0..1).returns(create(:location_type))
-  end
-
   test 'simple update - north (straight up)' do
     mock_maps
     time = DateTime.parse('2026-02-01 11:00:00')

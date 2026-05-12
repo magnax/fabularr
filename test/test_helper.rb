@@ -39,34 +39,33 @@ class ActionDispatch::IntegrationTest
   end
 end
 
-module ActiveSupport
-  class TestCase
-    include FactoryBot::Syntax::Methods
+class ActiveSupport::TestCase
+  include FactoryBot::Syntax::Methods
+  require_relative 'support/maps'
 
-    parallelize(workers: :number_of_processors) unless ENV['COVERAGE'] == '1'
+  parallelize(workers: :number_of_processors) unless ENV['COVERAGE'] == '1'
 
-    ActiveRecord::Migration.check_all_pending!
+  ActiveRecord::Migration.check_all_pending!
 
-    fixtures :all
+  fixtures :all
 
-    DatabaseCleaner.strategy = :transaction
+  DatabaseCleaner.strategy = :transaction
 
-    def login(user, character = nil)
+  def login(user, character = nil)
+    ApplicationController.any_instance
+                         .expects(:require_authentication)
+                         .returns(true)
+    if character.blank?
       ApplicationController.any_instance
-                           .expects(:require_authentication)
-                           .returns(true)
-      if character.blank?
-        ApplicationController.any_instance
-                             .expects(:current_user)
-                             .times(1..10)
-                             .returns(user || create(:user))
-      else
+                           .expects(:current_user)
+                           .times(1..10)
+                           .returns(user || create(:user))
+    else
 
-        ApplicationController.any_instance
-                             .expects(:current_character)
-                             .times(1..10)
-                             .returns(character)
-      end
+      ApplicationController.any_instance
+                           .expects(:current_character)
+                           .times(1..10)
+                           .returns(character)
     end
   end
 end
