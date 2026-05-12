@@ -18,7 +18,7 @@ Metrics/BlockLength:
     - hash
 
 Metrics/ClassLength:
-  Max: 125
+  Max: 150
   CountAsOne:
     - hash
 

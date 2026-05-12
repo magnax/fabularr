@@ -107,7 +107,7 @@ module Travellers
 
     # TODO: temporarily hardcoded 3 x base speed (so for characters without any load)
     def real_speed
-      @real_speed ||= 3 * base_speed * (@traveller.speed / 100.0)
+      @real_speed ||= @traveller.speed_factor * base_speed * (@traveller.speed / 100.0)
     end
 
     def time_elapsed

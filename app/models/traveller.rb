@@ -46,4 +46,18 @@ class Traveller < ApplicationRecord
 
     road.location_1 == start_location ? road.location_2 : road.location_1
   end
+
+  # TODO: it could be extracted to separate service (especially considering vehicles)
+  def speed_factor
+    return 3 unless subject.is_a?(Character)
+
+    w = subject.carrying_weight
+    if w < Character::MAX_CAPACITY * 0.1
+      3
+    elsif w < Character::MAX_CAPACITY * 0.5
+      2
+    else
+      1
+    end
+  end
 end
