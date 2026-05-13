@@ -1,8 +1,18 @@
   <td>
 		<%= link_to character[:name], character_set_url(character[:id]) %>
 	</td>
-	<td>
-		<%= fa_icon(character[:male] ? 'mars' : 'venus', title: t("genders.#{character[:gender]}")) %>
+	<td class="center" style="width: 50px;">
+		<% if character[:hunger_level].present? %>
+			<%= image_tag("hunger_#{character[:hunger_level]}.png", title: t("views.characters.#{character[:hunger_level]}")) %>
+		<% end %>
+		<% if character[:damage_level].present? %>
+			<%= image_tag("damage_#{character[:damage_level]}.png", title: t("views.characters.#{character[:damage_level]}")) %>
+		<% end %>
+	</td>
+	<td class="center">
+		<%= fa_icon(
+			character[:male] ? 'mars' : 'venus', title: t("genders.#{character[:gender]}")
+		) %>
 	</td>
 	<td>
 		<% if character[:travel_info].present? %>
@@ -23,7 +33,7 @@
 			<%= character[:location_name] %>
 		<% end %>
 	</td>
-	<td>
+	<td class="center small">
 		<% if character[:location_type].present? %>
 			<%= character[:location_type] %>
 		<% end %>

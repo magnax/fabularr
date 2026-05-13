@@ -231,6 +231,8 @@ en:
     small_wooden_cart: small wooden cart
   views:
     characters:
+      agony: In agony
+      hungry: Hungry
       name:
         create: Change name
         current_name: Current name
@@ -238,6 +240,7 @@ en:
       new:
         create: Create character
         title: New character
+      scratch: Scratch
       show:
         actions: Actions
         current_state: Current status
@@ -245,8 +248,10 @@ en:
         description: Name & description
         info: Character info
         skills: Skills
+      skinny: Skinny
       talk:
         talk_to: Say something to %{charname}
+      wounded: Wound
     events:
       age: '%{age} years'
       collect_resource: Collect

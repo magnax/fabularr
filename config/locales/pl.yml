@@ -231,6 +231,8 @@ pl:
     small_wooden_cart: mały drewniany wózek
   views:
     characters:
+      agony: W agonii
+      hungry: Wygłodzenie
       name:
         create: Zmień imię
         current_name: Obecne imię postaci
@@ -238,6 +240,7 @@ pl:
       new:
         create: Utwórz postać
         title: Nowa postać
+      scratch: Draśnięcie
       show:
         actions: Akcje
         current_state: Obecny stan
@@ -245,8 +248,10 @@ pl:
         description: Imię i opis
         info: Informacje o postaci
         skills: Umiejętności
+      skinny: Wychudzenie
       talk:
         talk_to: Powiedz coś do %{charname}
+      wounded: Zranienie
     events:
       age: '%{age} lat'
       collect_resource: Zbieraj

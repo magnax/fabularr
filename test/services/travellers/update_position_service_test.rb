@@ -161,7 +161,7 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     create(:inventory_object, subject: wood, character: character_1, amount: 1499)
     # just under half load for character_2:
     create(:inventory_object, subject: wood, character: character_2, amount: 7499)
-    # max load for character_1:
+    # max load for character_3:
     create(:inventory_object, subject: wood, character: character_3, amount: 15_000)
     Timecop.freeze(@time)
     create(:traveller, subject: character_1, speed: 100, direction: 0)

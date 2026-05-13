@@ -138,4 +138,24 @@ class Character < ApplicationRecord
     loc = loc.parent_location while loc.parent_location
     loc
   end
+
+  def hunger_level
+    if hunger >= 90
+      'agony'
+    elsif hunger >= 80
+      'skinny'
+    elsif hunger >= 50
+      'hungry'
+    end
+  end
+
+  def damage_level
+    if damage >= 90
+      'agony'
+    elsif damage >= 80
+      'wounded'
+    elsif damage >= 50
+      'scratch'
+    end
+  end
 end

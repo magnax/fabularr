@@ -17,14 +17,16 @@ module Users
 
     def characters_info
       characters.map do |char|
-        char.as_json(only: %i[id gender], methods: :project_info)
-            .merge(
-              name: char.name_for(char),
-              male: char.male?,
-              travel_info: travel_info(char),
-              location_name: char.location&.display_name(char, parent: true),
-              location_type: location_type(char)
-            )
+        char.as_json(
+          only: %i[id gender],
+          methods: %i[damage_level hunger_level project_info]
+        ).merge(
+          location_name: char.location&.display_name(char, parent: true),
+          location_type: location_type(char),
+          male: char.male?,
+          name: char.name_for(char),
+          travel_info: travel_info(char)
+        )
             .with_indifferent_access
       end
     end
