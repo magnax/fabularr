@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_07_082820) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_14_074257) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -140,6 +140,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_082820) do
     t.integer "parent_location_id"
     t.datetime "updated_at"
     t.index ["location_class_id"], name: "index_locations_on_location_class_id"
+  end
+
+  create_table "machineries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "key"
+    t.string "placement", array: true
+    t.boolean "portable", default: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "project_descriptions", force: :cascade do |t|
