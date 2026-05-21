@@ -9,6 +9,7 @@ module Projects
 
     def call
       return Projects::Info::Road.call(@character, @params) if @params[:type] == 'road'
+      return Projects::Info::Build.call(@character, @params[:recipe_id]) if @params[:type] == 'build'
 
       {
         location_resource: location_resource,

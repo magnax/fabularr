@@ -36,6 +36,8 @@ Fabularr::Application.routes.draw do
       get :join
       get :leave
       collection do
+        get 'new/build/:recipe_id', to: 'projects#new', as: :new_build,
+                                    defaults: { type: 'build' }
         get 'new/collect/:location_resource_id', to: 'projects#new', as: :new,
                                                  defaults: { type: 'collect' }
         get 'new/road/:location_id', to: 'projects#new', as: :new_road,

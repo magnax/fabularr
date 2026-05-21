@@ -39,4 +39,21 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
     assert_content 'wood shack'
     assert_content 'small wooden cart'
   end
+
+  test 'show project setup page for given recipe' do
+    create(:recipe, recipe_type: Recipe::ITEM, base_speed: 7200, key: 'stone_knife')
+    create(:project_type, :build)
+
+    visit '/en/recipes'
+
+    assert_equal 200, page.status_code
+
+    click_on 'Continue'
+
+    assert_equal 200, page.status_code
+    assert_content 'Item name:'
+    assert_content 'stone knife'
+    assert_content '1 hour'
+    assert_element 'form', action: "#{host}/en/projects"
+  end
 end

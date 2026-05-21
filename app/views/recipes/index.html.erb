@@ -8,13 +8,8 @@
       <span><%= t("#{recipe.recipe_type.pluralize}.#{recipe.key}") %></span>
       <span style="display: inline-block;">
         <%= 
-          button_to(
-            t('views.recipes.index.continue'), projects_url(
-              project: { 
-                project_type_id: @project_type_id,
-                recipe_id: recipe.id
-              }
-            ),
+          link_to(
+            t('views.recipes.index.continue'), new_build_projects_url(recipe.id),
             style: 'display: inline-block;'
           )
         %>

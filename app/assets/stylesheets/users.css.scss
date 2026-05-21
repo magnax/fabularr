@@ -2,22 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-table {
+table.characters {
   background-color: gray;
   border: 1px solid gray;
-}
 
-td {
-  background-color: white;
-  border: 1px solid gray;
-  padding: 3px;
+  td {
+    background-color: white;
+    border: 1px solid gray;
+    padding: 3px;
 
-  &.center {
-    text-align: center;
-  }
+    &.center {
+      text-align: center;
+    }
 
-  &.small {
-    font-size: 0.8em;
+    &.small {
+      font-size: 0.8em;
+    }
   }
 }
 

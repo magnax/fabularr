@@ -40,6 +40,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_info_params
-    params.permit(:type, :location_id, :location_resource_id)
+    params.permit(:type, :location_id, :location_resource_id, :recipe_id)
   end
 end

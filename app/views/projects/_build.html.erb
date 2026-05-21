@@ -1,0 +1,20 @@
+<%= form_for :project, url: projects_url do |f| %>
+  <%= f.hidden_field :project_type_id, value: project_type_id %>
+  <%= f.hidden_field :recipe_id, value: recipe_id %>
+  <table>
+    <tr>
+      <td><%= t('views.projects.new.item_name') %></td>
+      <td><%= t("items.#{item_name}") %></td>
+    </tr>
+    <tr>
+      <td><%= t('views.projects.new.time_needed') %></td>
+      <td><%= time_needed %></td>
+    </tr>
+    <tr>
+      <td colspan=2 class="table-actions">
+        <%= f.button t('views.projects.new.cancel') %>
+        <%= f.submit t('views.projects.new.submit') %>
+      </td>
+    </tr>
+  </table>
+<% end %>

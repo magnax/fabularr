@@ -16,5 +16,10 @@ FactoryBot.define do
     key { 'MyString' }
     base_speed { 1 }
     fixed { false }
+
+    trait :build do
+      key { 'build' }
+      fixed { true }
+    end
   end
 end

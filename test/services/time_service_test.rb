@@ -3,6 +3,10 @@
 require 'test_helper'
 
 class TimeServiceTest < ActiveSupport::TestCase
+  def teardown
+    I18n.locale = 'en'
+  end
+
   test '#display_time - hours (en)' do
     assert_equal '1 hour', TimeService.display_time(7200)
     assert_equal '1 hour', TimeService.display_time(5500)
@@ -15,6 +19,7 @@ class TimeServiceTest < ActiveSupport::TestCase
 
   test '#display_time - hours (pl)' do
     I18n.locale = 'pl'
+
     assert_equal '1 godzina', TimeService.display_time(7200)
     assert_equal '1 godzina', TimeService.display_time(5500)
     assert_equal '2 godziny', TimeService.display_time(14_400)
@@ -27,6 +32,7 @@ class TimeServiceTest < ActiveSupport::TestCase
 
   test '#display_time - days (pl)' do
     I18n.locale = 'pl'
+
     assert_equal '1 dzień', TimeService.display_time(24 * 3600)
     assert_equal '1.25 dnia', TimeService.display_time(13 * 7200)
     assert_equal '1.25 dnia', TimeService.display_time(15 * 7200)
