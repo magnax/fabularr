@@ -3,6 +3,16 @@
 module Definitions::Recipes
   RECIPES = [
     {
+      key: 'small_fire_pit',
+      type: 'machinery',
+      # TODO: base_speed is building/collecting time, can be confused with travel speed
+      base_speed: 3000,
+      placement: 'town',
+      instructions: [
+        { type: 'resource', key: 'stone', amount: 500 }
+      ]
+    },
+    {
       key: 'small_wooden_cart',
       type: 'vehicle',
       base_speed: 3000,
