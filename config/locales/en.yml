@@ -227,6 +227,13 @@ en:
     types:
       path: path
   select: --- select ---
+  time:
+    1_hour: hour
+    2_hours: hours
+    5_hours: hours
+    1_day: day
+    fraction_day: days
+    2_days: days
   vehicles:
     small_wooden_cart: small wooden cart
   views:
@@ -321,6 +328,8 @@ en:
       create_location: Create new location!
       discover: Discover
       new:
+        cancel: Cancel
+        item_name: 'Item name:'
         road:
           available_locations: 'Available locations: %{count}'
           create: Start building
@@ -328,6 +337,9 @@ en:
           impossible: You cannot build any new road at the moment
           location_html: 'Location: %{location_link}, direction: %{direction}'
           started: '- there is a building project already started'
+        submit: Start project
+        time_needed: 'Time needed:'
+        title: Build menu
       show:
         title: 'Project:'
       start: Start project

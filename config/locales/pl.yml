@@ -227,6 +227,13 @@ pl:
     types:
       path: ścieżka
   select: --- wybierz ---
+  time:
+    1_hour: godzina
+    2_hours: godziny
+    5_hours: godzin
+    1_day: dzień
+    fraction_day: dnia
+    2_days: dni
   vehicles:
     small_wooden_cart: mały drewniany wózek
   views:
@@ -321,6 +328,8 @@ pl:
       create_location: Utwórz nową lokację!
       discover: Odkrywaj
       new:
+        cancel: Anuluj
+        item_name: 'Nazwa przedmiotu:'
         road:
           available_locations: 'Dostępne lokacje: %{count}'
           create: Zacznij budowę
@@ -328,6 +337,9 @@ pl:
           impossible: W tej chwili nie możesz wybudować żadnej nowej drogi
           location_html: 'Osada: %{location_link}, kierunek: %{direction}'
           started: '- już istnieje projekt budowy tej drogi'
+        submit: Rozpocznij projekt
+        time_needed: 'Potrzebny czas:'
+        title: Menu budowania i produkcji
       show:
         title: 'Projekt:'
       start: Rozpocznij projekt
