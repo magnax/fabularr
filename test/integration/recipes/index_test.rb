@@ -56,4 +56,22 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
     assert_content '1 hour'
     assert_element 'form', action: "#{host}/en/projects"
   end
+
+  test 'show project setup page for project outside' do
+    create(:recipe, recipe_type: Recipe::VEHICLE, base_speed: 14_400, key: 'small_wooden_cart')
+    create(:project_type, :build)
+
+    visit '/en/recipes'
+
+    assert_equal 200, page.status_code
+
+    click_on 'Continue'
+
+    assert_equal 200, page.status_code
+    assert_content 'Item name:'
+    assert_content 'small wooden cart'
+    assert_content '2 hours'
+    assert_content 'Can be build only outside the buildings/vehicles'
+    assert_element 'form', action: "#{host}/en/projects"
+  end
 end

@@ -4,12 +4,19 @@
   <table>
     <tr>
       <td><%= t('views.projects.new.item_name') %></td>
-      <td><%= t("items.#{item_name}") %></td>
+      <td><%= item_name %></td>
     </tr>
     <tr>
       <td><%= t('views.projects.new.time_needed') %></td>
       <td><%= time_needed %></td>
     </tr>
+    <% if placement.present? %>
+      <tr>
+        <td colspan=2>
+          <%= t("placements.#{placement}") %>
+        </td>
+      </tr>
+    <% end %>
     <tr>
       <td colspan=2 class="table-actions">
         <%= f.button t('views.projects.new.cancel') %>

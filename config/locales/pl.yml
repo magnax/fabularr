@@ -164,6 +164,8 @@ pl:
     unnamed_place: nienazwane miejsce
     wood_shack: Drewniana chata
   new_user: Nowy użytkownik
+  placements:
+    outside_all: Może być zbudowane tylko na zewnątrz budynków/pojazdów
   project_info:
     build: 'Wyprodukowano: %{item}'
     collect: '%{amount} %{unit} %{res} wylądowało na ziemi.'

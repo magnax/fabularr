@@ -164,6 +164,8 @@ en:
     unnamed_place: unnamed place
     wood_shack: Wood shack
   new_user: New user
+  placements:
+    outside_all: Can be build only outside the buildings/vehicles
   project_info:
     build: 'Manufactured: %{item}'
     collect: '%{amount} %{unit} of %{res} landed on the ground.'

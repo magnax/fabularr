@@ -13,7 +13,8 @@ module Projects
       raise InvalidPlacementError if invalid_placement?
 
       {
-        item_name: 'stone_knife',
+        item_name: item_name,
+        placement: placement_key,
         project_type_id: project_type.id,
         recipe_id: @recipe_id,
         time_needed: time_needed
@@ -24,6 +25,20 @@ module Projects
 
     def invalid_placement?
       false
+    end
+
+    def item_name
+      @item_name ||= I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}")
+    end
+
+    def placement_key
+      return 'outside_all' if vehicle?
+
+      nil
+    end
+
+    def vehicle?
+      recipe.recipe_type == Recipe::VEHICLE
     end
 
     def time_needed
