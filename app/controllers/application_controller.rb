@@ -31,6 +31,12 @@ class ApplicationController < ActionController::Base
     flash_errors_and_redirect(err.model)
   end
 
+  def render_error(error, redirect_url = events_url)
+    flash[:errors] = error
+
+    redirect_to redirect_url
+  end
+
   def render_new?
     "#{request.original_url}/new" == request.referer
   end

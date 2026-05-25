@@ -61,6 +61,9 @@ pl:
     w: zachodni
     wnw: zachodnio-północno-zachodni
     wsw: zachodnio-południowo-zachodni
+  errors:
+    projects:
+      only_outside: Ten projekt można rozpocząć tylko na zewnątrz
   events:
     character:
       talking:

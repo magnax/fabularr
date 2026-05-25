@@ -61,6 +61,9 @@ en:
     w: west
     wnw: west-north-west
     wsw: west-south-west
+  errors:
+    projects:
+      only_outside: This project can be started only outside
   events:
     character:
       talking:

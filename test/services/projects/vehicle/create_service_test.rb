@@ -43,20 +43,14 @@ class ProjectsVehicleCreateServiceTest < ActiveSupport::TestCase
   end
 
   test 'vehicle - error when started inside the building' do
-    building = create(:location, :building, parent_location: @current_character.location)
+    building = create(:location, :building)
     @current_character.update!(location: building)
-    project_type = create(:project_type, key: 'build',
-                                         base_speed: 0, fixed: true)
-    wood = create(:resource, :material, key: 'wood')
-    recipe = create(:recipe, recipe_type: 'vehicle', key: 'small_wooden_cart', base_speed: 3600)
-    create(:recipe_instruction, recipe: recipe, subject: wood,
-                                amount: 500, unit: 'grams',
-                                instruction_type: 'resource')
+    project_type = create(:project_type, key: 'build')
+    recipe = create(:recipe, recipe_type: 'vehicle')
 
     params = {
       project_type_id: project_type.id,
-      recipe_id: recipe.id,
-      name: 'My Cart'
+      recipe_id: recipe.id
     }
 
     assert_raises Projects::OnlyOutsideError do

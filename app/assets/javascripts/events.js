@@ -1,6 +1,8 @@
 window.onload = function () {
   console.log("events page loaded");
 
+  setTimeout(clearErrors, 4000);
+
   locationId = document.getElementById('events').dataset.locationId;
   currentCharacterId = document.getElementById('current_character').dataset.id;
 

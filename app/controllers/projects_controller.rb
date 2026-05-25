@@ -13,6 +13,8 @@ class ProjectsController < ApplicationController
     Projects::CreateService.call(current_character, project_params)
 
     redirect_to events_path
+  rescue Projects::OnlyOutsideError
+    render_error I18n.t('errors.projects.only_outside')
   end
 
   def show
