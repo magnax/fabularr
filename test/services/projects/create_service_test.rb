@@ -33,6 +33,18 @@ class ProjectsCreateServiceTest < ActiveSupport::TestCase
     end
   end
 
+  test 'raise exception when recipe not found for build project' do
+    project_type = create(:project_type, key: 'build')
+
+    params = {
+      project_type_id: project_type.id
+    }
+
+    assert_raises Projects::RecipeNotFoundError do
+      call_service(params)
+    end
+  end
+
   test 'discover new location resource' do
     project_type = create(:project_type, key: 'discover_resource',
                                          base_speed: 1000, fixed: true)

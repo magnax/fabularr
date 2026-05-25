@@ -2,10 +2,9 @@
 
 module Projects
   class Create::Build < Projects::Create::Base
-    class RecipeNotFoundError < StandardError; end
-
     def call
-      raise RecipeNotFoundError if recipe.blank?
+      raise Projects::RecipeNotFoundError if recipe.blank?
+      raise Projects::OnlyOutsideError if wrong_location?
 
       super
 
@@ -13,6 +12,10 @@ module Projects
     end
 
     private
+
+    def wrong_location?
+      recipe.recipe_type == Recipe::VEHICLE && !@character.location.town?
+    end
 
     def project_attributes
       project_base_attributes.merge(
