@@ -40,6 +40,8 @@ module Travellers
 
     def location_type(coords)
       Maps.location_type(coords[:x], coords[:y])
+    rescue Maps::InvalidPositionError => e
+      log.error "Location type error #{e.message} for #{@traveller.id} (#{coords.as_json})"
     end
 
     def stop_travel!
@@ -122,6 +124,10 @@ module Travellers
     # vehicles will be added with more complex configuration
     def base_speed
       0.01736 # pixels for 1 minute (60 sec.)
+    end
+
+    def log
+      @log ||= Logger.new('log/travel.log')
     end
   end
 end
