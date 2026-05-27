@@ -25,17 +25,12 @@ function appendLine(event) {
 function createLine(event) {
   console.log(event);
 
-  const lead = event["lead"] ? `<div>
-          ${event["lead"]}
-        </div>` : '';
-
   return `
-        <div>
+        <span class="event-date">
           ${event["created_at"]}
-        </div>
-        ${lead}
-        <div>
+        </span>
+        <span>
           ${event["body"]}
-        </div>
+        </span>
       `
 };

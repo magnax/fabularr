@@ -91,24 +91,28 @@ module InventoryObjects
     end
 
     def create_character_event!
-      Event.create!(
+      event = Event.create!(
         body: send("take_#{subject.class.to_s.downcase}_body"),
         location: @character.location,
         receiver_character: @character
       )
+
+      Events::BroadcastService.call(@character.id, event.id)
     end
 
     def create_other_characters_events!
       @character.location.visible_characters.each do |char|
         next if char == @character
 
-        Event.create!(
+        event = Event.create!(
           # take_resource_others_body take_item_others_body
           body: send("take_#{subject.class.to_s.downcase}_others_body"),
           location: @character.location,
           character: nil,
           receiver_character: char
         )
+
+        Events::BroadcastService.call(char.id, event.id)
       end
     end
 
@@ -138,13 +142,16 @@ module InventoryObjects
     end
 
     def item_location_object
-      @item_location_object ||= location.location_objects.item.find_by(id: @params[:location_object_id])
+      @item_location_object ||= location.location_objects.item.find_by(
+        id: @params[:location_object_id]
+      )
     end
 
     def resource_location_object
-      @resource_location_object ||= location.location_objects
-                                            .resource
-                                            .find_by(subject_id: @params[:subject_id])
+      @resource_location_object ||=
+        location.location_objects
+                .resource
+                .find_by(subject_id: @params[:subject_id])
     end
 
     def inventory_object
