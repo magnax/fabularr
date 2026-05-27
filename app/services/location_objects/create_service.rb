@@ -122,23 +122,27 @@ module LocationObjects
     end
 
     def create_character_event!
-      Event.create!(
+      event = Event.create!(
         body: send("drop_#{subject.class.to_s.downcase}_body"),
         location: @character.location,
         receiver_character: @character
       )
+
+      Events::BroadcastService.call(@character.id, event.id)
     end
 
     def create_other_characters_events!
       @character.location.visible_characters.each do |char|
         next if char == @character
 
-        Event.create!(
+        event = Event.create!(
           body: send("drop_#{subject.class.to_s.downcase}_others_body"),
           location: @character.location,
           character: nil,
           receiver_character: char
         )
+
+        Events::BroadcastService.call(char.id, event.id)
       end
     end
 

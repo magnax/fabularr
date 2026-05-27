@@ -26,11 +26,13 @@ function createLine(event) {
   console.log(event);
 
   return `
+        <div class="event">      
         <span class="event-date">
           ${event["created_at"]}
         </span>
         <span>
           ${event["body"]}
         </span>
+        </div>
       `
 };
