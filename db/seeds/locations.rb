@@ -29,12 +29,20 @@ Definitions::LocationTypes::CONFIG_TOWNS.each do |key|
       coords: position
     }
   )
-  Character.create!(
-    user: User.first,
-    name: Faker::FunnyName.name,
-    location: location,
-    spawn_location: location,
-    gender: %w[K M].sample
-  )
   Log.say "Created location #{location.id}, type: #{lt.key}, position: #{position}"
+end
+
+active_locations = Location.all.sample(2)
+
+User.all.find_each do |user|
+  10.times do
+    location = active_locations.sample
+    Character.create!(
+      user: user,
+      name: Faker::FunnyName.name,
+      location: location,
+      spawn_location: location,
+      gender: %w[K M].sample
+    )
+  end
 end
