@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_14_074257) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_27_070504) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -68,9 +68,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_14_074257) do
   end
 
   create_table "item_types", force: :cascade do |t|
+    t.integer "attack", default: 0
     t.datetime "created_at", null: false
+    t.integer "defense", default: 0
     t.string "key"
+    t.integer "repair", default: 0
+    t.integer "rot", default: 10
+    t.integer "rot_use", default: 100
+    t.integer "skill", default: 50
     t.datetime "updated_at", null: false
+    t.boolean "visible", default: false
     t.integer "weight"
   end
 

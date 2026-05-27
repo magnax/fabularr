@@ -11,4 +11,8 @@
 #  updated_at :datetime         not null
 #
 class ItemClass < ApplicationRecord
+  PROTECTION = 'protection'
+  SEMI = 'semi'
+  TOOL = 'tool'
+  WEAPON = 'weapon'
 end
