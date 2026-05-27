@@ -24,11 +24,42 @@ class EventsCreateTest < ActionDispatch::IntegrationTest
       }
     }
 
-    assert_difference -> { Event.count }, 1 do
+    assert_difference -> { Event.count }, 2 do
       post events_route, params: params
     end
 
     assert_response :no_content
+
+    ev = Event.where(receiver_character_id: @character.id).sole
+    assert_equal "You say to <!--CHARID:#{@other_character.id}-->: #{params[:event][:body]}", ev.body
+
+    ev = Event.where(receiver_character_id: @other_character.id).sole
+    assert_equal "<!--CHARID:#{@character.id}--> says to You: #{params[:event][:body]}", ev.body
+  end
+
+  test 'character can talk to all' do
+    vehicle = create(:location, :vehicle, parent_location: @location)
+    create(:character, location: vehicle)
+
+    params = {
+      event: {
+        body: Faker::Lorem.sentence
+      }
+    }
+
+    assert_difference -> { Event.count }, 3 do
+      post events_route, params: params
+    end
+
+    assert_response :no_content
+
+    assert_empty Event.pluck(:character_id).compact
+
+    ev = Event.where(receiver_character_id: @character.id).sole
+    assert_equal "You say: #{params[:event][:body]}", ev.body
+
+    ev = Event.where(receiver_character_id: @other_character.id).sole
+    assert_equal "<!--CHARID:#{@character.id}--> says: #{params[:event][:body]}", ev.body
   end
 
   test 'create event and redirect' do
@@ -40,7 +71,7 @@ class EventsCreateTest < ActionDispatch::IntegrationTest
       }
     }
 
-    assert_difference -> { Event.count }, 1 do
+    assert_difference -> { Event.count }, 2 do
       post events_route, params: params
     end
 

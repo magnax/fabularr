@@ -5,7 +5,7 @@ class Api::EventsController < ApplicationController
 
   def show
     render json: {
-      event: Events::ParseService.call(event, character, parsed: true).as_json
+      event: Events::ParseService.call(event, character).as_json
     }
   end
 

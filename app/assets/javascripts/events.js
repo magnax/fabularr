@@ -3,10 +3,9 @@ window.onload = function () {
 
   setTimeout(clearErrors, 4000);
 
-  locationId = document.getElementById('events').dataset.locationId;
   currentCharacterId = document.getElementById('current_character').dataset.id;
 
-  App.cable.subscriptions.create({ channel: "LocationChannel", location_id: locationId }, {
+  App.cable.subscriptions.create({ channel: "CharacterChannel", character_id: currentCharacterId }, {
     received(data) {
       switch (data.type) {
         case 'event':

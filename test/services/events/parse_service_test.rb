@@ -30,8 +30,6 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
     result = call_service(event)
 
     assert_equal event.body, result[:body]
-    assert_equal 'events.character.talking.other', result[:lead][:key]
-    assert_equal "<a href=\"/characters/#{character.id}/name\">unknown man</a>", result[:lead][:char_name]
   end
 
   test 'parse talk event from the same character' do
@@ -41,7 +39,6 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
     result = call_service(event)
 
     assert_equal event.body, result[:body]
-    assert_equal 'events.character.talking.me', result[:lead][:key]
   end
 
   test 'parse private talk event from the other character' do
@@ -53,8 +50,6 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
     result = call_service(event)
 
     assert_equal event.body, result[:body]
-    assert_equal 'events.character.talking.to_me', result[:lead][:key]
-    assert_equal "<a href=\"/characters/#{character.id}/name\">unknown woman</a>", result[:lead][:char_name]
   end
 
   test 'parse private talk event to the other character' do
@@ -66,8 +61,6 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
     result = call_service(event)
 
     assert_equal event.body, result[:body]
-    assert_equal 'events.character.talking.to_other', result[:lead][:key]
-    assert_equal "<a href=\"/characters/#{character.id}/name\">unknown woman</a>", result[:lead][:char_name]
   end
 
   test 'parse event body with <!--CHARID--> placeholder' do

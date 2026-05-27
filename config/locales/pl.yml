@@ -67,10 +67,10 @@ pl:
   events:
     character:
       talking:
-        other: "%{char_name} mówi: "
-        to_me: "%{char_name} mówi do Ciebie: "
-        me: 'Mówisz: '
-        to_other: 'Mówisz do %{char_name}: '
+        other: "%{char_name} mówi: %{body}"
+        to_me: "%{char_name} mówi do Ciebie: %{body}"
+        me: 'Mówisz: %{body}'
+        to_other: 'Mówisz do %{char_name}: %{body}'
     drop_item: Upuszczasz %{item}
     drop_item_others: Widzisz jak %{character_link} upuszcza %{item}
     drop_resource: Upuszczasz %{amount} %{unit} %{res}

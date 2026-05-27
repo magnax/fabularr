@@ -11,11 +11,6 @@
       <span class="event-date">
         <%= event[:created_at] %>
       </span>
-      <% if event[:lead] %>
-        <span>
-          <%= t(event[:lead][:key], char_name: event[:lead][:char_name]).html_safe %>
-        </span>
-      <% end %>
       <span>
         <%= event[:body].html_safe %>
       </span>

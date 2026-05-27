@@ -5,16 +5,14 @@ module Events
     include Rails.application.routes.url_helpers
     include ActionView::Helpers::UrlHelper
 
-    def initialize(event, viewing_character, parsed: false)
+    def initialize(event, viewing_character)
       @event = event
       @viewing_character = viewing_character
-      @parsed = parsed
     end
 
     def call
       {
         body: parsed_body,
-        lead: @parsed ? parsed_lead : lead,
         created_at: parsed_time
       }.with_indifferent_access
     end
@@ -51,40 +49,6 @@ module Events
       end
 
       event_body
-    end
-
-    def parsed_lead
-      l = lead
-
-      I18n.t(l[:key], char_name: l[:char_name]) if l
-    end
-
-    def lead
-      return if @event.character_id.blank?
-
-      if @event.character_id == @viewing_character.id
-        if @event.receiver_character_id.present?
-          {
-            key: 'events.character.talking.to_other',
-            char_name: link_to_name_for(@event.receiver_character)
-          }
-        else
-          {
-            key: 'events.character.talking.me',
-            char_name: nil
-          }
-        end
-      elsif @event.receiver_character_id == @viewing_character.id
-        {
-          key: 'events.character.talking.to_me',
-          char_name: link_to_name_for(character)
-        }
-      else
-        {
-          key: 'events.character.talking.other',
-          char_name: link_to_name_for(character)
-        }
-      end
     end
 
     def link_to_name_for(char)

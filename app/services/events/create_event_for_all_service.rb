@@ -6,7 +6,6 @@ module Events
       @characters = characters
       @body = body
       @except = except
-      @locations = []
     end
 
     def call
@@ -19,15 +18,7 @@ module Events
           body: @body
         )
 
-        if ch.location
-          @locations << ch.location
-        else
-          ActionCable.server.broadcast("char_#{ch.id}", { type: 'event', body: @body })
-        end
-      end
-
-      @locations.uniq.each do |location|
-        ActionCable.server.broadcast("location_#{location.id}", { type: 'event', body: @body })
+        ActionCable.server.broadcast("char_#{ch.id}", { type: 'event', body: @body })
       end
     end
   end

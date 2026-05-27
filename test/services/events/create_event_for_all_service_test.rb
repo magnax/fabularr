@@ -18,7 +18,9 @@ class EventsCreateEventForAllServiceTest < ActiveSupport::TestCase
       call_service([char_1, char_2], 'new event!')
     end
 
-    assert_broadcast_on "location_#{location.id}", { type: 'event', body: 'new event!' }
+    [char_1.id, char_2.id].each do |id|
+      assert_broadcast_on "char_#{id}", { type: 'event', body: 'new event!' }
+    end
   end
 
   test 'create events for travelling characters' do
