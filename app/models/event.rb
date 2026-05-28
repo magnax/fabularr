@@ -6,6 +6,7 @@
 #
 #  id                    :bigint           not null, primary key
 #  body                  :text
+#  read_at               :datetime
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  character_id          :integer
