@@ -7,11 +7,13 @@ module Events
     end
 
     def call
+      read_events!
+
       {
         buildings: location&.buildings,
         character: @character,
         characters: map_characters,
-        events: Events::FetchEvents.call(@character),
+        events: events,
         items: items,
         location: location,
         location_info: Locations::InfoService.call(@character),
@@ -26,6 +28,12 @@ module Events
 
     private
 
+    def read_events!
+      @character.visible_events.where(read_at: nil).find_each do |event|
+        event.update(read_at: DateTime.current)
+      end
+    end
+
     def map_characters
       characters.uniq.map do |ch|
         {
@@ -34,6 +42,10 @@ module Events
           location: other_location(ch)
         }
       end
+    end
+
+    def events
+      @events ||= Events::FetchEvents.call(@character)
     end
 
     def other_location(other_character)

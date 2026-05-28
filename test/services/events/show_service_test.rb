@@ -176,4 +176,13 @@ class EventsShowServiceTest < ActiveSupport::TestCase
     assert_equal vehicle.parent_location_id, res[:location_info][:toplevel_location_id]
     assert_equal '[small wooden cart]', res[:location_info][:location_type]
   end
+
+  test 'mark events as read when showing them' do
+    event = create(:event, receiver_character: @character)
+
+    res = call_service
+
+    assert_equal 1, res[:events].length
+    assert_not_nil event.reload.read_at
+  end
 end
