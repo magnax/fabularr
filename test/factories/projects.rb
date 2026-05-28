@@ -30,7 +30,7 @@ FactoryBot.define do
   factory :project do
     association :starting_character, factory: :character
     location
-    project_type
+    project_type { FactoryBot.create(:project_type, key: 'build') }
     duration { 2000 }
     elapsed { 0 }
 

@@ -19,7 +19,10 @@
       <%= location_info[:location_type] %>
     <% end %>
   </div>
-
+  <% if project.present? %>
+    <%= t 'views.events.index.project' %>:
+    <%= project.name(character, short: true).html_safe %> <%= project.progress %>%
+  <% end %>
   <% if character.location %>
     <div>
       <%= link_to t('views.events.index.build_menu'), recipes_url %>

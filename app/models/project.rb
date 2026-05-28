@@ -86,4 +86,8 @@ class Project < ApplicationRecord
   def settings
     project_descriptions.settings.first&.metadata || {}
   end
+
+  def progress(precision = 1)
+    (elapsed.to_f / duration * 100.0).round(precision)
+  end
 end

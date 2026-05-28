@@ -3,13 +3,13 @@
   <% projects.each do |project| %>
     <div data-project-id="<%= project.id %>">
       <%= link_to fa_icon('info-circle'), project_url(project.id) %>
-      <%= project.name(@current_character, short: true).html_safe.upcase_first %>
+      <%= project.name(@current_character, short: true).upcase_first.html_safe %>
       <% if project.ready %>
         <%= "\u2714" %>
       <% else %>
         <%= "\u2718" %>
       <% end %>
-      (<span id="percent-<%= project.id %>"><%= (project.elapsed.to_f / project.duration * 100.0).round(1) %></span>%), 
+      (<span id="percent-<%= project.id %>"><%= project.progress %></span>%), 
       <%= t('projects.started_by', char_url: link_to(current_character.name_for(project.starting_character), character_name_url(project.starting_character_id))).html_safe %>
       <% if @current_character.project.blank? %>
         <% if project.ready %>

@@ -160,4 +160,21 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     assert_content 'unknown woman (Turtle [small wooden cart])'
   end
+
+  test 'show project in character info' do
+    fabular_city = create(:location)
+    character = create(:character, name: 'Magnus', location: fabular_city, user: @user)
+    recipe = create(:recipe)
+    project = create(:project, location: fabular_city, recipe: recipe, elapsed: 300, duration: 600)
+
+    create(:worker, character: character, project: project)
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_equal 200, page.status_code
+
+    assert_content 'Project:'
+    assert_content 'Building: stone knife 50.0%'
+  end
 end

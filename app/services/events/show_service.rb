@@ -9,7 +9,6 @@ module Events
     def call
       {
         buildings: location&.buildings,
-        vehicles: location&.vehicles,
         character: @character,
         characters: map_characters,
         events: Events::FetchEvents.call(@character),
@@ -17,9 +16,11 @@ module Events
         location: location,
         location_info: Locations::InfoService.call(@character),
         location_resources: location&.location_resources,
+        project: project,
         projects: Projects::VisibleProjects.call(@character),
         roads: roads,
-        travel_info: travel_info
+        travel_info: travel_info,
+        vehicles: location&.vehicles
       }
     end
 
@@ -82,6 +83,10 @@ module Events
 
     def town?
       location.present? && location.town?
+    end
+
+    def project
+      @character.project
     end
 
     def travel_info

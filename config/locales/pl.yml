@@ -282,6 +282,7 @@ pl:
         name_title: Nazwa
         no_buildings_here: Nie ma żadnych budynków
         no_vehicles_here: Nie ma żadnych pojazdów
+        project: Projekt
         projects_here: Projekty
         resources_here: Zasoby
         roads_here: Wyjścia (drogi)
