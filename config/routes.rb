@@ -58,7 +58,9 @@ Fabularr::Application.routes.draw do
     match '/list', to: 'users#show', via: 'get'
 
     namespace :api do
-      resources :events, only: :show
+      resources :events, only: :show do
+        get :unread, on: :collection
+      end
     end
   end
 

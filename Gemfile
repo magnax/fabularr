@@ -3,11 +3,9 @@
 source 'https://rubygems.org'
 
 gem 'bcrypt'
-gem 'coffee-rails'
 gem 'font-awesome-rails'
 gem 'i18n'
 gem 'jbuilder'
-gem 'jquery-rails'
 gem 'net-http'
 gem 'observer'
 gem 'pg'
@@ -19,8 +17,6 @@ gem 'rmagick'
 gem 'sass-rails'
 gem 'sidekiq'
 gem 'solid_cable'
-gem 'turbolinks'
-gem 'turbo-rails'
 gem 'uglifier', '>= 1.3.0'
 
 group :development do
