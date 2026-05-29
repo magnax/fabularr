@@ -1,5 +1,6 @@
   <td class="name <%= character[:unread_events].zero? ? '' : 'bold' %>">
 		<%= link_to character[:name], character_set_url(character[:id]) %>
+		<span class="events-count" style="visibility: <%= character[:unread_events].zero? ? 'hidden' : 'visible' %>"><%= character[:unread_events] %></span>
 	</td>
 	<td class="center" style="width: 50px;">
 		<% if character[:hunger_level].present? %>

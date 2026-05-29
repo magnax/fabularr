@@ -6,7 +6,6 @@ function clearErrors() {
 }
 
 function checkEvents() {
-  console.log(currentUserId);
   fetch(`/api/events/unread?user_id=${currentUserId}`)
     .then(response => {
       if (!response.ok) {
@@ -19,6 +18,9 @@ function checkEvents() {
         td = document.querySelector(`tr[id="char_${r}"] td.name`);
         if (data[r] > 0) {
           td.classList.add('bold');
+          ec = td.querySelector('.events-count')
+          ec.style['visibility'] = 'visible';
+          ec.innerText = data[r];
         }
       }
     })
