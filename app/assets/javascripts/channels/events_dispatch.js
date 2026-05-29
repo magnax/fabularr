@@ -12,8 +12,7 @@ function dispatch_event(event_id, character_id) {
     })
     .catch(error => {
       console.error("There was a problem with the fetch operation:", error);
-    }
-    );
+    });
 };
 
 function appendLine(event) {

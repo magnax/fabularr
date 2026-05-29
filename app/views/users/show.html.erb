@@ -6,7 +6,7 @@
     <h3><%= t 'views.users.show.characters' %> (<%= characters.count %>)</h3>
     <table class="characters">
       <% characters.each do |character| %>
-        <tr>
+        <tr id="char_<%= character['id'] %>">
           <%= render 'characters/character', character: character %>
         </tr>
       <% end %>

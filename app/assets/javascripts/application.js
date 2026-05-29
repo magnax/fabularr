@@ -2,9 +2,7 @@
 function clearErrors() {
   try {
     document.querySelector('.alert').remove();
-  } catch (_error) {
-
-  }
+  } catch (_error) { }
 }
 
 function checkEvents() {
@@ -17,12 +15,14 @@ function checkEvents() {
       return response.json();
     })
     .then(data => {
-      console.log(data);
-      // appendLine(data["event"]);
-      // document.getElementById("submit-body").value = '';
+      for (r in data) {
+        td = document.querySelector(`tr[id="char_${r}"] td.name`);
+        if (data[r] > 0) {
+          td.classList.add('bold');
+        }
+      }
     })
     .catch(error => {
       console.error("There was a problem with the fetch operation:", error);
-    }
-    );
+    });
 }

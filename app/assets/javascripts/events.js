@@ -1,9 +1,9 @@
 window.onload = function () {
   console.log("events page loaded");
 
-  setTimeout(clearErrors, 4000);
-
   currentCharacterId = document.getElementById('current_character').dataset.id;
+
+  setTimeout(clearErrors, 4000);
 
   App.cable.subscriptions.create({ channel: "CharacterChannel", character_id: currentCharacterId }, {
     received(data) {
