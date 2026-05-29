@@ -7,7 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= render 'layouts/character_header' %>
+  <% if @current_character %>
+	  <%= render 'layouts/character_header' %>
+  <% else %>
+	  <%= render 'layouts/header' %>
+  <% end %>
 	<% flash.each do |key, value| %>
     <% if key == 'errors' %>
       <div class="alert alert-<%= key %>"><%= value.split("\n").join('< /br>') %></div>

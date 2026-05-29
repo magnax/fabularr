@@ -22,6 +22,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @current_character = nil
+
     render layout: 'application', locals: Users::ShowService.call(current_user)
   end
 
