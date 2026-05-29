@@ -25,7 +25,8 @@ module Users
           location_type: location_type(char),
           male: char.male?,
           name: char.name_for(char),
-          travel_info: travel_info(char)
+          travel_info: travel_info(char),
+          unread_events: char.visible_events.unread.length
         )
             .with_indifferent_access
       end

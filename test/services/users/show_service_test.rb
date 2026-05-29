@@ -40,4 +40,19 @@ class UsersShowServiceTest < ActiveSupport::TestCase
     assert_equal 'wounded', chars.find { |c| c['id'] == char_wounded.id }['damage_level']
     assert_equal 'agony', chars.find { |c| c['id'] == char_agony.id }['damage_level']
   end
+
+  test 'show number of unread events' do
+    char_1 = create(:character, user: @user)
+    char_2 = create(:character, user: @user)
+
+    create(:event, receiver_character: char_1)
+
+    res = call_service
+
+    ch = res[:characters].find { |c| c['id'] == char_1.id }
+    assert_equal 1, ch[:unread_events]
+
+    ch = res[:characters].find { |c| c['id'] == char_2.id }
+    assert_equal 0, ch[:unread_events]
+  end
 end

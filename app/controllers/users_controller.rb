@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render locals: Users::ShowService.call(current_user)
+    render layout: 'application', locals: Users::ShowService.call(current_user)
   end
 
   def edit; end

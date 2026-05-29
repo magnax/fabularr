@@ -25,4 +25,5 @@ class Event < ApplicationRecord
   belongs_to :receiver_character, class_name: 'Character', optional: true
 
   scope :newest, -> { order(created_at: :desc).first(NEWEST_COUNT) }
+  scope :unread, -> { where(read_at: nil) }
 end

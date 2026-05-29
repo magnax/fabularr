@@ -9,6 +9,10 @@ class Api::EventsController < ApplicationController
     }
   end
 
+  def unread
+    render json: Events::UnreadService.call(params[:user_id])
+  end
+
   private
 
   def event

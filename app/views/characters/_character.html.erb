@@ -1,4 +1,4 @@
-  <td>
+  <td class="<%= character[:unread_events].zero? ? '' : 'bold' %>">
 		<%= link_to character[:name], character_set_url(character[:id]) %>
 	</td>
 	<td class="center" style="width: 50px;">
