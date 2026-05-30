@@ -12,7 +12,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_to asasevents_path
+        redirect_to events_path
       end
       format.json do
         render json: {}
