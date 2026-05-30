@@ -10,10 +10,13 @@ class EventsController < ApplicationController
   def create
     Events::CreateService.call(current_character, event_params)
 
-    if params[:event][:reload]
-      redirect_to events_path
-    else
-      render json: {}, status: :no_content
+    respond_to do |format|
+      format.html do
+        redirect_to asasevents_path
+      end
+      format.json do
+        render json: {}
+      end
     end
   end
 

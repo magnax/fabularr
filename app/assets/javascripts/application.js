@@ -1,4 +1,6 @@
 //= require channels
+//= require rails-ujs
+
 function clearErrors() {
   try {
     document.querySelector('.alert').remove();

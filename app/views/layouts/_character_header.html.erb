@@ -4,6 +4,6 @@
 	<% if signed_in? %>
 		<%= link_to t('views.layout.events_link'), events_url %>
 		<%= link_to t('views.layout.back_to_char_list'), list_url %>
-		<%= link_to t('views.layout.logout'), logout_url, method: "delete" %>
+		<%= link_to t('views.layout.logout'), logout_url, data: { method: "delete" } %>
 	<% end %>
 </nav>

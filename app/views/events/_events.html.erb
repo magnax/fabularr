@@ -2,7 +2,9 @@
 <%= form_for(:event) do |f| %>
 
   <%= f.text_field :body, id: 'submit-body' %>
-  <%= f.submit t('views.events.send'), data: { disable_with: false }, class: "btn btn-large btn-primary" %>
+  <%= f.submit t('views.events.send'), data: { disable_with: false }, 
+    class: "submit-button btn btn-large btn-primary" 
+  %>
 
 <% end %>
 <section id="event-list">
