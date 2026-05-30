@@ -10,12 +10,8 @@ class CharactersNameTest < ActionDispatch::IntegrationTest
                                           location: @current_character.location)
   end
 
-  def sign_in
-    visit new_session_url
-    fill_in 'E-mail', with: @user.email
-    fill_in 'Password', with: @user.password
-
-    click_on 'Login'
+  def sign_in_character
+    sign_in
     click_on @current_character.name
   end
 
@@ -23,24 +19,24 @@ class CharactersNameTest < ActionDispatch::IntegrationTest
     create(:char_name, character: @current_character,
                        named: @other_character, name: 'Ella')
 
-    sign_in
+    sign_in_character
   end
 
   test 'link to character name on events page' do
-    sign_in
+    sign_in_character
 
     assert_link 'unknown woman'
   end
 
   test 'content for unnamed character on character name page' do
-    sign_in
+    sign_in_character
     click_on 'unknown woman'
 
     assert_text 'Current name: unknown woman'
   end
 
   test 'change the character name' do
-    sign_in
+    sign_in_character
     click_on 'unknown woman'
 
     assert_difference -> { CharName.count }, 1 do
@@ -52,7 +48,7 @@ class CharactersNameTest < ActionDispatch::IntegrationTest
   end
 
   test 'change the name even if not provided' do
-    sign_in
+    sign_in_character
     click_on 'unknown woman'
 
     assert_difference -> { CharName.count }, 1 do

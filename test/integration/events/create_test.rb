@@ -28,7 +28,7 @@ class EventsCreateTest < ActionDispatch::IntegrationTest
       post events_route, params: params
     end
 
-    assert_response :no_content
+    assert_response :found
 
     ev = Event.where(receiver_character_id: @character.id).sole
     assert_equal "You say to <!--CHARID:#{@other_character.id}-->: #{params[:event][:body]}", ev.body
@@ -51,7 +51,7 @@ class EventsCreateTest < ActionDispatch::IntegrationTest
       post events_route, params: params
     end
 
-    assert_response :no_content
+    assert_response :found
 
     assert_empty Event.pluck(:character_id).compact
 

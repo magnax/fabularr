@@ -5,7 +5,7 @@ require 'test_helper'
 class SessionsCreateTest < ActionDispatch::IntegrationTest
   test 'login - with invalid information' do
     visit login_path
-    click_on 'Login'
+    click_button 'Login'
 
     assert_text 'Fabular login'
     assert_selector('div.alert.alert-error', text: 'Invalid username or password')
@@ -18,7 +18,7 @@ class SessionsCreateTest < ActionDispatch::IntegrationTest
     fill_in 'E-mail', with: user.email
     fill_in 'Password', with: user.password
 
-    click_on 'Login'
+    click_button 'Login'
 
     assert_content("Hello #{user.email}")
     assert_content("You don't have any characters")
@@ -34,7 +34,7 @@ class SessionsCreateTest < ActionDispatch::IntegrationTest
     fill_in 'E-mail', with: user.email
     fill_in 'Password', with: user.password
 
-    click_on 'Login'
+    click_button 'Login'
 
     assert_content("Hello #{user.email}")
     assert_no_link 'Login'

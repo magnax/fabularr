@@ -10,14 +10,6 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
     click_link 'Magnus'
   end
 
-  def sign_in
-    visit new_session_url
-    fill_in 'E-mail', with: @user.email
-    fill_in 'Password', with: @user.password
-
-    click_on 'Login'
-  end
-
   test 'no recipes available' do
     visit '/en/recipes'
 

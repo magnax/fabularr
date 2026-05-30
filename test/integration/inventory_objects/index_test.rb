@@ -11,14 +11,6 @@ class InventoryObjectsIndexTest < ActionDispatch::IntegrationTest
     click_link 'Magnus'
   end
 
-  def sign_in
-    visit new_session_url
-    fill_in 'E-mail', with: @user.email
-    fill_in 'Password', with: @user.password
-
-    click_on 'Login'
-  end
-
   test 'resources and items are visible' do
     iron = create(:resource, key: 'iron')
     stone_knife = create(:item_type, key: 'stone_knife', weight: 120)

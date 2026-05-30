@@ -7,15 +7,6 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     @user = create(:user, email: 'user@me.com')
   end
 
-  def sign_in
-    visit login_path
-
-    fill_in 'E-mail', with: @user.email
-    fill_in 'Password', with: @user.password
-
-    click_on 'Login'
-  end
-
   test 'not logged in user' do
     visit events_url
 
