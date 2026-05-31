@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_28_212539) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_31_121234) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -200,6 +200,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_28_212539) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.string "instruction_type"
+    t.jsonb "metadata"
     t.bigint "recipe_id"
     t.float "speed"
     t.integer "subject_id"

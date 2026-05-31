@@ -7,6 +7,7 @@
 #  id               :bigint           not null, primary key
 #  amount           :integer
 #  instruction_type :string
+#  metadata         :jsonb
 #  speed            :float
 #  subject_type     :string
 #  unit             :string
@@ -29,8 +30,10 @@ class RecipeInstruction < ApplicationRecord
 
   scope :resource, -> { where(instruction_type: RESOURCE) }
   scope :tool, -> { where(instruction_type: TOOL) }
+  scope :placement, -> { where(instruction_type: PLACEMENT) }
 
   # Types:
   RESOURCE = 'resource'
   TOOL = 'tool'
+  PLACEMENT = 'placement'
 end
