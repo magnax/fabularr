@@ -166,6 +166,8 @@ en:
     tundra: tundra
     unnamed_place: unnamed place
     wood_shack: Wood shack
+  machineries:
+    small_fire_pit: small fire pit
   new_user: New user
   placements:
     outside_all: Can be build only outside the buildings/vehicles

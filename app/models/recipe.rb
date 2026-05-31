@@ -14,10 +14,13 @@
 class Recipe < ApplicationRecord
   has_many :recipe_instructions, dependent: :destroy
 
-  ITEM = 'item'
   BUILDING = 'building'
   COLLECT = 'collect'
+  ITEM = 'item'
+  MACHINERY = 'machinery'
   VEHICLE = 'vehicle'
+
+  BUILD_TYPES = [ITEM, BUILDING, MACHINERY, VEHICLE].freeze
 
   scope :by_type, ->(type) { where(recipe_type: type) }
 end

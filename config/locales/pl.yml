@@ -166,6 +166,8 @@ pl:
     tundra: tundra
     unnamed_place: nienazwane miejsce
     wood_shack: Drewniana chata
+  machineries:
+    small_fire_pit: małe palenisko
   new_user: Nowy użytkownik
   placements:
     outside_all: Może być zbudowane tylko na zewnątrz budynków/pojazdów

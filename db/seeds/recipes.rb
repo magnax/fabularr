@@ -12,7 +12,7 @@ Definitions::Recipes::RECIPES.each do |recipe|
     end
     RecipeInstruction.create!(
       recipe_id: r.id, subject: subject, amount: i[:amount],
-      instruction_type: i[:type], speed: i[:speed]
+      instruction_type: i[:type], speed: i[:speed], unit: i[:unit] || 'grams'
     )
   end
 end
