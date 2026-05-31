@@ -5,38 +5,44 @@
 <ul>
   <% @recipes.each do |recipe| %>
     <li style="margin-bottom: 8px; border-bottom: 1px solid black;">
-      <span><%= t("#{recipe.recipe_type.pluralize}.#{recipe.key}") %></span>
-      <span style="display: inline-block;">
+      <span onClick="toggleRecipe(this);"><%= t("#{recipe.recipe_type.pluralize}.#{recipe.key}") %></span>
+      <div class="recipe-details" style="display: none;">
         <%= 
           link_to(
             t('views.recipes.index.continue'), new_build_projects_url(recipe.id),
             style: 'display: inline-block;'
           )
         %>
-      </span>
-      <br /><%= t('views.recipes.index.time') %>: <%= recipe.base_speed %>
-      <br /><%= t('views.recipes.index.resources') %>:
-      <ul>
-        <% recipe.recipe_instructions.resource.each do |instruction| %>
-          <li>
-            <%= tn("resources.#{instruction.subject.key}") %>
-            (<%= instruction.amount %> <%= td(instruction.unit) %>)</li>
-        <% end %>
-      </ul>
-
-      <% if recipe.recipe_instructions.tool.any? %>
-        <%= t('views.recipes.index.tools') %>:
+        <br /><%= t('views.recipes.index.time') %>: <%= recipe.base_speed %>
+        <br /><%= t('views.recipes.index.resources') %>:
         <ul>
-          <% recipe.recipe_instructions.tool.each do |instruction| %>
+          <% recipe.recipe_instructions.resource.each do |instruction| %>
             <li>
-              <%= t("items.#{instruction.subject.key}") %>
-            </li>
+              <%= tn("resources.#{instruction.subject.key}") %>
+              (<%= instruction.amount %> <%= td(instruction.unit) %>)</li>
           <% end %>
         </ul>
-      <% else %>
-        <%= t('views.recipes.index.manual') %>
-      <% end %>
-    </div>
+
+        <% if recipe.recipe_instructions.tool.any? %>
+          <%= t('views.recipes.index.tools') %>:
+          <ul>
+            <% recipe.recipe_instructions.tool.each do |instruction| %>
+              <li>
+                <%= t("items.#{instruction.subject.key}") %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <%= t('views.recipes.index.manual') %>
+        <% end %>
+        <% if recipe.recipe_instructions.placement.any? %>
+            <% recipe.recipe_instructions.placement.each do |instruction| %>
+              <div>
+                <%= t("placements.#{instruction.metadata['placement']}") %>
+              </div>
+            <% end %>
+        <% end %>
+      </div>
     </li>
   <% end %>
 </ul>

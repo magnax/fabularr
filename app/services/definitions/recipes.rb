@@ -7,7 +7,7 @@ module Definitions::Recipes
       type: 'machinery',
       # TODO: base_speed is building/collecting time, can be confused with travel speed
       base_speed: 3000,
-      placement: 'town',
+      placement: 'outside_all',
       instructions: [
         { type: 'resource', key: 'stone', amount: 500 }
       ]

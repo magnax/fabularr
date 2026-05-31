@@ -30,3 +30,8 @@ function checkEvents() {
       console.error("There was a problem with the fetch operation:", error);
     });
 }
+
+function toggleRecipe(el) {
+  const details = el.parentNode.querySelector('.recipe-details');
+  details.style['display'] = details.style['display'] === 'none' ? 'block' : 'none';
+}

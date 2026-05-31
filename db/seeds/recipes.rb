@@ -15,6 +15,16 @@ Definitions::Recipes::RECIPES.each do |recipe|
       instruction_type: i[:type], speed: i[:speed], unit: i[:unit] || 'grams'
     )
   end
+  next if recipe[:placement].blank?
+
+  RecipeInstruction.create!(
+    recipe_id: recipe.id,
+    subject: nil,
+    instruction_type: RecipeInstruction::PLACEMENT,
+    metadata: {
+      placement: [recipe[:placement]]
+    }
+  )
 end
 
 Log.say "Created #{Recipe.count} recipes: #{Recipe.all.pluck(:key).join(', ')}"
