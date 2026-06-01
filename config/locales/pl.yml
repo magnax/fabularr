@@ -338,6 +338,8 @@ pl:
       new:
         cancel: Anuluj
         item_name: 'Nazwa przedmiotu:'
+        needed: potrzebne
+        resources_needed: Wymagane surowce
         road:
           available_locations: 'Dostępne lokacje: %{count}'
           create: Zacznij budowę

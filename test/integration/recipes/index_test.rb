@@ -33,10 +33,11 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
   end
 
   test 'show project setup page for given recipe' do
-    create(:recipe, recipe_type: Recipe::ITEM, base_speed: 7200, key: 'stone_knife')
+    recipe = create(:recipe, recipe_type: Recipe::ITEM, base_speed: 7200,
+                             key: 'stone_knife')
     create(:project_type, :build)
 
-    visit '/en/recipes'
+    visit "/en/recipes?expanded[]=#{recipe.id}"
 
     assert_equal 200, page.status_code
 
@@ -50,10 +51,11 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
   end
 
   test 'show project setup page for project outside' do
-    create(:recipe, recipe_type: Recipe::VEHICLE, base_speed: 14_400, key: 'small_wooden_cart')
+    recipe = create(:recipe, recipe_type: Recipe::VEHICLE, base_speed: 14_400,
+                             key: 'small_wooden_cart')
     create(:project_type, :build)
 
-    visit '/en/recipes'
+    visit "/en/recipes?expanded[]=#{recipe.id}"
 
     assert_equal 200, page.status_code
 

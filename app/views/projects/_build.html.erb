@@ -10,6 +10,42 @@
       <td><%= t('views.projects.new.time_needed') %></td>
       <td><%= time_needed %></td>
     </tr>
+    <% if resources.any? %>
+      <tr>
+        <td><%= t('views.projects.new.resources_needed') %>:</td>
+        <td>
+          <% resources.each do |res| %>
+            <div>
+              <%= tn("resources.#{res[:key]}") %> 
+              (<%= "#{res[:amount]} #{td(res[:unit])}" %> 
+              <%= t('views.projects.new.needed') %>)
+            </div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+
+    <% if objects.any? %>
+      <tr>
+        <td><%= t('views.projects.new.objects_needed') %></td>
+        <td><%= time_needed %></td>
+      </tr>
+    <% end %>
+
+    <% if tools.any? %>
+      <tr>
+        <td><%= t('views.projects.new.tools_needed') %></td>
+        <td><%= time_needed %></td>
+      </tr>
+    <% end %>
+
+    <% if machineries.any? %>
+      <tr>
+        <td><%= t('views.projects.new.machineries_needed') %></td>
+        <td><%= time_needed %></td>
+      </tr>
+    <% end %>
+
     <% if placement.present? %>
       <tr>
         <td colspan=2>
@@ -19,7 +55,9 @@
     <% end %>
     <tr>
       <td colspan=2 class="table-actions">
-        <%= f.button t('views.projects.new.cancel') %>
+        <button type="button" onclick="location.href='<%= events_url %>'">
+          <%= t('views.projects.new.cancel') %>
+        </button>
         <%= f.submit t('views.projects.new.submit') %>
       </td>
     </tr>

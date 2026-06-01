@@ -18,11 +18,11 @@ Definitions::Recipes::RECIPES.each do |recipe|
   next if recipe[:placement].blank?
 
   RecipeInstruction.create!(
-    recipe_id: recipe.id,
+    recipe_id: r.id,
     subject: nil,
     instruction_type: RecipeInstruction::PLACEMENT,
     metadata: {
-      placement: [recipe[:placement]]
+      placement: [r[:placement]]
     }
   )
 end

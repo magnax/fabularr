@@ -4,7 +4,6 @@ class RecipesController < ApplicationController
   before_action :current_character_set
 
   def index
-    @recipes = Recipe.by_type(Recipe::BUILD_TYPES).all
-    @project_type_id = ProjectType.find_by(key: 'build')
+    render locals: Recipes::ShowService.call.merge(expanded: params[:expanded])
   end
 end

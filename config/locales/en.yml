@@ -338,6 +338,8 @@ en:
       new:
         cancel: Cancel
         item_name: 'Item name:'
+        needed: needed
+        resources_needed: Resources needed
         road:
           available_locations: 'Available locations: %{count}'
           create: Start building

@@ -14,10 +14,14 @@ module Projects
 
       {
         item_name: item_name,
+        machineries: machineries,
+        objects: instructions_map(object_instructions),
         placement: placement_key,
         project_type_id: project_type.id,
         recipe_id: @recipe_id,
-        time_needed: time_needed
+        resources: instructions_map(resource_instructions),
+        time_needed: time_needed,
+        tools: tools
       }
     end
 
@@ -29,6 +33,32 @@ module Projects
 
     def item_name
       @item_name ||= I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}")
+    end
+
+    def machineries
+      []
+    end
+
+    def objects
+      []
+    end
+
+    def resources
+      @resources ||= recipe_instructions.resource
+    end
+
+    def tools
+      @tools ||= recipe_instructions.tool
+    end
+
+    def instructions_map(instructions)
+      instructions.map do |res|
+        {
+          key: res.subject.key,
+          amount: res.amount,
+          unit: res.unit
+        }
+      end
     end
 
     def placement_key
@@ -47,6 +77,10 @@ module Projects
 
     def project_type
       @project_type ||= ProjectType.find_by(key: 'build')
+    end
+
+    def recipe_instructions
+      @recipe_instructions ||= recipe.recipe_instructions
     end
 
     def recipe
