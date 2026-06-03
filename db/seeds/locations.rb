@@ -9,6 +9,10 @@ Definitions::LocationTypes::CONFIG_BUILDINGS.each_key do |key|
   LocationType.create!(key: key)
 end
 
+Definitions::LocationTypes::CONFIG_VEHICLES.each_key do |key|
+  LocationType.create!(key: key)
+end
+
 Definitions::LocationTypes::CONFIG_TOWNS.each do |key|
   location_type = LocationType.create!(key: key)
   found = false

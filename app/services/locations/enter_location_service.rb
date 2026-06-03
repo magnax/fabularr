@@ -2,6 +2,9 @@
 
 module Locations
   class EnterLocationService < ApplicationService
+    class MaxCharactersExceededError < StandardError; end
+    class MaxCapacityExceededError < StandardError; end
+
     def initialize(character, location_id)
       @character = character
       @location_id = location_id
@@ -9,11 +12,28 @@ module Locations
     end
 
     def call
+      raise MaxCharactersExceededError if max_characters?
+      raise MaxCapacityExceededError if capacity_exceeded?
+
       @character.update!(location: location)
       create_events!
     end
 
     private
+
+    def max_characters?
+      location.characters.count == location.max_characters
+    end
+
+    def capacity_exceeded?
+      return false if location.max_capacity.nil?
+
+      total_weight > location.max_capacity
+    end
+
+    def total_weight
+      Character::WEIGHT + @character.carrying_weight + location.stored_weight
+    end
 
     def create_events!
       create_character_event!

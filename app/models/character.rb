@@ -20,6 +20,7 @@
 class Character < ApplicationRecord
   MAX_CAPACITY = 15_000
   MIN_HEARABLE_DISTANCE = 3
+  WEIGHT = 60_000
 
   belongs_to :location, optional: true
   belongs_to :spawn_location, class_name: 'Location'

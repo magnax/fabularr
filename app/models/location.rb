@@ -124,4 +124,8 @@ class Location < ApplicationRecord
   def loc_id
     "<!--LOCID:#{id}-->"
   end
+
+  def stored_weight
+    location_objects.resource.sum(&:amount) + location_objects.item.sum { |i| i.subject.weight }
+  end
 end

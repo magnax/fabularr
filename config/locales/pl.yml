@@ -115,6 +115,8 @@ pl:
       character_name_change_error: Błąd przy zmianie imienia postaci
       invalid_form: Nieprawidłowe dane
       invalid_record: Nieprawidłowe dane
+      max_capacity_exceeded: Nie możesz wejść, bo byłoby za dużo ciężaru w środku
+      max_characters_exceeded: Nie możesz wejść, bo w środku byłoby zbyt dużo osób
     success:
       welcome: Witamy w Fabular!
       profile_saved: Profil zapisany!

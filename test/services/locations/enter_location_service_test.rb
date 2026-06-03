@@ -67,4 +67,32 @@ class Locations::EnterLocationServiceTest < ActiveSupport::TestCase
                  "<!--LOCID:#{location.id}-->",
                  ev.body
   end
+
+  test 'raises an error when max characters exceeded' do
+    location = create(:location) # default is town
+    building = create(:location, :building, parent_location: location,
+                                            name: 'Town Hall', max_characters: 1)
+    @character.update!(location: location)
+
+    create(:character, location: building)
+
+    assert_raises Locations::EnterLocationService::MaxCharactersExceededError do
+      call_service(building.id)
+    end
+  end
+
+  test 'raises an error when max capacity exceeded' do
+    location = create(:location) # default is town
+    building = create(:location, :building, parent_location: location,
+                                            name: 'Town Hall', max_capacity: 100_000)
+    @character.update!(location: location)
+
+    stone = create(:resource, key: 'stone')
+    create(:location_object, location: building, subject: stone, amount: 30_000)
+    create(:inventory_object, character: @character, subject: stone, amount: 11_000)
+
+    assert_raises Locations::EnterLocationService::MaxCapacityExceededError do
+      call_service(building.id)
+    end
+  end
 end

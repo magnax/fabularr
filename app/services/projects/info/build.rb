@@ -15,11 +15,11 @@ module Projects
       {
         item_name: item_name,
         machineries: machineries,
-        objects: instructions_map(object_instructions),
+        objects: instructions_map(objects),
         placement: placement_key,
         project_type_id: project_type.id,
         recipe_id: @recipe_id,
-        resources: instructions_map(resource_instructions),
+        resources: instructions_map(resources),
         time_needed: time_needed,
         tools: tools
       }
@@ -63,8 +63,13 @@ module Projects
 
     def placement_key
       return 'outside_all' if vehicle?
+      return if placement.blank?
 
-      nil
+      placement.metadata['placement']
+    end
+
+    def placement
+      @placement ||= recipe_instructions.placement&.first
     end
 
     def vehicle?

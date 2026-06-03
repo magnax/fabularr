@@ -115,6 +115,8 @@ en:
       character_name_change_error: Error during character name changing
       invalid_form: Invalid data
       invalid_record: Invalid data
+      max_capacity_exceeded: You cannot enter because there will be too much weight inside
+      max_characters_exceeded: You cannot enter because there will be too much weight inside
     success:
       welcome: Welcome to Fabular!
       profile_saved: Profil saved!
