@@ -15,4 +15,7 @@ class ResourceType < ApplicationRecord
   MATERIAL = 'material'
   MEDICINE = 'medicine'
   RAW_FOOD = 'raw_food'
+  RAW_RESOURCE = 'raw_resource'
+
+  TYPES = %w[FOOD FUEL MATERIAL MEDICINE RAW_FOOD RAW_RESOURCE].freeze
 end

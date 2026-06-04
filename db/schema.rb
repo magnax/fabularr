@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_31_121234) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_03_095430) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -227,11 +227,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_31_121234) do
   create_table "resources", force: :cascade do |t|
     t.float "base_speed_per_unit"
     t.datetime "created_at", null: false
+    t.integer "eaten"
+    t.integer "heal", default: 0
+    t.integer "integer"
     t.string "key"
     t.boolean "material", default: true
     t.integer "resource_type_id", array: true
+    t.bigint "skill_id"
     t.string "unit", default: "grams"
     t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_resources_on_skill_id"
   end
 
   create_table "roads", force: :cascade do |t|
@@ -256,6 +261,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_31_121234) do
   create_table "settings", force: :cascade do |t|
     t.string "key"
     t.string "value"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "key"
+    t.datetime "updated_at", null: false
   end
 
   create_table "solid_cable_messages", force: :cascade do |t|
@@ -313,6 +324,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_31_121234) do
   add_foreign_key "project_descriptions", "projects"
   add_foreign_key "projects", "recipes"
   add_foreign_key "recipe_instructions", "recipes"
+  add_foreign_key "resources", "skills"
   add_foreign_key "roads", "locations", column: "location_1_id"
   add_foreign_key "roads", "locations", column: "location_2_id"
   add_foreign_key "sessions", "users"
