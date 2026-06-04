@@ -1,0 +1,303 @@
+apples:
+  rate: 100
+  heal: 88
+  skill: forestry
+  types:
+    - medicine
+asparagus:
+  rate: 550
+  eaten: 119
+  skill: farming
+  types:
+    - raw_food
+bananas:
+  rate: 275
+  heal: 56
+  skill: forestry
+  types:
+    - medicine
+barley:
+  rate: 875
+  skill: farming
+basil:
+  rate: 350
+  skill: collecting
+bauxite:
+  rate: 130
+  skill: mining
+beeswax:
+  rate: 170
+  skill: collecting
+bitumen:
+  rate: 100
+  skill: digging
+blackberries:
+  rate: 225
+  heal: 91
+  skill: collecting
+  types:
+    - medicine
+blueberries:
+  rate: 200
+  heal: 111
+  skill: collecting
+  types:
+    - medicine
+carrots:
+  rate: 800
+  eaten: 250
+  skill: farming
+  types:
+    - raw_food
+chromium:
+  rate: 86
+  skill: digging
+clay:
+  rate: 900
+  skill: digging
+coal:
+  rate: 250
+  skill: digging
+  types:
+    - fuel
+cobalt:
+  rate: 110
+  skill: mining
+cod:
+  rate: 100
+  skill: fishing
+copper:
+  rate: 175
+  skill: digging
+corn:
+  rate: 870
+  skill: farming
+cotton:
+  rate: 200
+  skill: farming
+cucumbers:
+  rate: 500
+  eaten: 75
+  skill: farming
+  types:
+    - raw_food
+diamonds:
+  rate: 15
+  skill: digging
+emerald:
+  rate: 8
+  skill: digging
+firewood:
+  rate: 300
+  skill: forestry
+  types:
+    - fuel
+garlic:
+  rate: 200
+  skill: collecting
+gas:
+  rate: 100
+  skill: digging
+ginger:
+  rate: 290
+  skill: collecting
+gold:
+  rate: 10
+  skill: digging
+grapes:
+  rate: 75
+  eaten: 45
+  skill: farming
+  types:
+    - medicine
+grass:
+  rate: 400
+  skill: farming
+hematite:
+  rate: 750
+  skill: mining
+hemp:
+  rate: 850
+  skill: farming
+lemons:
+  rate: 270
+  skill: collecting
+limestone:
+  rate: 1100
+  skill: digging
+magnetite:
+  rate: 750
+  skill: digging
+maple_sap:
+  rate: 50
+  skill: collecting
+mud:
+  rate: 850
+  skill: digging
+mushrooms:
+  rate: 200
+  heal: 88
+  skill: collecting
+  types:
+    - medicine
+nickel:
+  rate: 200
+  skill: minimum
+nuts:
+  rate: 250
+  heal: 54
+  skill: collecting
+  types:
+    - medicine
+obsidian:
+  rate: 40
+  skill: digging
+oil:
+  rate: 75
+  skill: drilling
+olives:
+  rate: 400
+  eaten: 125
+  skill: forestry
+  types:
+    - raw_food
+onions:
+  rate: 650
+  heal: 67
+  skill: farming
+  types:
+    - medicine
+papayas:
+  rate: 75
+  heal: 35
+  skill: forestry
+  types:
+    - medicine
+pearls:
+  rate: 20
+  skill: collecting
+pike:
+  rate: 100
+  skill: fishing
+pineapples:
+  rate: 50
+  heal: 35
+  skill: farming
+  types:
+    - medicine
+platinum:
+  rate: 10
+  skill: mining
+potatoes:
+  rate: 1600
+  eaten: 333
+  skill: farming
+  types:
+    - raw_food
+rainbow_trout:
+  rate: 100
+  skill: fishing
+raspberries:
+  rate: 300
+  heal: 125
+  skill: collecting
+  types:
+    - medicine
+reed:
+  rate: 225
+  skill: collecting
+resin:
+  rate: 80
+  skill: collecting
+rice:
+  rate: 1400
+  eaten: 500
+  skill: farming
+  types:
+    - raw_food
+roses:
+  rate: 200
+  skill: collecting
+rubber:
+  rate: 50
+  skill: forestry
+ruby:
+  rate: 20
+  skill: digging
+rye:
+  rate: 575
+  skill: farming
+sage:
+  rate: 160
+  skill: collecting
+salmon:
+  rate: 100
+  skill: fishing
+salt:
+  rate: 250
+  skill: digging
+sand:
+  rate: 2000
+  skill: digging
+seashells:
+  rate: 50
+  skill: gathering
+silver:
+  rate: 14
+  skill: mining
+soda:
+  rate: 320
+  skill: digging
+spinach:
+  rate: 700
+  eaten: 137
+  heal: 167
+  skill: farming
+  types:
+    - raw_food
+    - medicine
+stone:
+  rate: 750
+  skill: digging
+strawberries:
+  rate: 215
+  heal: 67
+  skill: collecting
+  types:
+    - medicine
+sugar:
+  rate: 150
+  heal: 625
+  skill: farming
+  types:
+    - medicine
+taconite:
+  rate: 1500
+  skill: digging
+tea_leaves:
+  rate: 240
+  skill: collecting
+thyme:
+  rate: 200
+  skill: collecting
+timber:
+  rate: 0
+  skill: forestry
+tin:
+  rate: 160
+  skill: mining
+tomatoes:
+  rate: 400
+  heal: 132
+  skill: farming
+  types:
+    - medicine
+tulips:
+  rate: 200
+  skill: collecting
+wheat:
+  rate: 900
+  skill: farming
+zinc:
+  rate: 120
+  skill: mining

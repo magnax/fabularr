@@ -1,0 +1,8 @@
+iron:
+  skill: refining
+iron_ore:
+  skill: mining
+wood:
+  skill: carpentry
+  types: 
+    - fuel
