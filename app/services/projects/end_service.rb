@@ -8,11 +8,11 @@ module Projects
 
     def call
       Projects::Dispatcher.call(@project_id)
+
       update_workers
       broadcast_to_location
 
-      return unless project.location.nil? ||
-                    project.starting_character.location == project.location
+      return unless project.starting_character.location == project.location
 
       update_starting_character
     end
@@ -40,7 +40,6 @@ module Projects
     def update_starting_character
       event = Event.create!(
         body: body,
-        location: project.location,
         receiver_character: project.starting_character
       )
       broadcast_to_receiver(event.id, project.starting_character.id)

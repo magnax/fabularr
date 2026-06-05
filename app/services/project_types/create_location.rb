@@ -7,26 +7,21 @@ module ProjectTypes
     end
 
     def call
-      location = Location.create!(location_type: location_type,
-                                  location_class: LocationClass.find_by(key: 'town'),
-                                  coords: starting_character.coords)
+      location = Locations::CreateService.call(position, location_type)
+
       update_travellers!(location)
-      pd = project.project_descriptions.where(
-        description_type: ProjectDescription::LOCATION
-      ).first_or_create
-      pd.update!(
-        subject: location
-      )
+      project_description.update!(subject: location)
+      project.update!(location: location)
     end
 
     private
 
     def location_type
-      @location_type ||= Maps.location_type(*position)
+      @location_type ||= Maps.location_type(position['x'], position['y'])
     end
 
     def position
-      [starting_character.x, starting_character.y]
+      project_description.metadata['coords']
     end
 
     def update_travellers!(location)
@@ -53,13 +48,17 @@ module ProjectTypes
         Traveller.joins('inner join characters ch on ch.id = travellers.subject_id')
                  .where(
                    "length(
-                    lseg(ch.coords::point, point(#{starting_character.x}, #{starting_character.y}))
+                    lseg(ch.coords::point, point(#{position['x']}, #{position['y']}))
                   ) < ?", Character::MIN_HEARABLE_DISTANCE
                  )
     end
 
     def starting_character
       @starting_character ||= project.starting_character
+    end
+
+    def project_description
+      @project_description ||= project.project_descriptions.location&.first
     end
 
     def project

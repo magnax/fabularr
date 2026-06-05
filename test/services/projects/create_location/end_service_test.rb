@@ -14,7 +14,9 @@ class ProjectsCreateLocationEndServiceTest < ActiveSupport::TestCase
     create(:traveller, subject: starting_character, speed: 0)
     project = create(:project, :create_location,
                      location: nil, starting_character: starting_character)
-    create(:project_description, description_type: ProjectDescription::LOCATION, project: project)
+    create(:project_description, description_type: ProjectDescription::LOCATION,
+                                 project: project,
+                                 metadata: { coords: { x: 300, y: 200 } })
     worker = create(:worker, project: project, character: starting_character)
     assert_nil worker.left_at
 
@@ -81,5 +83,45 @@ class ProjectsCreateLocationEndServiceTest < ActiveSupport::TestCase
 
     event = Event.where(receiver_character_id: travelling_character.id).last
     assert_equal 'You arrived at newly created town', event.body
+  end
+
+  test 'starting character is not present when project finishes' do
+    location_type = create(:location_type, key: 'tundra')
+    Maps.expects(:location_type).with(300, 200).returns(location_type)
+    starting_character = create(:character, location: nil,
+                                            coords: { x: 300, y: 200 })
+    other_character = create(:character, location: nil,
+                                         coords: { x: 300, y: 200 })
+    create(:traveller, subject: starting_character, speed: 0)
+    create(:traveller, subject: other_character, speed: 0)
+    project = create(:project, :create_location,
+                     location: nil, starting_character: starting_character)
+    create(:project_description, description_type: ProjectDescription::LOCATION,
+                                 project: project, metadata: {
+                                   coords: { x: 300, y: 200 }
+                                 })
+    worker = create(:worker, project: project, character: other_character)
+    starting_character.update!(coords: { x: 350, y: 250 })
+
+    assert_nil worker.left_at
+
+    assert_difference -> { Location.count } => 1,
+                      -> { Traveller.count } => -1,
+                      -> { Event.count } => 2,
+                      -> { ProjectDescription.count } => 0 do
+      call_service(project.id)
+    end
+
+    location = Location.last
+    assert_equal 'town', location.location_class.key
+    assert_equal 'tundra', location.location_type.key
+    assert_equal [300, 200], location.coords.to_a
+    assert_equal location.id, other_character.reload.location_id
+    assert_not other_character.travelling?
+
+    assert_not_nil worker.reload.left_at
+    assert_equal location.id, project.project_descriptions.sole.subject_id
+
+    assert_equal 0, Event.where(receiver_character_id: starting_character.id).count
   end
 end

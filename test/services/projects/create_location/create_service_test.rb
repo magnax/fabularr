@@ -34,6 +34,7 @@ class ProjectsCreateLocationCreateServiceTest < ActiveSupport::TestCase
 
     pd = ProjectDescription.last
     assert_equal ProjectDescription::LOCATION, pd.description_type
+
     coords = { 'x' => 120.0, 'y' => 140.0 }
     assert_equal coords, pd.metadata['coords']
   end
