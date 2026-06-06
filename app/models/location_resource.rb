@@ -6,6 +6,7 @@
 #
 #  id          :bigint           not null, primary key
 #  amount      :integer
+#  status      :boolean          default(FALSE)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  location_id :integer
@@ -14,4 +15,6 @@
 class LocationResource < ApplicationRecord
   belongs_to :location, optional: true
   belongs_to :resource
+
+  scope :visible, -> { where(status: true) }
 end
