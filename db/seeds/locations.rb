@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-town_class = LocationClass.where(key: 'town').first_or_create
+LocationClass.where(key: 'town').first_or_create
 LocationClass.where(key: 'animal').first_or_create(moveable: true)
 LocationClass.where(key: 'building').first_or_create(moveable: false)
 LocationClass.where(key: 'vehicle').first_or_create(moveable: true)
@@ -25,13 +25,8 @@ Definitions::LocationTypes::CONFIG_TOWNS.each do |key|
       nil
     end
   end
-  location = Location.create(
-    {
-      name: Faker::Address.city,
-      location_type_id: lt.id,
-      location_class_id: town_class.id,
-      coords: position
-    }
+  location = Locations::CreateService.call(
+    position, lt, { name: Faker::Address.city }
   )
   Log.say "Created location #{location.id}, type: #{lt.key}, position: #{position}"
 end
