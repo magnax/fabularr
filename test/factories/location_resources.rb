@@ -6,6 +6,7 @@
 #
 #  id          :bigint           not null, primary key
 #  amount      :integer
+#  sorting     :integer          default(0)
 #  status      :boolean          default(FALSE)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
