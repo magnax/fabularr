@@ -17,7 +17,7 @@ module Events
         items: items,
         location: location,
         location_info: Locations::InfoService.call(@character),
-        location_resources: location&.location_resources,
+        location_resources: visible_resources,
         project: project,
         projects: Projects::VisibleProjects.call(@character),
         roads: roads,
@@ -72,6 +72,10 @@ module Events
         resources: location&.location_objects&.includes(:subject)&.resource,
         items: location&.location_objects&.item
       }
+    end
+
+    def visible_resources
+      @visible_resources ||= location&.location_resources&.visible
     end
 
     def roads

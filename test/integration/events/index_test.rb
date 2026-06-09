@@ -45,10 +45,12 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     assert_selector 'section#map'
   end
 
-  test 'link to collect resource on events page' do
+  test 'link to collect resource on events page (visible only)' do
     fabular_city = create(:location, name: 'Fabular City')
-    lr = create(:location_resource, location: fabular_city,
-                                    resource: create(:resource, key: 'mushrooms'))
+    mushrooms = create(:location_resource, location: fabular_city, status: true,
+                                           resource: create(:resource, key: 'mushrooms'))
+    stone = create(:location_resource, location: fabular_city, status: false,
+                                       resource: create(:resource, key: 'stone'))
     create(:character, name: 'Magnus', location: fabular_city, user: @user)
 
     sign_in
@@ -56,7 +58,10 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     assert_content('mushrooms')
     assert_link(
-      'Collect', href: "#{host}/en/projects/new/collect/#{lr.id}"
+      'Collect', href: "#{host}/en/projects/new/collect/#{mushrooms.id}"
+    )
+    assert_no_link(
+      'Collect', href: "#{host}/en/projects/new/collect/#{stone.id}"
     )
   end
 
