@@ -2,6 +2,10 @@
 
 require 'test_helper'
 class ProjectsCreateLocationEndServiceTest < ActiveSupport::TestCase
+  def setup
+    create(:resource, :raw_resource)
+  end
+
   def call_service(project_id)
     Projects::EndService.call(project_id)
   end

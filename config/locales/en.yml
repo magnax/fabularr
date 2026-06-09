@@ -177,6 +177,7 @@ en:
     build: 'Manufactured: %{item}'
     collect: '%{amount} %{unit} of %{res} landed on the ground.'
     discover: 'Found new resource: %{res}'
+    discover_last: No resource found, all resources are already discovered.
   project_types:
     build: building
     collect: collecting

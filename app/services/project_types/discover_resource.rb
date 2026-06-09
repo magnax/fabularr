@@ -2,34 +2,23 @@
 
 module ProjectTypes
   class DiscoverResource < ApplicationService
-    include Definitions::LocationResources
-
     def initialize(project_id)
       @project_id = project_id
     end
 
     def call
-      return unless discovered_resource
+      discovered_resource&.update!(status: true)
 
-      LocationResource.create!(
-        location_id: project.location_id, resource_id: discovered_resource.id
+      project.project_descriptions.create!(
+        description_type: ProjectDescription::LOCATION_RESOURCE,
+        subject: discovered_resource&.resource
       )
-      project.project_descriptions.create!(subject: discovered_resource)
     end
 
     private
 
     def discovered_resource
-      return unless Resource.any?
-
-      @discovered_resource ||= begin
-        r_keys = RESOURCES[location.location_type.key.to_sym] & Resource.all.pluck(:key)
-        resources = Resource.where(key: r_keys)
-
-        resources.select do |rr|
-          rr.resource_type_id.include?(ResourceType.find_by(key: 'food').id)
-        end.sample
-      end
+      @discovered_resource ||= location.location_resources.available.first
     end
 
     def location

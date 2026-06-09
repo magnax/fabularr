@@ -177,6 +177,7 @@ pl:
     build: 'Wyprodukowano: %{item}'
     collect: '%{amount} %{unit} %{res} wylądowało na ziemi.'
     discover: 'Znaleziono nowy zasób: %{res}'
+    discover_last: Nie znaleziono żadnego zasobu. Wszystkie zasoby zostały już znalezione.
   project_types:
     build: produkcja
     collect: zbieranie

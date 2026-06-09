@@ -194,6 +194,10 @@ potatoes:
   skill: farming
   types:
     - raw_food
+pumpkins:
+  rate: 720
+  eaten: 111
+  skill: farming
 rainbow_trout:
   rate: 100
   skill: fishing
@@ -241,6 +245,11 @@ sand:
   skill: digging
 seashells:
   rate: 50
+  skill: gathering
+seaweeds:
+  rate: 135
+  eaten: 333
+  heal: 167
   skill: gathering
 silver:
   rate: 14

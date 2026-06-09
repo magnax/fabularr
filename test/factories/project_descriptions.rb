@@ -32,16 +32,10 @@ FactoryBot.define do
     amount { 1.5 }
     project
 
-    trait :resource_in do
-      description_type { ProjectDescription::RESOURCE_IN }
-    end
-
-    trait :settings do
-      description_type { ProjectDescription::SETTINGS }
-    end
-
-    trait :road do
-      description_type { ProjectDescription::ROAD }
+    %i[location_resource resource_in road settings].each do |key|
+      trait key do
+        description_type { ProjectDescription.const_get(key.to_s.upcase) }
+      end
     end
   end
 end

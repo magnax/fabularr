@@ -4,7 +4,7 @@ require 'test_helper'
 
 class SeedsRawResourcesTest < ActiveSupport::TestCase
   test 'works' do
-    expected_count = 78
+    expected_count = 80
 
     assert_difference -> { Resource.count } => expected_count,
                       -> { ResourceType.count } => 4 do

@@ -102,6 +102,8 @@ module Projects
     end
 
     def discover_resource_project_info
+      return I18n.t('project_info.discover_last') if resource_description.subject.blank?
+
       I18n.t('project_info.discover', res: resource_info)
     end
 
@@ -110,7 +112,7 @@ module Projects
     end
 
     def resource_description
-      @resource_description ||= project.project_descriptions.first
+      @resource_description ||= project.project_descriptions.location_resource.first
     end
 
     def location_description

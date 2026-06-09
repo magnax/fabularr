@@ -2,11 +2,15 @@
 
 module ProjectTypes
   class Collect < ApplicationService
+    class NoSuchResourceError < StandardError; end
+
     def initialize(project_id)
       @project_id = project_id
     end
 
     def call
+      raise NoSuchResourceError if location_resource.blank?
+
       LocationObject.create!(
         location_id: location.id, subject: resource, amount: amount, unit: resource.unit
       )
@@ -15,6 +19,14 @@ module ProjectTypes
     end
 
     private
+
+    def location_resource
+      @location_resource ||= visible_location_resources.find_by(resource_id: resource.id)
+    end
+
+    def visible_location_resources
+      @visible_location_resources ||= location.location_resources.visible
+    end
 
     def resource
       @resource ||= resource_description.subject

@@ -7,7 +7,7 @@ module ProjectTypes
     end
 
     def call
-      location = Locations::CreateService.call(position, location_type)
+      location = Locations::CreateService.call(position)
 
       update_travellers!(location)
       project_description.update!(subject: location)
@@ -15,10 +15,6 @@ module ProjectTypes
     end
 
     private
-
-    def location_type
-      @location_type ||= Maps.location_type(position['x'], position['y'])
-    end
 
     def position
       project_description.metadata['coords']

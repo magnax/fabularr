@@ -26,7 +26,7 @@ Definitions::LocationTypes::CONFIG_TOWNS.each do |key|
     end
   end
   location = Locations::CreateService.call(
-    position, lt, { name: Faker::Address.city }
+    position, { name: Faker::Address.city }
   )
   Log.say "Created location #{location.id}, type: #{lt.key}, position: #{position}"
 end

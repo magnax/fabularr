@@ -29,7 +29,7 @@ FactoryBot.define do
   factory :resource do
     key { 'MyString' }
 
-    %i[raw_food material].each do |key|
+    %i[raw_food material raw_resource].each do |key|
       trait key do
         resource_type_id { [FactoryBot.create(:resource_type, key: key.to_s).id] }
       end

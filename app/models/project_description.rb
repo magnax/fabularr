@@ -32,12 +32,14 @@ class ProjectDescription < ApplicationRecord
   scope :tool, -> { where(description_type: TOOL) }
   scope :settings, -> { where(description_type: SETTINGS) }
   scope :location, -> { where(description_type: LOCATION) }
+  scope :location_resource, -> { where(description_type: LOCATION_RESOURCE) }
   scope :road, -> { where(description_type: ROAD) }
-  # Types:
 
+  # Types:
   ITEM_IN = 'item_in'
   ITEM_OUT = 'item_out'
   LOCATION = 'location'
+  LOCATION_RESOURCE = 'location_resource'
   MACHINE = 'machine'
   RESOURCE_IN = 'resource_in' # input
   RESOURCE_OUT = 'resource_out' # output
