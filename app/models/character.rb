@@ -159,4 +159,15 @@ class Character < ApplicationRecord
       'scratch'
     end
   end
+
+  def foods
+    raw_food_id = ResourceType.find_by(key: ResourceType::RAW_FOOD)&.id
+    return [] if raw_food_id.blank?
+
+    inventory_objects
+      .resource
+      .joins('JOIN resources ON resources.id = inventory_objects.subject_id')
+      .where("#{raw_food_id} = any(resources.resource_type_id)")
+      .order('resources.eaten DESC')
+  end
 end
