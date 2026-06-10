@@ -7,21 +7,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if @current_character %>
-	  <%= render 'layouts/character_header' %>
-  <% else %>
-	  <%= render 'layouts/header' %>
-  <% end %>
-	<% flash.each do |key, value| %>
-    <% if key == 'errors' %>
-      <div class="alert alert-<%= key %>"><%= value.split("\n").join('< /br>') %></div>
+  <div class="top-bar">
+    <div class="header-title">Fabular</div>
+  </div>
+  <div class="main">
+    <% if @current_character %>
+      <%= render 'layouts/character_header' %>
     <% else %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
+      <%= render 'layouts/header' %>
     <% end %>
-  <% end %>
-	
-  <%= yield %>
-
+    <% flash.each do |key, value| %>
+      <% if key == 'errors' %>
+        <div class="alert alert-<%= key %>"><%= value.split("\n").join('< /br>') %></div>
+      <% else %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+    <% end %>
+    
+    <%= yield %>
+  </div>
   <%= javascript_include_tag yield(:js_name), "data-turbolinks-track" => false %>
 </body>
 </html>
