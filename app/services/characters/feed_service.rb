@@ -26,6 +26,13 @@ module Characters
       end
 
       character.update!(hunger: new_hunger)
+      create_hunger_event!
+    end
+
+    def create_hunger_event!
+      return unless hunger_change.positive?
+
+      create_event!(I18n.t('events.hungry'))
     end
 
     def hunger_change
@@ -63,7 +70,22 @@ module Characters
 
     def eat_food!(resource, amount)
       resource.update!(amount: resource.amount - amount)
-      resource.destroy if resource.amount.zero?
+      if resource.amount.zero?
+        body = I18n.t('events.eaten_all', res: resource.subject.key)
+        resource.destroy
+      else
+        body = I18n.t('events.eaten', amount: amount, res: resource.subject.key)
+      end
+
+      create_event!(body)
+    end
+
+    def create_event!(body)
+      event = Event.create!(
+        body: body,
+        receiver_character: @character
+      )
+      ActionCable.server.broadcast("char_#{@character.id}", { type: 'event', event_id: event.id })
     end
 
     def foods
