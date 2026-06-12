@@ -1,0 +1,18 @@
+<div class="content-right">
+  <% if character.location %>
+    <div>
+      <%= link_to t('views.events.index.build_menu'), recipes_url %>
+    </div>
+    <div>
+      <% if character.location.town? %>
+        <%= link_to t('views.events.index.build_road'), new_road_projects_url(location_id: character.location_id) %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if character.can_start_travel? %>
+    <div>
+      <%= link_to t('views.events.index.travel'), new_traveller_url %>
+    </div>
+  <% end %>
+</div>

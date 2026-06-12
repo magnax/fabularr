@@ -1,14 +1,20 @@
 <% provide(:js_name, 'events') %>
 
 <section id="current_character" data-id="<%= character.id %>">
-  
+  <div class="title-bar">
+    <%= t('views.character_info') %>
+  </div>
 </section>
 
-<%= render partial: 'events/character_info', locals: { 
-  character: character, location_info: location_info, project: project, travel_info: travel_info 
-} %>
+<div id="character_information" class="content">
+  <%= render partial: 'events/character_info', locals: { 
+    character: character, location_info: location_info, project: project, travel_info: travel_info 
+  } %>
+  <%= render partial: 'events/character_menu', locals: {
+    character: character }
+  %>
+</div>
 
-<section id="map"  style="float: right; width: 30%;"><img src="/maps" width=200 height=200></section>
 
 <section id="events" data-location-id="<%= location&.id %>" style="clear: both;">
   <div class="title-bar">
@@ -17,11 +23,17 @@
   <%= render partial: 'events/events', locals: { events: events } %>
 </section>
 
-<section id="characters" style="clear: both;">
+<section id="characters" style="clear: both;float: left;width:70%;">
   <div class="title-bar">
     <%= t 'views.events.index.characters_here' %>
   </div>
   <%= render partial: "events/characters", locals: { characters: characters } %>
+</section>
+<section id="map"  style="float: right; width: 29%;margin-left:3px;">
+  <div class="title-bar">
+    <%= t 'views.events.index.roads_here' %>
+  </div>
+  <img src="/maps" width=200 height=200>
 </section>
 
 <section id="items" style="clear: both;">

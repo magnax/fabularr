@@ -99,9 +99,44 @@ a {
   text-align: center;
   font-size: 1.2em;
   font-weight: 900;
-  margin-bottom: 6px;
+  margin: 6px 0;
 }
 
 nav {
   padding: 5px 0;
+}
+
+.content {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.content-left {
+  flex: 0 0 70%;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.content-right {
+  flex: 0 0 30%;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+}
+
+.cell.cell-left {
+  flex: 0 0 20%;
+  text-align: right;
+  margin-right: 15px;
+  padding: 3px;
+}
+
+.cell.cell-right {
+  flex: 1 1 70%;
+  text-align: left;
+  padding: 3px;
 }
