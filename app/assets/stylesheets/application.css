@@ -31,14 +31,15 @@ a {
 .alert {
   padding: 6px;
   width: 380px;
-  margin: auto;
   text-align: center;
   font-weight: 800;
-  margin-top: 12px;
+  margin: 10px auto;
 }
 
-.alert-errors {
-  background-color: lightcoral;
+.alert-errors,
+.alert-error {
+  background-color: var(--alert);
+  color: var(--dark-olive)
 }
 
 .top-bar {

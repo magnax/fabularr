@@ -17,20 +17,48 @@
   <%= render partial: 'events/events', locals: { events: events } %>
 </section>
 
-<%= render partial: "events/characters", locals: { characters: characters } %>
-<%= render partial: "events/items", locals: { 
-  resources: items[:resources], items: items[:items] 
-} %>
-<%= render partial: "events/roads", locals: { roads: roads } %>
-<%= render partial: "events/buildings", locals: { 
-  buildings: buildings, vehicles: vehicles 
-} %>
+<section id="characters" style="clear: both;">
+  <div class="title-bar">
+    <%= t 'views.events.index.characters_here' %>
+  </div>
+  <%= render partial: "events/characters", locals: { characters: characters } %>
+</section>
+
+<section id="items" style="clear: both;">
+  <div class="title-bar">
+    <%= t 'views.events.index.items_here' %>
+  </div>
+  <%= render partial: "events/items", locals: { 
+    resources: items[:resources], items: items[:items] 
+  } %>
+</section>
+
+<section id="items" style="clear: both;">
+  <div class="title-bar">
+    <%= t 'views.events.index.roads_here' %>
+  </div>
+  <%= render partial: "events/roads", locals: { roads: roads } %>
+</section>
+
+<section id="buildings" style="clear: both;">
+  <div class="title-bar">
+    <%= t 'views.events.index.buildings_here' %>
+  </div>
+  <%= render partial: "events/buildings", locals: { 
+    buildings: buildings, vehicles: vehicles 
+  } %>
+</section>
 
 <% if location&.town? %>
-  <%= render partial: "events/resources", locals: { 
-    location: location,
-    location_resources: location_resources 
-  } %>
+  <section id="resources" style="clear: both;">
+    <div class="title-bar">
+      <%= t 'views.events.index.resources_here' %>
+    </div>
+    <%= render partial: "events/resources", locals: { 
+      location: location,
+      location_resources: location_resources 
+    } %>
+  </section>
 <% elsif location&.parent_location_id %>
   <div>
     <%= link_to(
@@ -46,5 +74,10 @@
 <% end %>
 
 <% if location.present? || projects.present? %>
-  <%= render partial: "events/projects", locals: { projects: projects } %>
+  <section id="resources" style="clear: both;">
+    <div class="title-bar">
+      <%= t 'views.events.index.projects_here' %>
+    </div>
+    <%= render partial: "events/projects", locals: { projects: projects } %>
+  </section>
 <% end %>
