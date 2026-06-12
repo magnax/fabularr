@@ -26,14 +26,14 @@ class CharactersNewTest < ActionDispatch::IntegrationTest
 
     click_on 'Create character'
     assert_text 'New character successfully created'
-    assert_text 'Your characters (1)'
+    assert_text 'Characters list'
   end
 
   test 'cannot create more than 15 characters' do
     create_list(:character, 15, { user: @user })
 
     visit list_url
-    assert_text 'Your characters (15)'
+    assert_text 'Characters list'
     assert_text 'You cannot create more characters'
 
     assert_no_link 'Create new character'

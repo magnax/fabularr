@@ -10,7 +10,8 @@ class UsersShowTest < ActionDispatch::IntegrationTest
 
   test 'visiting the characters list page' do
     visit list_url
-    assert_selector 'h1', text: "Hello #{@user.email}"
+
+    assert_selector 'div', text: @user.email
   end
 
   test 'proper gender info for character' do

@@ -250,6 +250,7 @@ pl:
   vehicles:
     small_wooden_cart: mały drewniany wózek
   views:
+    character_info: Profil postaci
     characters:
       agony: W agonii
       hungry: Wygłodzenie
@@ -272,6 +273,7 @@ pl:
       talk:
         talk_to: Powiedz coś do %{charname}
       wounded: Zranienie
+    characters_list: Lista postaci
     events:
       age: '%{age} lat'
       collect_resource: Zbieraj
@@ -335,6 +337,7 @@ pl:
     location_resources:
       new:
         title: Odkryj nowe zasoby!
+    not_logged_in: Nie zalogowany
     projects:
       collect: Zbieraj
       collect_info: W ciągu jednego dnia jedna postać może zebrać tylko %{amount} gram. Liczba tur będzie zaokrąglona w górę. To ile otrzymasz na koniec podlega losowym odchyłom (maks. 20%) od ilości jaką podasz.
@@ -393,7 +396,6 @@ pl:
         title: Rejestracja nowego użytkownika
       show:
         cannot_create_char: Nie możesz tworzyć więcej postaci
-        characters: Twoje postacie
         create_char: Utwórz nową postać
         no_chars: Nie masz żadnych postaci
         travel_info_html: "W podróży z %{location_name} (%{direction})"

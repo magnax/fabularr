@@ -250,6 +250,7 @@ en:
   vehicles:
     small_wooden_cart: small wooden cart
   views:
+    character_info: Character info
     characters:
       agony: In agony
       hungry: Hungry
@@ -272,6 +273,7 @@ en:
       talk:
         talk_to: Say something to %{charname}
       wounded: Wound
+    characters_list: Characters list
     events:
       age: '%{age} years'
       collect_resource: Collect
@@ -335,6 +337,7 @@ en:
     location_resources:
       new:
         title: Discover new resources!
+    not_logged_in: Not logged in
     projects:
       collect: Collect
       collect_info: One character can collect only %{amount} grams in one day. Turns number will be rounded up. The final amount can differ by max 20% depending on provided amount.
@@ -393,7 +396,6 @@ en:
         title: Register new user
       show:
         cannot_create_char: You cannot create more characters
-        characters: Your characters
         create_char: Create new character
         no_chars: You don't have any characters
         travel_info_html: "Travelling from %{location_name} (%{direction})"

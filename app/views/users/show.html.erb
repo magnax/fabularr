@@ -1,9 +1,10 @@
 <% provide(:js_name, 'characters') %>
 
 <section id="current_user" data-id="<%= user.id %>">
-  <h1><%= t 'hello' %> <%= user.email %></h1>
+  <div class="title-bar">
+    <%= t('views.characters_list') %>
+  </div>
   <% if characters.any? %>
-    <h3><%= t 'views.users.show.characters' %> (<%= characters.count %>)</h3>
     <table class="characters">
       <% characters.each do |character| %>
         <tr id="char_<%= character['id'] %>">

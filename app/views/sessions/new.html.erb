@@ -1,6 +1,8 @@
-<h1><%= t 'views.sessions.new.title' %></h1>
+<div class="title-bar">
+  <%= t 'views.sessions.new.title' %>
+</div>
 
-<div class="row">
+<div class="row" style="padding: 10px;">
   <div class="span6 offset3">
     <%= form_for(:session, url: sessions_url) do |f| %>
 

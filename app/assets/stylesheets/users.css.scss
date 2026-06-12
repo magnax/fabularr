@@ -3,12 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 table.characters {
-  background-color: gray;
   border: 1px solid gray;
   margin: auto;
 
   td {
-    background-color: white;
     border: 1px solid gray;
     padding: 3px;
 
@@ -27,15 +25,18 @@ table.characters {
 }
 
 .fa-venus {
-  color: rgb(230, 16, 191);
+  color: #ff66f0;
+  text-shadow: 2px 1px 0px var(--dark-olive);
 }
 
 .fa-mars {
-  color: rgb(11, 38, 162);
+  color: #05c1ff;
+  text-shadow: 2px 1px 0px var(--dark-olive);
 }
 
 .events-count {
-  background-color: aquamarine;
+  background-color: var(--alert);
+  color: var(--dark-olive);
   padding: 1px 5px;
   font-size: 0.7em;
   border-radius: 10px;

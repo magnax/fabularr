@@ -20,7 +20,7 @@ class SessionsCreateTest < ActionDispatch::IntegrationTest
 
     click_button 'Login'
 
-    assert_content("Hello #{user.email}")
+    assert_content user.email
     assert_content("You don't have any characters")
     assert_link('Profile', href: "#{host}/en/users/#{user.id}/edit")
     assert_link('Logout', href: "#{host}/en/logout")
@@ -36,7 +36,7 @@ class SessionsCreateTest < ActionDispatch::IntegrationTest
 
     click_button 'Login'
 
-    assert_content("Hello #{user.email}")
+    assert_content user.email
     assert_no_link 'Login'
 
     click_on 'Logout'

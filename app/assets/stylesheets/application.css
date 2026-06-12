@@ -13,6 +13,21 @@
  *= require font-awesome
  */
 
+body {
+  background-color: var(--light-bronze);
+  color: var(--powder-petal);
+}
+
+a {
+  color: var(--link-color);
+  text-shadow: 2px 2px 1px var(--dark-olive);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--link-color-hover);
+  }
+}
+
 .alert {
   padding: 6px;
   width: 380px;
@@ -28,16 +43,64 @@
 
 .top-bar {
   text-align: center;
+  margin: 0 auto;
+  width: 800px;
 }
 
 .main {
   text-align: center;
+  width: 1000px;
+  background-color: var(--dark-bronze);
+  color: var(--powder-petal);
 }
 
 .header-title {
-  text-shadow: 0px 3px 3px #000000;
+  text-shadow: 0px 3px 3px var(--dark-olive);
   font-size: 24pt;
   margin-top: 0px;
   margin-bottom: 0px;
-  color: darkkhaki;
+  color: var(--powder-petal);
+}
+
+.header-date,
+.user-info,
+.header-user {
+  color: black;
+  text-shadow: 0px 1px 2px var(--powder-petal);
+  font-size: 0.75em;
+  font-weight: 600;
+}
+
+.user-info {
+  text-align: center;
+  margin: auto;
+}
+
+.header-info {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 2px;
+}
+
+.left,
+.right {
+  flex: 0 1 auto;
+}
+
+.title-bar {
+  background-color: var(--desert-sand);
+  color: var(--dark-olive);
+  text-transform: uppercase;
+  padding: 4px;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+nav {
+  padding: 5px 0;
 }

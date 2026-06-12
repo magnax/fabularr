@@ -17,7 +17,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     sign_in
     visit events_url
 
-    assert_text 'Hello user@me.com'
+    assert_text 'user@me.com'
   end
 
   test 'signed-in user with some characters' do
