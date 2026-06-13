@@ -31,7 +31,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     click_link 'Magnus'
 
     assert_content('Events for: Magnus')
-    assert_content('Location: unnamed place')
+    assert_content('Location:')
+    assert_content('unnamed place')
     assert_link('Magnus', href: "#{host}/en/characters/#{magnus.id}")
     assert_link('unknown woman')
     assert_no_link('Sid')

@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   around_action :time_and_locale
 
   def time_and_locale(&action)
-    @dt = GameTime.last.datetime
+    @dt = (GameTime.last || GameTime.create).datetime
 
     locale = params[:locale] || I18n.default_locale
     I18n.with_locale(locale, &action)

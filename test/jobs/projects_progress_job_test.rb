@@ -3,6 +3,10 @@
 require 'test_helper'
 
 class ProjectsProgressJobTest < ActiveSupport::TestCase
+  def setup
+    GameTime.create!
+  end
+
   def call_job
     ProjectsProgressJob.perform_sync
   end
