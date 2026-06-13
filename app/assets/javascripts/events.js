@@ -4,6 +4,7 @@ window.onload = function () {
   currentCharacterId = document.getElementById('current_character').dataset.id;
 
   setTimeout(clearErrors, 4000);
+  subscribeTime();
 
   App.cable.subscriptions.create({ channel: "CharacterChannel", character_id: currentCharacterId }, {
     received(data) {

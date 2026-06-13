@@ -8,6 +8,11 @@ class ProjectsProgressJob
       Projects::ProgressService.call(project.id)
     end
 
+    gt = GameTime.last
+    gt.touch # rubocop:disable Rails/SkipsModelValidations
+
+    ActionCable.server.broadcast('time_channel', { type: 'time', payload: gt.datetime })
+
     s = Setting.find_by key: 'projects'
     return unless s&.value == '1'
 

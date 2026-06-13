@@ -50,9 +50,11 @@ class ApplicationController < ActionController::Base
     { locale: I18n.locale }
   end
 
-  around_action :switch_locale
+  around_action :time_and_locale
 
-  def switch_locale(&action)
+  def time_and_locale(&action)
+    @dt = GameTime.last.datetime
+
     locale = params[:locale] || I18n.default_locale
     I18n.with_locale(locale, &action)
   end

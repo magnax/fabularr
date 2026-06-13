@@ -5,4 +5,6 @@ window.onload = function () {
 
   setTimeout(clearErrors, 4000);
   setInterval(checkEvents, 10000);
+
+  subscribeTime();
 }
