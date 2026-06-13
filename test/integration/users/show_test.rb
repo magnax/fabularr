@@ -28,6 +28,7 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     visit '/pl/list'
 
     assert_content 'las'
+    assert_selector 'img[title="town"]'
   end
 
   test 'proper location type info when in building (parent type)' do
@@ -40,6 +41,7 @@ class UsersShowTest < ActionDispatch::IntegrationTest
 
     assert_content 'Drewniana chata'
     assert_content 'las'
+    assert_selector 'img[title="building"]'
   end
 
   test 'show admin menu when logged as admin' do
@@ -62,6 +64,7 @@ class UsersShowTest < ActionDispatch::IntegrationTest
 
     assert_equal 200, page.status_code
     assert_content 'Travelling from Fabular City (north-east)'
+    assert_selector 'img[title="road"]'
   end
 
   test 'character travelling on road' do
@@ -101,5 +104,6 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     assert_equal 200, page.status_code
     assert_content 'Travelling from Fabular City to Other City'
     assert_content '(T 0%)'
+    assert_selector 'img[title="vehicle"]'
   end
 end

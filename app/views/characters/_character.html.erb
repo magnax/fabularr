@@ -1,49 +1,52 @@
-  <td class="name <%= character[:unread_events].zero? ? '' : 'bold' %>">
-		<%= link_to character[:name], character_set_url(character[:id]) %>
-		<span class="events-count" style="visibility: <%= character[:unread_events].zero? ? 'hidden' : 'visible' %>"><%= character[:unread_events] %></span>
-	</td>
-	<td class="center" style="width: 50px;">
-		<% if character[:hunger_level].present? %>
-			<%= image_tag("hunger_#{character[:hunger_level]}.png", title: t("views.characters.#{character[:hunger_level]}")) %>
-		<% end %>
-		<% if character[:damage_level].present? %>
-			<%= image_tag("damage_#{character[:damage_level]}.png", title: t("views.characters.#{character[:damage_level]}")) %>
-		<% end %>
-	</td>
-	<td class="center">
-		<%= fa_icon(
-			character[:male] ? 'mars' : 'venus', title: t("genders.#{character[:gender]}")
-		) %>
-	</td>
-	<td>
-		<% if character[:travel_info].present? %>
-			<% if character[:travel_info][:end_location_name].present? %>
-				<%= t(
-					'views.users.show.travel_road_info_html', 
-					start_location_name: character[:travel_info][:start_location_name],
-					end_location_name: character[:travel_info][:end_location_name]
-				) %>
-			<% else %>
-				<%= t(
-					'views.users.show.travel_info_html', 
-					location_name: character[:travel_info][:start_location_name],
-					direction: character[:travel_info][:direction]
-				) %>
-			<% end %>
+<td>
+	<%= character_placement_icon(character) %>
+</td>
+<td class="name <%= character[:unread_events].zero? ? '' : 'bold' %>">
+	<%= link_to character[:name], character_set_url(character[:id]) %>
+	<span class="events-count" style="visibility: <%= character[:unread_events].zero? ? 'hidden' : 'visible' %>"><%= character[:unread_events] %></span>
+</td>
+<td class="center" style="width: 50px;">
+	<% if character[:hunger_level].present? %>
+		<%= image_tag("hunger_#{character[:hunger_level]}.png", title: t("views.characters.#{character[:hunger_level]}")) %>
+	<% end %>
+	<% if character[:damage_level].present? %>
+		<%= image_tag("damage_#{character[:damage_level]}.png", title: t("views.characters.#{character[:damage_level]}")) %>
+	<% end %>
+</td>
+<td class="center">
+	<%= fa_icon(
+		character[:male] ? 'mars' : 'venus', title: t("genders.#{character[:gender]}")
+	) %>
+</td>
+<td>
+	<% if character[:travel_info].present? %>
+		<% if character[:travel_info][:end_location_name].present? %>
+			<%= t(
+				'views.users.show.travel_road_info_html', 
+				start_location_name: character[:travel_info][:start_location_name],
+				end_location_name: character[:travel_info][:end_location_name]
+			) %>
 		<% else %>
-			<%= character[:location_name] %>
+			<%= t(
+				'views.users.show.travel_info_html', 
+				location_name: character[:travel_info][:start_location_name],
+				direction: character[:travel_info][:direction]
+			) %>
 		<% end %>
-	</td>
-	<td class="center small">
-		<% if character[:location_type].present? %>
-			<%= character[:location_type] %>
-		<% end %>
-	</td>
-	<td>
-		<% if character[:project_info] %>
-			<a title="<%= character[:project_info][:name] %>"><%= fa_icon('cogs') %></a> (P <%= character[:project_info][:percent]%>%)</a>
-		<% end %>
-		<% if character[:travel_info] && character[:travel_info][:progress] %>
-			(T <%= character[:travel_info][:progress] %>%)
-		<% end %>
-	</td>
+	<% else %>
+		<%= character[:location_name] %>
+	<% end %>
+</td>
+<td class="center small">
+	<% if character[:location_type].present? %>
+		<%= character[:location_type] %>
+	<% end %>
+</td>
+<td>
+	<% if character[:project_info] %>
+		<a title="<%= character[:project_info][:name] %>"><%= fa_icon('cogs') %></a> (P <%= character[:project_info][:percent]%>%)</a>
+	<% end %>
+	<% if character[:travel_info] && character[:travel_info][:progress] %>
+		(T <%= character[:travel_info][:progress] %>%)
+	<% end %>
+</td>

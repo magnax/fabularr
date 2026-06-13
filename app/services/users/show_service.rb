@@ -21,6 +21,7 @@ module Users
           only: %i[id gender],
           methods: %i[damage_level hunger_level project_info]
         ).merge(
+          location_icon: location_icon(char),
           location_name: char.location&.display_name(char, parent: true),
           location_type: location_type(char),
           male: char.male?,
@@ -30,6 +31,15 @@ module Users
         )
             .with_indifferent_access
       end
+    end
+
+    def location_icon(char)
+      return 'town' if char.location&.town?
+      return 'building' unless char.travelling?
+      return 'road' if char.location.blank?
+
+      # TODO: there will be one more case: travelling on ship
+      'vehicle'
     end
 
     def location_type(char)
