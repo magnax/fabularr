@@ -1,20 +1,22 @@
-<h1><%= t 'views.users.new.title' %></h1>
+<div class="title-bar">
+  <%= t 'views.users.new.title' %>
+</div>
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span6 offset3" style="text-align:center;">
     <%= form_for(@user) do |f| %>
 
 	  <%= render 'shared/error_messages', object: f.object %>
 	  
-      <%= f.label :email %>
+      <p><%= f.label :email %>
       <%= f.text_field :email %>
 
-      <%= f.label :password %>
+      <p><%= f.label :password %>
       <%= f.password_field :password %>
 
-      <%= f.label :password_confirmation %>
+      <p><%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.submit I18n.t 'views.users.new.create', class: "btn btn-large btn-primary" %>
+      <p><%= f.submit I18n.t 'views.users.new.create', class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>
