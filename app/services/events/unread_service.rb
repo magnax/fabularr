@@ -7,12 +7,24 @@ module Events
     end
 
     def call
-      user.characters.inject({}) do |res, char|
-        res.merge!(char.id => char.visible_events.unread.length)
+      characters.inject({}) do |res, char|
+        res.merge!(char.id => char.count)
       end
     end
 
     private
+
+    def characters
+      @characters ||= Character
+                      .where(user_id: user.id)
+                      .joins(
+                        'LEFT JOIN events ON '\
+                        'events.receiver_character_id = characters.id'
+                      )
+                      .where(events: { read_at: nil })
+                      .group('characters.id')
+                      .select('characters.id, COUNT(events.id)')
+    end
 
     def user
       @user ||= User.find_by(id: @user_id)
