@@ -13,3 +13,6 @@ require_relative 'seeds/raw_resources'
 require_relative 'seeds/materials'
 require_relative 'seeds/recipes'
 require_relative 'seeds/locations'
+
+# "start" time
+GameTime.create!
