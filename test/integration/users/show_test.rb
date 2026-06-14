@@ -63,7 +63,7 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     visit list_url
 
     assert_equal 200, page.status_code
-    assert_content 'Travelling from Fabular City (north-east)'
+    assert_content 'Travelling from Fabular City (north-west)'
     assert_selector 'img[title="road"]'
   end
 

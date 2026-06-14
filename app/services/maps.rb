@@ -5,22 +5,23 @@ module Maps
   class InvalidPositionError < StandardError; end
 
   DIRECTIONS = {
-    1 => 'e',
-    2 => 'ese',
-    3 => 'se',
-    4 => 'sse',
-    5 => 's',
-    6 => 'ssw',
-    7 => 'sw',
-    8 => 'wsw',
-    9 => 'w',
-    10 => 'wnw',
-    11 => 'nw',
-    12 => 'nnw',
-    13 => 'n',
-    14 => 'nne',
-    15 => 'ne',
-    16 => 'ene'
+    0 => 'n',
+    1 => 'n',
+    2 => 'nne',
+    3 => 'ne',
+    4 => 'ene',
+    5 => 'e',
+    6 => 'ese',
+    7 => 'se',
+    8 => 'sse',
+    9 => 's',
+    10 => 'ssw',
+    11 => 'sw',
+    12 => 'wsw',
+    13 => 'w',
+    14 => 'wnw',
+    15 => 'nw',
+    16 => 'nnw'
   }.freeze
 
   def self.location_type(pos_x, pos_y)
@@ -54,26 +55,26 @@ module Maps
     direction_text(direction(location_from, location_to))
   end
 
-  def self.dir_16(direction)
-    (((direction - 11.5) / 22.5) + 2).to_i % 17
-  end
-
   def self.direction_text(direction)
     I18n.t("directions.#{DIRECTIONS[dir_16(direction)]}")
+  end
+
+  def self.dir_16(direction)
+    (((direction - 11.5) / 22.5) + 2).to_i % 17
   end
 
   def self.direction(location_from, location_to)
     ((Math.atan2(
       location_to.y - location_from.y,
       location_to.x - location_from.x
-    ) * 180.0 / Math::PI) + 360) % 360
+    ) * 180.0 / Math::PI) + 90) % 360
   end
 
   def self.road_direction(road, location_from)
     location_to_id = [road.location_1_id, road.location_2_id] - [location_from.id]
     location_to = Location.find_by(id: location_to_id)
 
-    (direction(location_from, location_to) + 90) % 360
+    direction(location_from, location_to) % 360
   end
 
   def self.calculate_percent(traveller, road)

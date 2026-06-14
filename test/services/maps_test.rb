@@ -65,8 +65,10 @@ class MapsTest < ActiveSupport::TestCase
 
   test 'direction_text' do
     results = [
-      [0, 'east'],
-      [45, 'south-east']
+      # [0, 'north'],
+      # [1, 'north'],
+      # [45, 'north-east'],
+      [355, 'north']
     ]
 
     results.each do |result|

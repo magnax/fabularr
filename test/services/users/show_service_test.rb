@@ -55,4 +55,13 @@ class UsersShowServiceTest < ActiveSupport::TestCase
     ch = res[:characters].find { |c| c['id'] == char_2.id }
     assert_equal 0, ch[:unread_events]
   end
+
+  test 'show travel info - free travel' do
+    character = create(:character, user: @user, location: nil)
+    create(:traveller, subject: character, direction: 45, speed: 100)
+
+    res = call_service
+
+    assert_equal 'north-east', res[:characters].sole['travel_info']['direction']
+  end
 end

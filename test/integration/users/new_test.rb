@@ -6,7 +6,7 @@ class UsersNewTest < ActionDispatch::IntegrationTest
   test 'register page' do
     visit register_path
 
-    assert_selector 'h1', text: 'Register'
+    assert_selector '.title-bar', text: 'Register'
   end
 
   test 'submit with invalid information' do
