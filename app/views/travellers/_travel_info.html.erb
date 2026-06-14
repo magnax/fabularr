@@ -15,16 +15,18 @@
   <%= t('views.events.index.travel_info_html', location_link: link_to(travel_info[:location].display_name(character, parent: true), location_name_url(travel_info[:location].id))) %>
 <% end %>
 
-<%= form_for :traveller, url: traveller_url(travel_info[:traveller_id]), method: 'PUT' do |form| %>
-  <%= t('views.travellers.update.speed') %> <%= form.text_field :speed, value: travel_info[:speed], style: 'width:3em;' %>%
-  <% unless travel_info[:dest_location].present? %>
-    <%= t('views.travellers.update.direction') %> <%= form.text_field :direction, value: travel_info[:direction], style: 'width:3em;' %>
+<% unless project.present? %>
+  <%= form_for :traveller, url: traveller_url(travel_info[:traveller_id]), method: 'PUT' do |form| %>
+    <%= t('views.travellers.update.speed') %> <%= form.text_field :speed, value: travel_info[:speed], style: 'width:3em;' %>%
+    <% unless travel_info[:dest_location].present? %>
+      <%= t('views.travellers.update.direction') %> <%= form.text_field :direction, value: travel_info[:direction], style: 'width:3em;' %>
+    <% end %>
+    <%= form.submit t('views.travellers.update.submit') %>
   <% end %>
-  <%= form.submit t('views.travellers.update.submit') %>
+  <% if travel_info[:speed].zero? %>
+    <%= link_to t('views.travel_info.examine'), examine_locations_url %>
+  <% else %>
+    <%= link_to t('views.travellers.stop'), traveller_stop_url(travel_info[:traveller_id]) %>
+  <% end %>
+  <%= link_to t('views.travellers.reverse'), traveller_reverse_url(travel_info[:traveller_id]) %>
 <% end %>
-<% if travel_info[:speed].zero? %>
-  <%= link_to t('views.travel_info.examine'), examine_locations_url %>
-<% else %>
-  <%= link_to t('views.travellers.stop'), traveller_stop_url(travel_info[:traveller_id]) %>
-<% end %>
-<%= link_to t('views.travellers.reverse'), traveller_reverse_url(travel_info[:traveller_id]) %>

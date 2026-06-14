@@ -174,4 +174,23 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     assert_content 'Project:'
     assert_content 'Building: stone knife 50.0%'
   end
+
+  test 'do not show travel related links when creating new location' do
+    character = create(:character, name: 'Magnus', location: nil, user: @user,
+                                   coords: { x: 100, y: 100 })
+    project = create(:project, :create_location, location: nil,
+                                                 elapsed: 300, duration: 600)
+    create(:traveller, subject: character, speed: 0)
+    create(:worker, character: character, project: project)
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_equal 200, page.status_code
+
+    assert_content 'Project:'
+    assert_content 'Creating new location 50.0%'
+    assert_no_link 'Examine location'
+    assert_no_link 'Reverse'
+  end
 end
