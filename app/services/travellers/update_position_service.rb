@@ -71,7 +71,7 @@ module Travellers
     def check_arrive_to_location
       if @traveller.road.present?
         Travellers::ArriveToLocationService.call(@traveller) if nearby?
-      elsif nearby_location.present?
+      elsif nearby_location.present? && nearby_location != @traveller.start_location
         Travellers::ArriveToLocationService.call(@traveller, nearby_location)
       end
     end

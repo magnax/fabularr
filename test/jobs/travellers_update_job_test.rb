@@ -27,6 +27,21 @@ class TravellersUpdateJobTest < ActiveSupport::TestCase
     Timecop.unfreeze
   end
 
+  test "don't arrive to start location" do
+    time = DateTime.parse('2026-04-11 09:00')
+    location = create(:location, coords: { x: 200, y: 300 })
+    character = create(:character, coords: { x: 200, y: 300 })
+    create(:traveller, subject: character, start_location: location,
+                       direction: 135, speed: 100, checked_at: time)
+
+    Timecop.travel(time + 10.minutes)
+    call_job
+
+    assert_equal 200.4, character.reload.x.round(1)
+    assert_equal 300.4, character.y.round(1)
+    Timecop.unfreeze
+  end
+
   test 'arriving to location when travelling on road' do
     time = DateTime.parse('2026-04-11 09:00')
     character = create(:character, location: nil, coords: { x: 200, y: 299 })
