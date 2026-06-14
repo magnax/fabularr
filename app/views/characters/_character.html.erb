@@ -18,7 +18,7 @@
 		character[:male] ? 'mars' : 'venus', title: t("genders.#{character[:gender]}")
 	) %>
 </td>
-<td>
+<td class="location">
 	<% if character[:travel_info].present? %>
 		<% if character[:travel_info][:end_location_name].present? %>
 			<%= t(

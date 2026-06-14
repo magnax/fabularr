@@ -5,6 +5,7 @@
 table.characters {
   border: 1px solid gray;
   margin: auto;
+  font-size: 14px;
 
   td {
     border: 1px solid gray;
@@ -16,6 +17,10 @@ table.characters {
 
     &.small {
       font-size: 0.8em;
+    }
+
+    &.location {
+      width: 38%;
     }
   }
 }
