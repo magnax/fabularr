@@ -44,6 +44,10 @@ en:
               confirmation: should match password
   buildings:
     wood_shack: wood shack
+  characters:
+    age:
+      over_20_k: She is in her twenties 
+      over_20_m: He is in his twenties 
   directions:
     e: east
     ene: east-north-east
@@ -270,6 +274,7 @@ en:
         description: Name & description
         info: Character info
         skills: Skills
+        spawn_info_html: 'Spawned: day %{day} in %{location_link}'
       skinny: Skinny
       talk:
         talk_to: Say something to %{charname}

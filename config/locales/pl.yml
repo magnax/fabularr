@@ -44,6 +44,10 @@ pl:
               confirmation: musi być takie jak hasło
   buildings:
     wood_shack: Drewniana chata
+  characters:
+    age:
+      over_20_k: Ona ma ponad dwadzieścia lat
+      over_20_m: On ma ponad dwadzieścia lat
   directions:
     e: wschodni
     ene: wschodnio-północno-wschodni
@@ -270,6 +274,7 @@ pl:
         description: Imię i opis
         info: 'Opis postaci: %{name}'
         skills: Umiejętności
+        spawn_info_html: 'Przebudzenie: dnia %{day} w %{location_link}'
       skinny: Wychudzenie
       talk:
         talk_to: Powiedz coś do %{charname}

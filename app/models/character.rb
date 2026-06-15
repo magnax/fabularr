@@ -170,4 +170,11 @@ class Character < ApplicationRecord
       .where("#{raw_food_id} = any(resources.resource_type_id)")
       .order('resources.eaten DESC')
   end
+
+  def decade
+    d = (GameTime.last.days / GameTime::DAYS_IN_YEAR + 20) / 10 * 10
+    d = 100 if d > 100
+
+    d
+  end
 end

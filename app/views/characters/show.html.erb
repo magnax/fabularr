@@ -2,6 +2,13 @@
   <div class="title-bar">
     <%= t('views.characters.show.info', name: name) %>
   </div>
+  <%= age %>
+  <p><%= t(
+    'views.characters.show.spawn_info_html', 
+    day: spawn_day, 
+    location_link: link_to(
+      spawn_location_name, location_name_url(spawn_location_id))
+    ) %>
 </section>
 <section id="actions">
   <div class="title-bar">

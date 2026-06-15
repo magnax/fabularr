@@ -135,4 +135,36 @@ class CharacterTest < ActiveSupport::TestCase
     assert_equal 'Building', character.project_info[:name]
     assert_equal 43, character.project_info[:percent]
   end
+
+  test '#decade' do
+    time_start = Date.parse('2026-06-01')
+
+    data_in_days = {
+      1 => 20,
+      20 => 20,
+      199 => 20,
+      201 => 30,
+      401 => 40,
+      601 => 50,
+      801 => 60,
+      1001 => 70,
+      1201 => 80,
+      1401 => 90,
+      1601 => 100,
+      2001 => 100,
+      3001 => 100
+    }
+
+    character = create(:character)
+    GameTime.create(created_at: time_start)
+
+    data_in_days.each do |days, result|
+      time_end = time_start + days
+      GameTime.last.update!(updated_at: time_end)
+
+      Timecop.travel(time_end)
+
+      assert_equal result, character.decade
+    end
+  end
 end
