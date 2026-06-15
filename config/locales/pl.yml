@@ -266,8 +266,9 @@ pl:
         actions: Akcje
         current_state: Obecny stan
         damage: Obrażenia
+        hunger: Głód
         description: Imię i opis
-        info: Informacje o postaci
+        info: 'Opis postaci: %{name}'
         skills: Umiejętności
       skinny: Wychudzenie
       talk:

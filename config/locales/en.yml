@@ -250,7 +250,7 @@ en:
   vehicles:
     small_wooden_cart: small wooden cart
   views:
-    character_info: Character info
+    character_info: 'Character description: %{name}'
     characters:
       agony: In agony
       hungry: Hungry
@@ -266,6 +266,7 @@ en:
         actions: Actions
         current_state: Current status
         damage: Damage
+        hunger: Hunger
         description: Name & description
         info: Character info
         skills: Skills

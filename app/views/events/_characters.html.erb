@@ -1,5 +1,6 @@
 <% characters.each do |character| %>
   <div>
+    <%= link_to fa_icon('info'), character_url(character[:id]) %>
     <% if current_character.id != character[:id] %>
       <%= link_to t('character.actions.talk'), character_talk_url(character[:id]) %>
     <% end %>

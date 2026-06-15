@@ -1,24 +1,67 @@
-<div class="main">
-  <section id="description">
-    <%= t('views.characters.show.info') %>
-  </section>
-  <section id="actions">
+<section id="description">
+  <div class="title-bar">
+    <%= t('views.characters.show.info', name: name) %>
+  </div>
+</section>
+<section id="actions">
+  <div class="title-bar">
     <%= t('views.characters.show.actions') %>
-  </section>
-  <section id="status">
-    <div class="title-bar"><%= t('views.characters.show.current_state') %></div>
-    <table>
-      <tr>
-        <td><%= t('views.characters.show.damage') %></td>
-        <td><%= @character.damage %>%</td>
-      </tr>
-    </table>
-  </section>
-  <section id="skills">
+  </div>
+    <%= link_to '' do %>
+      <div class="char-action">Talk</div>
+    <% end %>
+    <%= link_to '' do %>
+      <div class="char-action">Point</div>
+    <% end %>
+    <%= link_to '' do %>
+      <div class="char-action">Join to project</div>
+    <% end %>
+    <%= link_to '' do %>
+      <div class="char-action">Drag</div>
+    <% end %>
+    <%= link_to '' do %>
+      <div class="char-action">Attack</div>
+    <% end %>
+</section>
+<section id="status">
+  <div class="title-bar">
+    <%= t('views.characters.show.current_state') %>
+  </div>
+  <table>
+    <tr>
+      <td width="40%"><%= t('views.characters.show.damage') %>:</td>
+      <td>
+        <div class="stat">
+          <div class="stat-outer"></div>
+          <div class="stat-inner damage" style="width:<%= @character.damage %>%;">
+          </div>
+          <div class="stat-inner-number"><%= @character.damage %>%</div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td width="40%"><%= t('views.characters.show.hunger') %>:</td>
+      <td>
+        <div class="stat">
+          <div class="stat-outer"></div>
+          <div class="stat-inner hunger" style="width:<%= @character.hunger %>%;">
+          </div>
+          <div class="stat-inner-number"><%= @character.hunger %>%</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</section>
+
+<section id="skills">
+  <div class="title-bar">
     <%= t('views.characters.show.skills') %>
-  </section>
-  <section id="description">
-    <div class="title-bar"><%= t('views.characters.show.description') %></div>
-    <%= render 'characters/name_form' %>
-  </section>
-</div>
+  </div>
+</section>
+
+<section id="description" style="padding-bottom: 15px;">
+  <div class="title-bar">
+    <%= t('views.characters.show.description') %>
+  </div>
+  <%= render 'characters/name_form' %>
+</section>
