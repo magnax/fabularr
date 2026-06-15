@@ -36,4 +36,7 @@ class RecipeInstruction < ApplicationRecord
   RESOURCE = 'resource'
   TOOL = 'tool'
   PLACEMENT = 'placement'
+
+  # Placements:
+  OUTSIDE_ALL = 'outside_all'
 end

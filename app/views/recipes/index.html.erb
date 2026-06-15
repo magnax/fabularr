@@ -1,52 +1,61 @@
-<h2><%= t('views.recipes.index.title') %></h2>
+<section id="building-menu">
+  <div class="title-bar">
+    <%= t('views.recipes.index.title') %>
+  </div>
 
-<div><%= t('views.recipes.index.recipes_count') %>: <%= recipes.count %></div>
+  <div><%= t('views.recipes.index.recipes_count') %>: <%= recipes.count %></div>
 
-<ul>
-  <% recipes.each do |recipe| %>
-    <li style="margin-bottom: 8px; border-bottom: 1px solid black;">
-      <span onClick="toggleRecipe(this);" style="cursor:pointer;"><%= recipe[:recipe_type] %></span>
-      <% expanded_class = recipe[:id].to_s.in?(expanded || []) ? 'block' : 'none' %>
-      <div class="recipe-details" style="display: <%= expanded_class %>">
-        
-        <%= 
-          link_to(
-            t('views.recipes.index.continue'), new_build_projects_url(recipe[:id]),
-            style: 'display: inline-block;'
-          )
-        %>
-        <br /><%= t('views.recipes.index.time') %>: <%= recipe[:time_needed] %>
-        <% if recipe[:resource_instructions].present? %>
-          <br /><%= t('views.recipes.index.resources') %>:
-          <ul>
-            <% recipe[:resource_instructions].each do |instruction| %>
-              <li>
-                <%= tn("resources.#{instruction.subject.key}") %>
-                (<%= instruction.amount %> <%= td(instruction.unit) %>)</li>
-            <% end %>
-          </ul>
-        <% end %>
+  <ul style="text-align:left;">
+    <% recipes.each do |recipe| %>
+      <li class="build-item">
+        <span onClick="toggleRecipe(this);" style="cursor:pointer;">
+          <%= recipe[:recipe_type] %>
+          <% unless locale == :en %>
+            <span class="item-key">
+              [<%= recipe[:key] %>]
+          <% end %>
+        </span>
+        <% expanded_class = recipe[:id].to_s.in?(expanded || []) ? 'block' : 'none' %>
+        <div class="recipe-details" style="display: <%= expanded_class %>">
+          <%= 
+            link_to(
+              t('views.recipes.index.continue'), new_build_projects_url(recipe[:id]),
+              style: 'display: inline-block;'
+            )
+          %>
+          <br /><%= t('views.recipes.index.time') %>: <%= recipe[:time_needed] %>
+          <% if recipe[:resource_instructions].present? %>
+            <br /><%= t('views.recipes.index.resources') %>:
+            <ul>
+              <% recipe[:resource_instructions].each do |instruction| %>
+                <li>
+                  <%= tn("resources.#{instruction.subject.key}") %>
+                  (<%= instruction.amount %> <%= td(instruction.unit) %>)</li>
+              <% end %>
+            </ul>
+          <% end %>
 
-        <% if recipe[:tool_instructions].present? %>
-          <%= t('views.recipes.index.tools') %>:
-          <ul>
-            <% recipe[:tool_instructions].each do |instruction| %>
-              <li>
-                <%= t("items.#{instruction.subject.key}") %>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <%= t('views.recipes.index.manual') %>
-        <% end %>
-        <% if recipe[:placement_instructions].present? %>
+          <% if recipe[:tool_instructions].present? %>
+            <%= t('views.recipes.index.tools') %>:
+            <ul>
+              <% recipe[:tool_instructions].each do |instruction| %>
+                <li>
+                  <%= t("items.#{instruction.subject.key}") %>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+          <% if recipe[:placement_instructions].present? %>
             <% recipe[:placement_instructions].each do |instruction| %>
-              <div>
-                <%= t("placements.#{instruction.metadata['placement']}") %>
-              </div>
+              <% instruction.metadata['placement'].each do |p| %>
+                <div>
+                  <%= t("placements.#{p}") %>
+                </div>
+              <% end %>
             <% end %>
-        <% end %>
-      </div>
-    </li>
-  <% end %>
-</ul>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</section>

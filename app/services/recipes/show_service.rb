@@ -20,7 +20,7 @@ module Recipes
           tool_instructions: recipe_instructions.tool,
           placement_instructions: recipe_instructions.placement,
           key: recipe.key,
-          recipe_type: I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}"),
+          recipe_type: I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}").downcase,
           time_needed: TimeService.display_time(recipe.base_speed)
         }
       end

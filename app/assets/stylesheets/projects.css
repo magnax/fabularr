@@ -1,0 +1,16 @@
+.build-item {
+  margin-bottom: 8px;
+  border-bottom: 1px solid black;
+  background-image: url("item-icon.gif");
+  background-position-x: 0;
+  background-position-y: 3px;
+  background-repeat: no-repeat;
+  list-style: none;
+  padding: 2px 0 0 23px;
+}
+
+.item-key {
+  font-size: 0.7em;
+  font-style: italic;
+  color: var(--info);
+}
