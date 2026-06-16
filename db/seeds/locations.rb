@@ -36,12 +36,13 @@ active_locations = Location.all.sample(2)
 User.all.find_each do |user|
   10.times do
     location = active_locations.sample
-    Character.create!(
+    character = Character.create!(
       user: user,
       name: Faker::FunnyName.name,
       location: location,
       spawn_location: location,
       gender: %w[K M].sample
     )
+    Characters::AssignSkillsService.call(character)
   end
 end

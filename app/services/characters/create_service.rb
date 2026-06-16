@@ -18,6 +18,7 @@ module Characters
       )
 
       Characters::CreateInitialEvents.call(new_char)
+      Characters::AssignSkillsService.call(new_char)
     end
 
     private

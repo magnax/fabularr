@@ -13,6 +13,7 @@ class Characters::CreateServiceTest < ActiveSupport::TestCase
 
   test 'creates character in an empty location' do
     create(:location)
+    create(:skill)
     params = {
       name: 'Kermit',
       gender: 'M'
@@ -20,6 +21,7 @@ class Characters::CreateServiceTest < ActiveSupport::TestCase
 
     assert_difference(
       -> { Character.count } => 1,
+      -> { CharacterSkill.count } => 1,
       -> { Event.count } => 3
     ) do
       call_service(@user, params)
