@@ -12,6 +12,7 @@ class ProjectsJoinTest < ActionDispatch::IntegrationTest
   test 'join project' do
     project_type = create(:project_type, key: 'discover_resource',
                                          base_speed: 1000, fixed: true)
+    create(:skill, :exploring)
     project = create(:project, project_type: project_type)
 
     assert_difference -> { Worker.count }, 1 do

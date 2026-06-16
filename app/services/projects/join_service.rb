@@ -62,14 +62,17 @@ module Projects
     def reveal_skill!
       return unless project_type.exploring?
 
-      skill.update!(status: true) unless skill.status
+      character_skill.update!(status: true) unless character_skill.status
+    end
+
+    def character_skill
+      @character_skill ||= @character.character_skills
+                                     .where(skill_id: skill.id)
+                                     .first_or_create
     end
 
     def skill
-      @skill ||= @character.character_skills
-                           .joins(:skill)
-                           .where(skill: { key: Skill::EXPLORING })
-                           .first_or_create
+      @skill ||= Skill.where(key: Skill::EXPLORING).first_or_create
     end
 
     def project_type
