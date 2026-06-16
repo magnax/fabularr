@@ -71,4 +71,12 @@ class Skill < ApplicationRecord
     TAILORING
     WALKING
   ].freeze
+
+  MAP_LEVELS = {
+    0 => AWKWARDLY,
+    1 => NOVICELY,
+    2 => EFFICIENTLY,
+    3 => SKILLFULLY,
+    4 => EXPERTLY
+  }.freeze
 end

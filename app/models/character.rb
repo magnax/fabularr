@@ -27,14 +27,16 @@ class Character < ApplicationRecord
   belongs_to :user
 
   has_many :char_names, dependent: :destroy
-  has_many :location_names, dependent: :destroy
+  has_many :character_skills, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_many :inventory_objects, dependent: :destroy
+  has_many :location_names, dependent: :destroy
+  has_many :skills, through: :character_skills
+  has_many :travellers, dependent: :destroy, inverse_of: :subject
   has_many :visible_events, dependent: :destroy,
                             class_name: 'Event',
                             inverse_of: :receiver_character
-  has_many :inventory_objects, dependent: :destroy
   has_many :workers, dependent: :destroy
-  has_many :travellers, dependent: :destroy, inverse_of: :subject
 
   has_many :projects, through: :workers
 
