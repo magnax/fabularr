@@ -17,12 +17,20 @@ class ProjectsJoinServiceTest < ActiveSupport::TestCase
     end
   end
 
-  test 'can join to project (no requirements)' do
+  test 'can join to project (no requirements), reveal skill' do
     project = create(:project, :discover_resource)
+    skill = create(:skill, key: 'exploring')
+    create(:character_skill, character: @character, skill: skill,
+                             level: 3, status: false)
+
+    assert_equal 0, @character.character_skills.visible.count
 
     assert_difference -> { Worker.count } => 1 do
       call_service(project.id)
     end
+
+    assert_equal 1, @character.reload.character_skills.visible.count
+    assert @character.character_skills.find_by(skill_id: skill.id).status
   end
 
   test 'cannot join to project without needed tools' do

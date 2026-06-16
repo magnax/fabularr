@@ -17,4 +17,10 @@ class ProjectType < ApplicationRecord
   CREATE_LOCATION = 'create_location'
   DISCOVER_RESOURCE = 'discover_resource'
   ROAD = 'road'
+
+  EXPLORING_TYPES = [CREATE_LOCATION, DISCOVER_RESOURCE].freeze
+
+  def exploring?
+    key.in?(EXPLORING_TYPES)
+  end
 end

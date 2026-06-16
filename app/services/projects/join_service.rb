@@ -15,6 +15,7 @@ module Projects
 
       Worker.create!(project: project, character: @character,
                      speed: speed)
+      reveal_skill!
     end
 
     private
@@ -56,6 +57,23 @@ module Projects
         @character.inventory_objects.item.map do |tool|
           tool.subject.item_type.key
         end
+    end
+
+    def reveal_skill!
+      return unless project_type.exploring?
+
+      skill.update!(status: true) unless skill.status
+    end
+
+    def skill
+      @skill ||= @character.character_skills
+                           .joins(:skill)
+                           .where(skill: { key: Skill::EXPLORING })
+                           .first_or_create
+    end
+
+    def project_type
+      @project_type ||= project.project_type
     end
 
     def project

@@ -26,6 +26,7 @@ class Skill < ApplicationRecord
   COOKING = 'cooking'
   DIGGING = 'digging'
   DRILLING = 'drilling'
+  EXPLORING = 'exploring'
   FARMING = 'farming'
   FIGHTING = 'fighting'
   FISHING = 'fishing'
