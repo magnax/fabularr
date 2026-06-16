@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_12_184915) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_16_063405) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,6 +24,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_184915) do
     t.index ["character_id", "named_id"], name: "index_char_names_on_character_id_and_named_id", unique: true
     t.index ["character_id"], name: "index_char_names_on_character_id"
     t.index ["named_id"], name: "index_char_names_on_named_id"
+  end
+
+  create_table "character_skills", force: :cascade do |t|
+    t.bigint "character_id"
+    t.datetime "created_at", null: false
+    t.float "level"
+    t.bigint "skill_id"
+    t.boolean "status", default: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_character_skills_on_character_id"
+    t.index ["skill_id"], name: "index_character_skills_on_skill_id"
   end
 
   create_table "characters", id: :serial, force: :cascade do |t|
@@ -322,6 +333,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_184915) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "character_skills", "characters"
+  add_foreign_key "character_skills", "skills"
   add_foreign_key "inventory_objects", "characters"
   add_foreign_key "items", "item_classes"
   add_foreign_key "location_names", "characters"
