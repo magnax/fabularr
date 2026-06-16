@@ -60,11 +60,25 @@
   </table>
 </section>
 
-<section id="skills">
-  <div class="title-bar">
-    <%= t('views.characters.show.skills') %>
-  </div>
-</section>
+<% if self_view %>
+  <section id="skills">
+    <div class="title-bar">
+      <%= t('views.characters.show.skills') %>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:5px;">
+      <% skills.each do |skill| %>
+        <div class="char-skill">
+          <span style="text-align: right;">
+            <%= t("skills.#{skill['key']}") %>
+          </span>
+          <span>
+            — <%= t("skills.#{skill['description']}") %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </section>
+<% end %>
 
 <section id="description" style="padding-bottom: 15px;">
   <div class="title-bar">

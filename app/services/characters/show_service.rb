@@ -15,6 +15,7 @@ module Characters
       {
         age: age,
         name: @character.name_for(subject_character),
+        self_view: @character == subject_character,
         skills: skills,
         spawn_location_id: subject_character.spawn_location_id,
         spawn_location_name: spawn_location_name,

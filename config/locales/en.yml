@@ -244,6 +244,37 @@ en:
     types:
       path: path
   select: --- select ---
+  skills:
+    animal_husbandry: animal husbandry
+    awkwardly: awkwardly
+    building: building
+    burying: burying
+    carpentry: carpentry
+    collecting: collecting
+    cooking: cooking
+    digging: digging
+    drilling: drilling
+    efficiently: efficiently
+    expertly: expertly
+    farming: farming
+    fighting: fighting
+    fishing: fishing
+    forestry: forestry
+    gardening: gardening
+    hunting: hunting
+    manufacturing: manufacturing
+    manufacturing_machines: manufacturing machines
+    manufacturing_tools: manufacturing tools
+    manufacturing_vehicles: manufacturing vehicles
+    manufacturing_weapons: manufacturing weapons
+    mining: mining
+    novicely: novicely
+    refining: refining
+    shipbuilding: shipbuilding
+    skillfully: skillfully
+    smelting: smelting
+    tailoring: tailoring
+    walking: walking
   time:
     1_hour: hour
     2_hours: hours

@@ -13,7 +13,7 @@ class Characters::CreateServiceTest < ActiveSupport::TestCase
 
   test 'creates character in an empty location' do
     create(:location)
-    create(:skill)
+    skill = create(:skill)
     params = {
       name: 'Kermit',
       gender: 'M'
@@ -26,6 +26,8 @@ class Characters::CreateServiceTest < ActiveSupport::TestCase
     ) do
       call_service(@user, params)
     end
+
+    assert_equal skill.key, CharacterSkill.last.key
   end
 
   test 'creates character in location with other character' do

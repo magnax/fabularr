@@ -244,6 +244,37 @@ pl:
     types:
       path: ścieżka
   select: --- wybierz ---
+  skills:
+    animal_husbandry: hodowla zwierząt
+    awkwardly: niezręcznie
+    building: budowanie
+    burying: grabarstwo
+    carpentry: stolarstwo
+    collecting: zbieractwo
+    cooking: gotowanie
+    digging: kopanie
+    drilling: wiertnictwo
+    efficiently: przeciętnie
+    expertly: po mistrzowsku
+    farming: uprawa
+    fighting: walka
+    fishing: rybołowstwo
+    forestry: leśnictwo
+    gardening: ogrodnictwo
+    hunting: polowanie
+    manufacturing: produkcja
+    manufacturing_machines: produkcja maszyn
+    manufacturing_tools: produkcja narzędzi
+    manufacturing_vehicles: produkcja pojazdów
+    manufacturing_weapons: produkcja broni
+    mining: górnictwo
+    novicely: po amatorsku
+    refining: oczyszczanie
+    shipbuilding: szkutnictwo
+    skillfully: umiejętnie
+    smelting: hutnictwo
+    tailoring: krawiectwo
+    walking: chodzenie
   time:
     1_hour: godzina
     2_hours: godziny
