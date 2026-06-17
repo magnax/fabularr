@@ -8,9 +8,7 @@ module Characters
 
     def call
       Skill.find_each do |skill|
-        @character.character_skills.where(skill_id: skill.id).first_or_create(
-          level: (0..4).to_a.sample
-        )
+        CharacterSkills::CreateService.call(@character, skill)
       end
     end
   end

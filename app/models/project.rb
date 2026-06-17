@@ -90,4 +90,8 @@ class Project < ApplicationRecord
   def progress(precision = 1)
     (elapsed.to_f / duration * 100.0).round(precision)
   end
+
+  def skill
+    project_type.exploring? ? Skill.where(key: Skill::EXPLORING).first_or_create : nil
+  end
 end

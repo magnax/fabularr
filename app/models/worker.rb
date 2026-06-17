@@ -17,4 +17,10 @@ class Worker < ApplicationRecord
   belongs_to :character
 
   scope :active, -> { where(left_at: nil) }
+
+  def time
+    return 0 if left_at.nil?
+
+    left_at.to_i - created_at.to_i
+  end
 end

@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
   end
 
   def leave
-    Projects::LeaveService.call(current_character, params[:project_id])
+    Projects::LeaveService.call(current_character)
 
     redirect_to events_path
   end

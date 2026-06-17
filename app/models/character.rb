@@ -80,7 +80,11 @@ class Character < ApplicationRecord
   end
 
   def project
-    workers.active.last&.project
+    worker&.project
+  end
+
+  def worker
+    workers.active&.last
   end
 
   def age

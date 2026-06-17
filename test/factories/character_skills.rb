@@ -5,5 +5,9 @@ FactoryBot.define do
     character
     skill
     level { 0 }
+
+    trait :exploring do
+      skill { create(:skill, key: Skill::EXPLORING) }
+    end
   end
 end

@@ -12,6 +12,7 @@ class ProjectsLeaveTest < ActionDispatch::IntegrationTest
   test 'leave project' do
     project_type = create(:project_type, key: 'discover_resource',
                                          base_speed: 1000, fixed: true)
+    create(:character_skill, :exploring, character: @character)
     project = create(:project, project_type: project_type)
     worker = create(:worker, character: @character, project: project, left_at: nil)
 

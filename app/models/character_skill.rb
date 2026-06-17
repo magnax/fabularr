@@ -31,6 +31,10 @@ class CharacterSkill < ApplicationRecord
   delegate :key, to: :skill
 
   def description
-    Skill::MAP_LEVELS[level.floor]
+    Skill::MAP_LEVELS[int_level]
+  end
+
+  def int_level
+    level.floor
   end
 end

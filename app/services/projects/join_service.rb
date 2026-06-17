@@ -66,13 +66,11 @@ module Projects
     end
 
     def character_skill
-      @character_skill ||= @character.character_skills
-                                     .where(skill_id: skill.id)
-                                     .first_or_create
+      @character_skill ||= CharacterSkills::CreateService.call(@character, skill)
     end
 
     def skill
-      @skill ||= Skill.where(key: Skill::EXPLORING).first_or_create
+      @skill ||= project.skill
     end
 
     def project_type

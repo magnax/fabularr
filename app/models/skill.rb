@@ -80,4 +80,11 @@ class Skill < ApplicationRecord
     3 => SKILLFULLY,
     4 => EXPERTLY
   }.freeze
+
+  DAYS_PER_LEVEL = {
+    0 => 127.521,
+    1 => 141.69,
+    2 => 157.434,
+    3 => 174.927
+  }.freeze
 end
