@@ -3,6 +3,11 @@
     <%= t('views.characters.show.info', name: name) %>
   </div>
   <%= age %>
+  <% if project %>
+    <%= t('and') %>
+    <%= t("skills.#{project['skill']}") %>
+    <%= t('views.characters.show.project_name_html', name: project['name'].html_safe) %>
+  <% end %>
   <p><%= t(
     'views.characters.show.spawn_info_html', 
     day: spawn_day, 

@@ -42,6 +42,7 @@ pl:
               too_short: za krótkie (minimum to 6 znaków)
             password_confirmation:
               confirmation: musi być takie jak hasło
+  and: ' i '
   buildings:
     wood_shack: Drewniana chata
   characters:
@@ -305,6 +306,7 @@ pl:
         hunger: Głód
         description: Imię i opis
         info: 'Opis postaci: %{name}'
+        project_name_html: 'pracuje przy projekcie: %{name}'
         skills: Umiejętności
         spawn_info_html: 'Przebudzenie: dnia %{day} w %{location_link}'
       skinny: Wychudzenie

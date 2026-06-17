@@ -60,7 +60,7 @@ module Projects
     end
 
     def reveal_skill!
-      return unless project_type.exploring?
+      return if project.skill.blank?
 
       character_skill.update!(status: true) unless character_skill.status
     end

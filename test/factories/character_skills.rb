@@ -6,8 +6,10 @@ FactoryBot.define do
     skill
     level { 0 }
 
-    trait :exploring do
-      skill { create(:skill, key: Skill::EXPLORING) }
+    %i[building exploring].each do |key|
+      trait key do
+        skill { create(:skill, key: Skill.const_get(key.to_s.upcase)) }
+      end
     end
   end
 end

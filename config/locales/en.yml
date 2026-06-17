@@ -42,6 +42,7 @@ en:
               too_short: is too short (minimum is 6 characters)
             password_confirmation:
               confirmation: should match password
+  and: ' and '
   buildings:
     wood_shack: wood shack
   characters:
@@ -305,6 +306,7 @@ en:
         hunger: Hunger
         description: Name & description
         info: Character info
+        project_name_html: 'working on the project: %{name}'
         skills: Skills
         spawn_info_html: 'Spawned: day %{day} in %{location_link}'
       skinny: Skinny

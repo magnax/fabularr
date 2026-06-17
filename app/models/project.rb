@@ -92,6 +92,12 @@ class Project < ApplicationRecord
   end
 
   def skill
-    project_type.exploring? ? Skill.where(key: Skill::EXPLORING).first_or_create : nil
+    if project_type.exploring?
+      return Skill.where(key: Skill::EXPLORING).first_or_create
+    elsif project_type.key == ProjectType::ROAD
+      return Skill.where(key: Skill::BUILDING).first_or_create
+    end
+
+    nil
   end
 end

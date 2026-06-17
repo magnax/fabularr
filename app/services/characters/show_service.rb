@@ -15,6 +15,7 @@ module Characters
       {
         age: age,
         name: @character.name_for(subject_character),
+        project: project,
         self_view: @character == subject_character,
         skills: skills,
         spawn_location_id: subject_character.spawn_location_id,
@@ -27,6 +28,32 @@ module Characters
 
     def age
       I18n.t("characters.age.over_#{subject_character.decade}_#{subject_character.gender.downcase}")
+    end
+
+    def project
+      return if worker.blank?
+
+      {
+        name: worker_project.name(@character, short: true)
+              .upcase_first,
+        skill: worker_skill
+      }
+    end
+
+    def worker_skill
+      @worker_skill ||= Skill::MAP_LEVELS[
+        subject_character.character_skills.find_by(
+          skill_id: worker_project.skill.id
+        ).int_level
+      ]
+    end
+
+    def worker_project
+      @worker_project ||= worker.project
+    end
+
+    def worker
+      @worker ||= subject_character.worker
     end
 
     def skills
