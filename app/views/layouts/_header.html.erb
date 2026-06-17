@@ -1,16 +1,16 @@
 <nav>
-  <%= link_to t('views.layout.homepage_link'), root_url %>
+  <%= link_to t('views.layout.homepage_link'), root_url, class: 'char-action' %>
 
   <% if signed_in? %>
-  	<%= link_to t('views.layout.nav.profile'), edit_user_url(@current_user.id) %>
-  	<%= link_to t('views.layout.nav.settings_link'), '#' %>
-		<%= link_to t('views.layout.back_to_char_list'), list_url %>
-  	<%= link_to t('views.layout.logout'), logout_url, method: "delete" %>
+  	<%= link_to t('views.layout.nav.profile'), edit_user_url(@current_user.id), class: 'char-action' %>
+  	<%= link_to t('views.layout.nav.settings_link'), '#', class: 'char-action' %>
+		<%= link_to t('views.layout.back_to_char_list'), list_url, class: 'char-action' %>
+  	<%= link_to t('views.layout.logout'), logout_url, method: "delete", class: 'char-action' %>
 		<% if @current_user.god %>
-  		<%= link_to t('views.layout.admin'), admin_url %>
+  		<%= link_to t('views.layout.admin'), admin_url, class: 'char-action' %>
 		<% end %>
   <% else %>
-  	<%= link_to t('views.layout.login'), login_url %>
-  	<%= link_to t('views.layout.register'), register_url %>
+  	<%= link_to t('views.layout.login'), login_url, class: 'char-action' %>
+  	<%= link_to t('views.layout.register'), register_url, class: 'char-action' %>
   <% end %>
 </nav>
