@@ -2,19 +2,19 @@
   <div style="text-align:left;">
     <% projects.each do |project| %>
       <div style="padding: 4px 0px 3px 10px;">
-        <div style="max-width: 100px;display:inline-block;vertical-align:top;text-align:right;margin-right:10px;">
+        <div style="width:110px;display:inline-block;vertical-align:top;text-align:right;margin-right:10px;">
           <%= link_to fa_icon('hand-o-right'), '', title: 'Point at this project' %>
           <%= link_to fa_icon('info-circle'), project_url(project.id) %>
           <% if @current_character.project.blank? %>
             <% if project.ready %>
-              <%= link_to fa_icon('toggle-right'), project_join_url(project.id), title: t('projects.join') %>
+              <%= link_to fa_icon('user-plus'), project_join_url(project.id), title: t('projects.join') %>
             <% end %>
           <% elsif @current_character.project == project %>
-            <%= link_to t('projects.leave'), project_leave_url(project.id) %>
+            <%= link_to fa_icon('user-times'), project_leave_url(project.id), title: t('projects.leave') %>
           <% end %>
           <%= link_to fa_icon('times-rectangle-o'), '', title: 'Remove this project' %>
         </div>
-        <div data-project-id="<%= project.id %>"  style="display:inline-block;max-width:700px;">
+        <div data-project-id="<%= project.id %>"  style="display:inline-block;max-width:650px;">
           <%= project.name(@current_character, short: true).upcase_first.html_safe %>
           <% if project.ready %>
             <%= "\u2714" %>
