@@ -2,19 +2,20 @@
 
 # == Schema Information
 #
-# Table name: skills
+# Table name: animals
 #
 #  id         :bigint           not null, primary key
+#  agression  :integer
+#  attack     :integer
+#  health     :integer
 #  key        :string
+#  mountable  :boolean          default(FALSE)
+#  tamable    :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 FactoryBot.define do
-  factory :skill do
-    key { Faker::Lorem.word }
-
-    trait :exploring do
-      key { Skill::EXPLORING }
-    end
+  factory :animal do
+    key { Faker::Creature::Animal.name }
   end
 end
