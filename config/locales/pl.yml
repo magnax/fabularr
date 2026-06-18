@@ -49,6 +49,8 @@ pl:
     age:
       over_20_k: Ona ma ponad dwadzieścia lat
       over_20_m: On ma ponad dwadzieścia lat
+    actions:
+      talk: Mów do tej osoby
   directions:
     e: wschodni
     ene: wschodnio-północno-wschodni

@@ -2,7 +2,7 @@
   <div>
     <%= link_to fa_icon('info'), character_url(character[:id]) %>
     <% if current_character.id != character[:id] %>
-      <%= link_to t('character.actions.talk'), character_talk_url(character[:id]) %>
+      <%= link_to(image_tag("talk.svg", size: "20x20"), character_talk_url(character[:id]), title: t('characters.actions.talk')) %>
     <% end %>
 
     <%= link_to character[:name], character_name_url(character[:id]) %>

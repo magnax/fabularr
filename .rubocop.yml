@@ -8,6 +8,9 @@ require:
 Lint/MissingSuper:
   Enabled: false
 
+Metrics/AbcSize:
+  CountRepeatedAttributes: false
+
 Metrics/BlockLength:
   Exclude: 
     - '*_spec.rb'

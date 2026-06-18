@@ -48,7 +48,9 @@ en:
   characters:
     age:
       over_20_k: She is in her twenties 
-      over_20_m: He is in his twenties 
+      over_20_m: He is in his twenties
+    actions:
+      talk: Talk to this person
   directions:
     e: east
     ene: east-north-east

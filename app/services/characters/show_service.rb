@@ -14,6 +14,7 @@ module Characters
 
       {
         age: age,
+        id: subject_character.id,
         name: @character.name_for(subject_character),
         project: project,
         self_view: @character == subject_character,
