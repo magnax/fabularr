@@ -5,6 +5,7 @@ User.create!(email: 'm@m.eu', password: 'fabular',
 User.create!(email: 'a@a.eu', password: 'fabular',
              password_confirmation: 'fabular')
 
+require_relative 'seeds/animals'
 require_relative 'seeds/project_types'
 require_relative 'seeds/item_types'
 require_relative 'seeds/settings'

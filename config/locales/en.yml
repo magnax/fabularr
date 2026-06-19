@@ -43,6 +43,28 @@ en:
             password_confirmation:
               confirmation: should match password
   and: ' and '
+  animals:
+    cat: 
+      s: cat
+      p: cats
+    dog: 
+      s: dog
+      p: dogs
+    horse: 
+      s: horse
+      p: horses
+    red_fox: 
+      s: red fox
+      p: red foxes
+    sheep: 
+      s: sheep
+      p: sheep
+    turkey: 
+      s: turkey
+      p: turkeys
+    zebra: 
+      s: zebra
+      p: zebras
   buildings:
     wood_shack: wood shack
   characters:

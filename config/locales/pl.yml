@@ -43,6 +43,28 @@ pl:
             password_confirmation:
               confirmation: musi być takie jak hasło
   and: ' i '
+  animals:
+    cat: 
+      s: kot
+      p: koty
+    dog: 
+      s: pies
+      p: psy
+    horse: 
+      s: koń
+      p: konie
+    red_fox: 
+      s: lis rudy
+      p: lisy rude
+    sheep: 
+      s: owca
+      p: owce
+    turkey: 
+      s: indyk
+      p: indyki
+    zebra: 
+      s: zebra
+      p: zebry
   buildings:
     wood_shack: Drewniana chata
   characters:
