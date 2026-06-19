@@ -30,6 +30,7 @@ class Location < ApplicationRecord
 
   delegate :x, :y, to: :coords
 
+  has_many :animal_packs, dependent: :destroy
   has_many :buildings, dependent: :destroy,
                        class_name: 'Building',
                        inverse_of: :parent_location

@@ -21,4 +21,6 @@
 #  fk_rails_...  (location_id => locations.id)
 #
 class AnimalPack < ApplicationRecord
+  belongs_to :animal
+  belongs_to :location
 end

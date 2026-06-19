@@ -13,6 +13,7 @@ module Locations
                                    coords: @coords, **@params)
 
       LocationResources::CreateService.call(@location)
+      AnimalPacks::CreateService.call(@location)
 
       @location
     end

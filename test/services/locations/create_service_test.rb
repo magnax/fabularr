@@ -57,4 +57,19 @@ class LocationsCreateServiceTest < ActiveSupport::TestCase
     first_resource = resources_available.filter { |r| r.sorting == 1 }
     assert_equal 'stone', first_resource.sole.resource.key
   end
+
+  test 'create location and animal packs' do
+    require_relative '../../../db/seeds/animals'
+
+    location_type = create(:location_type, key: 'mountains')
+    coords = ActiveRecord::Point.new(x: 200, y: 200)
+    Maps.expects(:location_type).with(coords.x, coords.y).returns(location_type)
+    create(:resource, :raw_food, key: 'stone')
+
+    assert_difference -> { Location.count } => 1 do
+      call_service(coords)
+    end
+
+    assert Location.last.animal_packs.any?
+  end
 end
