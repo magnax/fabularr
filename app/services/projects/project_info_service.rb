@@ -17,6 +17,8 @@ module Projects
         location_resource: location_resource,
         location: location_resource.location,
         project_type_id: project_type.id,
+        skill: skill_key,
+        skill_name: skill_name,
         tools: tools
       }
     end
@@ -32,6 +34,14 @@ module Projects
           amount: tool.speed * resource.daily_rate
         }
       end
+    end
+
+    def skill_key
+      I18n.t("views.skills.#{resource.skill.key}")
+    end
+
+    def skill_name
+      I18n.t("views.skills.#{resource.skill.key}_perf")
     end
 
     def recipe

@@ -409,8 +409,8 @@ en:
     not_logged_in: Not logged in
     projects:
       collect: Collect
-      collect_info: One character can collect only %{amount} grams in one day.
-      collect_info_tool_html: If you have <b>%{key}</b>, you can collect %{amount} grams in one day.
+      collect_info: One character can %{skill_name} only %{amount} grams in one day.
+      collect_info_tool_html: If you have <b>%{key}</b>, you can %{skill_name} %{amount} grams in one day.
       create_location: Create new location!
       discover: Discover
       new:
@@ -446,6 +446,25 @@ en:
     sessions:
       new:
         title: Fabular login
+    skills:
+      collecting: collecting
+      collecting_perf: collect
+      digging: digging for
+      digging_perf: dig
+      drilling: drilling for
+      drilling_perf: drill
+      farming: farming
+      farming_perf: get
+      fishing: fishing
+      fishing_perf: catch
+      forestry: gathering
+      forestry_perf: gather
+      gardening: farming
+      gardening_perf: collect
+      gathering: gathering
+      gathering_perf: gather
+      mining: mining for
+      mining_perf: mine
     travel_info:
       examine: Examine location
     travellers:

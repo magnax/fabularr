@@ -32,6 +32,7 @@ class Skill < ApplicationRecord
   FISHING = 'fishing'
   FORESTRY = 'forestry'
   GARDENING = 'gardening'
+  GATHERING = 'gathering'
   HUNTING = 'hunting'
   MANUFACTURING = 'manufacturing'
   MANUFACTURING_MACHINES = 'manufacturing_machines'
@@ -59,6 +60,7 @@ class Skill < ApplicationRecord
     FISHING
     FORESTRY
     GARDENING
+    GATHERING
     HUNTING
     MANUFACTURING
     MANUFACTURING_MACHINES
@@ -71,6 +73,18 @@ class Skill < ApplicationRecord
     SMELTING
     TAILORING
     WALKING
+  ].freeze
+
+  COLLECTING_SKILLS = %w[
+    COLLECTING
+    DIGGING
+    DRILLING
+    FARMING
+    FISHING
+    FORESTRY
+    GARDENING
+    GATHERING
+    MINING
   ].freeze
 
   MAP_LEVELS = {

@@ -28,6 +28,7 @@
 FactoryBot.define do
   factory :resource do
     key { 'MyString' }
+    skill { FactoryBot.create(:skill, key: 'collecting') }
 
     %i[raw_food material raw_resource].each do |key|
       trait key do

@@ -1,8 +1,9 @@
-<div class="title-bar"><%= t("views.projects.new.collect_title") %> <%= t("resources.#{key}.d") %></div>
-<p><%= t('views.projects.collect_info', amount: amount.to_i) %></p>
+<div class="title-bar"><%= skill %> <%= td("resources.#{key}") %></div>
+
+<p><%= t('views.projects.collect_info', amount: amount.to_i, skill_name: skill_name) %></p>
 <% tools.each do |tool| %>
   <p>
-    <%= t('views.projects.collect_info_tool_html', key: tool[:key], amount: tool[:amount].to_i) %></p>
+    <%= t('views.projects.collect_info_tool_html', key: tool[:key], amount: tool[:amount].to_i, skill_name: skill_name) %></p>
 
 <% end %>
 

@@ -240,7 +240,7 @@ pl:
       gen: węgla
     copper:
       n: miedź
-      d: miedzi
+      gen: miedzi
     iron:
       n: żelazo
       gen: żelaza
@@ -409,8 +409,8 @@ pl:
     not_logged_in: Nie zalogowany
     projects:
       collect: Zbieraj
-      collect_info: W ciągu jednego dnia jedna postać może zebrać tylko %{amount} gram.
-      collect_info_tool_html: Jeśli masz <b>%{key}</b>, możesz zebrać %{amount} gram jednego dnia.
+      collect_info: W ciągu jednego dnia jedna postać może %{skill_name} tylko %{amount} gram.
+      collect_info_tool_html: Jeśli masz <b>%{key}</b>, możesz %{skill_name} %{amount} gram jednego dnia.
       create_location: Utwórz nową lokację!
       discover: Odkrywaj
       new:
@@ -446,6 +446,25 @@ pl:
     sessions:
       new:
         title: Logowanie do Fabular
+    skills:
+      collecting: zbieranie
+      collecting_perf: zebrać
+      digging: kopanie
+      digging_perf: nakopać
+      drilling: odwiert
+      drilling_perf: wydobyć
+      farming: uprawa
+      farming_perf: zebrać
+      fishing: łowienie
+      fishing_perf: złowić
+      forestry: zbieranie
+      forestry_perf: zebrać
+      gardening: uprawa
+      gardening_perf: uprawić
+      gathering: zbieranie
+      gathering_perf: zebrać
+      mining: kopanie
+      mining_perf: nakopać
     travel_info:
       examine: Eksploruj lokację
     travellers:

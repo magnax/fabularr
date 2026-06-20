@@ -4,7 +4,7 @@ require 'test_helper'
 
 class SeedsSkillsTest < ActiveSupport::TestCase
   test 'works' do
-    assert_difference -> { Skill.count } => 25 do
+    assert_difference -> { Skill.count } => 26 do
       require_relative '../../db/seeds/skills'
     end
   end
