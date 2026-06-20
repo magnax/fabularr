@@ -15,7 +15,7 @@ class SeedsMaterialsTest < ActiveSupport::TestCase
 
     # check some resources for proper values
     wood = Resource.find_by(key: 'wood')
-    assert_equal 0, wood.base_speed_per_unit
+    assert_equal 0, wood.daily_rate
     assert_equal 2, wood.resource_types.length
     assert_equal %w[fuel material], wood.resource_types.pluck(:key).sort
   end

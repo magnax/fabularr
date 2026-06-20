@@ -4,18 +4,18 @@
 #
 # Table name: resources
 #
-#  id                  :bigint           not null, primary key
-#  base_speed_per_unit :float
-#  eaten               :integer
-#  heal                :integer          default(0)
-#  integer             :integer
-#  key                 :string
-#  material            :boolean          default(TRUE)
-#  unit                :string           default("grams")
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  resource_type_id    :integer          is an Array
-#  skill_id            :bigint
+#  id               :bigint           not null, primary key
+#  daily_rate       :float
+#  eaten            :integer
+#  heal             :integer          default(0)
+#  integer          :integer
+#  key              :string
+#  material         :boolean          default(TRUE)
+#  unit             :string           default("grams")
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  resource_type_id :integer          is an Array
+#  skill_id         :bigint
 #
 # Indexes
 #

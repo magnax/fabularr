@@ -17,7 +17,7 @@ class SeedsRawResourcesTest < ActiveSupport::TestCase
     # check some resources for proper values
     # healing
     apples = Resource.find_by(key: 'apples')
-    assert_equal 100, apples.base_speed_per_unit
+    assert_equal 100, apples.daily_rate
     assert_equal 88, apples.heal
     assert_equal 0, apples.eaten
     assert_equal %w[medicine raw_resource], apples.resource_types.pluck(:key).sort
@@ -25,7 +25,7 @@ class SeedsRawResourcesTest < ActiveSupport::TestCase
 
     # nourishing food example
     carrots = Resource.find_by(key: 'carrots')
-    assert_equal 800, carrots.base_speed_per_unit
+    assert_equal 800, carrots.daily_rate
     assert_equal 0, carrots.heal
     assert_equal 250, carrots.eaten
     assert_equal %w[raw_food raw_resource], carrots.resource_types.pluck(:key).sort

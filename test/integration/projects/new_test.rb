@@ -58,7 +58,7 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
   end
 
   test 'no recipes available' do
-    wood = create(:resource, key: 'wood', base_speed_per_unit: 144)
+    wood = create(:resource, key: 'wood', daily_rate: 600)
     create(:project_type, key: 'collect')
     location_resource = create(:location_resource, resource: wood,
                                                    location: @character.location)
@@ -69,7 +69,7 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
   end
 
   test 'when there are recipes with tools' do
-    wood = create(:resource, key: 'wood', base_speed_per_unit: 144)
+    wood = create(:resource, key: 'wood', daily_rate: 600)
     create(:project_type, key: 'collect')
     location_resource = create(:location_resource, resource: wood,
                                                    location: @character.location)

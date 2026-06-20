@@ -15,16 +15,12 @@ module Projects
         location_resource: location_resource,
         location: location_resource.location,
         project_type_id: project_type.id,
-        amount: amount,
+        amount: resource.daily_rate,
         tools: tools
       }
     end
 
     private
-
-    def amount
-      @amount ||= 86_400.0 / location_resource.resource.base_speed_per_unit
-    end
 
     def tools
       return [] if recipe.blank?
@@ -32,13 +28,17 @@ module Projects
       recipe.recipe_instructions.map do |tool|
         {
           key: I18n.t("items.#{tool.subject.key}"),
-          amount: tool.speed * amount
+          amount: tool.speed * resource.daily_rate
         }
       end
     end
 
     def recipe
-      @recipe ||= Recipe.by_type(Recipe::COLLECT).find_by(key: location_resource.resource.key)
+      @recipe ||= Recipe.by_type(Recipe::COLLECT).find_by(key: resource.key)
+    end
+
+    def resource
+      @resource ||= location_resource.resource
     end
 
     def location_resource

@@ -18,7 +18,7 @@ module Seed
   def self.create_resource(key, conf, res_types_id, skill)
     Resource.create!(
       key: key, unit: 'grams',
-      base_speed_per_unit: conf.try(:[], 'rate') || 0,
+      daily_rate: conf.try(:[], 'rate') || 0,
       eaten: conf.try(:[], 'eaten') || 0,
       heal: conf.try(:[], 'heal') || 0,
       resource_type_id: res_types_id,
