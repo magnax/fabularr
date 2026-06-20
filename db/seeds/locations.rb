@@ -46,3 +46,14 @@ User.all.find_each do |user|
     Characters::AssignSkillsService.call(character)
   end
 end
+
+stone = Resource.find_by(key: 'stone')
+wood = Resource.find_by(key: 'wood')
+knife = ItemType.find_by(key: 'stone_knife')
+Location.find_each do |loc|
+  loc.location_objects.create(subject: stone, amount: 500)
+  loc.location_objects.create(subject: wood, amount: 500)
+  i = Item.create(item_type: knife)
+  loc.location_objects.create(subject: i)
+end
+Log.say "Added resources & items to locations (#{LocationObject.count} total)"

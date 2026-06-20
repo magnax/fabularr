@@ -3,55 +3,55 @@
 module Definitions::Recipes
   RECIPES = [
     {
-      key: 'small_fire_pit',
-      type: 'machinery',
+      key: 'copper#collect',
+      instructions: [
+        { key: 'tool#pickaxe', speed: 2 },
+        { key: 'tool#bronze_pickaxe', speed: 2 }
+      ]
+    },
+    {
+      key: 'small_fire_pit#machinery',
       # TODO: base_speed is building/collecting time, can be confused with travel speed
       base_speed: 3000,
       placement: 'outside_all',
       instructions: [
-        { type: 'resource', key: 'stone', amount: 500 }
+        { key: 'resource#stone', amount: 500 }
       ]
     },
     {
-      key: 'small_wooden_cart',
-      type: 'vehicle',
+      key: 'small_wooden_cart#vehicle',
       base_speed: 3000,
       instructions: [
-        { type: 'resource', key: 'wood', amount: 500 }
+        { key: 'resource#wood', amount: 500 }
       ]
     },
     {
-      key: 'stone_knife',
-      type: 'item',
+      key: 'stone_knife#item',
       base_speed: 3600,
       instructions: [
-        { type: 'resource', key: 'stone', amount: 100 }
+        { key: 'resource#stone', amount: 100 }
       ]
     },
     {
-      key: 'wooden_shaft',
-      type: 'item',
+      key: 'wooden_shaft#item',
       base_speed: 3600,
       instructions: [
-        { type: 'resource', key: 'wood', amount: 80 },
-        { type: 'tool', key: 'stone_knife' }
+        { key: 'resource#wood', amount: 80 },
+        { key: 'tool#stone_knife' }
       ]
     },
     {
-      key: 'wood',
-      type: 'collect',
-      base_speed: nil,
+      key: 'wood#collect',
       instructions: [
-        { type: 'tool', key: 'stone_knife', speed: 1.2 },
-        { type: 'tool', key: 'stone_axe', speed: 2 }
+        { key: 'tool#stone_knife', speed: 1.2 },
+        { key: 'tool#stone_axe', speed: 2 }
       ]
     },
     {
-      key: 'wood_shack',
-      type: 'building',
+      key: 'wood_shack#building',
       base_speed: 500,
       instructions: [
-        { type: 'resource', key: 'wood', amount: 100 }
+        { key: 'resource#wood', amount: 100 }
       ]
     }
   ].freeze
