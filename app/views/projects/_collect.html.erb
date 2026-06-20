@@ -1,7 +1,8 @@
+<div class="title-bar"><%= t("views.projects.new.collect_title") %> <%= t("resources.#{key}.d") %></div>
 <p><%= t('views.projects.collect_info', amount: amount.to_i) %></p>
 <% tools.each do |tool| %>
   <p>
-    <%= t('views.projects.collect_info_tool', key: tool[:key], amount: tool[:amount].to_i) %></p>
+    <%= t('views.projects.collect_info_tool_html', key: tool[:key], amount: tool[:amount].to_i) %></p>
 
 <% end %>
 

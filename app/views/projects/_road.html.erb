@@ -1,3 +1,4 @@
+<div class="title-bar"><%= t('views.projects.new.title') %></div>
 <section id="map"><img src="/maps?for=road&<%= order %>" width=200 height=200></section>
 <% if locations.any? %>
   <%= t('views.projects.new.road.available_locations', count: locations.filter { |l| l[:project_id].nil? }.length) %>

@@ -177,6 +177,7 @@ en:
         password: Password
   invalid_credentials: Invalid username or password
   items:
+    bronze_pickaxe: bronze pickaxe
     damage:
       brand_new: brand new
       damaged: damaged
@@ -184,6 +185,7 @@ en:
       used: used
     iron_knife: iron knife
     nothing_here: Nothing is laying here
+    pickaxe: pickaxe
     stone_axe: stone axe
     stone_knife: stone knife
     wooden_shaft: wooden shaft
@@ -407,12 +409,13 @@ en:
     not_logged_in: Not logged in
     projects:
       collect: Collect
-      collect_info: One character can collect only %{amount} grams in one day. Turns number will be rounded up. The final amount can differ by max 20% depending on provided amount.
-      collect_info_tool: If you have %{key}, you can collect %{amount} grams in one day.
+      collect_info: One character can collect only %{amount} grams in one day.
+      collect_info_tool_html: If you have <b>%{key}</b>, you can collect %{amount} grams in one day.
       create_location: Create new location!
       discover: Discover
       new:
         cancel: Cancel
+        collect_title: Collecting
         item_name: 'Item name:'
         needed: needed
         resources_needed: Resources needed

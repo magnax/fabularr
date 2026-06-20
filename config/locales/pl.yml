@@ -177,6 +177,7 @@ pl:
         password: Hasło
   invalid_credentials: Nieprawidłowy adres lub hasło
   items:
+    bronze_pickaxe: brązowy kilof
     damage:
       brand_new: całkiem nowy
       damaged: uszkodzony
@@ -184,6 +185,7 @@ pl:
       used: używany
     iron_knife: żelazny nóż
     nothing_here: Nic tu nie leży
+    pickaxe: kilof
     stone_axe: kamienna siekiera
     stone_knife: kamienny nóż
     wooden_shaft: drewniany trzonek
@@ -407,12 +409,13 @@ pl:
     not_logged_in: Nie zalogowany
     projects:
       collect: Zbieraj
-      collect_info: W ciągu jednego dnia jedna postać może zebrać tylko %{amount} gram. Liczba tur będzie zaokrąglona w górę. To ile otrzymasz na koniec podlega losowym odchyłom (maks. 20%) od ilości jaką podasz.
-      collect_info_tool: Jeśli masz %{key}, możesz zebrać %{amount} gram jednego dnia.
+      collect_info: W ciągu jednego dnia jedna postać może zebrać tylko %{amount} gram.
+      collect_info_tool_html: Jeśli masz <b>%{key}</b>, możesz zebrać %{amount} gram jednego dnia.
       create_location: Utwórz nową lokację!
       discover: Odkrywaj
       new:
         cancel: Anuluj
+        collect_title: Zbieranie
         item_name: 'Nazwa przedmiotu:'
         needed: potrzebne
         resources_needed: Wymagane surowce

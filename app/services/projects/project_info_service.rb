@@ -12,10 +12,11 @@ module Projects
       return Projects::Info::Build.call(@character, @params[:recipe_id]) if @params[:type] == 'build'
 
       {
+        amount: resource.daily_rate,
+        key: location_resource.resource.key,
         location_resource: location_resource,
         location: location_resource.location,
         project_type_id: project_type.id,
-        amount: resource.daily_rate,
         tools: tools
       }
     end
