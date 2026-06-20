@@ -14,7 +14,8 @@
           <% end %>
           <%= link_to fa_icon('times-rectangle-o'), '', title: 'Remove this project' %>
         </div>
-        <div data-project-id="<%= project.id %>"  style="display:inline-block;max-width:650px;">
+        <% worker_class = @current_character.project == project ? 'current-worker' : '' %>
+        <div data-project-id="<%= project.id %>"  style="display:inline-block;max-width:650px;" class="<%= worker_class %>">
           <%= project.name(@current_character, short: true).upcase_first.html_safe %>
           <% if project.ready %>
             <%= "\u2714" %>
