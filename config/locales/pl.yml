@@ -236,6 +236,9 @@ pl:
     coal: 
       n: węgiel
       gen: węgla
+    copper:
+      n: miedź
+      d: miedzi
     iron:
       n: żelazo
       gen: żelaza

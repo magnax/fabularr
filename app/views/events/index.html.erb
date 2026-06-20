@@ -52,6 +52,15 @@
   <%= render partial: "events/roads", locals: { roads: roads } %>
 </section>
 
+<% if location.present? %>
+  <section id="items" style="clear: both;">
+    <div class="title-bar">
+      <%= t 'views.events.index.animals_here' %>
+    </div>
+    <%= render partial: "events/animals", locals: { animals: animals } %>
+  </section>
+<% end %>
+
 <section id="buildings" style="clear: both;">
   <div class="title-bar">
     <%= t 'views.events.index.buildings_here' %>

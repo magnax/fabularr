@@ -10,6 +10,7 @@ module Events
       read_events!
 
       {
+        animals: animals,
         buildings: location&.buildings,
         character: @character,
         characters: map_characters,
@@ -27,6 +28,17 @@ module Events
     end
 
     private
+
+    def animals
+      return if location.blank?
+
+      location.animal_packs.map do |pack|
+        {
+          key: pack.animal.key,
+          quantity: pack.amount
+        }
+      end
+    end
 
     def read_events!
       @character.visible_events.where(read_at: nil).find_each do |event|
