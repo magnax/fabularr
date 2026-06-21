@@ -109,4 +109,32 @@ class ProjectTest < ActiveSupport::TestCase
                  "<a href=\"/locations/#{dest_location.id}/name\">"\
                  'Dest Location</a>', name
   end
+
+  test 'proper #name and #skill for project - raw resources - digging' do
+    character = create(:character)
+    digging = create(:skill, key: 'digging')
+    copper = create(:resource, key: 'copper', skill: digging)
+    project_type = create(:project_type, key: 'collect')
+    project = create(:project, starting_character: character,
+                               project_type: project_type,
+                               location: character.location)
+    create(:project_description, :resource_out, subject: copper, project: project)
+
+    assert_equal 'digging for copper', project.name(character, short: true)
+    assert_equal digging, project.skill
+  end
+
+  test 'proper #name and #skill for project - raw resources - fishing' do
+    character = create(:character)
+    fishing = create(:skill, key: 'fishing')
+    copper = create(:resource, key: 'cod', skill: fishing)
+    project_type = create(:project_type, key: 'collect')
+    project = create(:project, starting_character: character,
+                               project_type: project_type,
+                               location: character.location)
+    create(:project_description, :resource_out, subject: copper, project: project)
+
+    assert_equal 'fishing cod', project.name(character, short: true)
+    assert_equal fishing, project.skill
+  end
 end

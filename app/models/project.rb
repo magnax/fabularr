@@ -76,6 +76,10 @@ class Project < ApplicationRecord
       end
     when ProjectType::DISCOVER_RESOURCE, ProjectType::CREATE_LOCATION
       base_type_name
+    when ProjectType::COLLECT
+      skill = I18n.t("views.skills.#{project_descriptions.resource_out.last.subject.skill.key}")
+      res = I18n.td("resources.#{project_descriptions.resource_out.last.subject.key}")
+      "#{skill} #{res}"
     end
   end
 
@@ -96,6 +100,8 @@ class Project < ApplicationRecord
       return Skill.where(key: Skill::EXPLORING).first_or_create
     elsif project_type.key == ProjectType::ROAD
       return Skill.where(key: Skill::BUILDING).first_or_create
+    elsif project_type.key == ProjectType::COLLECT
+      return project_descriptions.resource_out.first.subject.skill
     end
 
     nil

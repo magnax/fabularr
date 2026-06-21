@@ -238,6 +238,9 @@ pl:
     coal: 
       n: węgiel
       gen: węgla
+    cod:
+      n: dorsz
+      gen: dorsza
     copper:
       n: miedź
       gen: miedzi
