@@ -415,6 +415,9 @@ pl:
       discover: Odkrywaj
       new:
         cancel: Anuluj
+        collect:
+          amount: 'Ilość:'
+          repeat: 'Ten projekt może się powtarzać automatycznie. Wybierz ilość powtórzeń:'
         collect_title: Zbieranie
         item_name: 'Nazwa przedmiotu:'
         needed: potrzebne

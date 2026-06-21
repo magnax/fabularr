@@ -415,6 +415,9 @@ en:
       discover: Discover
       new:
         cancel: Cancel
+        collect:
+          amount: 'Amount:'
+          repeat: 'This project can automatically repeat. Choose number of repeats:'
         collect_title: Collecting
         item_name: 'Item name:'
         needed: needed

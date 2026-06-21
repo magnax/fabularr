@@ -28,6 +28,15 @@ module Projects
         amount_needed: amount,
         unit: resource.unit
       )
+      return unless @params[:repeats]
+
+      @project.project_descriptions.create!(
+        description_type: ProjectDescription::REPEAT,
+        subject: nil,
+        amount: @params[:repeats],
+        amount_needed: nil,
+        unit: nil
+      )
     end
 
     def project_info
@@ -43,7 +52,7 @@ module Projects
     end
 
     def duration
-      amount * project_type.base_speed
+      (amount.to_f / resource.daily_rate) * GameTime::DAY
     end
 
     def amount

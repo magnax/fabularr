@@ -31,9 +31,17 @@ module Projects
     end
 
     def end_project!
-      project.update(elapsed: project.duration, checked_at: DateTime.current)
+      if repeated_project?
+        Projects::YieldPartialAmountService.call(project, elapsed_time)
+      else
+        project.update(elapsed: project.duration, checked_at: DateTime.current)
 
-      Projects::EndService.call(project.id)
+        Projects::EndService.call(project.id)
+      end
+    end
+
+    def repeated_project?
+      project.project_descriptions.repeat.any?
     end
 
     def elapsed_time

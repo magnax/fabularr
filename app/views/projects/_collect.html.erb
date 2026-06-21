@@ -10,6 +10,29 @@
 <%= form_for :project, url: projects_url, method: 'POST' do |form| %>
   <%= form.hidden_field :project_type_id, value: project_type_id %>
   <%= form.hidden_field :location_resource_id, value: location_resource.id %>
-  <%= form.text_field :amount %>
-  <%= form.submit t('views.projects.start') %>
+  <table style="margin: auto;">
+    <tbody>
+      <tr>
+        <td style="text-align:right;" width="50%">
+          <%= form.label :amount, t('views.projects.new.collect.amount') %>
+        </td>
+        <td style="text-align:left;vertical-align:top" width="50%">
+          <%= form.text_field :amount %>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:right;" width="50%">
+          <%= form.label :repeat, t('views.projects.new.collect.repeat') %>
+        </td>
+        <td style="text-align:left;vertical-align:top" width="50%">
+          <%= form.text_field :repeat %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <%= form.submit t('views.projects.start') %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>

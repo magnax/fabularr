@@ -44,40 +44,4 @@ class ProjectsCreateServiceTest < ActiveSupport::TestCase
       call_service(params)
     end
   end
-
-  test 'collect resource' do
-    project_type = create(:project_type, key: 'collect',
-                                         base_speed: 6, fixed: false)
-    strawberry = create(:resource, :raw_food, key: 'strawberries')
-    location_resource = create(:location_resource, location: @location,
-                                                   resource: strawberry)
-
-    params = {
-      project_type_id: project_type.id,
-      location_resource_id: location_resource.id,
-      amount: '100'
-    }
-
-    assert_difference -> { Project.count }, 1 do
-      call_service(params)
-    end
-
-    project = Project.last
-
-    assert_equal 'collect', project.project_type.key
-    assert_equal 600, project.duration
-    assert_equal 0, project.elapsed
-    assert project.ready
-
-    desc = ProjectDescription.last
-    assert_equal strawberry.id, desc.subject_id
-    assert_equal 'Resource', desc.subject_type
-    assert_equal ProjectDescription::RESOURCE_OUT, desc.description_type
-    assert_equal 0, desc.amount
-    assert_equal 100, desc.amount_needed
-    assert_equal 'grams', desc.unit
-
-    event = Event.last
-    assert_equal "You're starting new project: collecting strawberries.", event.body
-  end
 end

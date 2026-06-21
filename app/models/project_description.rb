@@ -28,12 +28,14 @@ class ProjectDescription < ApplicationRecord
   belongs_to :subject, polymorphic: true, optional: true
   belongs_to :project
 
-  scope :resource_in, -> { where(description_type: RESOURCE_IN) }
-  scope :tool, -> { where(description_type: TOOL) }
-  scope :settings, -> { where(description_type: SETTINGS) }
   scope :location, -> { where(description_type: LOCATION) }
   scope :location_resource, -> { where(description_type: LOCATION_RESOURCE) }
+  scope :repeat, -> { where(description_type: REPEAT) }
+  scope :resource_in, -> { where(description_type: RESOURCE_IN) }
+  scope :resource_out, -> { where(description_type: RESOURCE_OUT) }
+  scope :settings, -> { where(description_type: SETTINGS) }
   scope :road, -> { where(description_type: ROAD) }
+  scope :tool, -> { where(description_type: TOOL) }
 
   # Types:
   ITEM_IN = 'item_in'
@@ -41,6 +43,7 @@ class ProjectDescription < ApplicationRecord
   LOCATION = 'location'
   LOCATION_RESOURCE = 'location_resource'
   MACHINE = 'machine'
+  REPEAT = 'repeat' # number of repetitions of the project
   RESOURCE_IN = 'resource_in' # input
   RESOURCE_OUT = 'resource_out' # output
   ROAD = 'road' # params to road building/upgrading, ie. type, location

@@ -32,7 +32,8 @@ FactoryBot.define do
     amount { 1.5 }
     project
 
-    %i[location_resource resource_in road settings].each do |key|
+    %i[location_resource repeat resource_in
+       resource_out road settings].each do |key|
       trait key do
         description_type { ProjectDescription.const_get(key.to_s.upcase) }
       end
