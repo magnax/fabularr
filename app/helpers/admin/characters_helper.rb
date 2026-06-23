@@ -2,6 +2,6 @@
 
 module Admin::CharactersHelper
   def coords(obj)
-    obj.coords.present? ? "(#{obj.x}, #{obj.y})" : '-'
+    obj.coords.present? ? "(#{obj.x.round(2)}, #{obj.y.round(2)})" : '-'
   end
 end

@@ -4,14 +4,26 @@ body {
 
 #breadcrumbs {
   border-bottom: solid 1px lightgrey;
+  padding: 5px;
 }
 
 #menu {
   float: left;
   min-width: 120px;
   border-right: solid 1px lightgrey;
+  padding: 5px;
 }
 
 #main {
   float: left;
+  padding: 10px;
+}
+
+.bold {
+  font-weight: 900;
+}
+
+.identifier {
+  font-size: 0.85em;
+  color: red;
 }

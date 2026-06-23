@@ -14,7 +14,13 @@
       <tr>
         <td><%= character.id %></td>
         <td><%= character.user_id %></td>
-        <td><%= link_to character.location_id, admin_location_url(character.location_id) %></td>
+        <td>
+          <% if character.location %>
+            <%= link_to character.location_id, admin_location_url(character.location_id) %>
+          <% else %>
+            -
+          <% end %>
+        </td>
         <td><%= character.gender %></td>
         <td><%= coords(character) %></td>
       </tr>

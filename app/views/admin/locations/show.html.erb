@@ -1,0 +1,11 @@
+<div>Name: <%= location_name %></div>
+<div>
+  Resources: 
+  <% resources.each do |resource| %>
+    <div class="<%= resource[:status] ? 'bold' : '' %>">
+      <%= resource[:sorting] %>. 
+      <%= resource[:key] %> (<%= resource[:name] %>)
+      <span class="identifier"><%= resource[:id] %></span>
+    </div>
+  <% end %>
+</div>
