@@ -14,6 +14,21 @@ class ProjectsCollectCreateServiceTest < ActiveSupport::TestCase
     )
   end
 
+  test 'raises invalid resource exception' do
+    strawberry = create(:resource, :raw_food, key: 'strawberries', daily_rate: 600)
+    location_resource = create(:location_resource, location: @location, status: false,
+                                                   resource: strawberry)
+
+    params = {
+      location_resource_id: location_resource.id,
+      amount: 600
+    }
+
+    assert_raises Projects::Create::Collect::InvalidResourceError do
+      call_service(params)
+    end
+  end
+
   test 'collect resource' do
     strawberry = create(:resource, :raw_food, key: 'strawberries', daily_rate: 600)
     location_resource = create(:location_resource, location: @location,

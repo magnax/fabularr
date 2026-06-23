@@ -2,6 +2,8 @@
 
 module Projects
   class ProjectInfoService < ApplicationService
+    class InvalidResourceError < StandardError; end
+
     def initialize(character, params)
       @character = character
       @params = params
@@ -11,6 +13,14 @@ module Projects
       return Projects::Info::Road.call(@character, @params) if @params[:type] == 'road'
       return Projects::Info::Build.call(@character, @params[:recipe_id]) if @params[:type] == 'build'
 
+      raise InvalidResourceError unless location_resource.status
+
+      result
+    end
+
+    private
+
+    def result
       {
         amount: resource.daily_rate,
         key: location_resource.resource.key,
@@ -22,8 +32,6 @@ module Projects
         tools: tools
       }
     end
-
-    private
 
     def tools
       return [] if recipe.blank?

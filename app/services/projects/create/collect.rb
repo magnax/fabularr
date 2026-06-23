@@ -2,13 +2,21 @@
 
 module Projects
   class Create::Collect < Projects::Create::Base
+    class InvalidResourceError < StandardError; end
+
     def call
+      raise InvalidResourceError unless valid_resource?
+
       super
 
       create_project_descriptions!
     end
 
     private
+
+    def valid_resource?
+      location_resource.status == true
+    end
 
     def project_attributes
       project_base_attributes.merge(

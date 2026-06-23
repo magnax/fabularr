@@ -7,6 +7,8 @@ class ProjectsController < ApplicationController
     render locals: Projects::ProjectInfoService.call(
       current_character, project_info_params
     ).merge(type: params[:type])
+  rescue Projects::ProjectInfoService::InvalidResourceError
+    render_error I18n.t('errors.projects.invalid_resource')
   end
 
   def create
@@ -15,6 +17,8 @@ class ProjectsController < ApplicationController
     redirect_to events_path
   rescue Projects::OnlyOutsideError
     render_error I18n.t('errors.projects.only_outside')
+  rescue Projects::Create::Collect::InvalidResourceError
+    render_error I18n.t('errors.projects.invalid_resource')
   end
 
   def show

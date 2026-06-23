@@ -18,5 +18,6 @@ FactoryBot.define do
     location_id { 1 }
     resource_id { 1 }
     amount { 1 }
+    status { true }
   end
 end
