@@ -235,6 +235,9 @@ pl:
     beeswax:
       n: wosk pszczeli
       gen: wosku pszczelego
+    carrots:
+      n: marchewki
+      gen: marchewek
     coal: 
       n: węgiel
       gen: węgla
@@ -244,9 +247,18 @@ pl:
     copper:
       n: miedź
       gen: miedzi
+    firewood:
+      n: drewno opałowe
+      gen: drewna opałowego
+    grapes:
+      n: winogrona
+      gen: winogron
     iron:
       n: żelazo
       gen: żelaza
+    mud:
+      n: błoto
+      gen: błota
     mushrooms:
       n: grzyby
       gen: grzybów
@@ -254,6 +266,12 @@ pl:
     nuts: 
       n: orzechy
       gen: orzechów
+    potatoes:
+      n: ziemniaki
+      gen: ziemniaków
+    reed:
+      n: trzcina
+      gen: trzciny
     salmon: 
       n: łosoś
       gen: łososia
@@ -442,7 +460,14 @@ pl:
         time_needed: 'Potrzebny czas:'
         title: Menu budowania i produkcji
       show:
+        amount: 'Ilość:'
+        participants: 'Ucestnicy:'
+        progress: 'Postęp:'
+        repeats: 'Powtórzeń pozostało:'
+        start_by: 'Rozpoczynający:'
+        time: 'Potrzebny czas:'
         title: 'Projekt:'
+        type: 'Typ:'
       start: Rozpocznij projekt
     recipes:
       index:

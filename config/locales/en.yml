@@ -235,6 +235,9 @@ en:
     beeswax: beeswax
     # in polish translations there are different conjugations - I'm using nominative and genitive
     # these blank lines in en.yml are just to sync line numbers
+    carrots: carrots
+
+
     coal: coal
 
 
@@ -244,7 +247,16 @@ en:
     copper: copper
     
     
+    firewood: firewood
+
+
+    grapes: grapes
+
+
     iron: iron
+
+
+    mud: mud
 
 
     mushrooms: mushrooms
@@ -252,6 +264,12 @@ en:
 
     nothing_here: No visible resources
     nuts: nuts
+
+
+    potatoes: potatoes
+
+
+    reed: reed
 
 
     salmon: salmon
@@ -442,7 +460,14 @@ en:
         time_needed: 'Time needed:'
         title: Build menu
       show:
+        amount: 'Amount:'
+        participants: 'Participants:'
+        progress: 'Progress:'
+        repeats: 'Repeats left:'
+        start_by: 'Started by:'
+        time: 'Time needed:'
         title: 'Project:'
+        type: 'Type:'
       start: Start project
     recipes:
       index:
