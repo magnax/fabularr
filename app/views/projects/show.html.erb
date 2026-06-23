@@ -1,1 +1,52 @@
-<%= t('views.projects.show.title') %>
+<section id="project-info">
+  <div class="title-bar">
+    <%= t('views.projects.show.title') %> <%= name %>
+  </div>
+  <table>
+    <tbody>
+      <tr>
+        <td>Uczestnicy:</td>
+        <td>
+          <% participants.each do |worker| %>
+            <div>
+              <%= link_to(worker[:name], character_url(worker[:id])) %>
+              (<%= t("skills.#{worker[:skill]}") %>)
+            </div>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Rozpoczynający:</td>
+        <td><%= link_to(starting_character_name, character_url(starting_character_id)) %> (<%= start_day %>)</td>
+      </tr>
+
+      <tr>
+        <td>Postęp:</td>
+        <td><%= t('views.projects.info.percent', progress: progress) %></td>
+      </tr>
+
+      <tr>
+        <td>Potrzebny czas:</td>
+        <td><%= time %></td>
+      </tr>
+
+      <tr>
+        <td>Wykonywanie projektu:</td>
+        <td><%= t("views.projects.#{run_type}") %></td>
+      </tr>
+
+      <% if repeats %>
+        <tr>
+          <td>Powtórzeń pozostało:</td>
+          <td><%= repeats %></td>
+        </tr>
+      <% end %>
+
+      <tr>
+        <td>Ilość:</td>
+        <td><%= amount %></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

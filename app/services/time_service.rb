@@ -12,6 +12,7 @@ module TimeService
 
   def self.display_time(base_speed)
     hours = (base_speed.to_f / MINUTE / MINUTES_IN_HOUR).round(0)
+
     hours = 1 if hours < 1
 
     return display_hours(hours) if hours < 12
@@ -46,5 +47,9 @@ module TimeService
           end
 
     "#{days.to_s.gsub('.0', '')} #{I18n.t(key)}"
+  end
+
+  def self.short_datetime(datetime)
+    "#{datetime[:day]}-#{datetime[:hour]}"
   end
 end

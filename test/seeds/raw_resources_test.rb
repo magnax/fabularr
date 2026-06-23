@@ -31,4 +31,9 @@ class SeedsRawResourcesTest < ActiveSupport::TestCase
     assert_equal %w[raw_food raw_resource], carrots.resource_types.pluck(:key).sort
     assert_equal 'farming', carrots.skill.key
   end
+
+  def teardown
+    Resource.destroy_all
+    Skill.destroy_all
+  end
 end

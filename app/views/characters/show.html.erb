@@ -6,7 +6,7 @@
   <% if project %>
     <%= t('and') %>
     <%= t("skills.#{project['skill']}") %>
-    <%= t('views.characters.show.project_name_html', name: project['name'].html_safe) %>
+    <%= t('views.characters.show.project_name_html', name: link_to(project['name'].html_safe, project_url(project['id']))) %>
   <% end %>
   <p><%= t(
     'views.characters.show.spawn_info_html', 

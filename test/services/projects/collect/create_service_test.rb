@@ -55,7 +55,7 @@ class ProjectsCollectCreateServiceTest < ActiveSupport::TestCase
     params = {
       location_resource_id: location_resource.id,
       amount: 600,
-      repeats: 3
+      repeat: 3
     }
 
     assert_difference -> { Project.count } => 1,

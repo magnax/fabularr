@@ -272,6 +272,9 @@ pl:
     wood: 
       n: drewno
       gen: drewna
+    zinc:
+      n: cynk
+      gen: cynku
   roads:
     path: ścieżka z %{location_1} do %{location_2}
     types:
@@ -416,6 +419,9 @@ pl:
       collect_info_tool_html: Jeśli masz <b>%{key}</b>, możesz %{skill_name} %{amount} gram jednego dnia.
       create_location: Utwórz nową lokację!
       discover: Odkrywaj
+      hand: Wykonywane ręcznie
+      info:
+        percent: '%{progress} procent'
       new:
         cancel: Anuluj
         collect:

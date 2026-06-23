@@ -2,9 +2,11 @@
 
 require 'test_helper'
 
-class ProjectsJoinServiceTest < ActiveSupport::TestCase
+class ProjectsCollectJoinServiceTest < ActiveSupport::TestCase
   def setup
     @character = create(:character)
+    @stone = create(:resource, key: 'stone')
+    create(:character_skill, character: @character, skill: @stone.skill)
   end
 
   def call_service(project_id)
@@ -16,6 +18,8 @@ class ProjectsJoinServiceTest < ActiveSupport::TestCase
     instruction = create(:recipe_instruction, :tool,
                          recipe: recipe, speed: 2)
     project = create(:project, :collect, recipe: recipe)
+    create(:project_description, :resource_out, project: project,
+                                                subject: @stone, amount: 200)
     tool = create(:item, item_type: instruction.subject)
     create(:inventory_object, character: @character, subject: tool)
 
@@ -35,6 +39,8 @@ class ProjectsJoinServiceTest < ActiveSupport::TestCase
     instruction_2 = create(:recipe_instruction, :tool,
                            recipe: recipe, speed: 2)
     project = create(:project, :collect, recipe: recipe)
+    create(:project_description, :resource_out, project: project,
+                                                subject: @stone, amount: 200)
     tool_1 = create(:item, item_type: instruction_1.subject)
     tool_2 = create(:item, item_type: instruction_2.subject)
     create(:inventory_object, character: @character, subject: tool_1)

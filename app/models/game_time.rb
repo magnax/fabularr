@@ -14,8 +14,9 @@ class GameTime < ApplicationRecord
   MINUTE = HOUR / 12
   DAYS_IN_YEAR = 20
 
-  def datetime
-    diff = updated_at.to_i - created_at.to_i
+  def datetime(from_date = nil)
+    end_date = from_date || updated_at
+    diff = end_date.to_i - created_at.to_i
     day = diff / DAY
     seconds = diff - (day * 86_400)
     hours = seconds / HOUR

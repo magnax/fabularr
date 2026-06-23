@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    render locals: Projects::ShowService.call(current_character, params[:project_id])
+    render locals: Projects::ShowService.call(current_character, params[:id])
   end
 
   def join

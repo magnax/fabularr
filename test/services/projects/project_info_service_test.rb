@@ -10,6 +10,11 @@ class ProjectsProjectInfoServiceTest < ActiveSupport::TestCase
     @project_type = create(:project_type, key: 'collect')
   end
 
+  def teardown
+    Resource.destroy_all
+    Skill.destroy_all
+  end
+
   def call_service(params)
     Projects::ProjectInfoService.call(@character, params)
   end

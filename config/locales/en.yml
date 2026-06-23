@@ -272,6 +272,9 @@ en:
     wood: wood
 
 
+    zinc: zinc
+
+    
   roads:
     path: path from %{location_1} to %{location_2}
     types:
@@ -416,6 +419,9 @@ en:
       collect_info_tool_html: If you have <b>%{key}</b>, you can %{skill_name} %{amount} grams in one day.
       create_location: Create new location!
       discover: Discover
+      hand: Manual
+      info:
+        percent: '%{progress} percent'
       new:
         cancel: Cancel
         collect:

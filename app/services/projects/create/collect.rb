@@ -28,12 +28,12 @@ module Projects
         amount_needed: amount,
         unit: resource.unit
       )
-      return unless @params[:repeats]
+      return unless @params[:repeat]
 
       @project.project_descriptions.create!(
         description_type: ProjectDescription::REPEAT,
         subject: nil,
-        amount: @params[:repeats],
+        amount: @params[:repeat],
         amount_needed: nil,
         unit: nil
       )
@@ -44,11 +44,11 @@ module Projects
     end
 
     def type_name
-      I18n.t("project_types.#{project_type.key}")
+      I18n.t("skills.#{resource.skill.key}")
     end
 
     def resource_name
-      I18n.t("resources.#{resource.key}")
+      I18n.td("resources.#{resource.key}")
     end
 
     def duration

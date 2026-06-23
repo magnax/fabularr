@@ -8,4 +8,8 @@ class SeedsSkillsTest < ActiveSupport::TestCase
       require_relative '../../db/seeds/skills'
     end
   end
+
+  def teardown
+    Skill.destroy_all
+  end
 end
