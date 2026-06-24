@@ -14,18 +14,43 @@ module Characters
 
       {
         age: age,
+        gender: gender,
         id: subject_character.id,
+        location: location,
         name: @character.name_for(subject_character),
         project: project,
         self_view: @character == subject_character,
         skills: skills,
         spawn_location_id: subject_character.spawn_location_id,
         spawn_location_name: spawn_location_name,
-        spawn_day: GameTime.last.days(subject_character.created_at)
+        spawn_day: spawn_day,
+        strength: strength
       }.with_indifferent_access
     end
 
     private
+
+    def gender
+      subject_character.gender.downcase
+    end
+
+    def location
+      return if subject_character.travelling?
+
+      {
+        id: subject_character.location_id,
+        location_type: I18n.t(
+          "locations.#{subject_character.location.location_type.key}"
+        ),
+        name: subject_character.location.display_name(@character)
+      }
+    end
+
+    def strength
+      return unless subject_character == @character
+
+      Skill::MAP_STRENGTH[@character.strength.level.floor]
+    end
 
     def age
       I18n.t("characters.age.over_#{subject_character.decade}_#{subject_character.gender.downcase}")
@@ -64,6 +89,10 @@ module Characters
       subject_character.character_skills.visible.as_json(
         only: :level, methods: %i[description key]
       )
+    end
+
+    def spawn_day
+      GameTime.last.days(subject_character.created_at)
     end
 
     def spawn_location_name

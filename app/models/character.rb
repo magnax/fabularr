@@ -183,4 +183,8 @@ class Character < ApplicationRecord
 
     d
   end
+
+  def strength
+    character_skills.find_by(skill_id: Skill.find_by(key: Skill::STRENGTH))
+  end
 end

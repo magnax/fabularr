@@ -17,6 +17,13 @@ class Skill < ApplicationRecord
   SKILLFULLY = 'skillfully'
   EXPERTLY = 'expertly'
 
+  # strength levels
+  AVERAGE_STRENGTH = 'average_strength'
+  STRONGER = 'stronger'
+  WEAKER = 'weaker'
+  VERY_WEAK = 'very_weak'
+  VERY_STRONG = 'very_strong'
+
   # skills
   ANIMAL_HUSBANDRY = 'animal_husbandry'
   BUILDING = 'building'
@@ -43,6 +50,7 @@ class Skill < ApplicationRecord
   REFINING = 'refining'
   SHIPBUILDING = 'shipbuilding'
   SMELTING = 'smelting'
+  STRENGTH = 'strength'
   TAILORING = 'tailoring'
   WALKING = 'walking'
 
@@ -71,6 +79,7 @@ class Skill < ApplicationRecord
     REFINING
     SHIPBUILDING
     SMELTING
+    STRENGTH
     TAILORING
     WALKING
   ].freeze
@@ -93,6 +102,14 @@ class Skill < ApplicationRecord
     2 => EFFICIENTLY,
     3 => SKILLFULLY,
     4 => EXPERTLY
+  }.freeze
+
+  MAP_STRENGTH = {
+    0 => VERY_WEAK,
+    1 => WEAKER,
+    2 => AVERAGE_STRENGTH,
+    3 => STRONGER,
+    4 => VERY_STRONG
   }.freeze
 
   DAYS_PER_LEVEL = {

@@ -73,6 +73,8 @@ pl:
       over_20_m: On ma ponad dwadzieścia lat
     actions:
       talk: Mów do tej osoby
+    k_is: Ona jest w
+    m_is: On jest w
   directions:
     e: wschodni
     ene: wschodnio-północno-wschodni
@@ -299,7 +301,7 @@ pl:
       path: ścieżka
   select: --- wybierz ---
   skills:
-    animal_husbandry: hodowla zwierząt
+    animal_husbandry: hodowla zwierząt 
     awkwardly: niezręcznie
     building: budowanie
     burying: grabarstwo
@@ -356,9 +358,10 @@ pl:
         actions: Akcje
         current_state: Obecny stan
         damage: Obrażenia
-        hunger: Głód
         description: Imię i opis
+        hunger: Głód
         info: 'Opis postaci: %{name}'
+        location_info_html: '%{location_link} [%{location_type}]'
         project_name_html: 'pracuje przy projekcie: %{name}'
         skills: Umiejętności
         spawn_info_html: 'Przebudzenie: dnia %{day} w %{location_link}'
@@ -502,6 +505,22 @@ pl:
       gathering_perf: zebrać
       mining: kopanie
       mining_perf: nakopać
+    strength:
+      average_strength: 
+        k: 'Ona jest przeciętnie silna.'
+        m: 'On jest przeciętnie silny.'
+      stronger:
+        k: 'Ona jest silniejsza niż większość.'
+        m: 'On jest silniejszy niż większość.'
+      weaker:
+        k: 'Ona jest słabsza niż większość.'
+        m: 'On jest słabszy niż większość.'
+      very_weak:
+        k: 'Ona jest bardzo słaba.'
+        m: 'On jest bardzo słaby.'
+      very_strong:
+        k: 'Ona jest niezwykle silna.'
+        m: 'On jest niezwykle silny.'
     travel_info:
       examine: Eksploruj lokację
     travellers:
@@ -526,5 +545,5 @@ pl:
         no_chars: Nie masz żadnych postaci
         travel_info_html: "W podróży z %{location_name} (%{direction})"
         travel_road_info_html: "W podróży z %{start_location_name} do %{end_location_name}"
-  unknown_man: nieznana kobieta
-  unknown_woman: nieznany mężczyzna
+  unknown_man: nieznany mężczyzna
+  unknown_woman: nieznana kobieta

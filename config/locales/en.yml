@@ -73,6 +73,8 @@ en:
       over_20_m: He is in his twenties
     actions:
       talk: Talk to this person
+    k_is: She is in
+    m_is: He is in
   directions:
     e: east
     ene: east-north-east
@@ -356,8 +358,9 @@ en:
         actions: Actions
         current_state: Current status
         damage: Damage
-        hunger: Hunger
         description: Name & description
+        hunger: Hunger
+        location_info_html: '%{location_link} [%{location_type}]'
         info: Character info
         project_name_html: 'working on the project: %{name}'
         skills: Skills
@@ -502,6 +505,22 @@ en:
       gathering_perf: gather
       mining: mining for
       mining_perf: mine
+    strength:
+      average_strength: 
+        k: 'She seems to have average strength.'
+        m: 'He seems to have average strength.'
+      stronger:
+        k: 'She is stronger than most others.'
+        m: 'He is stronger than most others.'
+      weaker:
+        k: 'She is weaker than most others.'
+        m: 'He is weaker than most others.'
+      very_weak:
+        k: 'She is very weak.'
+        m: 'He is very weak.'
+      very_strong:
+        k: 'She is very strong.'
+        m: 'He is very strong.'
     travel_info:
       examine: Examine location
     travellers:

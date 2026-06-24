@@ -2,18 +2,29 @@
   <div class="title-bar">
     <%= t('views.characters.show.info', name: name) %>
   </div>
-  <%= age %>
   <% if project %>
-    <%= t('and') %>
+    <%= "#{age} #{t('and')}" %>
     <%= t("skills.#{project['skill']}") %>
-    <%= t('views.characters.show.project_name_html', name: link_to(project['name'].html_safe, project_url(project['id']))) %>
+    <%= t('views.characters.show.project_name_html', name: link_to(project['name'].html_safe, project_url(project['id']))) %>.
+  <% else %>
+    <%= age %>.
   <% end %>
-  <p><%= t(
-    'views.characters.show.spawn_info_html', 
-    day: spawn_day, 
+  <% if self_view %>
+    <%= t("views.strength.#{strength}.#{gender}") %>
+  <% end%>
+  <p><%= t("characters.#{gender}_is") %> <%= t(
+    'views.characters.show.location_info_html', 
     location_link: link_to(
-      spawn_location_name, location_name_url(spawn_location_id))
-    ) %>
+      location[:name], location_name_url(location[:id])),
+    location_type: location[:location_type]) %>
+  <% if self_view %>
+    <p><%= t(
+      'views.characters.show.spawn_info_html', 
+      day: spawn_day, 
+      location_link: link_to(
+        spawn_location_name, location_name_url(spawn_location_id))
+      ) %>
+  <% end %>
 </section>
 <section id="actions">
   <div class="title-bar">
