@@ -1,6 +1,7 @@
 <% characters.each do |character| %>
   <div>
     <%= link_to fa_icon('info'), character_url(character[:id]) %>
+    <%= link_to fa_icon('hand-o-right'), character_point_url(character[:id]), title: t('characters.actions.point') %>
     <% if current_character.id != character[:id] %>
       <%= link_to(image_tag("talk.svg", size: "20x20"), character_talk_url(character[:id]), title: t('characters.actions.talk')) %>
     <% end %>

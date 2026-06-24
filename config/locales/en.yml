@@ -72,6 +72,7 @@ en:
       over_20_k: She is in her twenties 
       over_20_m: He is in his twenties
     actions:
+      point: Point at this person
       talk: Talk to this person
     k_is: She is in
     m_is: He is in
@@ -123,6 +124,10 @@ en:
       arrive_created: You arrived at newly created town
     people:
       spawn_info: "You see a new person, it's %{character_link}."
+    point:
+      point_person_me: You point at %{char_name}
+      point_person_other: You see %{char_name_1} pointing at %{char_name_2}
+      point_person_you: You see %{char_name} pointing at you
     projects:
       create_location_ended: New location (%{location_info}) is successfully created
       ended: Project has ended.

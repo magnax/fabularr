@@ -9,9 +9,10 @@ Fabularr::Application.routes.draw do
 
   scope '(:locale)', locale: /pl|en/ do
     resources :characters, only: %i[new create show] do
-      get :talk
-      get :set
       get :name
+      get :point
+      get :set
+      get :talk
     end
     resources :char_names
     resources :events

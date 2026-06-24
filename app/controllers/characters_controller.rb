@@ -17,6 +17,11 @@ class CharactersController < ApplicationController
     @charname = current_character.char_name_or_build @named_character
   end
 
+  def point
+    Events::PointService.call(current_character, 'character', params[:character_id])
+    redirect_to events_path
+  end
+
   def set
     cookies.permanent[:character_token] = params[:character_id]
     redirect_to events_path

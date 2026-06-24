@@ -36,8 +36,11 @@
         <%= t('characters.actions.talk') %>
       </div>
     <% end %>
-    <%= link_to '' do %>
-      <div class="char-action">Point</div>
+    <%= link_to character_point_url(id) do %>
+      <div class="char-action" title="<%= t('characters.actions.point') %>">
+        <%= fa_icon("hand-o-right") %>
+        <%= t('characters.actions.point') %>
+      </div>
     <% end %>
     <%= link_to '' do %>
       <div class="char-action">Join to project</div>

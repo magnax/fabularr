@@ -72,6 +72,7 @@ pl:
       over_20_k: Ona ma ponad dwadzieścia lat
       over_20_m: On ma ponad dwadzieścia lat
     actions:
+      point: Wskaż tę osobę
       talk: Mów do tej osoby
     k_is: Ona jest w
     m_is: On jest w
@@ -123,6 +124,10 @@ pl:
       arrive_created: Przybyłeś do nowo utworzonej osady
     people:
       spawn_info: Widzisz nową osobę, to %{character_link}.
+    point:
+      point_person_me: Wskazujesz na %{char_name}
+      point_person_other: Widzisz jak %{char_name_1} wskazuje na %{char_name_2}
+      point_person_you: '<b>Widzisz jak %{char_name} wskazuje na Ciebie</b>'
     projects:
       create_location_ended: Nowa osada (%{location_info}) została utworzona
       ended: Projekt zakończył się
