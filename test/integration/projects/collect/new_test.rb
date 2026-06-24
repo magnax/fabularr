@@ -16,6 +16,11 @@ class ProjectsCollectNewTest < ActionDispatch::IntegrationTest
     click_link 'Magnus'
   end
 
+  def teardown
+    Resource.destroy_all
+    Skill.destroy_all
+  end
+
   test 'no recipes available' do
     wood = create(:resource, key: 'wood', daily_rate: 600)
     location_resource = create(:location_resource, resource: wood,
