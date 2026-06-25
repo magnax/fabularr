@@ -1,0 +1,44 @@
+<section id="description">
+  <div class="title-bar">
+    <%= t('views.characters.attack.title') %>
+  </div>
+  <%= form_for(:event, url: attack_url) do |f| %>
+    <%= f.hidden_field :target_id, value: target_id %>
+    <%= f.hidden_field :target_type, value: 'character' %>
+
+    <table style="margin:0 auto;">
+      <tbody>
+        <tr>
+          <td colspan="2">
+            <%= t('views.characters.attack.info_html') %>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td width="50%" align="right">
+            <%= t('views.characters.attack.weapon') %>
+          </td>
+          <td width="50%" align="left">
+            <%= f.select :weapon, weapons %>
+          </td>
+        </tr>
+        <tr valign="top">
+          <td width="50%" align="right">
+            <%= t('views.characters.attack.force') %>
+          </td>
+          <td width="50%" align="left">
+              <%= f.collection_radio_buttons :force,  force, :id, :tag %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <%= f.submit(
+              I18n.t('views.characters.attack.submit'), 
+              data: { disable_with: false }, 
+              class: "btn btn-large btn-primary"
+            ) %>
+          </td>
+        </tr>
+      </tbody>
+    </table >
+  <% end %>
+</section>

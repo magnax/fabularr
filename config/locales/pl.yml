@@ -72,6 +72,7 @@ pl:
       over_20_k: Ona ma ponad dwadzieścia lat
       over_20_m: On ma ponad dwadzieścia lat
     actions:
+      attack: Atakuj tę osobę
       point: Wskaż tę osobę
       talk: Mów do tej osoby
     k_is: Ona jest w
@@ -111,6 +112,11 @@ pl:
     eaten_all: Zjadasz wszystkie swoje %{res}
     enter_location: Opuszczasz %{out_place} wchodząc do %{in_place}, gdzie widzisz %{count} osób
     enter_location_other: Widzisz jak %{character_link} wchodzi do %{in_place} z %{out_place}
+    hit:
+      character:
+        defend_self: '%{skill} chronisz %{saved} punktów używając swojej %{protection}'
+        defend_self_no_protection: 'Nie chronisz się przed atakiem.'
+        hit_self: '%{skill} ranisz się używając %{weapon}. Tracisz %{lose} punktów.'
     hungry: Głodujesz
     leave_location_other: Widzisz jak %{character_link} opuszcza %{out_place} wchodząc do %{in_place}
     initial:
@@ -184,6 +190,7 @@ pl:
         password: Hasło
   invalid_credentials: Nieprawidłowy adres lub hasło
   items:
+    bare_fist: goła pięść
     bronze_pickaxe: brązowy kilof
     damage:
       brand_new: całkiem nowy
@@ -350,6 +357,14 @@ pl:
     character_info: Profil postaci
     characters:
       agony: W agonii
+      attack: 
+        info_html: >
+          W tym formularzu możesz wybrać broń i siłę uderzenia.<br>
+          Uwaga: użycie 0% siły i wybór pięści spowoduje spoliczkowanie.
+        force: Siła, z jaką chcesz uderzyć (0 - 100%)
+        submit: Uderz!
+        title: 'Atak: broń i siła'
+        weapon: 'Broń:'
       hungry: Wygłodzenie
       name:
         create: Zmień imię

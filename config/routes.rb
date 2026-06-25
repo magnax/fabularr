@@ -9,6 +9,7 @@ Fabularr::Application.routes.draw do
 
   scope '(:locale)', locale: /pl|en/ do
     resources :characters, only: %i[new create show] do
+      get :attack
       get :name
       get :point
       get :set
@@ -57,6 +58,7 @@ Fabularr::Application.routes.draw do
     match '/login', to: 'sessions#new', via: 'get'
     match '/logout', to: 'sessions#destroy', via: 'delete'
     match '/list', to: 'users#show', via: 'get'
+    match '/attack', to: 'attacks#create', via: 'post'
 
     namespace :api do
       resources :events, only: :show do

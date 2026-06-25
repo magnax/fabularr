@@ -12,6 +12,10 @@ class CharactersController < ApplicationController
     redirect_to list_path
   end
 
+  def attack
+    render locals: Characters::AttackInfoService.call(current_character, attack_params)
+  end
+
   def name
     @named_character = Character.find(params[:character_id])
     @charname = current_character.char_name_or_build @named_character
@@ -44,5 +48,9 @@ class CharactersController < ApplicationController
 
   def character_params
     params.require(:character).permit(:name, :gender)
+  end
+
+  def attack_params
+    params.permit(:character_id)
   end
 end

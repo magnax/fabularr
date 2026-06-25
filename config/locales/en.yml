@@ -72,6 +72,7 @@ en:
       over_20_k: She is in her twenties 
       over_20_m: He is in his twenties
     actions:
+      attack: Attack this person
       point: Point at this person
       talk: Talk to this person
     k_is: She is in
@@ -111,6 +112,11 @@ en:
     eaten_all: You eat all of your %{res}
     enter_location: You are entering from %{out_place} into %{in_place}, where you see %{count} people
     enter_location_other: You see %{character_link} is entering %{in_place} from %{out_place}
+    hit:
+      character:
+        defend_self: 'You %{skill} save %{saved} points using your %{protection}'
+        defend_self_no_protection: "You're not saving any points."
+        hit_self: 'You %{skill} hurt yourself using %{weapon}. You lose %{lose} points.'
     hungry: You are hungry
     leave_location_other: You see %{character_link} is leaving %{out_place} entering %{in_place}
     initial:
@@ -184,6 +190,7 @@ en:
         password: Password
   invalid_credentials: Invalid username or password
   items:
+    bare_fist: bare fist
     bronze_pickaxe: bronze pickaxe
     damage:
       brand_new: brand new
@@ -350,6 +357,14 @@ en:
     character_info: 'Character description: %{name}'
     characters:
       agony: In agony
+      attack:
+        info_html: >
+          With this form you can select the weapon you want to use and the amount of force you want to apply.<br>
+          Note: Using 0 % and a bare fist will result in a slap in the face.
+        force: Force you want to use (0 - 100%)
+        submit: Hit!
+        title: 'Attack: weapon & force'
+        weapon: 'Weapon:'
       hungry: Hungry
       name:
         create: Change name
