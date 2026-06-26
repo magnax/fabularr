@@ -9,12 +9,14 @@ module Characters
       @char_id = char_id
     end
 
-    def call
+    def call # rubocop:disable Metrics/AbcSize
       raise InvalidCharacterError if subject_character.blank?
 
       {
         age: age,
+        damage: damage,
         gender: gender,
+        hunger: hunger,
         id: subject_character.id,
         location: location,
         name: @character.name_for(subject_character),
@@ -29,6 +31,14 @@ module Characters
     end
 
     private
+
+    def damage
+      subject_character.damage.round(0)
+    end
+
+    def hunger
+      subject_character.hunger.round(0)
+    end
 
     def gender
       subject_character.gender.downcase

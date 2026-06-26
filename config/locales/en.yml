@@ -114,9 +114,20 @@ en:
     enter_location_other: You see %{character_link} is entering %{in_place} from %{out_place}
     hit:
       character:
-        defend_self: 'You %{skill} save %{saved} points using your %{protection}'
-        defend_self_no_protection: "You're not saving any points."
-        hit_self: 'You %{skill} hurt yourself using %{weapon}. You lose %{lose} points.'
+        defend: 'You %{skill} save %{saved} points using your %{protection}.</b>'
+        defend_no_protection: "You're not saving any points.</b>"
+        hit_self: '<b>You %{skill} hurt yourself using %{weapon}. You lose %{lose} points.'
+        hit: >-
+          You see %{character_link_1} %{skill} hurts %{character_link_2}
+          using %{weapon}
+        hit_by: >-
+          <b>%{character_link} %{skill} hurts you using %{weapon}.
+          You lose %{lose} points.
+        hit_other: >-
+          You %{skill} hurt %{character_link} using %{weapon}.
+          %{pronoun} loses %{lose} points.
+        slap: You see %{character_link_1} %{skill} slaps %{pronoun}
+        slap_self: "<b>You %{skill} slap yourself in the face. You didn't lose any points.</b>"
     hungry: You are hungry
     leave_location_other: You see %{character_link} is leaving %{out_place} entering %{in_place}
     initial:
@@ -174,8 +185,12 @@ en:
       please_login: Please login!
       please_choose_char: Please choose one character
   genders:
+    he: he
+    herself: herself
+    himself: himself
     K: female
     M: male
+    she: she
   gram: grams
   # blank lines on purpose!!
 

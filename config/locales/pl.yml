@@ -114,9 +114,17 @@ pl:
     enter_location_other: Widzisz jak %{character_link} wchodzi do %{in_place} z %{out_place}
     hit:
       character:
-        defend_self: '%{skill} chronisz %{saved} punktów używając swojej %{protection}'
-        defend_self_no_protection: 'Nie chronisz się przed atakiem.'
+        defend: '%{skill} chronisz %{saved} punktów używając swojej %{protection}</b>'
+        defend_no_protection: 'Nie chronisz się przed atakiem.</b>'
         hit_self: '%{skill} ranisz się używając %{weapon}. Tracisz %{lose} punktów.'
+        hit_by: >-
+          <b>%{character_link} %{skill} rani Cię używając %{weapon} tak, że
+          tracisz %{lose} punktów.
+        hit_other: >-
+          Używając %{weapon} %{skill} ranisz %{character_link} tak, 
+          że traci %{lose} punkty(ów).'
+        slap: Widzisz jak %{character_link_1} %{skill} się policzkuje.
+        slap_self: '%{skill} policzkujesz się. Nie tracisz żadnych punktów'
     hungry: Głodujesz
     leave_location_other: Widzisz jak %{character_link} opuszcza %{out_place} wchodząc do %{in_place}
     initial:
@@ -174,8 +182,12 @@ pl:
       please_login: Zaloguj się, proszę
       please_choose_char: Musisz najpierw wybrać którąś postać
   genders:
+    he: 'on'
+    herself: się
+    himself: się
     K: kobieta
     M: mężczyzna
+    she: ona
   gram: 
     n: gram
     gen: gramów

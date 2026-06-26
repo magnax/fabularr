@@ -59,6 +59,7 @@
       </div>
     <% end %>
 </section>
+
 <section id="status">
   <div class="title-bar">
     <%= t('views.characters.show.current_state') %>
@@ -69,9 +70,9 @@
       <td>
         <div class="stat">
           <div class="stat-outer"></div>
-          <div class="stat-inner damage" style="width:<%= @character.damage %>%;">
+          <div class="stat-inner damage" style="width:<%= damage %>%;">
           </div>
-          <div class="stat-inner-number"><%= @character.damage %>%</div>
+          <div class="stat-inner-number"><%= damage %>%</div>
         </div>
       </td>
     </tr>
@@ -80,9 +81,9 @@
       <td>
         <div class="stat">
           <div class="stat-outer"></div>
-          <div class="stat-inner hunger" style="width:<%= @character.hunger %>%;">
+          <div class="stat-inner hunger" style="width:<%= hunger %>%;">
           </div>
-          <div class="stat-inner-number"><%= @character.hunger %>%</div>
+          <div class="stat-inner-number"><%= hunger %>%</div>
         </div>
       </td>
     </tr>
