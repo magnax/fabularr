@@ -137,4 +137,17 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal 'fishing cod', project.name(character, short: true)
     assert_equal fishing, project.skill
   end
+
+  test 'proper #name and #skill for project with recipe with skill' do
+    character = create(:character)
+    skill = create(:skill, key: Skill::MANUFACTURING_MACHINES)
+    project_type = create(:project_type, key: ProjectType::BUILD)
+    recipe = create(:recipe, :machinery, key: 'small_fire_pit', skill: skill)
+    project = create(:project, starting_character: character,
+                               project_type: project_type, recipe: recipe,
+                               location: character.location)
+
+    assert_equal skill, project.skill
+    assert_equal 'manufacturing small fire pit', project.name(character, short: true)
+  end
 end

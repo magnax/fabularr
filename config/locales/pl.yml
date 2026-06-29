@@ -539,6 +539,7 @@ pl:
       gardening_perf: uprawić
       gathering: zbieranie
       gathering_perf: zebrać
+      manufacturing_machines: budowa
       mining: kopanie
       mining_perf: nakopać
     strength:

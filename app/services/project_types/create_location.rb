@@ -24,7 +24,7 @@ module ProjectTypes
       travellers.each do |traveller|
         character = traveller.subject
         character.update!(location: location)
-        character.traveller.destroy
+        traveller.destroy
         next if character == starting_character
 
         create_event_and_broadcast!(character)

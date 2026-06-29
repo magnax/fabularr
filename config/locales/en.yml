@@ -539,6 +539,7 @@ en:
       gardening_perf: collect
       gathering: gathering
       gathering_perf: gather
+      manufacturing_machines: manufacturing
       mining: mining for
       mining_perf: mine
     strength:

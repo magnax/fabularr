@@ -20,8 +20,6 @@ class ProjectsJoinServiceTest < ActiveSupport::TestCase
   test 'can join to project (no requirements), reveal skill' do
     project = create(:project, :discover_resource)
     skill = create(:skill, key: 'exploring')
-    # create(:character_skill, character: @character, skill: skill,
-    #                          level: 3, status: false)
 
     assert_equal 0, @character.character_skills.visible.count
 

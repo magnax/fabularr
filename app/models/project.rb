@@ -69,6 +69,9 @@ class Project < ApplicationRecord
       case recipe.recipe_type
       when Recipe::BUILDING
         "#{I18n.t('projects.name.start_building')} (#{item_name})"
+      when Recipe::MACHINERY
+        "#{I18n.t("views.skills.#{recipe.skill.key}")} #{item_name}"
+
       when Recipe::VEHICLE
         "#{I18n.t('projects.name.start_vehicle')} (#{item_name})"
       else
@@ -102,6 +105,8 @@ class Project < ApplicationRecord
       return Skill.where(key: Skill::BUILDING).first_or_create
     elsif project_type.key == ProjectType::COLLECT
       return project_descriptions.resource_out.first.subject.skill
+    elsif recipe.present? && recipe.skill.present?
+      return recipe.skill
     end
 
     nil

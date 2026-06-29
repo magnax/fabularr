@@ -16,6 +16,7 @@ class ProjectType < ApplicationRecord
   COLLECT = 'collect'
   CREATE_LOCATION = 'create_location'
   DISCOVER_RESOURCE = 'discover_resource'
+  MACHINERY = 'machinery'
   ROAD = 'road'
 
   EXPLORING_TYPES = [CREATE_LOCATION, DISCOVER_RESOURCE].freeze
