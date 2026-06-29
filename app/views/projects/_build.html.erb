@@ -13,7 +13,7 @@
     </tr>
     <% if resources.any? %>
       <tr>
-        <td><%= t('views.projects.new.resources_needed') %>:</td>
+        <td valign="top"><%= t('views.projects.new.resources_needed') %>:</td>
         <td>
           <% resources.each do |res| %>
             <div>
@@ -50,7 +50,11 @@
     <% if placement.present? %>
       <tr>
         <td colspan=2>
-          <%= t("placements.#{placement}") %>
+          <% placement.each do |p| %>
+            <div>
+              <%= t("placements.#{p}") %>
+            </div>
+          <% end %>
         </td>
       </tr>
     <% end %>

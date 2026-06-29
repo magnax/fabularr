@@ -62,7 +62,7 @@ module Projects
     end
 
     def placement_key
-      return 'outside_all' if vehicle?
+      return ['outside_all'] if vehicle?
       return if placement.blank?
 
       placement.metadata['placement']

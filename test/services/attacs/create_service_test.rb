@@ -92,7 +92,7 @@ class AttacksCreateServiceTest < ActiveSupport::TestCase
     event_me = Event.where(receiver_character: @character).sole
     event_spectator = Event.where(receiver_character: @location_character).sole
 
-    assert_equal '<b>You efficiently slap yourself in the face. '\
+    assert_equal '<b>You efficiently slap yourself. '\
                  "You didn't lose any points.</b>", event_me.body
     assert_equal "You see <!--CHARID:#{@character.id}--> efficiently slaps himself",
                  event_spectator.body
