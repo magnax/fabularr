@@ -10,6 +10,8 @@
 #  updated_at :datetime         not null
 #
 class Skill < ApplicationRecord
+  has_many :recipes, dependent: :destroy
+
   # levels:
   AWKWARDLY = 'awkwardly'
   NOVICELY = 'novicely'

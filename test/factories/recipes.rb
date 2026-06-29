@@ -10,6 +10,15 @@
 #  recipe_type :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  skill_id    :bigint
+#
+# Indexes
+#
+#  index_recipes_on_skill_id  (skill_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (skill_id => skills.id)
 #
 FactoryBot.define do
   factory :recipe do

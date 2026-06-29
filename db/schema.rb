@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_20_070756) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_29_053614) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -255,7 +255,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_070756) do
     t.datetime "created_at", null: false
     t.string "key"
     t.string "recipe_type"
+    t.bigint "skill_id"
     t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_recipes_on_skill_id"
   end
 
   create_table "resource_types", force: :cascade do |t|
@@ -368,6 +370,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_20_070756) do
   add_foreign_key "project_descriptions", "projects"
   add_foreign_key "projects", "recipes"
   add_foreign_key "recipe_instructions", "recipes"
+  add_foreign_key "recipes", "skills"
   add_foreign_key "resources", "skills"
   add_foreign_key "roads", "locations", column: "location_1_id"
   add_foreign_key "roads", "locations", column: "location_2_id"
