@@ -81,9 +81,14 @@ module Events
       return {} if location.blank?
 
       {
-        resources: location&.location_objects&.includes(:subject)&.resource,
-        items: location&.location_objects&.item
+        items: objects&.item,
+        machines: objects&.machinery,
+        resources: objects&.includes(:subject)&.resource
       }
+    end
+
+    def objects
+      @objects ||= location&.location_objects
     end
 
     def visible_resources

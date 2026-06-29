@@ -28,11 +28,13 @@ class RecipeInstruction < ApplicationRecord
   belongs_to :recipe
   belongs_to :subject, polymorphic: true, optional: true
 
+  scope :machinery, -> { where(instruction_type: MACHINERY) }
   scope :resource, -> { where(instruction_type: RESOURCE) }
   scope :tool, -> { where(instruction_type: TOOL) }
   scope :placement, -> { where(instruction_type: PLACEMENT) }
 
   # Types:
+  MACHINERY = 'machinery'
   RESOURCE = 'resource'
   TOOL = 'tool'
   PLACEMENT = 'placement'

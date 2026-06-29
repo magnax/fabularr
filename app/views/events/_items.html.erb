@@ -12,6 +12,12 @@
       <%= t("items.damage.#{item.subject.damage_key}") %> <%= t("items.#{item.subject.item_type.key}") %>
     </div>
   <% end %>
+
+  <% machines.each do |item| %>
+    <div>
+      <%= t("machineries.#{item.subject.key}") %>
+    </div>
+  <% end %>
 <% else %>
   <%= t('items.nothing_here') %>
 <% end %>

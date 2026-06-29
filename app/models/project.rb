@@ -44,6 +44,7 @@ class Project < ApplicationRecord
     'create_location' => 'CreateLocation',
     'discover_resource' => 'DiscoverResource',
     'item' => 'Build',
+    'machinery' => 'Machinery',
     'road' => 'BuildRoad',
     'vehicle' => 'Vehicle'
   }.freeze

@@ -17,6 +17,8 @@ Definitions::Recipes::RECIPES.each do |recipe|
       subject = Resource.where(key: i_key).first_or_create
     when RecipeInstruction::TOOL
       subject = ItemType.where(key: i_key).first_or_create
+    when RecipeInstruction::MACHINERY
+      subject = Machinery.where(key: i_key).first_or_create
     end
     RecipeInstruction.create!(
       recipe_id: r.id, subject: subject, amount: i[:amount],

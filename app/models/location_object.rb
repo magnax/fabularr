@@ -26,6 +26,7 @@ class LocationObject < ApplicationRecord
   belongs_to :subject, polymorphic: true
   belongs_to :location
 
-  scope :resource, -> { where(subject_type: 'Resource') }
   scope :item, -> { where(subject_type: 'Item') }
+  scope :machinery, -> { where(subject_type: 'Machinery') }
+  scope :resource, -> { where(subject_type: 'Resource') }
 end
