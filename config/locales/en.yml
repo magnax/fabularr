@@ -116,7 +116,6 @@ en:
       character:
         defend: 'You %{skill} save %{saved} points using your %{protection}.</b>'
         defend_no_protection: "You're not saving any points.</b>"
-        hit_self: '<b>You %{skill} hurt yourself using %{weapon}. You lose %{lose} points.'
         hit: >-
           You see %{character_link_1} %{skill} hurts %{character_link_2}
           using %{weapon}
@@ -126,8 +125,9 @@ en:
         hit_other: >-
           You %{skill} hurt %{character_link} using %{weapon}.
           %{pronoun} loses %{lose} points.
+        hit_self: '<b>You %{skill} hurt yourself using %{weapon}. You lose %{lose} points.'
         slap: You see %{character_link_1} %{skill} slaps %{pronoun}
-        slap_self: "<b>You %{skill} slap yourself in the face. You didn't lose any points.</b>"
+        slap_self: "<b>You %{skill} slap yourself. You didn't lose any points.</b>"
     hungry: You are hungry
     leave_location_other: You see %{character_link} is leaving %{out_place} entering %{in_place}
     initial:
@@ -453,6 +453,7 @@ en:
       examine:
         cannot_create: Cannot create location - there is already project for that
         location_type: 'Location type: %{type}'
+        title: Examine & create new location
       name:
         create: 'Rename'
         current_name: 'Current name:'

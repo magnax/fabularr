@@ -12,11 +12,15 @@
   <% if self_view %>
     <%= t("views.strength.#{strength}.#{gender}") %>
   <% end%>
-  <p><%= t("characters.#{gender}_is") %> <%= t(
-    'views.characters.show.location_info_html', 
-    location_link: link_to(
-      location[:name], location_name_url(location[:id])),
-    location_type: location[:location_type]) %>
+  <% if location %>
+    <p>
+      <%= t("characters.#{gender}_is") %> 
+      <%= t('views.characters.show.location_info_html', 
+            location_link: link_to(
+              location[:name], location_name_url(location[:id])
+            ), location_type: location[:location_type]
+          ) %>
+  <% end %>
   <% if self_view %>
     <p><%= t(
       'views.characters.show.spawn_info_html', 

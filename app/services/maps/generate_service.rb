@@ -49,7 +49,10 @@ module Maps
       draw.draw(canvas)
     end
 
+    # TODO: not tested!
     def draw_locations(draw, canvas)
+      return if locations.empty?
+
       locations.each do |location|
         x = location.x - position[:x]
         y = location.y - position[:y]

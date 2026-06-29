@@ -116,15 +116,18 @@ pl:
       character:
         defend: '%{skill} chronisz %{saved} punktów używając swojej %{protection}</b>'
         defend_no_protection: 'Nie chronisz się przed atakiem.</b>'
-        hit_self: '%{skill} ranisz się używając %{weapon}. Tracisz %{lose} punktów.'
+        hit: >-
+          Widzisz jak %{character_link_1} %{skill} rani %{character_link_2}
+          używając %{weapon}
         hit_by: >-
           <b>%{character_link} %{skill} rani Cię używając %{weapon} tak, że
           tracisz %{lose} punktów.
         hit_other: >-
           Używając %{weapon} %{skill} ranisz %{character_link} tak, 
           że traci %{lose} punkty(ów).'
+        hit_self: '<b>%{skill} ranisz się używając %{weapon}. Tracisz %{lose} punktów.</b>'
         slap: Widzisz jak %{character_link_1} %{skill} się policzkuje.
-        slap_self: '%{skill} policzkujesz się. Nie tracisz żadnych punktów'
+        slap_self: '<b>%{skill} policzkujesz się. Nie tracisz żadnych punktów.</b>'
     hungry: Głodujesz
     leave_location_other: Widzisz jak %{character_link} opuszcza %{out_place} wchodząc do %{in_place}
     initial:
@@ -450,6 +453,7 @@ pl:
       examine:
         cannot_create: Nie możesz utworzyć osady - już istnieje projekt na jej tworzenie
         location_type: 'Typ terenu: %{type}'
+        title: Zbadaj i utwórz nową lokację
       name:
         create: 'Zmień nazwę'
         current_name: 'Obecna nazwa:'
