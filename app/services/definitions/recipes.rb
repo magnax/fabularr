@@ -14,6 +14,7 @@ module Definitions::Recipes
       # TODO: base_speed is building/collecting time, can be confused with travel speed
       base_speed: 3000,
       placement: 'outside_all',
+      skill: 'manufacturing_machines',
       instructions: [
         { key: 'resource#stone', amount: 500 }
       ]

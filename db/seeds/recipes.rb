@@ -4,7 +4,11 @@ Definitions::Recipes::RECIPES.each do |recipe|
   (key, recipe_type) = recipe[:key].split('#')
 
   r = Recipe.where(key: key)
-            .first_or_create(recipe_type: recipe_type, base_speed: recipe[:base_speed])
+            .first_or_create(
+              recipe_type: recipe_type,
+              base_speed: recipe[:base_speed],
+              skill: Skill.where(key: recipe[:skill]).first_or_create
+            )
   recipe[:instructions].each do |i|
     (i_type, i_key) = i[:key].split('#')
 

@@ -25,5 +25,9 @@ FactoryBot.define do
     recipe_type { Recipe::ITEM }
     key { 'stone_knife' }
     base_speed { 1000 }
+
+    trait :machinery do
+      recipe_type { Recipe::MACHINERY }
+    end
   end
 end
