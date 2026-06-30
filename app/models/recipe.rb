@@ -26,6 +26,7 @@ class Recipe < ApplicationRecord
 
   BUILDING = 'building'
   COLLECT = 'collect'
+  DRYING = 'drying'
   ITEM = 'item'
   MACHINERY = 'machinery'
   VEHICLE = 'vehicle'

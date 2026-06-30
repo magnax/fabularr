@@ -30,12 +30,14 @@ class RecipeInstruction < ApplicationRecord
 
   scope :machinery, -> { where(instruction_type: MACHINERY) }
   scope :resource, -> { where(instruction_type: RESOURCE) }
+  scope :resource_out, -> { where(instruction_type: RESOURCE_OUT) }
   scope :tool, -> { where(instruction_type: TOOL) }
   scope :placement, -> { where(instruction_type: PLACEMENT) }
 
   # Types:
   MACHINERY = 'machinery'
   RESOURCE = 'resource'
+  RESOURCE_OUT = 'resource_out'
   TOOL = 'tool'
   PLACEMENT = 'placement'
 

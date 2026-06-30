@@ -1,14 +1,30 @@
 # frozen_string_literal: true
 
-Definitions::Recipes::RECIPES.each do |recipe|
+recipes_created = 0
+recipes_updated = 0
+instructions_created = 0
+instructions_updated = 0
+
+definitions = Definitions::Recipes::RECIPES + Definitions::Recipes::Machinery::RECIPES
+
+definitions.each do |recipe| # rubocop:disable Metrics/BlockLength
   (key, recipe_type) = recipe[:key].split('#')
 
-  r = Recipe.where(key: key)
-            .first_or_create(
-              recipe_type: recipe_type,
-              base_speed: recipe[:base_speed],
-              skill: Skill.where(key: recipe[:skill]).first_or_create
-            )
+  attrs = {
+    recipe_type: recipe_type,
+    base_speed: recipe[:base_speed],
+    skill: Skill.where(key: recipe[:skill]).first_or_create
+  }
+
+  r = Recipe.find_by(key: key)
+  if r
+    r.update!(attrs)
+    recipes_updated += 1
+  else
+    r = Recipe.create!(attrs.merge(key: key))
+    recipes_created += 1
+  end
+
   recipe[:instructions].each do |i|
     (i_type, i_key) = i[:key].split('#')
 
@@ -20,21 +36,44 @@ Definitions::Recipes::RECIPES.each do |recipe|
     when RecipeInstruction::MACHINERY
       subject = Machinery.where(key: i_key).first_or_create
     end
-    RecipeInstruction.create!(
-      recipe_id: r.id, subject: subject, amount: i[:amount],
-      instruction_type: i_type, speed: i[:speed], unit: i[:unit] || 'grams'
-    )
+
+    ri_attrs = {
+      amount: i[:amount],
+      instruction_type: i_type,
+      speed: i[:speed],
+      unit: i[:unit] || 'grams'
+    }
+
+    ri = RecipeInstruction.find_by(recipe_id: r.id, subject: subject)
+    if ri
+      ri.update!(ri_attrs)
+      instructions_updated += 1
+    else
+      RecipeInstruction.create!(ri_attrs.merge(recipe_id: r.id, subject: subject))
+      instructions_created += 1
+    end
   end
   next if recipe[:placement].blank?
 
-  RecipeInstruction.create!(
+  ri_placement_attrs = {
     recipe_id: r.id,
     subject: nil,
-    instruction_type: RecipeInstruction::PLACEMENT,
-    metadata: {
-      placement: [r[:placement]]
-    }
-  )
+    instruction_type: RecipeInstruction::PLACEMENT
+
+  }
+  ri = RecipeInstruction.find_by(ri_placement_attrs)
+
+  if ri
+    ri.update!(metadata: { placement: [r[:placement]] })
+    instructions_updated += 1
+  else
+    RecipeInstruction.create!(
+      ri_placement_attrs.merge(metadata: { placement: [r[:placement]] })
+    )
+    instructions_created += 1
+  end
 end
 
-Log.say "Created #{Recipe.count} recipes: #{Recipe.all.pluck(:key).join(', ')}"
+Log.say "Recipes: created #{recipes_created}, updated #{recipes_updated}"
+Log.say "Instructions: created #{instructions_created}, updated #{instructions_updated}"
+Log.say "All recipes: #{Recipe.all.pluck(:key).join(', ')}"
