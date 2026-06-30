@@ -276,13 +276,22 @@ en:
     copper: copper
     
     
+    dried_dung: dried dung
+
+
     firewood: firewood
 
 
+    fresh_dung: fresh dung
+      
+      
     grapes: grapes
 
 
     iron: iron
+
+
+    meat: meat
 
 
     mud: mud
@@ -515,11 +524,20 @@ en:
       index:
         continue: Continue
         manual: Done manually
-        recipes_count: Available formulas
+        recipes_count: 'Select what you want to make (recipes: %{count}):'
         resources: Materials needed
         time: Time needed
         title: Building & production
         tools: Tools needed
+      machine:
+        title: Select option for %{name}
+      machinery:
+        dried_dung: dried dung
+        grilled_meat: grilled meat
+        title:
+          dried_dung: drying fresh dung
+          grilled_meat_dung: grilling meat using dried dung
+          grilled_meat_firewood: grilling meat using firewood
     roads:
       name_html: '%{type} to %{location_link}, direction: %{direction}'
     sessions:

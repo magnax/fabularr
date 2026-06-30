@@ -29,12 +29,10 @@ definitions.each do |recipe| # rubocop:disable Metrics/BlockLength
     (i_type, i_key) = i[:key].split('#')
 
     case i_type
-    when RecipeInstruction::RESOURCE
+    when RecipeInstruction::RESOURCE, RecipeInstruction::RESOURCE_OUT
       subject = Resource.where(key: i_key).first_or_create
     when RecipeInstruction::TOOL
       subject = ItemType.where(key: i_key).first_or_create
-    when RecipeInstruction::MACHINERY
-      subject = Machinery.where(key: i_key).first_or_create
     end
 
     ri_attrs = {
@@ -53,6 +51,26 @@ definitions.each do |recipe| # rubocop:disable Metrics/BlockLength
       instructions_created += 1
     end
   end
+
+  if recipe[:machine].present?
+    subject = Machinery.where(key: recipe[:machine]).first_or_create
+
+    ri_attrs = {
+      recipe_id: r.id,
+      subject: subject,
+      instruction_type: RecipeInstruction::MACHINERY
+
+    }
+    ri = RecipeInstruction.find_by(ri_attrs)
+
+    if ri
+      instructions_updated += 1
+    else
+      RecipeInstruction.create!(ri_attrs)
+      instructions_created += 1
+    end
+  end
+
   next if recipe[:placement].blank?
 
   ri_placement_attrs = {

@@ -276,15 +276,24 @@ pl:
     copper:
       n: miedź
       gen: miedzi
+    dried_dung:
+      n: suszone łajno
+      gen: suszonego łajna
     firewood:
       n: drewno opałowe
       gen: drewna opałowego
+    fresh_dung:
+      n: świeże łajno
+      gen: świeżego łajna
     grapes:
       n: winogrona
       gen: winogron
     iron:
       n: żelazo
       gen: żelaza
+    meat:
+      n: mięso
+      gen: mięsa
     mud:
       n: błoto
       gen: błota
@@ -515,11 +524,20 @@ pl:
       index:
         continue: Kontynuuj
         manual: Wykonywane ręcznie
-        recipes_count: Dostępnych instrukcji
+        recipes_count: 'Wybierz projekt dla uzyskania (dostępnych instrukcji: %{count}):'
         resources: Potrzebne materiały
         time: Potrzebny czas
         title: Budowanie i produkcja
         tools: Potrzebne narzędzia
+      machine:
+        title: 'Wybierz opcję dla: %{name}'
+      machinery:
+        dried_dung: suszonego łajna
+        grilled_meat: pieczonego mięsa
+        title:
+          dried_dung: suszenie świeżego łajna
+          grilled_meat_dung: pieczenie mięsa z użyciem suszonego łajna
+          grilled_meat_firewood: pieczenie mięsa z użyciem drewna opałowego
     roads:
       name_html: '%{type} do %{location_link}, kierunek: %{direction}'
     sessions:

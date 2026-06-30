@@ -6,4 +6,8 @@ class RecipesController < ApplicationController
   def index
     render locals: Recipes::ShowService.call.merge(expanded: params[:expanded])
   end
+
+  def machine
+    render locals: Recipes::MachineService.call(current_character, params[:id])
+  end
 end

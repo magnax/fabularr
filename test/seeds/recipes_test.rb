@@ -8,8 +8,8 @@ class SeedsRecipesTest < ActiveSupport::TestCase
   end
 
   test 'works' do
-    assert_difference -> { Recipe.count } => 8,
-                      -> { RecipeInstruction.count } => 13 do
+    assert_difference -> { Recipe.count } => 10,
+                      -> { RecipeInstruction.count } => 22 do
       require_relative '../../db/seeds/recipes'
     end
 
@@ -19,6 +19,8 @@ class SeedsRecipesTest < ActiveSupport::TestCase
 
     cooking_recipe = Recipe.find_by(key: 'dried_dung', recipe_type: Recipe::DRYING)
     assert_equal Skill::COOKING, cooking_recipe.skill.key
+    instruction = RecipeInstruction.where(recipe_id: cooking_recipe, instruction_type: RecipeInstruction::MACHINERY).sole
+    assert_equal 'small_fire_pit', instruction.subject.key
 
     instruction = machinery_recipe.recipe_instructions.resource.sole
     assert_equal RecipeInstruction::RESOURCE, instruction.instruction_type

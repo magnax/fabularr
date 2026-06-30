@@ -46,7 +46,9 @@ Fabularr::Application.routes.draw do
                                      defaults: { type: 'road' }
       end
     end
-    resources :recipes, only: [:index]
+    resources :recipes, only: [:index] do
+      get 'machine/:id', to: 'recipes#machine', as: :machine, on: :collection
+    end
     resources :sessions, only: %i[new create destroy]
     resources :travellers, only: %i[new create update] do
       get :stop
