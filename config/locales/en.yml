@@ -469,6 +469,9 @@ en:
     location_resources:
       new:
         title: Discover new resources!
+    machines:
+      point: Point at this machine
+      use: Use this machine
     not_logged_in: Not logged in
     projects:
       collect: Collect

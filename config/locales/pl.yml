@@ -469,6 +469,9 @@ pl:
     location_resources:
       new:
         title: Odkryj nowe zasoby!
+    machines:
+      point: Wskaż to urządzenie
+      use: Użyj tego urządzenia
     not_logged_in: Nie zalogowany
     projects:
       collect: Zbieraj

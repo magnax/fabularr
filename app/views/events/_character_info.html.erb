@@ -44,7 +44,10 @@
           <%= t 'views.events.index.project' %>:
         </div>
         <div class="cell cell-right">
-          <%= project.name(character, short: true).html_safe %> <%= project.progress %>%
+          <%= link_to project_url(project.id), class: 'highlight' do %>
+            <%= project.name(character, short: true).html_safe %> <span id="percent-<%= project.id %>"><%= project.progress %></span>%
+          <% end %>
+          <%= link_to fa_icon('user-times'), project_leave_url(project.id), title: t('projects.leave'), style: "margin-left:12px;" %>
         </div>
       </div>
     <% end %>

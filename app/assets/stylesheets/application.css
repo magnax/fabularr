@@ -26,6 +26,11 @@ a {
   &:hover {
     color: var(--link-color-hover);
   }
+
+  &.highlight {
+    background-color: var(--dark-olive);
+    padding: 2px 5px;
+  }
 }
 
 .alert {
