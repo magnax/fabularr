@@ -1,9 +1,10 @@
 <section id="building-menu">
+
   <div class="title-bar">
     <%= t('views.recipes.index.title') %>
   </div>
 
-  <div><%= t('views.recipes.index.recipes_count') %>: <%= recipes.count %></div>
+  <div><%= t('views.recipes.index.recipes_count', count: recipes.count) %></div>
 
   <ul style="text-align:left;">
     <% recipes.each do |recipe| %>

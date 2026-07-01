@@ -12,4 +12,5 @@
 #  updated_at :datetime         not null
 #
 class Machinery < ApplicationRecord
+  SMALL_FIRE_PIT = 'small_fire_pit'
 end

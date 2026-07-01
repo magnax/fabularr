@@ -10,6 +10,7 @@ module Recipes
     def call
       {
         count: all_recipes.length,
+        machine_id: @machine_id,
         name: name,
         recipes: recipes
       }

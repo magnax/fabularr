@@ -44,6 +44,8 @@ Fabularr::Application.routes.draw do
                                                  defaults: { type: 'collect' }
         get 'new/road/:location_id', to: 'projects#new', as: :new_road,
                                      defaults: { type: 'road' }
+        post 'new/machine', to: 'projects#new', as: :new_machine,
+                            defaults: { type: 'machine' }
       end
     end
     resources :recipes, only: [:index] do

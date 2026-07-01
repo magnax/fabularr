@@ -14,7 +14,7 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
     visit '/en/recipes'
 
     assert_equal 200, page.status_code
-    assert_content 'Available formulas: 0'
+    assert_content 'Select what you want to make (recipes: 0)'
   end
 
   test 'show available recipes: items, buildings, vehicles' do
@@ -26,7 +26,7 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
     visit '/en/recipes'
 
     assert_equal 200, page.status_code
-    assert_content 'Available formulas: 3'
+    assert_content 'Select what you want to make (recipes: 3)'
     assert_content 'stone knife'
     assert_content 'wood shack'
     assert_content 'small wooden cart'

@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
     render locals: Projects::ProjectInfoService.call(
       current_character, project_info_params
     ).merge(type: params[:type])
-  rescue Projects::ProjectInfoService::InvalidResourceError
+  rescue Projects::Info::Collect::InvalidResourceError
     render_error I18n.t('errors.projects.invalid_resource')
   end
 
@@ -47,6 +47,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_info_params
-    params.permit(:type, :location_id, :location_resource_id, :recipe_id)
+    params.permit(:type, :location_id, :location_resource_id, :recipe_id,
+                  project: [:machine_id])
   end
 end

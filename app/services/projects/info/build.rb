@@ -4,9 +4,9 @@ module Projects
   class Info::Build < ApplicationService
     class InvalidPlacementError < StandardError; end
 
-    def initialize(character, recipe_id)
+    def initialize(character, params)
       @character = character
-      @recipe_id = recipe_id
+      @recipe_id = params[:recipe_id]
     end
 
     def call

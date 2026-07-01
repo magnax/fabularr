@@ -30,7 +30,7 @@ class ProjectsProjectInfoServiceTest < ActiveSupport::TestCase
       type: 'collect'
     }
 
-    assert_raises Projects::ProjectInfoService::InvalidResourceError do
+    assert_raises Projects::Info::Collect::InvalidResourceError do
       call_service(params)
     end
   end

@@ -1,42 +1,43 @@
 <section id="machine-recipes">
+
   <div class="title-bar">
     <%= t('views.recipes.machine.title', name: name) %>
   </div>
 
   <div><%= t('views.recipes.index.recipes_count', count: count) %></div>
 
-  <ul style="list-style:none;text-align:left;">
-    <% recipes.each do |recipe_key, recipe_variants| %>
-      <li style="font-weight:bold;margin-top:7px;">
-        <%= t("views.recipes.machinery.#{recipe_key}") %>
-      </li>
-      <ul class="plain" style="list-style:none;">
-        
-        <% recipe_variants.each do |variant| %>
-          <li>
-            <label style="cursor:pointer;">
-              <input type="radio" name="choice" value="<%= variant[:id] %>">
-                <%= t("views.recipes.machinery.title.#{variant[:key]}") %>
-                <span class="project_resources_list"> (wymaga 
-                  <% variants = variant[:resource_instructions] %>
-                  <% variants.each_with_index do |res, i| %>
-                    <% if i < (variants.length - 1) %>
-                      <%= "#{res}, ".html_safe %>
-                    <% else %>
-                      <%= "#{res})".html_safe %>
+  <%= form_for :project, url: new_machine_projects_url do |f| %>
+    <%= f.hidden_field :machine_id, value: machine_id %>
+
+    <ul style="list-style:none;text-align:left;">
+      <% recipes.each do |recipe_key, recipe_variants| %>
+        <li style="font-weight:bold;margin-top:7px;">
+          <%= t("views.recipes.machinery.#{recipe_key}") %>
+        </li>
+        <ul class="plain" style="list-style:none;">
+          
+          <% recipe_variants.each do |variant| %>
+            <li>
+              <label style="cursor:pointer;">
+                <input type="radio" name="recipe_id" value="<%= variant[:id] %>">
+                  <%= t("views.recipes.machinery.title.#{variant[:key]}") %>
+                  <span class="project_resources_list"> (wymaga 
+                    <% variants = variant[:resource_instructions] %>
+                    <% variants.each_with_index do |res, i| %>
+                      <% if i < (variants.length - 1) %>
+                        <%= "#{res}, ".html_safe %>
+                      <% else %>
+                        <%= "#{res})".html_safe %>
+                      <% end %>
                     <% end %>
-                  <% end %>
-                </span>
-            </label>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </ul>
-    
-    
-
-
-
+                  </span>
+              </label>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </ul>
+    <%= f.submit 'go' %>
+  <% end %>
 
 </section>
