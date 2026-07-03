@@ -9,6 +9,7 @@ module Projects
       'collect' => 'Create::Collect',
       'create_location' => 'Create::CreateLocation',
       'discover_resource' => 'Create::DiscoverResource',
+      'machinery' => 'Create::Machinery',
       'road' => 'Create::Road'
     }.freeze
 

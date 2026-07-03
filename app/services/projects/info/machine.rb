@@ -17,7 +17,10 @@ module Projects
 
       {
         daily_amount: daily_amount,
+        machine_id: machine.id,
         max_amount: max_amount,
+        project_type_id: project_type.id,
+        recipe_id: recipe.id,
         resource_out: resource_out,
         resources_in: resources_in
       }
@@ -95,6 +98,10 @@ module Projects
         subject_type: 'Machinery',
         location_id: @character.location_id
       )
+    end
+
+    def project_type
+      @project_type ||= ProjectType.find_by(key: ProjectType::MACHINERY)
     end
   end
 end

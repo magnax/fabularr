@@ -42,7 +42,7 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(
       :project_type_id, :amount, :repeat,
-      :location_resource_id, :recipe_id, :location_id
+      :location_resource_id, :recipe_id, :location_id, :machine_id
     )
   end
 

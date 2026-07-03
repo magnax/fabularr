@@ -485,6 +485,8 @@ pl:
       point: Wskaż to urządzenie
       use: Użyj tego urządzenia
     not_logged_in: Nie zalogowany
+    project_descriptions:
+      grilled_meat: pieczenie mięsa
     projects:
       collect: Zbieraj
       collect_info: W ciągu jednego dnia jedna postać może %{skill_name} tylko %{amount} gram.

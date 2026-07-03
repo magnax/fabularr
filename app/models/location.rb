@@ -129,4 +129,8 @@ class Location < ApplicationRecord
   def stored_weight
     location_objects.resource.sum(&:amount) + location_objects.item.sum { |i| i.subject.weight }
   end
+
+  def machines
+    location_objects.where(subject_type: 'Machinery')
+  end
 end

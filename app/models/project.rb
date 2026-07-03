@@ -84,6 +84,10 @@ class Project < ApplicationRecord
       skill = I18n.t("views.skills.#{project_descriptions.resource_out.last.subject.skill.key}")
       res = I18n.td("resources.#{project_descriptions.resource_out.last.subject.key}")
       "#{skill} #{res}"
+    when ProjectType::MACHINERY
+      I18n.td(
+        "views.project_descriptions.#{project_descriptions.resource_out.last.subject.key}"
+      )
     end
   end
 

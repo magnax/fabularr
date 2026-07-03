@@ -61,6 +61,8 @@ class ProjectsMachineryProjectInfoServiceTest < ActiveSupport::TestCase
     assert_equal 18_000, res[:max_amount]
     assert_equal 'grilled meat', res[:resource_out]
     assert_equal 2, res[:resources_in].length
+    assert_equal machine.id, res[:machine_id]
+    assert_equal recipe.id, res[:recipe_id]
 
     resources_in = res[:resources_in].pluck(:needed)
     assert_includes resources_in, '250 grams meat'

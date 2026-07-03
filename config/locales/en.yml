@@ -485,6 +485,8 @@ en:
       point: Point at this machine
       use: Use this machine
     not_logged_in: Not logged in
+    project_descriptions:
+      grilled_meat: grilling meat
     projects:
       collect: Collect
       collect_info: One character can %{skill_name} only %{amount} grams in one day.
