@@ -36,6 +36,7 @@ class RecipeInstruction < ApplicationRecord
 
   # Types:
   MACHINERY = 'machinery'
+  MAX_AMOUNT = 'max_amount'
   RESOURCE = 'resource'
   RESOURCE_OUT = 'resource_out'
   TOOL = 'tool'

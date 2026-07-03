@@ -31,10 +31,23 @@ FactoryBot.define do
     subject_type { 'Resource' }
     amount { 1 }
     unit { 'grams' }
+    recipe
 
     trait :tool do
       instruction_type { 'tool' }
       subject { FactoryBot.create(:item_type) }
+    end
+
+    trait :resource_out do
+      instruction_type { 'resource_out' }
+    end
+
+    trait :machinery do
+      instruction_type { 'machinery' }
+    end
+
+    trait :max_amount do
+      instruction_type { 'max_amount' }
     end
   end
 end

@@ -283,10 +283,13 @@ en:
 
 
     fresh_dung: fresh dung
-      
-      
+
+
     grapes: grapes
 
+      
+    grilled_meat: grilled meat
+   
 
     iron: iron
 
@@ -491,6 +494,20 @@ en:
       hand: Manual
       info:
         percent: '%{progress} percent'
+      machine:
+        amount: 'How much you want to make:'
+        amount_to_use: Amount to use
+        days: 'Days of work:'
+        max_amount: 'Max amount that you can produce is %{amount} grams.'
+        needed: '%{amount} grams %{resource}'
+        production_info: >-
+          In 1 day you can produce %{amount} grams of %{resource}. 
+          You need following resources:
+        resource: Resource
+        use_if_all: Only if I have everything
+        use_no: No, let me do it
+        use_yes: Yes, put in all I have
+        use_resources: Do you want the required resources and objects to be allocated automatically from your inventory?
       new:
         cancel: Cancel
         collect:
@@ -498,6 +515,8 @@ en:
           repeat: 'This project can automatically repeat. Choose number of repeats:'
         collect_title: Collecting
         item_name: 'Item name:'
+        machine:
+          title: Set amount for this project
         needed: needed
         resources_needed: Resources needed
         road:

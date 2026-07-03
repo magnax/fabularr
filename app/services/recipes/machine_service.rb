@@ -2,12 +2,16 @@
 
 module Recipes
   class MachineService < ApplicationService
+    class InvalidMachineError < StandardError; end
+
     def initialize(character, machine_id)
       @character = character
       @machine_id = machine_id
     end
 
     def call
+      raise InvalidMachineError if machine.blank?
+
       {
         count: all_recipes.length,
         machine_id: @machine_id,

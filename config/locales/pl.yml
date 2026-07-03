@@ -288,6 +288,9 @@ pl:
     grapes:
       n: winogrona
       gen: winogron
+    grilled_meat:
+      n: pieczone mięso
+      gen: pieczonego mięsa
     iron:
       n: żelazo
       gen: żelaza
@@ -491,6 +494,20 @@ pl:
       hand: Wykonywane ręcznie
       info:
         percent: '%{progress} procent'
+      machine:
+        amount: 'Ile chcesz zrobić:'
+        amount_to_use: Ilość do użycia
+        days: 'Dni pracy:'
+        max_amount: 'Maksymalna ilość jaką możesz wyprodukować wynosi %{amount} gramów.'
+        needed: '%{amount} gramów %{resource}'
+        production_info: >-
+          W ciągu 1 dnia możesz wyprodukować tylko %{amount} gramów %{resource}. 
+          Potrzebujesz następujących surowców:
+        resource: Surowiec
+        use_if_all: Tylko jeśli mam wszystko, co potrzebne
+        use_no: Nie, ja to zrobię
+        use_yes: Tak, tyle ile mam
+        use_resources: Czy chcesz, aby odpowiednie surowce i przedmioty zostały automatycznie pobrane z twojego inwentarza i użyte do projektu?
       new:
         cancel: Anuluj
         collect:
@@ -498,6 +515,8 @@ pl:
           repeat: 'Ten projekt może się powtarzać automatycznie. Wybierz ilość powtórzeń:'
         collect_title: Zbieranie
         item_name: 'Nazwa przedmiotu:'
+        machine:
+          title: Wybierz ilość dla tego projektu
         needed: potrzebne
         resources_needed: Wymagane surowce
         road:

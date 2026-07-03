@@ -30,7 +30,7 @@ FactoryBot.define do
     key { 'MyString' }
     skill { FactoryBot.create(:skill, key: 'collecting') }
 
-    %i[raw_food material raw_resource].each do |key|
+    %i[food material raw_food raw_resource].each do |key|
       trait key do
         resource_type_id { [FactoryBot.create(:resource_type, key: key.to_s).id] }
       end

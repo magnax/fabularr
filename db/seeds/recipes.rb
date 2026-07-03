@@ -71,6 +71,24 @@ definitions.each do |recipe| # rubocop:disable Metrics/BlockLength
     end
   end
 
+  if recipe[:max_amount].present?
+    ri_attrs = {
+      recipe_id: r.id,
+      subject: nil,
+      instruction_type: RecipeInstruction::MAX_AMOUNT
+
+    }
+    ri = RecipeInstruction.find_by(ri_attrs)
+
+    if ri
+      ri.update!(amount: recipe[:max_amount])
+      instructions_updated += 1
+    else
+      RecipeInstruction.create!(ri_attrs.merge(amount: recipe[:max_amount]))
+      instructions_created += 1
+    end
+  end
+
   next if recipe[:placement].blank?
 
   ri_placement_attrs = {
