@@ -31,7 +31,7 @@
           <%= resource[:needed] %>
         </td>
           <td width="350" style="padding-left:20px;text-align:left;">
-            <input type="text" name="amount_<%= resource[:key] %>" id="<%= resource[:key] %>" onkeyup="recount('<%= resource[:key] %>', this.value)"> (<%= resource[:having].to_i %>)
+            <input type="text" data-amount="<%= resource[:amount_needed] %>" name="amount_<%= resource[:key] %>" id="<%= resource[:key] %>" onkeyup="recount(this)"> (<%= resource[:having].to_i %>)
           </td>
       </tr>
     <% end %>
@@ -41,7 +41,7 @@
         <%= t('views.projects.machine.amount') %>
       </td>
       <td style="width:350px; padding-left:20px;text-align:left">
-        <input type="text" name="project[amount]" size="30" value="" id="output" onkeyup="recount('soutput', this.value)">
+        <input type="text" name="project[amount]" data-amount="<%= daily_amount %>" size="30" value="" id="output" onkeyup="recount(this)">
       </td>
     </tr>
 
@@ -50,7 +50,7 @@
         <%= t('views.projects.machine.days') %>
       </td>
       <td style="width:350px;padding-left:20px;text-align:left">
-        <input type="text" name="days" size="10" value="" id="days" onkeyup="recount('sdays', this.value)">
+        <input type="text" name="days" size="10" data-amount="1" value="" id="days" onkeyup="recount(this)">
       </td>
     </tr>
 

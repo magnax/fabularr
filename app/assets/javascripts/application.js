@@ -1,4 +1,5 @@
 //= require channels
+//= require projects.js
 //= require rails-ujs
 
 function clearErrors() {

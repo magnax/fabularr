@@ -47,6 +47,7 @@ module Projects
     def resources_in
       resources_in_instructions.map do |ri|
         {
+          amount_needed: ri.amount,
           key: ri.subject.key,
           needed: needed_resource_string(ri),
           having: inventory_resource_amount(ri.subject_id)
