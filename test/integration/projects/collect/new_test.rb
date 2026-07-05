@@ -7,9 +7,6 @@ class ProjectsCollectNewTest < ActionDispatch::IntegrationTest
     @user = create(:user)
     @character = create(:character, name: 'Magnus', user: @user)
 
-    # create skills:
-    require_relative '../../../../db/seeds/skills'
-
     create(:project_type, key: 'collect')
 
     sign_in(@user)
@@ -18,7 +15,6 @@ class ProjectsCollectNewTest < ActionDispatch::IntegrationTest
 
   def teardown
     Resource.destroy_all
-    Skill.destroy_all
   end
 
   test 'no recipes available' do
@@ -32,7 +28,7 @@ class ProjectsCollectNewTest < ActionDispatch::IntegrationTest
   end
 
   test 'show proper skill name - digging' do
-    digging = Skill.find_by(key: Skill::DIGGING)
+    digging = create(:skill, key: Skill::DIGGING)
     stone = create(:resource, key: 'stone', daily_rate: 600, skill: digging)
     location_resource = create(:location_resource, resource: stone,
                                                    location: @character.location)

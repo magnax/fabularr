@@ -148,6 +148,8 @@ pl:
     projects:
       create_location_ended: Nowa osada (%{location_info}) została utworzona
       ended: Projekt zakończył się
+      machine:
+        added_resource: Dodajesz %{amount} gramów %{resource} do projektu %{project_name}.
       my_ended: Projekt rozpoczęty przez Ciebie właśnie się zakończył. %{project_info}
       starting_me: "Rozpoczynasz nowy projekt: %{info}."
       starting_other: Widzisz jak %{character_link} rozpoczyna nowy projekt

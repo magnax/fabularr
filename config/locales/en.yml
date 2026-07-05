@@ -148,6 +148,8 @@ en:
     projects:
       create_location_ended: New location (%{location_info}) is successfully created
       ended: Project has ended.
+      machine:
+        added_resource: You added %{amount} grams of %{resource} to project %{project_name}.
       my_ended: Project started by you has just ended. %{project_info}
       starting_me: "You're starting new project: %{info}."
       starting_other: You see that %{character_link} is starting new project

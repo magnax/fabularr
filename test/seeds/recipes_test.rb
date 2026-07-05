@@ -9,7 +9,7 @@ class SeedsRecipesTest < ActiveSupport::TestCase
 
   test 'works' do
     assert_difference -> { Recipe.count } => 10,
-                      -> { RecipeInstruction.count } => 22 do
+                      -> { RecipeInstruction.count } => 25 do
       require_relative '../../db/seeds/recipes'
     end
 
