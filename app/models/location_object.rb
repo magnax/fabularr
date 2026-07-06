@@ -29,4 +29,12 @@ class LocationObject < ApplicationRecord
   scope :item, -> { where(subject_type: 'Item') }
   scope :machinery, -> { where(subject_type: 'Machinery') }
   scope :resource, -> { where(subject_type: 'Resource') }
+
+  def in_use?
+    ProjectDescription.machine
+                      .joins(:project)
+                      .where(subject_id: id)
+                      .merge(Project.pending)
+                      .any?
+  end
 end

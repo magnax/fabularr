@@ -46,7 +46,6 @@ module Projects
         unit: 'grams'
       )
       # what to add:
-
       resources_in.each do |resource|
         description = @project.project_descriptions.create!(
           description_type: ProjectDescription::RESOURCE_IN,
@@ -57,6 +56,11 @@ module Projects
         )
         @events << prepare_resource_event!(description) unless description.amount.zero?
       end
+      # where to run
+      @project.project_descriptions.create!(
+        description_type: ProjectDescription::MACHINE,
+        subject: machine
+      )
     end
 
     def prepare_resource_event!(description)

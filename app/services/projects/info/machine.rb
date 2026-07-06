@@ -3,6 +3,7 @@
 module Projects
   class Info::Machine < ApplicationService
     class InvalidMachineError < StandardError; end
+    class MachineInUseError < StandardError; end
     class InvalidRecipeError < StandardError; end
 
     def initialize(character, params)
@@ -13,6 +14,7 @@ module Projects
 
     def call
       raise InvalidMachineError if machine.blank?
+      raise MachineInUseError if machine.in_use?
       raise InvalidRecipeError unless valid_recipe?
 
       {
@@ -27,6 +29,18 @@ module Projects
     end
 
     private
+
+    # def machine_in_use?
+    #   return false if @character.location.projects.pending.empty?
+
+    #   ProjectDescription.machine
+    #                     .joins(:project)
+    #                     .where(subject_id: machine.id,
+    #                            project: {
+    #                              location_id: @character.location_id
+    #                            })
+    #                     .any?
+    # end
 
     def valid_recipe?
       recipe.present?

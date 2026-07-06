@@ -30,6 +30,7 @@ class ProjectDescription < ApplicationRecord
 
   scope :location, -> { where(description_type: LOCATION) }
   scope :location_resource, -> { where(description_type: LOCATION_RESOURCE) }
+  scope :machine, -> { where(description_type: MACHINE) }
   scope :repeat, -> { where(description_type: REPEAT) }
   scope :resource_in, -> { where(description_type: RESOURCE_IN) }
   scope :resource_out, -> { where(description_type: RESOURCE_OUT) }

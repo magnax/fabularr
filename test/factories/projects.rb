@@ -42,5 +42,10 @@ FactoryBot.define do
         project_type { FactoryBot.create(:project_type, key: key.to_s) }
       end
     end
+
+    trait :completed do
+      duration { 1000 }
+      elapsed { 1000 }
+    end
   end
 end

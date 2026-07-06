@@ -82,13 +82,23 @@ module Events
 
       {
         items: objects&.item,
-        machines: objects&.machinery,
+        machines: machines,
         resources: objects&.includes(:subject)&.resource
       }
     end
 
     def objects
       @objects ||= location&.location_objects
+    end
+
+    def machines
+      @machines ||= objects&.machinery&.map do |machine|
+        {
+          id: machine.id,
+          key: machine.subject.key,
+          in_use: machine.in_use?
+        }
+      end
     end
 
     def visible_resources

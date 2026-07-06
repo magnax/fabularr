@@ -31,6 +31,60 @@ class ProjectsMachineryProjectInfoServiceTest < ActiveSupport::TestCase
     end
   end
 
+  test 'raise exception for machine in use' do
+    pit = create(:machinery, key: Machinery::SMALL_FIRE_PIT)
+    machine = create(:location_object, location: @character.location, subject: pit)
+    project = create(:project, location: @character.location)
+    create(:project_description, :machine, subject: machine, project: project)
+
+    params = {
+      project: {
+        machine_id: machine.id
+      },
+      type: 'machine'
+    }
+
+    assert_raises Projects::Info::Machine::MachineInUseError do
+      call_service(params)
+    end
+  end
+
+  test 'does not raise exception when machine no longer in use' do
+    pit = create(:machinery, key: Machinery::SMALL_FIRE_PIT)
+    machine = create(:location_object, location: @character.location, subject: pit)
+    project = create(:project, :completed, location: @character.location)
+    create(:project_description, :machine, subject: machine, project: project)
+
+    params = {
+      project: {
+        machine_id: machine.id
+      },
+      type: 'machine'
+    }
+
+    assert_raises Projects::Info::Machine::InvalidRecipeError do
+      call_service(params)
+    end
+  end
+
+  test 'does not raise exception 2 when machine no longer in use' do
+    pit = create(:machinery, key: Machinery::SMALL_FIRE_PIT)
+    machine = create(:location_object, location: @character.location, subject: pit)
+    old_project = create(:project, :completed, location: @character.location)
+    create(:project_description, :machine, subject: machine, project: old_project)
+
+    params = {
+      project: {
+        machine_id: machine.id
+      },
+      type: 'machine'
+    }
+
+    assert_raises Projects::Info::Machine::InvalidRecipeError do
+      call_service(params)
+    end
+  end
+
   test 'proper data for recipe' do
     pit = create(:machinery, key: 'small_fire_pit')
     meat = create(:resource, :raw_food, key: 'meat')

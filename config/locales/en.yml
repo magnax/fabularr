@@ -96,6 +96,7 @@ en:
     wsw: west-south-west
   errors:
     projects:
+      machine_in_use: This machine is already used
       only_outside: This project can be started only outside
   events:
     character:
@@ -234,6 +235,7 @@ en:
     unnamed_place: unnamed place
     wood_shack: Wood shack
   machineries:
+    in_use: '(in use)'
     small_fire_pit: small fire pit
   new_user: New user
   placements:

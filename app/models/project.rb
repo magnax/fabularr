@@ -36,6 +36,7 @@ class Project < ApplicationRecord
   has_many :project_descriptions, dependent: :destroy
 
   scope :pending, -> { where('elapsed < duration') }
+  scope :completed, -> { where('elapsed = duration') }
 
   DISPATCH_SERVICE = {
     'build' => 'Build',

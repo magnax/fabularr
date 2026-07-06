@@ -9,5 +9,7 @@ class RecipesController < ApplicationController
 
   def machine
     render locals: Recipes::MachineService.call(current_character, params[:id])
+  rescue Recipes::MachineService::MachineInUseError
+    render_error I18n.t('errors.projects.machine_in_use')
   end
 end

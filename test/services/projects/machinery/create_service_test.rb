@@ -63,7 +63,7 @@ class ProjectsMachineryCreateServiceTest < ActiveSupport::TestCase
     }
 
     assert_difference -> { Project.count } => 1,
-                      -> { ProjectDescription.count } => 3 do
+                      -> { ProjectDescription.count } => 4 do
       call_service(params)
     end
 
@@ -96,6 +96,10 @@ class ProjectsMachineryCreateServiceTest < ActiveSupport::TestCase
     assert_nil desc.amount_needed
     assert_equal 'grams', desc.unit
 
+    desc = ProjectDescription.machine.sole
+    assert_equal 'LocationObject', desc.subject_type
+    assert_equal ProjectDescription::MACHINE, desc.description_type
+
     event = Event.last
     assert_equal "You're starting new project: grilling meat.", event.body
   end
@@ -114,7 +118,7 @@ class ProjectsMachineryCreateServiceTest < ActiveSupport::TestCase
     }
 
     assert_difference -> { Project.count } => 1,
-                      -> { ProjectDescription.count } => 3,
+                      -> { ProjectDescription.count } => 4,
                       -> { Event.count } => 3,
                       -> { InventoryObject.count } => -1 do
       call_service(params)
@@ -176,7 +180,7 @@ class ProjectsMachineryCreateServiceTest < ActiveSupport::TestCase
     }
 
     assert_difference -> { Project.count } => 1,
-                      -> { ProjectDescription.count } => 3,
+                      -> { ProjectDescription.count } => 4,
                       -> { Event.count } => 1,
                       -> { InventoryObject.count } => 0 do
       call_service(params)

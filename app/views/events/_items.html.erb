@@ -16,8 +16,11 @@
   <% machines.each do |item| %>
     <div>
       <%= link_to fa_icon('hand-o-right'), '', title: t('views.machines.point') %>
-      <%= link_to fa_icon('asterisk'), machine_recipes_url(id: item.id), title: t('views.machines.use') %>
-      <%= t("machineries.#{item.subject.key}") %>
+      <%= link_to fa_icon('asterisk'), machine_recipes_url(id: item[:id]), title: t('views.machines.use') %>
+      <%= t("machineries.#{item[:key]}") %>
+      <% if item[:in_use] %>
+        <i><%= t('machineries.in_use') %></i>
+      <% end %>
     </div>
   <% end %>
 <% else %>

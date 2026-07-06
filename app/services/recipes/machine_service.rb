@@ -3,6 +3,7 @@
 module Recipes
   class MachineService < ApplicationService
     class InvalidMachineError < StandardError; end
+    class MachineInUseError < StandardError; end
 
     def initialize(character, machine_id)
       @character = character
@@ -11,6 +12,8 @@ module Recipes
 
     def call
       raise InvalidMachineError if machine.blank?
+
+      raise MachineInUseError if machine_in_use?
 
       {
         count: all_recipes.length,
@@ -21,6 +24,10 @@ module Recipes
     end
 
     private
+
+    def machine_in_use?
+      ProjectDescription.machine.find_by(subject_id: machine.id).present?
+    end
 
     def name
       I18n.t("machineries.#{machine.subject.key}")

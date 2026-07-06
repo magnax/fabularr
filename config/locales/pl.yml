@@ -96,6 +96,7 @@ pl:
     wsw: zachodnio-południowo-zachodni
   errors:
     projects:
+      machine_in_use: To urządzenie jest aktualnie używane
       only_outside: Ten projekt można rozpocząć tylko na zewnątrz
   events:
     character:
@@ -234,6 +235,7 @@ pl:
     unnamed_place: nienazwane miejsce
     wood_shack: Drewniana chata
   machineries:
+    in_use: '(w użyciu)'
     small_fire_pit: małe palenisko
   new_user: Nowy użytkownik
   placements:

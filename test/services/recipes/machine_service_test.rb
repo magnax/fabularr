@@ -20,9 +20,20 @@ class RecipesMachineServiceTest < ActiveSupport::TestCase
   test 'raises error when machine is in use' do
     pit = create(:machinery, key: Machinery::SMALL_FIRE_PIT)
     machine = create(:location_object, subject: pit)
+    project = create(:project, location: @character.location)
+    create(:project_description, :machine, subject: machine, project: project)
 
     assert_raises Recipes::MachineService::MachineInUseError do
       call_service(machine.id)
     end
+  end
+
+  test 'works' do
+    pit = create(:machinery, key: Machinery::SMALL_FIRE_PIT)
+    machine = create(:location_object, subject: pit)
+
+    res = call_service(machine.id)
+
+    assert_equal machine.id, res[:machine_id]
   end
 end
