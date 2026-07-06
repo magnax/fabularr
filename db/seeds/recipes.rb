@@ -7,25 +7,28 @@ instructions_updated = 0
 
 definitions = Definitions::Recipes::RECIPES + Definitions::Recipes::Machinery::RECIPES
 
-definitions.each do |recipe| # rubocop:disable Metrics/BlockLength
-  (key, recipe_type) = recipe[:key].split('#')
+definitions.each do |recipe_definition| # rubocop:disable Metrics/BlockLength
+  (key, recipe_type) = recipe_definition[:key].split('#')
+
+  base_speed = recipe_definition[:base_speed]
+  base_speed = base_speed.to_i * GameTime::DAY if base_speed&.to_s&.match(/\d{1,2}d/)
 
   attrs = {
     recipe_type: recipe_type,
-    base_speed: recipe[:base_speed],
-    skill: Skill.where(key: recipe[:skill]).first_or_create
+    base_speed: base_speed,
+    skill: Skill.where(key: recipe_definition[:skill]).first_or_create
   }
 
-  r = Recipe.find_by(key: key)
-  if r
-    r.update!(attrs)
+  recipe = Recipe.find_by(key: key)
+  if recipe
+    recipe.update!(attrs)
     recipes_updated += 1
   else
-    r = Recipe.create!(attrs.merge(key: key))
+    recipe = Recipe.create!(attrs.merge(key: key))
     recipes_created += 1
   end
 
-  recipe[:instructions].each do |i|
+  recipe_definition[:instructions].each do |i|
     (i_type, i_key) = i[:key].split('#')
 
     case i_type
@@ -42,28 +45,28 @@ definitions.each do |recipe| # rubocop:disable Metrics/BlockLength
       unit: i[:unit] || 'grams'
     }
 
-    ri = RecipeInstruction.find_by(recipe_id: r.id, subject: subject)
-    if ri
-      ri.update!(ri_attrs)
+    rinstr = RecipeInstruction.find_by(recipe_id: recipe.id, subject: subject)
+    if rinstr
+      rinstr.update!(ri_attrs)
       instructions_updated += 1
     else
-      RecipeInstruction.create!(ri_attrs.merge(recipe_id: r.id, subject: subject))
+      RecipeInstruction.create!(ri_attrs.merge(recipe_id: recipe.id, subject: subject))
       instructions_created += 1
     end
   end
 
-  if recipe[:machine].present?
-    subject = Machinery.where(key: recipe[:machine]).first_or_create
+  if recipe_definition[:machine].present?
+    subject = Machinery.where(key: recipe_definition[:machine]).first_or_create
 
     ri_attrs = {
-      recipe_id: r.id,
+      recipe_id: recipe.id,
       subject: subject,
       instruction_type: RecipeInstruction::MACHINERY
 
     }
-    ri = RecipeInstruction.find_by(ri_attrs)
+    rinstr = RecipeInstruction.find_by(ri_attrs)
 
-    if ri
+    if rinstr
       instructions_updated += 1
     else
       RecipeInstruction.create!(ri_attrs)
@@ -71,17 +74,17 @@ definitions.each do |recipe| # rubocop:disable Metrics/BlockLength
     end
   end
 
-  if recipe[:max_amount].present?
+  if recipe_definition[:max_amount].present?
     ri_attrs = {
-      recipe_id: r.id,
+      recipe_id: recipe.id,
       subject: nil,
       instruction_type: RecipeInstruction::MAX_AMOUNT
 
     }
-    ri = RecipeInstruction.find_by(ri_attrs)
+    rinstr = RecipeInstruction.find_by(ri_attrs)
 
-    if ri
-      ri.update!(amount: recipe[:max_amount])
+    if rinstr
+      rinstr.update!(amount: recipe[:max_amount])
       instructions_updated += 1
     else
       RecipeInstruction.create!(ri_attrs.merge(amount: recipe[:max_amount]))
@@ -89,22 +92,22 @@ definitions.each do |recipe| # rubocop:disable Metrics/BlockLength
     end
   end
 
-  next if recipe[:placement].blank?
+  next if recipe_definition[:placement].blank?
 
   ri_placement_attrs = {
-    recipe_id: r.id,
+    recipe_id: recipe.id,
     subject: nil,
     instruction_type: RecipeInstruction::PLACEMENT
 
   }
-  ri = RecipeInstruction.find_by(ri_placement_attrs)
+  rinstr = RecipeInstruction.find_by(ri_placement_attrs)
 
-  if ri
-    ri.update!(metadata: { placement: [r[:placement]] })
+  if rinstr
+    rinstr.update!(metadata: { placement: [recipe_definition[:placement]] })
     instructions_updated += 1
   else
     RecipeInstruction.create!(
-      ri_placement_attrs.merge(metadata: { placement: [r[:placement]] })
+      ri_placement_attrs.merge(metadata: { placement: [recipe_definition[:placement]] })
     )
     instructions_created += 1
   end

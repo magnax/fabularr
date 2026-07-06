@@ -8,8 +8,8 @@ class SeedsRecipesTest < ActiveSupport::TestCase
   end
 
   test 'works' do
-    assert_difference -> { Recipe.count } => 10,
-                      -> { RecipeInstruction.count } => 25 do
+    assert_difference -> { Recipe.count } => 11,
+                      -> { RecipeInstruction.count } => 26 do
       require_relative '../../db/seeds/recipes'
     end
 
@@ -25,5 +25,13 @@ class SeedsRecipesTest < ActiveSupport::TestCase
     instruction = machinery_recipe.recipe_instructions.resource.sole
     assert_equal RecipeInstruction::RESOURCE, instruction.instruction_type
     assert_equal 'stone', instruction.subject.key
+
+    # assert conversion from '2d' (2 days) to seconds
+    lasso_recipe = Recipe.find_by(key: 'lasso', recipe_type: Recipe::ITEM)
+    assert_equal 86_400 * 2, lasso_recipe.base_speed
+
+    # assert placement instruction
+    pit_recipe = Recipe.find_by(key: 'small_fire_pit', recipe_type: Recipe::MACHINERY)
+    assert_equal 'outside_all', pit_recipe.recipe_instructions.placement.sole.metadata['placement'].sole
   end
 end

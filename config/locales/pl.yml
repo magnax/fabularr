@@ -215,6 +215,7 @@ pl:
       damaged: uszkodzony
       new: nowy
       used: używany
+    lasso: lasso
     iron_knife: żelazny nóż
     nothing_here: Nic tu nie leży
     pickaxe: kilof
@@ -326,12 +327,15 @@ pl:
     seaweeds: 
       n: wodorosty
       gen: wodorostów
-    strawberries:
-      n: truskawki
-      gen: truskawek
     stone:
       n: kamień
       gen: kamienia
+    strawberries:
+      n: truskawki
+      gen: truskawek
+    string:
+      n: sznurek
+      gen: sznurka
     wood: 
       n: drewno
       gen: drewna
@@ -537,7 +541,7 @@ pl:
         title: Menu budowania i produkcji
       show:
         amount: 'Ilość:'
-        participants: 'Ucestnicy:'
+        participants: 'Uczestnicy:'
         progress: 'Postęp:'
         repeats: 'Powtórzeń pozostało:'
         start_by: 'Rozpoczynający:'

@@ -10,6 +10,14 @@ module Definitions::Recipes
       ]
     },
     {
+      key: 'lasso#item',
+      base_speed: '2d',
+      skill: 'manufacturing_tools',
+      instructions: [
+        { key: 'resource#string', amount: 500 }
+      ]
+    },
+    {
       key: 'small_fire_pit#machinery',
       # TODO: base_speed is building/collecting time, can be confused with travel speed
       base_speed: 3000,

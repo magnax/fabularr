@@ -216,6 +216,7 @@ en:
       new: new
       used: used
     iron_knife: iron knife
+    lasso: lasso
     nothing_here: Nothing is laying here
     pickaxe: pickaxe
     stone_axe: stone axe
@@ -326,12 +327,15 @@ en:
     seaweeds: seaweeds
 
 
-    strawberries: strawberries
-
-
     stone: stone
 
 
+    strawberries: strawberries
+
+
+    string: string
+
+    
     wood: wood
 
 
