@@ -2,13 +2,13 @@
   <div class="title-bar">
     <%= t('views.projects.show.title') %> <%= name %>
   </div>
-  <table width="60%" style="margin:auto;">
+  <table width="70%" style="margin:auto;">
     <tbody>
       <tr>
         <td style="text-align:left;width:180px;">
           <%= t('views.projects.show.participants') %>
         </td>
-        <td>
+        <td style="text-align:left;">
           <% participants.each do |worker| %>
             <div>
               <%= link_to(worker[:name], character_url(worker[:id])) %>
@@ -22,36 +22,49 @@
         <td style="text-align:left;width:180px;">
           <%= t('views.projects.show.start_by') %>
         </td>
-        <td><%= link_to(starting_character_name, character_url(starting_character_id)) %> (<%= start_day %>)</td>
+        <td style="text-align:left;"><%= link_to(starting_character_name, character_url(starting_character_id)) %> (<%= start_day %>)</td>
       </tr>
 
       <tr>
         <td style="text-align:left;width:180px;">
           <%= t('views.projects.show.progress') %>
         </td>
-        <td><%= t('views.projects.info.percent', progress: progress) %></td>
+        <td style="text-align:left;"><%= t('views.projects.info.percent', progress: progress) %></td>
       </tr>
 
       <tr>
         <td style="text-align:left;width:180px;">
           <%= t('views.projects.show.time') %>
         </td>
-        <td><%= time %></td>
+        <td style="text-align:left;"><%= time %></td>
       </tr>
 
       <tr>
         <td style="text-align:left;width:180px;">
           <%= t('views.projects.show.type') %>
         </td>
-        <td><%= t("views.projects.#{run_type}") %></td>
+        <td style="text-align:left;"><%= t("views.projects.#{run_type}") %></td>
       </tr>
+
+      <% if resources_used %>
+        <tr>
+          <td style="text-align:left;width:180px;">
+            <%= t('views.projects.show.resources') %>
+          </td>
+          <td style="text-align:left;">
+            <% resources_used.each do |resource| %>
+              <%= t('views.projects.show.resource_info', key: resource[:key], to_add: resource[:to_add], needed: resource[:needed]) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
 
       <% if repeats %>
         <tr>
           <td style="text-align:left;width:180px;">
             <%= t('views.projects.show.repeats') %>
           </td>
-          <td><%= repeats %></td>
+          <td style="text-align:left;"><%= repeats %></td>
         </tr>
       <% end %>
 
@@ -60,7 +73,15 @@
           <td style="text-align:left;width:180px;">
             <%= t('views.projects.show.amount') %>
           </td>
-          <td><%= amount %></td>
+          <td style="text-align:left;"><%= amount %></td>
+        </tr>
+      <% end %>
+
+      <% if problems %>
+        <tr>
+          <td style="text-align:left;width:180px;padding-top:20px;" colspan="2">
+            <%= t('views.projects.show.problems', desc: problems) %>
+          </td>
         </tr>
       <% end %>
     </tbody>

@@ -335,7 +335,7 @@ en:
 
     string: string
 
-    
+
     wood: wood
 
 
@@ -541,9 +541,14 @@ en:
         title: Build menu
       show:
         amount: 'Amount:'
+        no_resources: not all resources added
+        no_tools: no required tool(s)
         participants: 'Participants:'
+        problems: 'Project cannot be run: %{desc}'
         progress: 'Progress:'
         repeats: 'Repeats left:'
+        resource_info: '%{key} (you have to add %{to_add} from needed %{needed} grams)'
+        resources: 'Resources:'
         start_by: 'Started by:'
         time: 'Time needed:'
         title: 'Project:'

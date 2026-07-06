@@ -30,18 +30,6 @@ module Projects
 
     private
 
-    # def machine_in_use?
-    #   return false if @character.location.projects.pending.empty?
-
-    #   ProjectDescription.machine
-    #                     .joins(:project)
-    #                     .where(subject_id: machine.id,
-    #                            project: {
-    #                              location_id: @character.location_id
-    #                            })
-    #                     .any?
-    # end
-
     def valid_recipe?
       recipe.present?
     end

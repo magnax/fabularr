@@ -12,8 +12,10 @@ module Projects
         amount: project.amount,
         name: project.name(@character, short: true),
         participants: participants,
+        problems: problems,
         progress: project.progress(1),
         repeats: repeats,
+        resources_used: resources_used,
         run_type: 'hand', # TODO: will add automatic/semi-automattic types later
         start_day: start_day,
         starting_character_id: project.starting_character.id,
@@ -52,6 +54,26 @@ module Projects
 
     def repeat_description
       @repeat_description ||= project.project_descriptions.repeat.first
+    end
+
+    def problems
+      return if resources_used.pluck(:to_add).all?(&:zero?)
+
+      I18n.t('views.projects.show.no_resources')
+    end
+
+    def resources_used
+      resource_descriptions.map do |description|
+        {
+          key: I18n.tn("resources.#{description.subject.key}"),
+          needed: description.amount_needed.to_i,
+          to_add: (description.amount_needed - description.amount).to_i
+        }
+      end
+    end
+
+    def resource_descriptions
+      @resource_descriptions ||= project.project_descriptions.resource_in
     end
 
     def time_needed
