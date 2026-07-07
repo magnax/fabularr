@@ -21,6 +21,12 @@ class ProjectsController < ApplicationController
     render_error I18n.t('errors.projects.invalid_resource')
   end
 
+  def destroy
+    Projects::DestroyService.call(current_character, params[:id])
+
+    redirect_to events_path
+  end
+
   def show
     render locals: Projects::ShowService.call(current_character, params[:id])
   end

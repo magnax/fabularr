@@ -13,6 +13,7 @@ module Projects
         name: project.name(@character, short: true),
         participants: participants,
         problems: problems,
+        project_id: project.id,
         progress: project.progress(1),
         repeats: repeats,
         resources_used: resources_used,
