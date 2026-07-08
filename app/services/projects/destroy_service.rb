@@ -8,12 +8,18 @@ module Projects
     end
 
     def call
+      raise Projects::NotOwnerError unless owner?
+
       release_resources!
 
       project.destroy!
     end
 
     private
+
+    def owner?
+      @character == project.starting_character
+    end
 
     def release_resources!
       project.project_descriptions.resource_in.each do |description|

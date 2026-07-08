@@ -35,7 +35,7 @@ class ProjectsMachineryDestroyServiceTest < ActiveSupport::TestCase
     create_recipe!
 
     project = create(:project, :machinery, recipe: @recipe,
-                                           location: @location)
+                                           location: @location, starting_character: @character)
     create(:project_description, :resource_in,
            project: project, subject: @meat, amount: 300, amount_needed: 600)
     create(:project_description, :resource_in,
@@ -49,8 +49,42 @@ class ProjectsMachineryDestroyServiceTest < ActiveSupport::TestCase
     assert_equal 300, @character.reload.inventory_objects.resource.sole.amount
   end
 
+  test 'destroys project but returns materials to the ground' do
+    create_recipe!
+
+    project = create(:project, :machinery, recipe: @recipe,
+                                           location: @location, starting_character: @character)
+    create(:project_description, :resource_in,
+           project: project, subject: @meat, amount: 300, amount_needed: 600)
+    create(:project_description, :resource_in,
+           project: project, subject: @dung, amount: 0, amount_needed: 500)
+    create(:inventory_object, character: @character, subject: @dung,
+                              amount: 14_701)
+
+    assert_difference -> { Project.count } => -1,
+                      -> { LocationObject.count } => 1 do
+      call_service(project.id)
+    end
+
+    assert_equal 14_701, @character.reload.inventory_objects.resource.sole.amount
+  end
+
+  test 'do not allow to destroy project when no owner' do
+    create_recipe!
+
+    project = create(:project, :machinery,
+                     recipe: @recipe, location: @location,
+                     starting_character: create(:character))
+    create(:project_description, :resource_in,
+           project: project, subject: @meat, amount: 300, amount_needed: 600)
+    create(:project_description, :resource_in,
+           project: project, subject: @dung, amount: 0, amount_needed: 500)
+
+    assert_raises Projects::NotOwnerError do
+      call_service(project.id)
+    end
+  end
+
   # TODO: Edge cases:
-  # - not owner of the project
-  # - amount in project is bigger than character capacity
   # - return proportional amount of already produced result and remaining resources
 end
