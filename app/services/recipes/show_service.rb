@@ -19,10 +19,31 @@ module Recipes
           resource_instructions: recipe_instructions.resource,
           tool_instructions: recipe_instructions.tool,
           placement_instructions: recipe_instructions.placement,
+          item_instructions: item_instructions(
+            recipe_instructions.item + recipe_instructions.option_item
+          ),
           key: recipe.key,
           recipe_type: I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}").downcase,
           time_needed: TimeService.display_time(recipe.base_speed)
         }
+      end
+    end
+
+    def item_instructions(instructions)
+      instructions.map do |instruction|
+        if instruction.instruction_type == RecipeInstruction::OPTION_ITEM
+
+          {
+            options: instruction.metadata.map do |item_id|
+              {
+                id: item_id,
+                key: ItemType.find_by(id: item_id).key
+              }
+            end
+          }
+        else
+          { key: instruction.subject.key }
+        end
       end
     end
   end

@@ -219,6 +219,8 @@ en:
     lasso: lasso
     nothing_here: Nothing is laying here
     pickaxe: pickaxe
+    small_bone_shaft: small bone shaft
+    small_wooden_shaft: small wooden shaft
     stone_axe: stone axe
     stone_knife: stone knife
     wooden_shaft: wooden shaft
@@ -238,7 +240,9 @@ en:
   machineries:
     in_use: '(in use)'
     small_fire_pit: small fire pit
+    drop_spindle: drop spindle
   new_user: New user
+  or: or
   placements:
     outside_all: Can be build only outside the buildings/vehicles
   project_info:

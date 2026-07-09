@@ -28,19 +28,23 @@ class RecipeInstruction < ApplicationRecord
   belongs_to :recipe
   belongs_to :subject, polymorphic: true, optional: true
 
+  scope :item, -> { where(instruction_type: ITEM) }
   scope :machinery, -> { where(instruction_type: MACHINERY) }
+  scope :option_item, -> { where(instruction_type: OPTION_ITEM) }
+  scope :placement, -> { where(instruction_type: PLACEMENT) }
   scope :resource, -> { where(instruction_type: RESOURCE) }
   scope :resource_out, -> { where(instruction_type: RESOURCE_OUT) }
   scope :tool, -> { where(instruction_type: TOOL) }
-  scope :placement, -> { where(instruction_type: PLACEMENT) }
 
   # Types:
+  ITEM = 'item'
   MACHINERY = 'machinery'
   MAX_AMOUNT = 'max_amount'
+  OPTION_ITEM = 'option_item'
+  PLACEMENT = 'placement'
   RESOURCE = 'resource'
   RESOURCE_OUT = 'resource_out'
   TOOL = 'tool'
-  PLACEMENT = 'placement'
 
   # Placements:
   OUTSIDE_ALL = 'outside_all'

@@ -30,17 +30,26 @@ definitions.each do |recipe_definition| # rubocop:disable Metrics/BlockLength
 
   recipe_definition[:instructions].each do |i|
     (i_type, i_key) = i[:key].split('#')
+    metadata = nil
 
     case i_type
     when RecipeInstruction::RESOURCE, RecipeInstruction::RESOURCE_OUT
       subject = Resource.where(key: i_key).first_or_create
     when RecipeInstruction::TOOL
       subject = ItemType.where(key: i_key).first_or_create
+    when RecipeInstruction::ITEM
+      if i[:options]
+        metadata = i[:options].map do |io|
+          ItemType.where(key: io[:key]).first_or_create.id
+        end
+        i_type = RecipeInstruction::OPTION_ITEM
+      end
     end
 
     ri_attrs = {
       amount: i[:amount],
       instruction_type: i_type,
+      metadata: metadata,
       speed: i[:speed],
       unit: i[:unit] || 'grams'
     }

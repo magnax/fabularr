@@ -10,6 +10,20 @@ module Definitions::Recipes
       ]
     },
     {
+      key: 'drop_spindle#machinery',
+      portable: true,
+      instructions: [
+        { key: 'resource#stone', amount: 50 },
+        {
+          key: 'item#small_shaft', amount: 1,
+          options: [
+            { key: 'small_wooden_shaft' },
+            { key: 'small_bone_shaft' }
+          ]
+        }
+      ]
+    },
+    {
       key: 'lasso#item',
       base_speed: '2d',
       skill: 'manufacturing_tools',

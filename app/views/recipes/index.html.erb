@@ -36,6 +36,28 @@
             </ul>
           <% end %>
 
+          <% if recipe[:item_instructions].present? %>
+            <br /><%= t('views.recipes.index.resources') %>:
+            <ul>
+              <% recipe[:item_instructions].each do |instruction| %>
+                <% if instruction[:options] %>
+                  <% instruction[:options].each_with_index do |item, index| %>
+                    <li>
+                      <% if index > 0 %>
+                        <span style="color:black"> <%= t('or') %> </span>
+                      <% end %>
+                      <%= tn("items.#{item[:key]}") %>
+                    </li>
+                  <% end %>
+                <% else %>
+                  <li>
+                    <%= t("items.#{instruction[:key]}") %>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
+
           <% if recipe[:tool_instructions].present? %>
             <%= t('views.recipes.index.tools') %>:
             <ul>

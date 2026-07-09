@@ -8,8 +8,8 @@ class SeedsRecipesTest < ActiveSupport::TestCase
   end
 
   test 'works' do
-    assert_difference -> { Recipe.count } => 11,
-                      -> { RecipeInstruction.count } => 26 do
+    assert_difference -> { Recipe.count } => 12,
+                      -> { RecipeInstruction.count } => 28 do
       require_relative '../../db/seeds/recipes'
     end
 
@@ -31,7 +31,19 @@ class SeedsRecipesTest < ActiveSupport::TestCase
     assert_equal 86_400 * 2, lasso_recipe.base_speed
 
     # assert placement instruction
-    pit_recipe = Recipe.find_by(key: 'small_fire_pit', recipe_type: Recipe::MACHINERY)
-    assert_equal 'outside_all', pit_recipe.recipe_instructions.placement.sole.metadata['placement'].sole
+    pit_recipe = Recipe.find_by(
+      key: 'small_fire_pit', recipe_type: Recipe::MACHINERY
+    )
+    assert_equal 'outside_all',
+                 pit_recipe.recipe_instructions.placement.sole.metadata['placement'].sole
+
+    # assert options for items used
+    option_item_recipe = Recipe.find_by(
+      key: 'drop_spindle', recipe_type: Recipe::MACHINERY
+    )
+    expected_items = ItemType.where(key: %w[small_bone_shaft small_wooden_shaft])
+    instruction = option_item_recipe.recipe_instructions.option_item.sole
+    metadata_items = ItemType.where(id: instruction.metadata)
+    assert_equal metadata_items.pluck(:id).sort, expected_items.pluck(:id).sort
   end
 end

@@ -219,6 +219,8 @@ pl:
     iron_knife: żelazny nóż
     nothing_here: Nic tu nie leży
     pickaxe: kilof
+    small_bone_shaft: mały trzonek z kości
+    small_wooden_shaft: mały drewniany trzonek
     stone_axe: kamienna siekiera
     stone_knife: kamienny nóż
     wooden_shaft: drewniany trzonek
@@ -238,7 +240,9 @@ pl:
   machineries:
     in_use: '(w użyciu)'
     small_fire_pit: małe palenisko
+    drop_spindle: przenośne wrzeciono
   new_user: Nowy użytkownik
+  or: lub
   placements:
     outside_all: Może być zbudowane tylko na zewnątrz budynków/pojazdów
   project_info:

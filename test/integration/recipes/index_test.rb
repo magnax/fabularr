@@ -68,4 +68,22 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
     assert_content 'Can be build only outside the buildings/vehicles'
     assert_element 'form', action: "#{host}/en/projects"
   end
+
+  test 'show options for needed items' do
+    wooden_shaft = create(:item_type, key: 'small_wooden_shaft')
+    bone_shaft = create(:item_type, key: 'small_bone_shaft')
+    recipe = create(:recipe, recipe_type: Recipe::MACHINERY, base_speed: 14_400,
+                             key: 'drop_spindle')
+    create(:recipe_instruction, :option_item, recipe: recipe,
+                                              metadata: [wooden_shaft.id, bone_shaft.id])
+    create(:project_type, :build)
+
+    visit "/en/recipes?expanded[]=#{recipe.id}"
+
+    assert_equal 200, page.status_code
+
+    assert_content 'drop spindle'
+    assert_content 'small bone shaft'
+    assert_content 'small wooden shaft'
+  end
 end
