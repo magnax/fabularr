@@ -19,9 +19,7 @@ module Recipes
           resource_instructions: recipe_instructions.resource,
           tool_instructions: recipe_instructions.tool,
           placement_instructions: recipe_instructions.placement,
-          item_instructions: item_instructions(
-            recipe_instructions.item + recipe_instructions.option_item
-          ),
+          item_instructions: item_instructions(recipe_instructions.item),
           key: recipe.key,
           recipe_type: I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}").downcase,
           time_needed: TimeService.display_time(recipe.base_speed)
@@ -31,13 +29,12 @@ module Recipes
 
     def item_instructions(instructions)
       instructions.map do |instruction|
-        if instruction.instruction_type == RecipeInstruction::OPTION_ITEM
-
+        if instruction.subject.virtual
           {
-            options: instruction.metadata.map do |item_id|
+            options: instruction.subject.item_types.map do |item|
               {
-                id: item_id,
-                key: ItemType.find_by(id: item_id).key
+                id: item.id,
+                key: item.key
               }
             end
           }

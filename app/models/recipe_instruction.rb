@@ -30,7 +30,6 @@ class RecipeInstruction < ApplicationRecord
 
   scope :item, -> { where(instruction_type: ITEM) }
   scope :machinery, -> { where(instruction_type: MACHINERY) }
-  scope :option_item, -> { where(instruction_type: OPTION_ITEM) }
   scope :placement, -> { where(instruction_type: PLACEMENT) }
   scope :resource, -> { where(instruction_type: RESOURCE) }
   scope :resource_out, -> { where(instruction_type: RESOURCE_OUT) }
@@ -40,7 +39,6 @@ class RecipeInstruction < ApplicationRecord
   ITEM = 'item'
   MACHINERY = 'machinery'
   MAX_AMOUNT = 'max_amount'
-  OPTION_ITEM = 'option_item'
   PLACEMENT = 'placement'
   RESOURCE = 'resource'
   RESOURCE_OUT = 'resource_out'

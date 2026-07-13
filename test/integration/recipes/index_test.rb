@@ -70,12 +70,14 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
   end
 
   test 'show options for needed items' do
-    wooden_shaft = create(:item_type, key: 'small_wooden_shaft')
-    bone_shaft = create(:item_type, key: 'small_bone_shaft')
+    v_small_shaft = create(:item_type, key: 'small_shaft', virtual: true)
+    create(:item_type, key: 'small_wooden_shaft',
+                       parent_item_type: v_small_shaft)
+    create(:item_type, key: 'small_bone_shaft',
+                       parent_item_type: v_small_shaft)
     recipe = create(:recipe, recipe_type: Recipe::MACHINERY, base_speed: 14_400,
                              key: 'drop_spindle')
-    create(:recipe_instruction, :option_item, recipe: recipe,
-                                              metadata: [wooden_shaft.id, bone_shaft.id])
+    create(:recipe_instruction, :item, recipe: recipe, subject: v_small_shaft)
     create(:project_type, :build)
 
     visit "/en/recipes?expanded[]=#{recipe.id}"
@@ -85,5 +87,6 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
     assert_content 'drop spindle'
     assert_content 'small bone shaft'
     assert_content 'small wooden shaft'
+    assert_no_content 'small shaft'
   end
 end

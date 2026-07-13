@@ -50,8 +50,8 @@ FactoryBot.define do
       instruction_type { 'max_amount' }
     end
 
-    trait :option_item do
-      instruction_type { RecipeInstruction::OPTION_ITEM }
+    trait :item do
+      instruction_type { RecipeInstruction::ITEM }
     end
   end
 end
