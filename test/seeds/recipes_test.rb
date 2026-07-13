@@ -41,9 +41,7 @@ class SeedsRecipesTest < ActiveSupport::TestCase
     option_item_recipe = Recipe.find_by(
       key: 'drop_spindle', recipe_type: Recipe::MACHINERY
     )
-    expected_items = ItemType.where(key: %w[small_bone_shaft small_wooden_shaft])
-    instruction = option_item_recipe.recipe_instructions.option_item.sole
-    metadata_items = ItemType.where(id: instruction.metadata)
-    assert_equal metadata_items.pluck(:id).sort, expected_items.pluck(:id).sort
+    instruction = option_item_recipe.recipe_instructions.item.sole
+    assert instruction.subject.virtual
   end
 end
