@@ -7,10 +7,20 @@ module ProjectTypes
     end
 
     def call
-      location.location_objects.create(subject: created_item)
+      if created_item.portable && creator_present?
+        project.starting_character.inventory_objects.create!(
+          subject: created_item
+        )
+      else
+        location.location_objects.create(subject: created_item)
+      end
     end
 
     private
+
+    def creator_present?
+      project.location == project.starting_character&.location
+    end
 
     def created_item
       ::Machinery.find_by(key: recipe.key)
