@@ -28,7 +28,24 @@ definitions.each do |recipe_definition| # rubocop:disable Metrics/BlockLength
     recipes_created += 1
   end
 
-  recipe_definition[:instructions].each do |i|
+  if recipe.recipe_type == Recipe::MACHINERY
+
+    machinery = Machinery.find_by(key: key)
+    if machinery
+      machinery.update!(
+        portable: recipe_definition[:portable] || false,
+        placement: recipe_definition[:placement]
+      )
+    else
+      Machinery.create!(
+        key: key,
+        portable: recipe_definition[:portable] || false,
+        placement: recipe_definition[:placement]
+      )
+    end
+  end
+
+  recipe_definition[:instructions].each do |i| # rubocop:disable Metrics/BlockLength
     (i_type, i_key) = i[:key].split('#')
     metadata = nil
 
@@ -65,7 +82,9 @@ definitions.each do |recipe_definition| # rubocop:disable Metrics/BlockLength
       rinstr.update!(ri_attrs)
       instructions_updated += 1
     else
-      RecipeInstruction.create!(ri_attrs.merge(recipe_id: recipe.id, subject: subject))
+      RecipeInstruction.create!(
+        ri_attrs.merge(recipe_id: recipe.id, subject: subject)
+      )
       instructions_created += 1
     end
   end

@@ -37,11 +37,14 @@ class SeedsRecipesTest < ActiveSupport::TestCase
     assert_equal 'outside_all',
                  pit_recipe.recipe_instructions.placement.sole.metadata['placement'].sole
 
-    # assert options for items used
+    # assert options for items used & portable attribute
     option_item_recipe = Recipe.find_by(
       key: 'drop_spindle', recipe_type: Recipe::MACHINERY
     )
     instruction = option_item_recipe.recipe_instructions.item.sole
     assert instruction.subject.virtual
+
+    machinery = Machinery.find_by(key: option_item_recipe[:key])
+    assert machinery.portable
   end
 end
