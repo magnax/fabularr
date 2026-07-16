@@ -41,6 +41,7 @@ class SeedsRecipesTest < ActiveSupport::TestCase
     option_item_recipe = Recipe.find_by(
       key: 'drop_spindle', recipe_type: Recipe::MACHINERY
     )
+    assert_equal Skill::MANUFACTURING_MACHINES, option_item_recipe.skill.key
     instruction = option_item_recipe.recipe_instructions.item.sole
     assert instruction.subject.virtual
 

@@ -539,6 +539,8 @@ en:
         machine:
           title: Set amount for this project
         needed: needed
+        objects_needed: Objects
+        pieces: '(%{count} pcs.)'
         resources_needed: Resources needed
         road:
           available_locations: 'Available locations: %{count}'

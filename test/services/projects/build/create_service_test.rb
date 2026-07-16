@@ -4,11 +4,11 @@ require 'test_helper'
 
 class ProjectsBuildCreateServiceTest < ActiveSupport::TestCase
   def setup
-    @current_character = create(:character)
+    @character = create(:character)
   end
 
   def call_service(params)
-    Projects::CreateService.call(@current_character, params)
+    Projects::CreateService.call(@character, params)
   end
 
   test 'basic build - just one type of resource needed' do
@@ -19,7 +19,7 @@ class ProjectsBuildCreateServiceTest < ActiveSupport::TestCase
     create(:recipe_instruction, recipe: recipe, subject: stone,
                                 amount: 100, unit: 'grams',
                                 instruction_type: 'resource')
-    second_character = create(:character, location: @current_character.location)
+    second_character = create(:character, location: @character.location)
 
     params = {
       project_type_id: project_type.id,
@@ -51,7 +51,7 @@ class ProjectsBuildCreateServiceTest < ActiveSupport::TestCase
 
     event = second_character.visible_events.last
     assert_equal(
-      "You see that <!--CHARID:#{@current_character.id}--> is starting new project",
+      "You see that <!--CHARID:#{@character.id}--> is starting new project",
       event.body
     )
   end
@@ -76,7 +76,8 @@ class ProjectsBuildCreateServiceTest < ActiveSupport::TestCase
 
     assert_difference(
       -> { Project.count } => 1,
-      -> { ProjectDescription.count } => 2
+      -> { ProjectDescription.count } => 2,
+      -> { Event.count } => 1
     ) do
       call_service(params)
     end
@@ -88,5 +89,47 @@ class ProjectsBuildCreateServiceTest < ActiveSupport::TestCase
     assert_nil desc.amount
     assert_nil desc.amount_needed
     assert_nil desc.unit
+  end
+
+  test 'build machine using resource and option items' do
+    project_type = create(:project_type, key: 'build',
+                                         base_speed: 0, fixed: true)
+    stone = create(:resource, :material, key: 'stone')
+    skill = create(:skill, key: 'manufacturing_machines')
+    create(:machinery, key: 'drop_spindle')
+    shaft = create(:item_type, key: 'wooden_shaft', virtual: true)
+    recipe = create(:recipe, :machinery, key: 'drop_spindle',
+                                         base_speed: 3600, skill: skill)
+    create(:recipe_instruction, recipe: recipe, subject: stone,
+                                amount: 100, unit: 'grams',
+                                instruction_type: 'resource')
+    create(:recipe_instruction, recipe: recipe, subject: shaft,
+                                amount: 1, unit: nil,
+                                instruction_type: 'item')
+
+    params = {
+      project_type_id: project_type.id,
+      recipe_id: recipe.id
+    }
+
+    assert_difference(
+      -> { Project.count } => 1,
+      -> { ProjectDescription.count } => 2,
+      -> { Event.count } => 1
+    ) do
+      call_service(params)
+    end
+
+    desc = ProjectDescription.item_in.last
+    assert_equal shaft.id, desc.subject_id
+    assert_equal 'ItemType', desc.subject_type
+    assert_equal 0, desc.amount
+    assert_equal 1, desc.amount_needed
+    assert_nil desc.unit
+
+    event = Event.last
+    assert_equal(
+      "You're starting new project: manufacturing drop spindle.", event.body
+    )
   end
 end

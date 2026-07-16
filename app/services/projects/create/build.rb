@@ -47,6 +47,15 @@ module Projects
           unit: nil
         )
       end
+      items.each do |item|
+        @project.project_descriptions.create!(
+          description_type: ProjectDescription::ITEM_IN,
+          subject: item.subject,
+          amount: 0,
+          amount_needed: item.amount,
+          unit: nil
+        )
+      end
       create_name_description! if @params[:name]
     end
 
@@ -56,6 +65,10 @@ module Projects
 
     def tools
       recipe.recipe_instructions.tool
+    end
+
+    def items
+      recipe.recipe_instructions.item
     end
 
     def create_name_description!

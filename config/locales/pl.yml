@@ -539,6 +539,8 @@ pl:
         machine:
           title: Wybierz ilość dla tego projektu
         needed: potrzebne
+        objects_needed: Przedmioty
+        pieces: '(%{count} szt.)'
         resources_needed: Wymagane surowce
         road:
           available_locations: 'Dostępne lokacje: %{count}'

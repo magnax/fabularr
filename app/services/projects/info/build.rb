@@ -40,7 +40,7 @@ module Projects
     end
 
     def objects
-      []
+      @objects ||= recipe_instructions.item
     end
 
     def resources

@@ -28,6 +28,7 @@ class ProjectDescription < ApplicationRecord
   belongs_to :subject, polymorphic: true, optional: true
   belongs_to :project
 
+  scope :item_in, -> { where(description_type: ITEM_IN) }
   scope :location, -> { where(description_type: LOCATION) }
   scope :location_resource, -> { where(description_type: LOCATION_RESOURCE) }
   scope :machine, -> { where(description_type: MACHINE) }

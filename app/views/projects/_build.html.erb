@@ -2,19 +2,29 @@
 <%= form_for :project, url: projects_url do |f| %>
   <%= f.hidden_field :project_type_id, value: project_type_id %>
   <%= f.hidden_field :recipe_id, value: recipe_id %>
-  <table>
+  <table style="width:75%;margin:10px auto;">
     <tr>
-      <td><%= t('views.projects.new.item_name') %></td>
-      <td><%= item_name %></td>
+      <td style="text-align:right">
+        <%= t('views.projects.new.item_name') %>
+      </td>
+      <td style="text-align:left;padding-left:12px;">
+        <%= item_name %>
+      </td>
     </tr>
     <tr>
-      <td><%= t('views.projects.new.time_needed') %></td>
-      <td><%= time_needed %></td>
+      <td style="text-align:right">
+        <%= t('views.projects.new.time_needed') %>
+      </td>
+      <td style="text-align:left;padding-left:12px;">
+        <%= time_needed %>
+      </td>
     </tr>
     <% if resources.any? %>
       <tr>
-        <td valign="top"><%= t('views.projects.new.resources_needed') %>:</td>
-        <td>
+        <td valign="top" style="text-align:right">
+          <%= t('views.projects.new.resources_needed') %>:
+        </td>
+        <td style="text-align:left;padding-left:12px;">
           <% resources.each do |res| %>
             <div>
               <%= tn("resources.#{res[:key]}") %> 
@@ -28,8 +38,17 @@
 
     <% if objects.any? %>
       <tr>
-        <td><%= t('views.projects.new.objects_needed') %></td>
-        <td><%= time_needed %></td>
+        <td valign="top" style="text-align:right">
+          <%= t('views.projects.new.objects_needed') %>:
+        </td>
+        <td style="text-align:left;padding-left:12px;">
+          <% objects.each do |obj| %>
+            <div>
+              <%= tn("items.#{obj[:key]}") %> 
+              <%= t("views.projects.new.pieces", count: obj[:amount]) %>
+            </div>
+          <% end %>
+        </td>
       </tr>
     <% end %>
 
@@ -58,6 +77,41 @@
         </td>
       </tr>
     <% end %>
+
+    <tr>
+      <td colspan="2">
+        <table style="width:100%">
+          <tbody>
+            <tr>
+              <td colspan="3">
+                <%= t('views.projects.machine.use_resources') %>
+                <br>
+              </td>
+            </tr>
+            <tr>
+              <td style="width:33%" align="left">
+                <label>
+                  <input type="radio" name="project[resource_allocation]" value="none">
+                  <%= t('views.projects.machine.use_no') %>
+                </label>
+              </td>
+              <td style="width:33%" align="left">
+                <label>
+                  <input type="radio" name="project[resource_allocation]" value="full" checked=""> <%= t('views.projects.machine.use_if_all') %>
+                </label>
+              </td>
+              <td align="left">
+                <label>
+                  <input type="radio" name="project[resource_allocation]" value="regardless">
+                  <%= t('views.projects.machine.use_yes') %>
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    
     <tr>
       <td colspan=2 class="table-actions">
         <button type="button" onclick="location.href='<%= events_url %>'">

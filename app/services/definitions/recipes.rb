@@ -12,6 +12,7 @@ module Definitions::Recipes
     {
       key: 'drop_spindle#machinery',
       portable: true,
+      skill: 'manufacturing_machines',
       instructions: [
         { key: 'resource#stone', amount: 50 },
         {
