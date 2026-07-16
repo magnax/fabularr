@@ -25,6 +25,7 @@ a {
 
   &:hover {
     color: var(--link-color-hover);
+    background-color: var(--lighter-dark-bronze);
   }
 
   &.highlight {

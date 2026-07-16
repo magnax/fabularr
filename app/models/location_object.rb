@@ -29,6 +29,9 @@ class LocationObject < ApplicationRecord
   scope :item, -> { where(subject_type: 'Item') }
   scope :machinery, -> { where(subject_type: 'Machinery') }
   scope :resource, -> { where(subject_type: 'Resource') }
+  scope :non_zero_resource, lambda {
+    where('subject_type = ? and amount > 0', 'Resource')
+  }
 
   def in_use?
     ProjectDescription.machine

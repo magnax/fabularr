@@ -83,7 +83,7 @@ module Events
       {
         items: objects&.item,
         machines: machines,
-        resources: objects&.includes(:subject)&.resource
+        resources: objects&.includes(:subject)&.non_zero_resource
       }
     end
 

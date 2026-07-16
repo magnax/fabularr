@@ -46,7 +46,7 @@
         <td style="text-align:left;"><%= t("views.projects.#{run_type}") %></td>
       </tr>
 
-      <% if resources_used %>
+      <% if resources_used.any? %>
         <tr>
           <td style="text-align:left;width:180px;">
             <%= t('views.projects.show.resources') %>
@@ -59,7 +59,7 @@
         </tr>
       <% end %>
 
-      <% if items_used %>
+      <% if items_used.any? %>
         <tr>
           <td style="text-align:left;width:180px;">
             <%= t('views.projects.show.items') %>
@@ -104,7 +104,7 @@
       <% end %>
 
       <tr>
-        <td style="text-align:center;width:180px;padding-top:20px;" colspan="2">
+        <td style="text-align:center;width:180px;padding:20px 0;" colspan="2">
           <%= link_to t('views.projects.show.destroy'), project_url(project_id), data: { method: "delete" }, class: 'char-action' %>
         </td>
       </tr>

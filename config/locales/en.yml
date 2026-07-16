@@ -554,6 +554,7 @@ en:
         title: Build menu
       show:
         amount: 'Amount:'
+        destroy: Remove project
         item_info: '%{key} (you have to add %{to_add} from needed %{needed} objects)'
         items: 'Items:'
         no_items: not all items added

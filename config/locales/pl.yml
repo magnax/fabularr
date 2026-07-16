@@ -554,6 +554,7 @@ pl:
         title: Menu budowania i produkcji
       show:
         amount: 'Ilość:'
+        destroy: Usuń projekt
         item_info: '%{key} (musisz jeszcze dodać %{to_add} z potrzebnych %{needed} obiektów)'
         items: 'Przedmioty:'
         no_items: brakuje wymaganych przedmiotów
