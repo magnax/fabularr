@@ -1,0 +1,33 @@
+<h2>Locations (<%= locations.length %>)</h2>
+<table>
+  <thead>
+    <tr style="font-size:0.9em;font-weight:bold;">
+      <td>ID</td>
+      <td>Name (internal)</td>
+      <td>Type</td>
+      <td style="width:55px;">Chars</td>
+      <td style="width:55px;">Build's</td>
+      <td style="width:55px;">Projects</td>
+      <td style="width:55px;">Items</td>
+      <td style="width:55px;">Machines</td>
+      <td>Coords</td>
+      <td>Resources</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% locations.each do |location| %>
+      <tr>
+        <td><%= link_to location.id, admin_location_url(location.id) %></td>
+        <td><%= location.name %></td>
+        <td style="font-size:0.75em;"><%= location.location_type.key %></td>
+        <td><%= location.characters.count %></td>
+        <td><%= location.buildings.count %></td>
+        <td><%= location.projects.pending.count %></td>
+        <td><%= location.items.count %></td>
+        <td><%= location.machines.count %></td>
+        <td><%= coords(location) %></td>
+        <td style="font-size:0.75em;"><%= location.location_resources.map { |lr| lr.resource.key }.join(', ') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

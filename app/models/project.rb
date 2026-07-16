@@ -50,6 +50,14 @@ class Project < ApplicationRecord
     'vehicle' => 'Vehicle'
   }.freeze
 
+  def pending?
+    elapsed < duration
+  end
+
+  def active?
+    workers.active.any?
+  end
+
   def name(character, short: false)
     name = if project_type.key == ProjectType::ROAD
              Projects::NameService.call(self, character)

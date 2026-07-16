@@ -1,4 +1,4 @@
-<div>Name: <%= location_name %></div>
+<div>Name: <%= location_name %> <span style="font-size:0.85em;">(<%= type %>)</span></div>
 <div>
   Resources: 
   <% resources.each do |resource| %>
@@ -7,5 +7,17 @@
       <%= resource[:key] %> (<%= resource[:name] %>)
       <span class="identifier"><%= resource[:id] %></span>
     </div>
+  <% end %>
+</div>
+<div style="margin-top:10px;">
+  Projects:<br>
+  <% projects.each do |project| %>
+    <span style="<%= project[:pending] ? 'font-weight:bold;' : '' %>">
+      <% if project[:active] %>
+        !
+      <% end %>
+      <%= project[:name] %>
+      <span class="identifier"><%= project[:id] %></span>
+    </span><br>
   <% end %>
 </div>

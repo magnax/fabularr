@@ -2,7 +2,7 @@
 
 class Admin::LocationsController < Admin::ApplicationController
   def index
-    render locals: { characters: Character.all, breadcrumbs: breadcrumbs }
+    render locals: { locations: Location.town.all, breadcrumbs: breadcrumbs }
   end
 
   def show

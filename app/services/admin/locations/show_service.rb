@@ -13,7 +13,9 @@ module Admin
       {
         location_id: location.id,
         location_name: location.name,
+        projects: projects,
         resources: resources,
+        type: location.location_type.key,
         breadcrumbs: breadcrumbs
       }
     end
@@ -36,6 +38,17 @@ module Admin
           key: res.resource.key,
           name: I18n.tn("resources.#{res.resource.key}"),
           sorting: res.sorting
+        }
+      end
+    end
+
+    def projects
+      @projects ||= location.projects.map do |project|
+        {
+          active: project.active?,
+          id: project.id,
+          name: project.short_name,
+          pending: project.pending?
         }
       end
     end

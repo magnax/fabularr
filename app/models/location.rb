@@ -36,7 +36,6 @@ class Location < ApplicationRecord
                        inverse_of: :parent_location
   has_many :characters, dependent: :destroy
   has_many :events, dependent: :destroy
-  has_many :items, dependent: :destroy
   has_many :location_names, dependent: :destroy
   has_many :location_objects, dependent: :destroy
   has_many :location_resources, dependent: :destroy
@@ -53,6 +52,11 @@ class Location < ApplicationRecord
   has_many :vehicles, dependent: :destroy,
                       class_name: 'Vehicle',
                       inverse_of: :parent_location
+
+  has_many :items, dependent: :destroy, through: :location_objects,
+                   source: :subject, source_type: 'Item'
+  has_many :machines, dependent: :destroy, through: :location_objects,
+                      source: :subject, source_type: 'Machinery'
 
   belongs_to :location_type
   belongs_to :location_class
