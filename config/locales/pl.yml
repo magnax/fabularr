@@ -554,10 +554,13 @@ pl:
         title: Menu budowania i produkcji
       show:
         amount: 'Ilość:'
+        item_info: '%{key} (musisz jeszcze dodać %{to_add} z potrzebnych %{needed} obiektów)'
+        items: 'Przedmioty:'
+        no_items: brakuje wymaganych przedmiotów
         no_resources: brakuje wymaganych surowców/materiałów
         no_tools: brakuje wymaganych narzędzi
         participants: 'Uczestnicy:'
-        problems: 'Projekt nie może być wykonywany: %{desc}'
+        problems: 'Projekt nie może być wykonywany bo:'
         progress: 'Postęp:'
         repeats: 'Powtórzeń pozostało:'
         resource_info: '%{key} (musisz jeszcze dodać %{to_add} z potrzebnych %{needed} gramów)'

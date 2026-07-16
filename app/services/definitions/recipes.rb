@@ -11,6 +11,7 @@ module Definitions::Recipes
     },
     {
       key: 'drop_spindle#machinery',
+      base_speed: '1d',
       portable: true,
       skill: 'manufacturing_machines',
       instructions: [

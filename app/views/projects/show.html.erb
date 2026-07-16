@@ -59,6 +59,19 @@
         </tr>
       <% end %>
 
+      <% if items_used %>
+        <tr>
+          <td style="text-align:left;width:180px;">
+            <%= t('views.projects.show.items') %>
+          </td>
+          <td style="text-align:left;">
+            <% items_used.each do |item| %>
+              <%= t('views.projects.show.item_info', key: item[:key], to_add: item[:to_add], needed: item[:needed]) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+
       <% if repeats %>
         <tr>
           <td style="text-align:left;width:180px;">
@@ -79,8 +92,13 @@
 
       <% if problems %>
         <tr>
-          <td style="text-align:left;width:180px;padding-top:20px;" colspan="2">
-            <%= t('views.projects.show.problems', desc: problems) %>
+          <td valign="top" style="text-align:left;width:180px;padding-top:20px;">
+            <%= t('views.projects.show.problems') %>
+          </td>
+          <td style="text-align:left;padding-top:20px;">
+            <% problems.each do |problem| %>
+              <%= problem %><br>
+            <% end %>
           </td>
         </tr>
       <% end %>

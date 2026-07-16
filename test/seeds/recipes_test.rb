@@ -42,6 +42,7 @@ class SeedsRecipesTest < ActiveSupport::TestCase
       key: 'drop_spindle', recipe_type: Recipe::MACHINERY
     )
     assert_equal Skill::MANUFACTURING_MACHINES, option_item_recipe.skill.key
+    assert_equal 86_400, option_item_recipe.base_speed
     instruction = option_item_recipe.recipe_instructions.item.sole
     assert instruction.subject.virtual
 

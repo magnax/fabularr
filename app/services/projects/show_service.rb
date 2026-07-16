@@ -10,6 +10,7 @@ module Projects
     def call
       {
         amount: project.amount,
+        items_used: items_used,
         name: project.name(@character, short: true),
         participants: participants,
         problems: problems,
@@ -58,9 +59,28 @@ module Projects
     end
 
     def problems
-      return if resources_used.pluck(:to_add).all?(&:zero?)
+      p = []
 
-      I18n.t('views.projects.show.no_resources')
+      p << I18n.t('views.projects.show.no_resources') unless all_resources?
+      p << I18n.t('views.projects.show.no_items') unless all_items?
+    end
+
+    def all_resources?
+      resources_used.pluck(:to_add).all?(&:zero?)
+    end
+
+    def all_items?
+      items_used.pluck(:to_add).all?(&:zero?)
+    end
+
+    def items_used
+      item_descriptions.map do |description|
+        {
+          key: I18n.tn("items.#{description.subject.key}"),
+          needed: description.amount_needed.to_i,
+          to_add: (description.amount_needed - description.amount).to_i
+        }
+      end
     end
 
     def resources_used
@@ -75,6 +95,10 @@ module Projects
 
     def resource_descriptions
       @resource_descriptions ||= project.project_descriptions.resource_in
+    end
+
+    def item_descriptions
+      @item_descriptions ||= project.project_descriptions.item_in
     end
 
     def time_needed
