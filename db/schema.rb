@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_13_072025) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_16_072915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -110,6 +110,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_13_072025) do
     t.integer "attack", default: 0
     t.datetime "created_at", null: false
     t.integer "defense", default: 0
+    t.bigint "item_class_id"
     t.string "key"
     t.bigint "parent_item_type_id"
     t.integer "repair", default: 0
@@ -120,6 +121,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_13_072025) do
     t.boolean "virtual", default: false
     t.boolean "visible", default: false
     t.integer "weight"
+    t.index ["item_class_id"], name: "index_item_types_on_item_class_id"
     t.index ["parent_item_type_id"], name: "index_item_types_on_parent_item_type_id"
   end
 
@@ -365,6 +367,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_13_072025) do
   add_foreign_key "character_skills", "characters"
   add_foreign_key "character_skills", "skills"
   add_foreign_key "inventory_objects", "characters"
+  add_foreign_key "item_types", "item_classes"
   add_foreign_key "item_types", "item_types", column: "parent_item_type_id"
   add_foreign_key "items", "item_classes"
   add_foreign_key "location_names", "characters"
