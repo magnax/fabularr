@@ -2,6 +2,11 @@
 
 module Definitions::ItemTypes
   CONFIG = [
+    # virtual item types:
+    { key: 'small_shaft', item_class: 'semi', virtual: true,
+      weight: 0, rot: 0, rot_use: 0, repair: 0,
+      attack: 0, defense: 0, skill: 0, visible: false },
+    # regular item types:
     { key: 'bone_knife', item_class: 'tool',
       weight: 100, rot: 30, rot_use: 200, repair: 0,
       attack: 10, defense: 0, skill: 75, visible: false },
@@ -11,7 +16,10 @@ module Definitions::ItemTypes
     { key: 'stone_knife', item_class: 'tool',
       weight: 100, rot: 30, rot_use: 200, repair: 0,
       attack: 10, defense: 0, skill: 75, visible: false },
-    { key: 'small_wooden_shaft', item_class: 'semi',
+    { key: 'small_wooden_shaft', item_class: 'semi', parent: 'small_shaft',
+      weight: 50, rot: 0, rot_use: 0, repair: 0,
+      attack: 3, defense: 0, skill: 50, visible: false },
+    { key: 'small_bone_shaft', item_class: 'semi', parent: 'small_shaft',
       weight: 50, rot: 0, rot_use: 0, repair: 0,
       attack: 3, defense: 0, skill: 50, visible: false }
   ].freeze
