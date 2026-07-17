@@ -89,4 +89,24 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
     assert_content 'small wooden shaft'
     assert_no_content 'small shaft'
   end
+
+  test 'show options for needed tools' do
+    knife = create(:item_type, key: 'knife', virtual: true)
+    create(:item_type, key: 'steel_knife',
+                       parent_item_type: knife)
+    create(:item_type, key: 'bone_knife',
+                       parent_item_type: knife)
+    recipe = create(:recipe, recipe_type: Recipe::ITEM, base_speed: 14_400,
+                             key: 'small_wooden_shaft')
+    create(:recipe_instruction, :tool, recipe: recipe, subject: knife)
+    create(:project_type, :build)
+
+    visit "/en/recipes?expanded[]=#{recipe.id}"
+
+    assert_equal 200, page.status_code
+
+    assert_content 'steel knife'
+    assert_content 'bone knife'
+    assert_content 'small wooden shaft'
+  end
 end

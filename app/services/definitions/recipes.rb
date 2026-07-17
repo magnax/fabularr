@@ -34,6 +34,37 @@ module Definitions::Recipes
       ]
     },
     {
+      key: 'small_bone_shaft#item',
+      base_speed: '1d',
+      skill: 'carpenting',
+      instructions: [
+        { key: 'resource#small_bones', amount: 50 },
+        { key: 'tool#knife',
+          options: [
+            { key: 'steel_knife' },
+            { key: 'bone_knife' }
+          ] }
+      ]
+    },
+    {
+      key: 'small_firewood_shaft#item',
+      base_speed: '1d',
+      skill: 'carpenting',
+      instructions: [
+        { key: 'resource#firewood', amount: 50 },
+        { key: 'tool#knife' }
+      ]
+    },
+    {
+      key: 'small_wooden_shaft#item',
+      base_speed: '1d',
+      skill: 'carpenting',
+      instructions: [
+        { key: 'resource#wood', amount: 50 },
+        { key: 'tool#knife' }
+      ]
+    },
+    {
       key: 'small_fire_pit#machinery',
       # TODO: base_speed is building/collecting time, can be confused with travel speed
       base_speed: 3000,
@@ -55,14 +86,6 @@ module Definitions::Recipes
       base_speed: 3600,
       instructions: [
         { key: 'resource#stone', amount: 100 }
-      ]
-    },
-    {
-      key: 'wooden_shaft#item',
-      base_speed: 3600,
-      instructions: [
-        { key: 'resource#wood', amount: 80 },
-        { key: 'tool#stone_knife' }
       ]
     },
     {

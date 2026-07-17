@@ -63,9 +63,20 @@
             <%= t('views.recipes.index.tools') %>:
             <ul>
               <% recipe[:tool_instructions].each do |instruction| %>
-                <li>
-                  <%= t("items.#{instruction.subject.key}") %>
-                </li>
+                <% if instruction[:options] %>
+                  <% instruction[:options].each_with_index do |item, index| %>
+                    <li>
+                      <% if index > 0 %>
+                        <span style="color:black"> <%= t('or') %> </span>
+                      <% end %>
+                      <%= tn("items.#{item[:key]}") %>
+                    </li>
+                  <% end %>
+                <% else %>
+                  <li>
+                    <%= t("items.#{instruction.subject.key}") %>
+                  </li>
+                <% end %>
               <% end %>
             </ul>
           <% end %>

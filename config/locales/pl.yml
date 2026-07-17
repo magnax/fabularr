@@ -209,19 +209,23 @@ pl:
   invalid_credentials: Nieprawidłowy adres lub hasło
   items:
     bare_fist: goła pięść
+    bone_knife: kościany nóż
     bronze_pickaxe: brązowy kilof
     damage:
       brand_new: całkiem nowy
       damaged: uszkodzony
       new: nowy
       used: używany
-    lasso: lasso
     iron_knife: żelazny nóż
+    knife: nóż
+    lasso: lasso
     nothing_here: Nic tu nie leży
     pickaxe: kilof
     small_bone_shaft: mały trzonek z kości
+    small_firewood_shaft: mały trzonek z drewna opałowego
     small_shaft: mały trzonek
     small_wooden_shaft: mały drewniany trzonek
+    steel_knife: stalowy nóż
     stone_axe: kamienna siekiera
     stone_knife: kamienny nóż
     wooden_shaft: drewniany trzonek
@@ -338,6 +342,9 @@ pl:
     seaweeds: 
       n: wodorosty
       gen: wodorostów
+    small_bones:
+      n: małe kości
+      gen: małych kości
     stone:
       n: kamień
       gen: kamienia
@@ -552,6 +559,7 @@ pl:
         submit: Rozpocznij projekt
         time_needed: 'Potrzebny czas:'
         title: Menu budowania i produkcji
+        tools_needed: 'Narzędzia:'
       show:
         amount: 'Ilość:'
         destroy: Usuń projekt

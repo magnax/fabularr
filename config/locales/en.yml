@@ -209,6 +209,7 @@ en:
   invalid_credentials: Invalid username or password
   items:
     bare_fist: bare fist
+    bone_knife: bone knife
     bronze_pickaxe: bronze pickaxe
     damage:
       brand_new: brand new
@@ -216,12 +217,15 @@ en:
       new: new
       used: used
     iron_knife: iron knife
+    knife: knife
     lasso: lasso
     nothing_here: Nothing is laying here
     pickaxe: pickaxe
     small_bone_shaft: small bone shaft
+    small_firewood_shaft: small firewood shaft
     small_shaft: small shaft
     small_wooden_shaft: small wooden shaft
+    steel_knife: steel knife
     stone_axe: stone axe
     stone_knife: stone knife
     wooden_shaft: wooden shaft
@@ -336,6 +340,9 @@ en:
 
 
     seaweeds: seaweeds
+
+
+    small_bones: small bones
 
 
     stone: stone
@@ -552,6 +559,7 @@ en:
         submit: Start project
         time_needed: 'Time needed:'
         title: Build menu
+        tools_needed: 'Tools:'
       show:
         amount: 'Amount:'
         destroy: Remove project

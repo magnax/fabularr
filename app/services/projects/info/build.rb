@@ -21,7 +21,7 @@ module Projects
         recipe_id: @recipe_id,
         resources: instructions_map(resources),
         time_needed: time_needed,
-        tools: tools
+        tools: instructions_map(tools)
       }
     end
 

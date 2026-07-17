@@ -54,6 +54,17 @@ definitions.each do |recipe_definition| # rubocop:disable Metrics/BlockLength
       subject = Resource.where(key: i_key).first_or_create
     when RecipeInstruction::TOOL
       subject = ItemType.where(key: i_key).first_or_create
+      if i[:options]
+        subject.update!(virtual: true)
+        i[:options].each do |option_item|
+          item_type = ItemType.find_by(key: option_item[:key])
+          if item_type
+            item_type.update!(parent_item_type: subject)
+          else
+            ItemType.create!(key: option_item[:key], parent_item_type: subject)
+          end
+        end
+      end
     when RecipeInstruction::ITEM
       subject = ItemType.where(key: i_key).first_or_create
       if i[:options]

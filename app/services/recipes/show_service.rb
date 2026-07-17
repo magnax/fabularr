@@ -17,7 +17,7 @@ module Recipes
         {
           id: recipe.id,
           resource_instructions: recipe_instructions.resource,
-          tool_instructions: recipe_instructions.tool,
+          tool_instructions: tool_instructions(recipe_instructions.tool),
           placement_instructions: recipe_instructions.placement,
           item_instructions: item_instructions(recipe_instructions.item),
           key: recipe.key,
@@ -28,6 +28,23 @@ module Recipes
     end
 
     def item_instructions(instructions)
+      instructions.map do |instruction|
+        if instruction.subject.virtual
+          {
+            options: instruction.subject.item_types.map do |item|
+              {
+                id: item.id,
+                key: item.key
+              }
+            end
+          }
+        else
+          { key: instruction.subject.key }
+        end
+      end
+    end
+
+    def tool_instructions(instructions)
       instructions.map do |instruction|
         if instruction.subject.virtual
           {

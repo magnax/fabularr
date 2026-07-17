@@ -54,8 +54,17 @@
 
     <% if tools.any? %>
       <tr>
-        <td><%= t('views.projects.new.tools_needed') %></td>
-        <td><%= time_needed %></td>
+        <td valign="top" style="text-align:right">
+          <%= t('views.projects.new.tools_needed') %>
+        </td>
+        <td style="text-align:left;padding-left:12px;">
+          <% tools.each do |obj| %>
+            <div>
+              <%= tn("items.#{obj[:key]}") %> 
+              <%= t("views.projects.new.pieces", count: obj[:amount]) %>
+            </div>
+          <% end %>
+        </td>
       </tr>
     <% end %>
 
@@ -111,7 +120,7 @@
         </table>
       </td>
     </tr>
-    
+
     <tr>
       <td colspan=2 class="table-actions">
         <button type="button" onclick="location.href='<%= events_url %>'">

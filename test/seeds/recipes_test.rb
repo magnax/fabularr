@@ -8,8 +8,8 @@ class SeedsRecipesTest < ActiveSupport::TestCase
   end
 
   test 'works' do
-    assert_difference -> { Recipe.count } => 12,
-                      -> { RecipeInstruction.count } => 28 do
+    assert_difference -> { Recipe.count } => 14,
+                      -> { RecipeInstruction.count } => 32 do
       require_relative '../../db/seeds/recipes'
     end
 
@@ -48,5 +48,11 @@ class SeedsRecipesTest < ActiveSupport::TestCase
 
     machinery = Machinery.find_by(key: option_item_recipe[:key])
     assert machinery.portable
+
+    knife = ItemType.find_by(key: 'knife')
+    assert knife.virtual
+
+    steel_knife = ItemType.find_by(key: 'steel_knife')
+    assert_not steel_knife.virtual
   end
 end
