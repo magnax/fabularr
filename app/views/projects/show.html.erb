@@ -72,6 +72,20 @@
         </tr>
       <% end %>
 
+      <% if tools_needed.any? %>
+        <tr>
+          <td style="text-align:left;width:180px;">
+            <%= t('views.projects.show.tools') %>
+          </td>
+          <td style="text-align:left;">
+            <% tools_needed.each do |item| %>
+              <%= fa_icon(item[:present] ? 'check-square-o' : 'square-o') %>
+              <%= t("items.#{item[:key]}") %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+
       <% if repeats %>
         <tr>
           <td style="text-align:left;width:180px;">
@@ -95,7 +109,7 @@
           <td valign="top" style="text-align:left;width:180px;padding-top:20px;">
             <%= t('views.projects.show.problems') %>
           </td>
-          <td style="text-align:left;padding-top:20px;">
+          <td valign="top" style="text-align:left;padding-top:20px;">
             <% problems.each do |problem| %>
               <%= problem %><br>
             <% end %>

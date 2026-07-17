@@ -53,6 +53,6 @@ class ProjectsMachineryShowServiceTest < ActiveSupport::TestCase
     assert_equal 'grilling meat', res[:name]
     assert_includes res[:resources_used], { key: 'meat', to_add: 300, needed: 600 }
     assert_includes res[:resources_used], { key: 'dried dung', to_add: 500, needed: 500 }
-    assert_equal 'not all resources added', res[:problems]
+    assert_equal ['not all resources added'], res[:problems]
   end
 end

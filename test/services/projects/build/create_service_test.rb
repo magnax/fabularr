@@ -120,7 +120,7 @@ class ProjectsBuildCreateServiceTest < ActiveSupport::TestCase
       call_service(params)
     end
 
-    assert_equal 0, Project.last.duration
+    assert_equal 3600, Project.last.duration
 
     desc = ProjectDescription.item_in.last
     assert_equal shaft.id, desc.subject_id

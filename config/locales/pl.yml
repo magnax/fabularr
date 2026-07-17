@@ -577,6 +577,7 @@ pl:
         start_by: 'Rozpoczynający:'
         time: 'Potrzebny czas:'
         title: 'Projekt:'
+        tools: 'Narzędzia:'
         type: 'Typ:'
       start: Rozpocznij projekt
     recipes:

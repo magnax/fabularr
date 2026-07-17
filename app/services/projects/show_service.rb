@@ -22,7 +22,8 @@ module Projects
         start_day: start_day,
         starting_character_id: project.starting_character.id,
         starting_character_name: project.starting_character.name_for(@character),
-        time: time_needed
+        time: time_needed,
+        tools_needed: tools
       }
     end
 
@@ -63,6 +64,8 @@ module Projects
 
       p << I18n.t('views.projects.show.no_resources') unless all_resources?
       p << I18n.t('views.projects.show.no_items') unless all_items?
+
+      p
     end
 
     def all_resources?
@@ -103,6 +106,22 @@ module Projects
 
     def time_needed
       @time_needed ||= TimeService.display_time(project.duration)
+    end
+
+    def tools
+      project.project_descriptions.tool.map do |desc|
+        {
+          key: desc.subject.key,
+          present: desc.subject.key.in?(inventory_tools)
+        }
+      end
+    end
+
+    def inventory_tools
+      @character.inventory_objects.item.map do |item|
+        it = item.subject.item_type
+        it.parent_item_type_id.present? ? it.parent_item_type.key : item.subject.key
+      end.uniq
     end
 
     def project
