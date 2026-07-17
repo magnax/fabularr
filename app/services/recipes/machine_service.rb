@@ -45,12 +45,18 @@ module Recipes
           recipe_type: I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}").downcase
         }
 
-        key = recipe_instructions.resource_out.first.subject.key
-        if obj[key].present?
-          obj[key] << variant
-        else
-          obj.merge!(key => [variant])
-        end
+        obj = add_or_merge_variant(obj, variant, recipe_instructions)
+      end
+
+      obj
+    end
+
+    def add_or_merge_variant(obj, variant, instructions)
+      key = instructions.resource_out.first.subject.key
+      if obj[key].present?
+        obj[key] << variant
+      else
+        obj = obj.merge(key => [variant])
       end
 
       obj

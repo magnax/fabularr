@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ModuleLength
+
 module Definitions::Recipes
   RECIPES = [
     {
@@ -104,3 +106,5 @@ module Definitions::Recipes
     }
   ].freeze
 end
+
+# rubocop:enable Metrics/ModuleLength

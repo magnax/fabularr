@@ -21,10 +21,14 @@ module Recipes
           placement_instructions: recipe_instructions.placement,
           item_instructions: item_instructions(recipe_instructions.item),
           key: recipe.key,
-          recipe_type: I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}").downcase,
+          recipe_type: recipe_type(recipe),
           time_needed: TimeService.display_time(recipe.base_speed)
         }
       end
+    end
+
+    def recipe_type(recipe)
+      I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}").downcase
     end
 
     def item_instructions(instructions)

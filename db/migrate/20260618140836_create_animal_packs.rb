@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAnimalPacks < ActiveRecord::Migration[8.1]
   def change
     create_table :animal_packs do |t|

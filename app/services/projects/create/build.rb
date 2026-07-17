@@ -29,6 +29,13 @@ module Projects
     end
 
     def create_project_descriptions!
+      create_material_descriptions!
+      create_tool_descriptions!
+      create_item_descriptions!
+      create_name_description! if @params[:name]
+    end
+
+    def create_material_descriptions!
       materials.each do |material|
         @project.project_descriptions.create!(
           description_type: ProjectDescription::RESOURCE_IN,
@@ -38,6 +45,9 @@ module Projects
           unit: material.unit
         )
       end
+    end
+
+    def create_tool_descriptions!
       tools.each do |tool|
         @project.project_descriptions.create!(
           description_type: ProjectDescription::TOOL,
@@ -47,6 +57,9 @@ module Projects
           unit: nil
         )
       end
+    end
+
+    def create_item_descriptions!
       items.each do |item|
         @project.project_descriptions.create!(
           description_type: ProjectDescription::ITEM_IN,
@@ -56,7 +69,6 @@ module Projects
           unit: nil
         )
       end
-      create_name_description! if @params[:name]
     end
 
     def materials

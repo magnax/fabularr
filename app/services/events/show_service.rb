@@ -87,10 +87,6 @@ module Events
       }
     end
 
-    def objects
-      @objects ||= location&.location_objects
-    end
-
     def machines
       @machines ||= objects&.machinery&.map do |machine|
         {
@@ -99,6 +95,10 @@ module Events
           in_use: machine.in_use?
         }
       end
+    end
+
+    def objects
+      @objects ||= location&.location_objects
     end
 
     def visible_resources

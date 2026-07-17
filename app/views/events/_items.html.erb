@@ -1,4 +1,4 @@
-<% if items.present? || resources.present? %>
+<% if items.present? || machines.present? || resources.present? %>
   <% resources.each do |item| %>
     <div>
       <%= link_to fa_icon('upload'), location_object_take_url(item.id), title: t('views.location_objects.take') %>
