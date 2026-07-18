@@ -73,31 +73,37 @@ class Project < ApplicationRecord
   def short_name
     case project_type.key
     when ProjectType::BUILD
-      return base_type_name unless recipe
-
-      item_name = I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}")
-      case recipe.recipe_type
-      when Recipe::BUILDING
-        "#{I18n.t('projects.name.start_building')} (#{item_name})"
-      when Recipe::MACHINERY
-        "#{I18n.t("views.skills.#{recipe.skill.key}")} #{item_name}"
-
-      when Recipe::VEHICLE
-        "#{I18n.t('projects.name.start_vehicle')} (#{item_name})"
-      else
-        "#{base_type_name}: #{item_name}"
-      end
+      build_type_name
     when ProjectType::DISCOVER_RESOURCE, ProjectType::CREATE_LOCATION
       base_type_name
     when ProjectType::COLLECT
-      skill = I18n.t("views.skills.#{project_descriptions.resource_out.last.subject.skill.key}")
-      res = I18n.td("resources.#{project_descriptions.resource_out.last.subject.key}")
+      skill = I18n.t("views.skills.#{resource_out_skill.key}")
+      res = I18n.td("resources.#{resource_out_subject.key}")
       "#{skill} #{res}"
     when ProjectType::MACHINERY
       I18n.td(
-        "views.project_descriptions.#{project_descriptions.resource_out.last.subject.key}"
+        "views.project_descriptions.#{resource_out_subject.key}"
       )
     end
+  end
+
+  def build_type_name
+    return base_type_name unless recipe
+
+    case recipe.recipe_type
+    when Recipe::BUILDING
+      "#{I18n.t('projects.name.start_building')} (#{recipe_item_name})"
+    when Recipe::MACHINERY
+      "#{I18n.t("views.skills.#{recipe.skill.key}")} #{recipe_item_name}"
+    when Recipe::VEHICLE
+      "#{I18n.t('projects.name.start_vehicle')} (#{recipe_item_name})"
+    else
+      "#{base_type_name}: #{recipe_item_name}"
+    end
+  end
+
+  def recipe_item_name
+    I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}")
   end
 
   def base_type_name
@@ -113,16 +119,24 @@ class Project < ApplicationRecord
   end
 
   def skill
+    return recipe.skill if recipe&.skill.present?
+
     if project_type.exploring?
       return Skill.where(key: Skill::EXPLORING).first_or_create
-    elsif project_type.key == ProjectType::ROAD
+    elsif project_type.road?
       return Skill.where(key: Skill::BUILDING).first_or_create
-    elsif project_type.key == ProjectType::COLLECT
-      return project_descriptions.resource_out.first.subject.skill
-    elsif recipe.present? && recipe.skill.present?
-      return recipe.skill
+    elsif project_type.collect?
+      return resource_out_skill
     end
 
     nil
+  end
+
+  def resource_out_skill
+    project_descriptions.resource_out.first.subject.skill
+  end
+
+  def resource_out_subject
+    project_descriptions.resource_out.last.subject
   end
 end

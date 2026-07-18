@@ -24,4 +24,13 @@ class ProjectType < ApplicationRecord
   def exploring?
     key.in?(EXPLORING_TYPES)
   end
+
+  # defines:
+  # def collect?
+  # def road?
+  [COLLECT, ROAD].each do |key_name|
+    define_method "#{key_name.downcase}?" do
+      key == key_name
+    end
+  end
 end

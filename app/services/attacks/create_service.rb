@@ -25,10 +25,7 @@ module Attacks
 
     def create_events!
       if target_character == @character
-        Event.create!(
-          body: [hit_self, defend].map(&:upcase_first).compact.join(' '),
-          receiver_character: @character
-        )
+        create_hit_self_event!
       else
         Event.create!(
           body: hit_other_body,
@@ -42,6 +39,13 @@ module Attacks
       end
 
       create_location_events!
+    end
+
+    def create_hit_self_event!
+      Event.create!(
+        body: [hit_self, defend].map(&:upcase_first).compact.join(' '),
+        receiver_character: @character
+      )
     end
 
     def hit_other_body
