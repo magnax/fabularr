@@ -11,4 +11,8 @@ class SeedsProjectTypesTest < ActiveSupport::TestCase
     keys = %w[build collect create_location discover_resource machinery road]
     assert_equal keys.sort, ProjectType.pluck(:key).sort
   end
+
+  def teardown
+    ProjectType.destroy_all
+  end
 end

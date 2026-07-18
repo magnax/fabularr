@@ -31,7 +31,7 @@ module Projects
     end
 
     def speed_change?
-      return false unless project.project_type.key == 'collect'
+      return false unless project_type.collect?
       return false unless project.recipe
 
       best_tool_instruction.present?

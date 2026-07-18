@@ -72,9 +72,5 @@ module Events
     def parsed_time
       @event.created_at.strftime('%Y-%m-%d')
     end
-
-    def character
-      @event.character
-    end
   end
 end

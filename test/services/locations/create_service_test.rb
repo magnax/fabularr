@@ -71,5 +71,7 @@ class LocationsCreateServiceTest < ActiveSupport::TestCase
     end
 
     assert Location.last.animal_packs.any?
+  ensure
+    AnimalPack.destroy_all
   end
 end

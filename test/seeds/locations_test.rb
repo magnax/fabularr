@@ -7,6 +7,7 @@ class SeedsLocationsTest < ActiveSupport::TestCase
     create(:user)
 
     assert_difference -> { Location.count } => 10 do
+      require_relative '../../db/seeds/skills'
       require_relative '../../db/seeds/raw_resources'
       require_relative '../../db/seeds/locations'
     end
@@ -15,5 +16,11 @@ class SeedsLocationsTest < ActiveSupport::TestCase
       assert_not_empty location.location_resources
       assert_empty location.location_resources.visible
     end
+  end
+
+  def teardown
+    Resource.destroy_all
+    CharacterSkill.destroy_all
+    Skill.destroy_all
   end
 end

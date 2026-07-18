@@ -3,10 +3,6 @@
 require 'test_helper'
 
 class SeedsRecipesTest < ActiveSupport::TestCase
-  def teardown
-    Skill.destroy_all
-  end
-
   test 'works' do
     assert_difference -> { Recipe.count } => 14,
                       -> { RecipeInstruction.count } => 32 do
@@ -54,5 +50,11 @@ class SeedsRecipesTest < ActiveSupport::TestCase
 
     steel_knife = ItemType.find_by(key: 'steel_knife')
     assert_not steel_knife.virtual
+  end
+
+  def teardown
+    Resource.destroy_all
+    Skill.destroy_all
+    ItemType.destroy_all
   end
 end

@@ -19,4 +19,9 @@ class SeedsMaterialsTest < ActiveSupport::TestCase
     assert_equal 2, wood.resource_types.length
     assert_equal %w[fuel material], wood.resource_types.pluck(:key).sort
   end
+
+  def teardown
+    Resource.destroy_all
+    Skill.destroy_all
+  end
 end

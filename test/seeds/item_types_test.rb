@@ -13,4 +13,8 @@ class SeedsItemTypesTest < ActiveSupport::TestCase
     assert virtual.virtual
     assert_equal 2, virtual.item_types.length
   end
+
+  def teardown
+    ItemType.destroy_all
+  end
 end

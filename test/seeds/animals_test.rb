@@ -8,4 +8,8 @@ class SeedsAnimalsTest < ActiveSupport::TestCase
       require_relative '../../db/seeds/animals'
     end
   end
+
+  def teardown
+    AnimalPack.destroy_all
+  end
 end
