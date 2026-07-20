@@ -33,11 +33,8 @@ module Events
       return if location.blank?
 
       location.animal_packs.map do |pack|
-        {
-          key: pack.animal.key,
-          quantity: pack.amount
-        }
-      end
+        I18n.t("animals.#{pack.animal.key}.p")
+      end.sort.join(', ')
     end
 
     def read_events!

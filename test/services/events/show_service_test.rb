@@ -185,4 +185,15 @@ class EventsShowServiceTest < ActiveSupport::TestCase
     assert_equal 1, res[:events].length
     assert_not_nil event.reload.read_at
   end
+
+  test 'show animals in location' do
+    cat = create(:animal, key: 'cat')
+    zebra = create(:animal, key: 'zebra')
+    create(:animal_pack, animal: cat, location: @character.location)
+    create(:animal_pack, animal: zebra, location: @character.location)
+
+    res = call_service
+
+    assert_equal 'cats, zebras', res[:animals]
+  end
 end

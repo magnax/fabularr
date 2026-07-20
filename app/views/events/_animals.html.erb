@@ -1,9 +1,0 @@
-<% if animals.present? %>
-  <% animals.each do |animal| %>
-    <div>
-      <span><%= animal[:quantity] %> <%= t("animals.#{animal[:key]}.p") %></span> 
-    </div>
-  <% end %>
-<% else %>
-  There are no animals here
-<% end %>

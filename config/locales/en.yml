@@ -449,12 +449,15 @@ en:
       discover_new_resource: Discover new resource
       events: Events
       index:
+        animals_here: Animals
         build_road: Build a road
         build_menu: Build menu
         buildings: 'Buildings:'
         buildings_here: Buildings & vehicles
         carrying: Carrying
         characters_here: Characters here
+        domestication: Domestication
+        hunting: Hunting
         inventory_page: Inventory
         items_here: Items
         location: Location

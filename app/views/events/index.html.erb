@@ -29,6 +29,7 @@
   </div>
   <%= render partial: "events/characters", locals: { characters: characters } %>
 </section>
+
 <section id="map"  style="float: right; width: 29%;margin-left:3px;">
   <div class="title-bar">
     <%= t 'views.events.index.roads_here' %>
@@ -45,21 +46,12 @@
   } %>
 </section>
 
-<section id="items" style="clear: both;">
+<section id="roads" style="clear: both;">
   <div class="title-bar">
     <%= t 'views.events.index.roads_here' %>
   </div>
   <%= render partial: "events/roads", locals: { roads: roads } %>
 </section>
-
-<% if location.present? %>
-  <section id="items" style="clear: both;">
-    <div class="title-bar">
-      <%= t 'views.events.index.animals_here' %>
-    </div>
-    <%= render partial: "events/animals", locals: { animals: animals } %>
-  </section>
-<% end %>
 
 <section id="buildings" style="clear: both;">
   <div class="title-bar">
@@ -68,34 +60,56 @@
   <%= render partial: "events/buildings", locals: { 
     buildings: buildings, vehicles: vehicles 
   } %>
+  <% if location&.parent_location_id %>
+    <div>
+      <%= link_to(
+            fa_icon('arrow-right'),
+            location_enter_url(location.parent_location.id), 
+            title: t('views.buildings.enter')
+      ) %>
+      <%= link_to(
+        location.parent_location.display_name(character), 
+        location_name_url(location.parent_location.id)
+      ) %>
+    </div>
+  <% end %>
 </section>
 
 <% if location&.town? %>
-  <section id="resources" style="clear: both;">
-    <div class="title-bar">
-      <%= t 'views.events.index.resources_here' %>
-    </div>
-    <%= render partial: "events/resources", locals: { 
-      location: location,
-      location_resources: location_resources 
-    } %>
-  </section>
-<% elsif location&.parent_location_id %>
-  <div>
-    <%= link_to(
-          fa_icon('arrow-right'),
-          location_enter_url(location.parent_location.id), 
-          title: t('views.buildings.enter')
-    ) %>
-    <%= link_to(
-      location.parent_location.display_name(character), 
-      location_name_url(location.parent_location.id)
-    ) %>
+
+  <div style="display:flex">
+    <section id="resources" style="width:50%;margin-right:3px;">
+      <div class="title-bar">
+        <%= t 'views.events.index.resources_here' %>
+      </div>
+      <%= render partial: "events/resources", locals: { 
+        location: location,
+        location_resources: location_resources 
+      } %>
+    </section>
+
+    <section id="animals" style="width:50%;">
+      <div class="title-bar">
+        <%= t 'views.events.index.animals_here' %>
+      </div>
+      <% if animals.present? %>
+        <div>
+          <%= animals %>
+        </div>
+        <div style="margin-top:12px;">
+          <%= link_to t('views.events.index.hunting'), new_traveller_url, class: 'char-action' %>
+          <%= link_to t('views.events.index.domestication'), new_traveller_url, class: 'char-action' %>
+        </div>
+      <% else %>
+        There are no animals here
+      <% end %>
+    </section>
   </div>
+
 <% end %>
 
 <% if location.present? || projects.present? %>
-  <section id="resources" style="clear: both;">
+  <section id="projects" style="clear: both;">
     <div class="title-bar">
       <%= t 'views.events.index.projects_here' %>
     </div>

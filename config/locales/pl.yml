@@ -449,12 +449,15 @@ pl:
       discover_new_resource: Odkryj nowy zasób
       events: Zdarzenia
       index:
+        animals_here: Zwierzęta
         build_road: Buduj drogę
         build_menu: Menu budowania
         buildings: 'Budynki:'
         buildings_here: Budynki i pojazdy
         carrying: Dźwiga
         characters_here: Postacie w tym miejscu
+        domestication: Udomawianie
+        hunting: Polowanie
         inventory_page: Inwentarz
         items_here: Przedmioty
         location: Miejsce
