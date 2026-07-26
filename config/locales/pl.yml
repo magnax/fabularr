@@ -115,6 +115,8 @@ pl:
     enter_location_other: Widzisz jak %{character_link} wchodzi do %{in_place} z %{out_place}
     hit:
       animal: Używając %{weapon} %{skill} ranisz %{key}, które traci %{damage} punktów.
+      animal_kill: Używając %{weapon} %{skill} zabijasz %{key}
+      animal_kill_other: Widzisz jak %{character_link} %{skill} zabija %{key}, używając %{weapon}.
       animal_other: Widzisz jak %{character_link} %{skill} rani %{key}, używając %{weapon}.
       character:
         defend: '%{skill} chronisz %{saved} punktów używając swojej %{protection}</b>'

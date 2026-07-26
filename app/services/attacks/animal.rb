@@ -15,9 +15,26 @@ module Attacks
 
     def apply_damage!
       target_packs.each do |pack|
-        pack.update!(points: pack.points - damage)
+        animal = pack.animal
+        points = pack.points - damage
+        amount = (points.to_i / animal.health.to_i) + 1
+        if amount < pack.amount
+          drop_resources!(animal)
+          create_kill_events!(animal.key)
+        else
+          create_events!(animal.key, damage)
+        end
 
-        create_events!(pack.animal.key, damage)
+        pack.update!(points: points, amount: amount)
+      end
+    end
+
+    def drop_resources!(animal)
+      animal.animal_resources.hunt.each do |res|
+        amount = (res.min_amount..res.max_amount).to_a.sample
+        InventoryObjects::IncreaseAmountService.call(
+          @character, res.resource.key, amount
+        )
       end
     end
 
@@ -32,6 +49,17 @@ module Attacks
       create_location_events!(key)
     end
 
+    def create_kill_events!(key)
+      event = Event.create!(
+        body: I18n.t('events.hit.animal_kill', key: key, skill: skill,
+                                               weapon: weapon_key),
+        receiver_character: @character
+      )
+      Events::BroadcastService.call(@character.id, event.id)
+
+      create_location_kill_events!(key)
+    end
+
     def create_location_events!(key)
       @character.location.visible_characters.each do |char|
         next if char == @character
@@ -39,6 +67,23 @@ module Attacks
         event = Event.create!(
           body: I18n.t(
             'events.hit.animal_other',
+            key: key, skill: skill,
+            weapon: weapon_key, character_link: @character.char_id
+          ),
+          receiver_character: char
+        )
+
+        Events::BroadcastService.call(char.id, event.id)
+      end
+    end
+
+    def create_location_kill_events!(key)
+      @character.location.visible_characters.each do |char|
+        next if char == @character
+
+        event = Event.create!(
+          body: I18n.t(
+            'events.hit.animal_kill_other',
             key: key, skill: skill,
             weapon: weapon_key, character_link: @character.char_id
           ),
