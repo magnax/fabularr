@@ -114,6 +114,8 @@ en:
     enter_location: You are entering from %{out_place} into %{in_place}, where you see %{count} people
     enter_location_other: You see %{character_link} is entering %{in_place} from %{out_place}
     hit:
+      animal: You %{skill} hurt a %{key}, using %{weapon}, which loses %{damage} points
+      animal_other: You see that %{character_link} %{skill} hurts a %{key}, using %{weapon}.
       character:
         defend: 'You %{skill} save %{saved} points using your %{protection}.</b>'
         defend_no_protection: "You're not saving any points.</b>"
@@ -407,6 +409,10 @@ en:
   vehicles:
     small_wooden_cart: small wooden cart
   views:
+    animals:
+      attack:
+        info: With this form you can select the weapon you want to use and the amount of force you want to apply.
+        title: Hunting
     character_info: 'Character description: %{name}'
     characters:
       agony: In agony

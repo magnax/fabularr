@@ -114,6 +114,8 @@ pl:
     enter_location: Opuszczasz %{out_place} wchodząc do %{in_place}, gdzie widzisz %{count} osób
     enter_location_other: Widzisz jak %{character_link} wchodzi do %{in_place} z %{out_place}
     hit:
+      animal: Używając %{weapon} %{skill} ranisz %{key}, które traci %{damage} punktów.
+      animal_other: Widzisz jak %{character_link} %{skill} rani %{key}, używając %{weapon}.
       character:
         defend: '%{skill} chronisz %{saved} punktów używając swojej %{protection}</b>'
         defend_no_protection: 'Nie chronisz się przed atakiem.</b>'
@@ -407,6 +409,10 @@ pl:
   vehicles:
     small_wooden_cart: mały drewniany wózek
   views:
+    animals:
+      attack:
+        info: W tym formularzu możesz wybrać broń i siłę uderzenia.
+        title: Polowanie
     character_info: Profil postaci
     characters:
       agony: W agonii

@@ -1,0 +1,60 @@
+<section id="attack-animal">
+  <div class="title-bar">
+    <%= t('views.animals.attack.title') %>
+  </div>
+  <%= form_for(:event, url: attack_url) do |f| %>
+    <%= f.hidden_field :target_type, value: 'animal' %>
+
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <% animals.each do |animal| %>
+            <%= f.checkbox 'target_id[]', value: animal[:id] %> <%= t("animals.#{animal[:name]}.p") %><br />
+            <% end %>
+          </td>
+
+          <td>
+            <table style="margin:0 auto;">
+              <tbody>
+                <tr>
+                  <td colspan="2">
+                    <%= t('views.animals.attack.info') %>
+                  </td>
+                </tr>
+                <tr valign="top">
+                  <td width="50%" align="right">
+                    <%= t('views.characters.attack.weapon') %>
+                  </td>
+                  <td width="50%" align="left">
+                    <%= f.select :weapon, weapons %>
+                  </td>
+                </tr>
+                <tr valign="top">
+                  <td width="50%" align="right">
+                    <%= t('views.characters.attack.force') %>
+                  </td>
+                  <td width="50%" align="left">
+                      <%= f.collection_radio_buttons :force,  force, :id, :tag %>
+                  </td>
+                </tr>
+              </tbody>
+            </table >
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">
+            <%= f.submit(
+              I18n.t('views.characters.attack.submit'), 
+              data: { disable_with: false }, 
+              class: "btn btn-large btn-primary"
+            ) %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    
+    
+  <% end %>
+</section>

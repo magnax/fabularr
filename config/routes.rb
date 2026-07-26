@@ -8,6 +8,9 @@ Fabularr::Application.routes.draw do
   root to: 'static_pages#home'
 
   scope '(:locale)', locale: /pl|en/ do
+    resources :animals, only: [] do
+      get :attack, on: :collection
+    end
     resources :characters, only: %i[new create show] do
       get :attack
       get :name

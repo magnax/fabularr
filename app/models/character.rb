@@ -191,4 +191,8 @@ class Character < ApplicationRecord
   def fighting
     character_skills.find_by(skill_id: Skill.find_by(key: Skill::FIGHTING))
   end
+
+  def hunting
+    character_skills.find_by(skill_id: Skill.find_by(key: Skill::HUNTING))
+  end
 end
