@@ -27,6 +27,7 @@ class Character < ApplicationRecord
   belongs_to :user
 
   has_many :char_names, dependent: :destroy
+  has_many :character_actions, dependent: :destroy
   has_many :character_skills, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :inventory_objects, dependent: :destroy
