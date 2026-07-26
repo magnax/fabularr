@@ -114,10 +114,10 @@ pl:
     enter_location: Opuszczasz %{out_place} wchodząc do %{in_place}, gdzie widzisz %{count} osób
     enter_location_other: Widzisz jak %{character_link} wchodzi do %{in_place} z %{out_place}
     hit:
-      animal: Używając %{weapon} %{skill} ranisz %{key}, które traci %{damage} punktów.
-      animal_kill: Używając %{weapon} %{skill} zabijasz %{key}
-      animal_kill_other: Widzisz jak %{character_link} %{skill} zabija %{key}, używając %{weapon}.
-      animal_other: Widzisz jak %{character_link} %{skill} rani %{key}, używając %{weapon}.
+      animal: 'Używając %{weapon} %{skill} ranisz zwierzę: %{key}, które traci %{damage} punktów.'
+      animal_kill: 'Używając %{weapon} %{skill} zabijasz zwierzę: %{key}.'
+      animal_kill_other: 'Widzisz jak %{character_link} %{skill} zabija zwierzę: %{key}, używając %{weapon}.'
+      animal_other: 'Widzisz jak %{character_link} %{skill} rani zwierzę: %{key}, używając %{weapon}.'
       character:
         defend: '%{skill} chronisz %{saved} punktów używając swojej %{protection}</b>'
         defend_no_protection: 'Nie chronisz się przed atakiem.</b>'

@@ -5,6 +5,7 @@ module Attacks
     def initialize(character, params)
       @character = character
       @params = params
+      @target_ids = params.delete(:target_ids).map(&:to_i).reject(&:zero?)
     end
 
     def call
@@ -16,17 +17,28 @@ module Attacks
     def apply_damage!
       target_packs.each do |pack|
         animal = pack.animal
-        points = pack.points - damage
-        amount = (points.to_i / animal.health.to_i) + 1
+        points, amount = calculate_damage(pack, animal)
+
         if amount < pack.amount
           drop_resources!(animal)
-          create_kill_events!(animal.key)
+          create_kill_events!(animal_name(animal.key))
         else
-          create_events!(animal.key, damage)
+          create_events!(animal_name(animal.key), damage)
         end
 
         pack.update!(points: points, amount: amount)
       end
+    end
+
+    def animal_name(key)
+      I18n.t("animals.#{key}.s")
+    end
+
+    def calculate_damage(pack, animal)
+      points = pack.points - damage
+      amount = (points.to_i / animal.health.to_i) + 1
+
+      [points, amount]
     end
 
     def drop_resources!(animal)
@@ -95,7 +107,7 @@ module Attacks
     end
 
     def skill
-      key = Skill::MAP_LEVELS[@character.hunting.level.floor]
+      key = Skill::MAP_LEVELS[@character.hunting&.level&.floor]
       I18n.t("skills.#{key}")
     end
 
@@ -124,7 +136,7 @@ module Attacks
     end
 
     def target_packs
-      @target_packs ||= location.animal_packs.where(animal_id: @params[:target_id])
+      @target_packs ||= location.animal_packs.where(animal_id: @target_ids)
     end
 
     def location

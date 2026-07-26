@@ -10,6 +10,6 @@ class AttacksController < ApplicationController
   private
 
   def attack_params
-    params.require(:event).permit(:target_id, :target_type, :weapon, :force)
+    params.require(:event).permit(:target_id, :target_type, :weapon, :force, target_ids: [])
   end
 end

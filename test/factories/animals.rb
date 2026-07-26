@@ -17,5 +17,6 @@
 FactoryBot.define do
   factory :animal do
     key { Faker::Creature::Animal.name }
+    health { 100 }
   end
 end

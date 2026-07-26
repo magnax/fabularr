@@ -28,7 +28,7 @@ class AttacksAnimalsCreateServiceTest < ActiveSupport::TestCase
 
     params = {
       force: 10,
-      target_id: [@cat.id, zebra.id],
+      target_ids: [@cat.id, zebra.id],
       target_type: 'animal',
       weapon: 0
     }
@@ -63,7 +63,7 @@ class AttacksAnimalsCreateServiceTest < ActiveSupport::TestCase
 
     params = {
       force: 10,
-      target_id: [@cat.id],
+      target_ids: [@cat.id],
       target_type: 'animal',
       weapon: 0
     }
@@ -100,7 +100,7 @@ class AttacksAnimalsCreateServiceTest < ActiveSupport::TestCase
 
     params = {
       force: 10,
-      target_id: [@cat.id],
+      target_ids: [@cat.id],
       target_type: 'animal',
       weapon: 0
     }
