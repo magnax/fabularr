@@ -120,4 +120,23 @@ class AttacksAnimalsCreateServiceTest < ActiveSupport::TestCase
     assert(inv_hide >= 20 && inv_hide <= 40)
     assert(inv_meat >= 40 && inv_meat <= 70)
   end
+
+  test 'cannot attack in less than one day' do
+    cats = create(:animal_pack, animal: @cat, location: @location,
+                                amount: 3, points: 62)
+    create(:character_action, character: @character, subject: cats,
+                              key: CharacterAction::HUNTING,
+                              updated_at: 23.hours.ago)
+
+    params = {
+      force: 10,
+      target_ids: [@cat.id],
+      target_type: 'animal',
+      weapon: 0
+    }
+
+    assert_raises Attacks::Animal::NotEnoughTimeError do
+      call_service(params)
+    end
+  end
 end

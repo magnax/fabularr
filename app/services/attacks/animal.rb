@@ -2,6 +2,8 @@
 
 module Attacks
   class Animal < ApplicationService
+    class NotEnoughTimeError < StandardError; end
+
     def initialize(character, params)
       @character = character
       @params = params
@@ -9,10 +11,26 @@ module Attacks
     end
 
     def call
+      check_packs!
+
       apply_damage!
     end
 
     private
+
+    def check_packs!
+      target_packs.each do |pack|
+        action = @character.character_actions.find_by(
+          key: CharacterAction::HUNTING,
+          subject: pack
+        )
+        next if action.blank?
+
+        time_diff = DateTime.current.to_i - action.updated_at.to_i
+
+        raise NotEnoughTimeError if time_diff < GameTime::DAY
+      end
+    end
 
     def apply_damage!
       target_packs.each do |pack|
@@ -27,7 +45,16 @@ module Attacks
         end
 
         pack.update!(points: points, amount: amount)
+        create_action!(pack)
       end
+    end
+
+    def create_action!(pack)
+      action = @character.character_actions.where(
+        key: CharacterAction::HUNTING, subject: pack
+      ).first_or_create
+
+      action.update!(updated_at: DateTime.current)
     end
 
     def animal_name(key)

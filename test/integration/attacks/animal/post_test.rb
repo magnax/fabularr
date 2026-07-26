@@ -12,7 +12,8 @@ class AttacksAnimalPostTest < ActionDispatch::IntegrationTest
 
   test 'valid params' do
     cat = create(:animal, key: 'cat')
-    create(:animal_pack, animal: cat, location: @location, amount: 1, points: 100)
+    cats = create(:animal_pack, animal: cat, location: @location,
+                                amount: 1, points: 100)
 
     params = {
       event: {
@@ -23,8 +24,13 @@ class AttacksAnimalPostTest < ActionDispatch::IntegrationTest
       }
     }
 
-    assert_difference -> { Event.count } => 1 do
+    assert_difference -> { Event.count } => 1,
+                      -> { CharacterAction.count } => 1 do
       post '/attack', params: params.as_json
     end
+
+    action = @character.character_actions.sole
+    assert_equal CharacterAction::HUNTING, action.key
+    assert_equal cats, action.subject
   end
 end
