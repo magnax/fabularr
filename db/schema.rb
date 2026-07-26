@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_16_072915) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_26_114458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,6 +23,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_16_072915) do
     t.datetime "updated_at", null: false
     t.index ["animal_id"], name: "index_animal_packs_on_animal_id"
     t.index ["location_id"], name: "index_animal_packs_on_location_id"
+  end
+
+  create_table "animal_resources", force: :cascade do |t|
+    t.bigint "animal_id"
+    t.datetime "created_at", null: false
+    t.string "key"
+    t.integer "max_amount"
+    t.integer "min_amount"
+    t.bigint "resource_id"
+    t.datetime "updated_at", null: false
+    t.index ["animal_id"], name: "index_animal_resources_on_animal_id"
+    t.index ["resource_id"], name: "index_animal_resources_on_resource_id"
   end
 
   create_table "animals", force: :cascade do |t|
@@ -364,6 +376,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_16_072915) do
 
   add_foreign_key "animal_packs", "animals"
   add_foreign_key "animal_packs", "locations"
+  add_foreign_key "animal_resources", "animals"
+  add_foreign_key "animal_resources", "resources"
   add_foreign_key "character_skills", "characters"
   add_foreign_key "character_skills", "skills"
   add_foreign_key "inventory_objects", "characters"

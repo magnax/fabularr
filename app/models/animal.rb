@@ -15,4 +15,5 @@
 #  updated_at :datetime         not null
 #
 class Animal < ApplicationRecord
+  has_many :animal_resources, dependent: :destroy
 end
