@@ -45,6 +45,7 @@ module Attacks
         end
 
         pack.update!(points: points, amount: amount)
+        increase_hunting!
         create_action!(pack)
       end
     end
@@ -55,6 +56,10 @@ module Attacks
       ).first_or_create
 
       action.update!(updated_at: DateTime.current)
+    end
+
+    def increase_hunting!
+      CharacterSkills::IncreaseOnceService.call(@character.hunting)
     end
 
     def animal_name(key)

@@ -41,6 +41,9 @@ class AttacksAnimalsCreateServiceTest < ActiveSupport::TestCase
     assert_equal 80, dogs.reload.points
     assert_equal 146, zebras.reload.points
 
+    # hunting skill increase
+    assert @character.reload.hunting.level > 3.6
+
     events_me = Event.where(receiver_character: @character)
     events_spectator = Event.where(receiver_character: @location_character)
 
