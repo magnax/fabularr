@@ -95,6 +95,9 @@ en:
     wnw: west-north-west
     wsw: west-south-west
   errors:
+    attacks:
+      animal:
+        not_enough_time: You still cannot attack some animals
     projects:
       machine_in_use: This machine is already used
       only_outside: This project can be started only outside

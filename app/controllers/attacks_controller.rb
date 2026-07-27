@@ -5,6 +5,8 @@ class AttacksController < ApplicationController
     Attacks::CreateService.call(current_character, attack_params)
 
     redirect_to events_url
+  rescue Attacks::Animal::NotEnoughTimeError
+    render_error I18n.t('errors.attacks.animal.not_enough_time')
   end
 
   private

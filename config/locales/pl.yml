@@ -95,6 +95,9 @@ pl:
     wnw: zachodnio-północno-zachodni
     wsw: zachodnio-południowo-zachodni
   errors:
+    attacks:
+      animal:
+        not_enough_time: Jeszcze nie możesz atakować niektórych zwierząt
     projects:
       machine_in_use: To urządzenie jest aktualnie używane
       only_outside: Ten projekt można rozpocząć tylko na zewnątrz

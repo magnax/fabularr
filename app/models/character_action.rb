@@ -25,6 +25,8 @@ class CharacterAction < ApplicationRecord
   belongs_to :character
   belongs_to :subject, polymorphic: true
 
+  scope :hunting, -> { where(key: HUNTING) }
+
   HUNTING = 'hunting'
   ATTACK = 'attack'
 end

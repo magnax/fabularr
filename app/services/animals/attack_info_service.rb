@@ -20,10 +20,19 @@ module Animals
     def animals
       location.animal_packs.includes(:animal).map do |pack|
         {
+          can_attack: can_attack?(pack),
           id: pack.animal.id,
           name: pack.animal.key
         }
       end
+    end
+
+    def can_attack?(pack)
+      !pack.id.in?(last_attacked_packs_ids)
+    end
+
+    def last_attacked_packs_ids
+      @last_attacked_packs_ids ||= @character.character_actions.hunting.pluck(:subject_id)
     end
 
     # TODO: duplicate code!

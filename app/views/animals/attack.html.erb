@@ -10,7 +10,10 @@
         <tr>
           <td>
             <% animals.each do |animal| %>
-              <%= f.check_box 'target_ids', { multiple: true }, animal[:id] %> <%= t("animals.#{animal[:name]}.p") %><br />
+              <% if animal[:can_attack] %>
+                <%= f.check_box 'target_ids', { multiple: true }, animal[:id] %> 
+              <% end %>
+              <%= t("animals.#{animal[:name]}.p") %><br />
             <% end %>
           </td>
 
