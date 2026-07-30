@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_26_210011) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_28_075727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -39,11 +39,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_26_210011) do
 
   create_table "animals", force: :cascade do |t|
     t.integer "agression"
+    t.integer "armour"
     t.integer "attack"
     t.datetime "created_at", null: false
     t.integer "health"
     t.string "key"
     t.boolean "mountable", default: false
+    t.integer "pack_size"
     t.boolean "tamable", default: false
     t.datetime "updated_at", null: false
   end

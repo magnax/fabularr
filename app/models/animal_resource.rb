@@ -27,11 +27,14 @@ class AnimalResource < ApplicationRecord
   belongs_to :animal
   belongs_to :resource
 
+  scope :feed, -> { where(key: FEED) }
   scope :hunt, -> { where(key: HUNT) }
   scope :daily, -> { where(key: DAILY) }
   scope :slay, -> { where(key: SLAY) }
 
-  HUNT = 'hunt'
-  DAILY = 'daily'
-  SLAY = 'slay'
+  DAILY = 'daily'     # what is produced daily (automatically) by domesticated animal
+  FEED = 'feed'       # what should domesticated animal eat daily
+  GATHER = 'gather'   # what can be gathered from an animal as a project
+  HUNT = 'hunt'       # what drops after hunting
+  SLAY = 'slay'       # what drops after butchering domesticated animal
 end
