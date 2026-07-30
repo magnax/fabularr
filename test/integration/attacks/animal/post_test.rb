@@ -7,6 +7,8 @@ class AttacksAnimalPostTest < ActionDispatch::IntegrationTest
     @user = create(:user)
     @location = create(:location)
     @character = create(:character, user: @user, location: @location)
+    skill = create(:skill, key: Skill::HUNTING)
+    create(:character_skill, character: @character, skill: skill, level: 3)
     login(@user, @character)
   end
 

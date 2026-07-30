@@ -1,5 +1,26 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: character_actions
+#
+#  id           :bigint           not null, primary key
+#  key          :string
+#  subject_type :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  character_id :bigint
+#  subject_id   :bigint
+#
+# Indexes
+#
+#  index_character_actions_on_character_id  (character_id)
+#  index_character_actions_on_subject       (subject_type,subject_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (character_id => characters.id)
+#
 FactoryBot.define do
   factory :character_action do
     key { CharacterAction::HUNTING }
