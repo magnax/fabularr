@@ -14,7 +14,7 @@ module Projects
       if (project.duration - project.elapsed) > elapsed_time
         progress_project!
       else
-        end_project!
+        end_or_repeat_project!
       end
     end
 
@@ -25,16 +25,24 @@ module Projects
     end
 
     def progress_project!
+      elapsed = project.elapsed
+
       project.update(elapsed: project.elapsed + elapsed_time, checked_at: DateTime.current)
+
+      log.info "#{project.reload.id}: elapsed before: #{elapsed} after: #{project.reload.elapsed}"
 
       broadcast_progress!
     end
 
-    def end_project!
+    def end_or_repeat_project!
+      log.info "#{project.reload.id}: Project ended!!!!"
+
       if repeated_project?
         Projects::YieldPartialAmountService.call(project, elapsed_time)
+        project.update!(checked_at: DateTime.current)
       else
-        project.update(elapsed: project.duration, checked_at: DateTime.current)
+        project.update!(elapsed: project.duration, checked_at: DateTime.current)
+        log.info "#{project.id}: Elapsed: #{project.reload.elapsed}"
 
         Projects::EndService.call(project.id)
       end
@@ -87,6 +95,10 @@ module Projects
 
     def project
       @project ||= Project.find_by(id: @project_id)
+    end
+
+    def log
+      @log ||= Logger.new(Rails.root.join("log/#{Rails.env}_progress.log"))
     end
   end
 end

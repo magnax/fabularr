@@ -96,9 +96,11 @@ module Projects
     end
 
     def collect_project_info
-      I18n.t('project_info.collect', amount: resource_description.amount.to_i,
-                                     res: resource_info,
-                                     unit: I18n.t(resource_description.unit))
+      I18n.t('project_info.collect', amount: out_resource_description.amount.to_i,
+                                     res: I18n.tn(
+                                       "resources.#{out_resource_description.subject.key}"
+                                     ),
+                                     unit: I18n.t(out_resource_description.unit))
     end
 
     def discover_resource_project_info
@@ -113,6 +115,10 @@ module Projects
 
     def resource_description
       @resource_description ||= project.project_descriptions.location_resource.first
+    end
+
+    def out_resource_description
+      @out_resource_description ||= project.project_descriptions.resource_out.first
     end
 
     def location_description

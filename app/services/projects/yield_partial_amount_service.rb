@@ -9,20 +9,21 @@ module Projects
 
     def call
       @project.update!(elapsed: new_elapsed_time)
-      receiving_character.inventory_objects.create!(
-        subject: resource, amount: @project.amount
+
+      InventoryObjects::IncreaseAmountService.call(
+        receiving_character, resource.key, resource_description.amount_needed
       )
-      if repeat_description.amount == 1
-        repeat_description.destroy!
-      else
-        repeat_description.update!(amount: repeat_description.amount - 1)
-      end
+
+      repeat_description.update!(amount: repeat_description.amount - 1)
+      return unless repeat_description.amount == 1
+
+      repeat_description.destroy!
     end
 
     private
 
     def new_elapsed_time
-      @elapsed_time - @project.duration
+      @project.elapsed + @elapsed_time - @project.duration
     end
 
     def receiving_character
@@ -30,7 +31,11 @@ module Projects
     end
 
     def resource
-      @resource ||= @project.project_descriptions.resource_out.first.subject
+      @resource ||= resource_description.subject
+    end
+
+    def resource_description
+      @resource_description ||= @project.project_descriptions.resource_out.first
     end
 
     def repeat_description

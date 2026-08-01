@@ -106,4 +106,56 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
     assert_equal project.elapsed, project.duration
     Timecop.unfreeze
   end
+
+  test 'repeated project' do
+    location = create(:location)
+    character = create(:character, location: location)
+    stone = create(:resource, key: 'stone', daily_rate: 1440)
+    create(:location_resource, resource: stone, location: location, status: true)
+    time = DateTime.parse('2026-02-01 11:00:00')
+    Timecop.freeze(time)
+    project = create(:project, :collect, starting_character: character, location: location,
+                                         duration: 600, elapsed: 0, checked_at: nil)
+    create(:project_description, :resource_out, project: project,
+                                                subject: stone, amount_needed: 10)
+    desc = create(:project_description, :repeat, project: project, amount: 3)
+    create(:worker, project: project, character: character, left_at: nil)
+
+    Timecop.freeze(time + 11.minutes)
+    call_service(project.id)
+
+    project.reload
+
+    # assert resource being deposited after first repeat, description updated
+    inv_stone = character.reload.inventory_objects.resource.find_by(subject_id: stone.id)
+    assert_equal 10, inv_stone.amount
+    assert_equal 2, desc.reload.amount
+    assert_equal 60, project.elapsed
+
+    # second round
+    Timecop.freeze(time + 21.minutes)
+    assert_difference -> { ProjectDescription.count } => -1 do
+      call_service(project.id)
+    end
+
+    project.reload
+
+    # assert resource being added after second repeat, description updated
+    inv_stone = character.reload.inventory_objects.resource.find_by(subject_id: stone.id)
+    assert_equal 20, inv_stone.amount
+    assert_equal 60, project.elapsed
+
+    # last round
+    Timecop.freeze(time + 31.minutes)
+    call_service(project.id)
+
+    project.reload
+
+    # assert resource being added after last repeat, description updated
+    inv_stone = character.reload.inventory_objects.resource.find_by(subject_id: stone.id)
+    assert_equal 30, inv_stone.amount
+    assert_equal 600, project.elapsed
+
+    Timecop.unfreeze
+  end
 end

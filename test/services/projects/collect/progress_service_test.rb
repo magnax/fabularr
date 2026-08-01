@@ -40,39 +40,14 @@ class ProjectsCollectProgressServiceTest < ActiveSupport::TestCase
     project = create(:project, :collect,
                      duration: 600, elapsed: 0,
                      checked_at: nil)
-    project_description = create(:project_description, :repeat,
-                                 project: project, amount: 2)
+    create(:project_description, :repeat, project: project, amount: 2)
     create(:project_description, :resource_out,
-           project: project, subject: stone, amount: 2)
+           project: project, subject: stone, amount_needed: 2)
     create(:worker, project: project,
                     character: create(:character),
                     left_at: nil)
-
-    Timecop.freeze(time + 11.minutes) do
-      assert_difference -> { InventoryObject.count } => 1 do
-        call_service(project.id)
-      end
-    end
-
-    project.reload
-    assert_equal 1, project_description.reload.amount
-
-    Timecop.unfreeze
-  end
-
-  test 'collect - repeating project, last repeat' do
-    time = DateTime.parse('2026-02-01 11:00:00')
-    Timecop.freeze(time)
-    stone = create(:resource, key: 'stone')
-    project = create(:project, :collect,
-                     duration: 600, elapsed: 0,
-                     checked_at: nil)
-    create(:project_description, :repeat, project: project, amount: 1)
-    create(:project_description, :resource_out,
-           project: project, subject: stone, amount: 2)
-    create(:worker, project: project,
-                    character: create(:character),
-                    left_at: nil)
+    create(:location_resource, resource: stone,
+                               location: project.starting_character.location, status: true)
 
     Timecop.freeze(time + 11.minutes) do
       assert_difference -> { InventoryObject.count } => 1,

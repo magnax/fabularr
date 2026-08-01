@@ -11,8 +11,8 @@ module ProjectTypes
     def call
       raise NoSuchResourceError if location_resource.blank?
 
-      LocationObject.create!(
-        location_id: location.id, subject: resource, amount: amount, unit: resource.unit
+      InventoryObjects::IncreaseAmountService.call(
+        receiving_character, resource.key, resource_description.amount_needed
       )
 
       resource_description.update!(amount: amount)
@@ -28,18 +28,21 @@ module ProjectTypes
       @visible_location_resources ||= location.location_resources.visible
     end
 
+    # TODO: case when starting character is not present in project's location
+    def receiving_character
+      @receiving_character ||= project.starting_character
+    end
+
     def resource
       @resource ||= resource_description.subject
     end
 
     def resource_description
-      @resource_description ||= project.project_descriptions
-                                       .where(subject_type: 'Resource')
-                                       .last
+      @resource_description ||= project.project_descriptions.resource_out.last
     end
 
     def amount
-      @amount ||= (resource_description.amount * ((rand * 0.2) + 0.9)).to_i
+      @amount ||= resource_description.amount.to_i
     end
 
     def location
