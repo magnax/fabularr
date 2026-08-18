@@ -18,6 +18,7 @@
 #  user_id           :integer
 #
 class Character < ApplicationRecord
+  DEATH_DELAY = 30.minutes
   MAX_CAPACITY = 15_000
   MIN_HEARABLE_DISTANCE = 3
   WEIGHT = 60_000

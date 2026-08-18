@@ -18,7 +18,10 @@ module Characters
     def eat_and_calculate_hunger!
       if foods.empty?
         new_hunger = character.hunger + HUNGER_POINTS
-        new_hunger = 100 if new_hunger >= 100
+        if new_hunger >= 100
+          new_hunger = 100
+          CharacterDeathJob.perform_in(Character::DEATH_DELAY)
+        end
       else
         return if hunger_change.zero?
 

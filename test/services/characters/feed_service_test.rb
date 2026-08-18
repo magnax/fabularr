@@ -34,6 +34,16 @@ class CharactersFeedServiceTest < ActiveSupport::TestCase
     assert_equal 'You are hungry', event.body
   end
 
+  test 'if character hunger is 100 then schedule death job' do
+    @character.update!(hunger: 96)
+
+    Sidekiq.testing!(:fake) do
+      assert_difference -> { CharacterDeathJob.jobs.size } => 1 do
+        call_service
+      end
+    end
+  end
+
   test 'hunger is 0 and character has enough food - raw food' do
     food = create(:resource, :raw_food, key: 'potatoes', eaten: 25)
     inv = create(:inventory_object, character: @character, subject: food, amount: 100)

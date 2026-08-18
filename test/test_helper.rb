@@ -14,6 +14,7 @@ require 'capybara/rails'
 require 'minitest/reporters'
 
 Minitest::Reporters.use!
+Sidekiq.logger.level = Logger::Severity::WARN
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
