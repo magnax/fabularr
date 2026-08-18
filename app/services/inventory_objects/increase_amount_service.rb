@@ -11,8 +11,12 @@ module InventoryObjects
     def call
       if @character.carrying_weight + @amount > Character::MAX_CAPACITY
         location_object.update!(amount: location_object.amount + @amount)
+
+        @character.location
       else
         inventory_object.update!(amount: inventory_object.amount + @amount)
+
+        @character
       end
     end
 

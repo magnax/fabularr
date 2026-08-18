@@ -11,11 +11,14 @@ module ProjectTypes
     def call
       raise NoSuchResourceError if location_resource.blank?
 
-      InventoryObjects::IncreaseAmountService.call(
+      receiver = InventoryObjects::IncreaseAmountService.call(
         receiving_character, resource.key, resource_description.amount_needed
       )
 
       resource_description.update!(amount: amount)
+      project.project_descriptions.create!(
+        description_type: ProjectDescription::RECEIVER, subject: receiver
+      )
       update_workers!
       return unless project.starting_character.location == project.location
 
@@ -46,7 +49,21 @@ module ProjectTypes
     end
 
     def body
-      I18n.t('events.projects.end.collect', **project_info)
+      I18n.t(body_key, **project_info)
+    end
+
+    def body_key
+      return 'events.projects.end.collect' if receiver == project.starting_character
+
+      'events.projects.end.collect_ground'
+    end
+
+    def receiver
+      @receiver = destination_description.subject
+    end
+
+    def destination_description
+      @destination_description ||= project.project_descriptions.receiver.last
     end
 
     def broadcast_to_receiver(event_id, receiver_id)

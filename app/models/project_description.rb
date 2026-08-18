@@ -32,6 +32,7 @@ class ProjectDescription < ApplicationRecord
   scope :location, -> { where(description_type: LOCATION) }
   scope :location_resource, -> { where(description_type: LOCATION_RESOURCE) }
   scope :machine, -> { where(description_type: MACHINE) }
+  scope :receiver, -> { where(description_type: RECEIVER) }
   scope :repeat, -> { where(description_type: REPEAT) }
   scope :resource_in, -> { where(description_type: RESOURCE_IN) }
   scope :resource_out, -> { where(description_type: RESOURCE_OUT) }
@@ -45,6 +46,7 @@ class ProjectDescription < ApplicationRecord
   LOCATION = 'location'
   LOCATION_RESOURCE = 'location_resource'
   MACHINE = 'machine'
+  RECEIVER = 'receiver' # destination character or location for objects
   REPEAT = 'repeat' # number of repetitions of the project
   RESOURCE_IN = 'resource_in' # input
   RESOURCE_OUT = 'resource_out' # output

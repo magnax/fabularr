@@ -52,4 +52,37 @@ class ProjectsCollectEndServiceTest < ActiveSupport::TestCase
                  '(100 grams of mushrooms landed in your inventory)',
                  event.body
   end
+
+  test '#collect creates resource on the ground if full inventory' do
+    location = create(:location)
+    food_type = create(:resource_type, key: 'food')
+    resource = create(:resource, key: 'mushrooms', resource_type_id: [food_type.id])
+    create(:location_resource, location: location, resource: resource, status: true)
+    starting_character = create(:character, location: location)
+    create(:inventory_object, character: starting_character,
+                              subject: create(:resource), amount: 14_100)
+    project = create(:project, :collect, location: location,
+                                         starting_character: starting_character)
+    create(:project_description, :resource_out, project: project,
+                                                subject: resource, amount_needed: 1000,
+                                                unit: 'grams')
+    worker = create(:worker, project: project, character: starting_character)
+    assert_nil worker.left_at
+
+    assert_difference -> { InventoryObject.count } => 0,
+                      -> { LocationObject.count } => 1 do
+      call_service(project.id)
+    end
+
+    assert_not_nil worker.reload.left_at
+
+    mushrooms = location.reload.location_objects.sole
+    assert_equal resource.id, mushrooms.subject_id
+    assert_equal 1000, mushrooms.amount
+
+    event = Event.where(receiver_character_id: starting_character.id).last
+    assert_equal 'Project: Collecting mushrooms has just ended '\
+                 '(1000 grams of mushrooms landed on the ground)',
+                 event.body
+  end
 end
