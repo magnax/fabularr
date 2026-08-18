@@ -155,6 +155,9 @@ pl:
       point_person_you: '<b>Widzisz jak %{char_name} wskazuje na Ciebie</b>'
     projects:
       create_location_ended: Nowa osada (%{location_info}) została utworzona
+      end:
+        collect: 'Projekt: %{project_name} zakończył się (%{amount} gramów %{resource} trafia do Twojego inwentarza)'
+        collect_ground: 'Projekt: %{project_name} zakończył się (%{amount} gramów %{resource} trafia na ziemię)'
       ended: Projekt zakończył się
       machine:
         added_resource: Dodajesz %{amount} gramów %{resource} do projektu %{project_name}.

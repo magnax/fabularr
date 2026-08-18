@@ -42,9 +42,14 @@ class ProjectsCollectEndServiceTest < ActiveSupport::TestCase
     end
 
     assert_not_nil worker.reload.left_at
-    assert_equal resource.id, starting_character.reload.inventory_objects.sole.subject_id
+
+    mushrooms = starting_character.reload.inventory_objects.sole
+    assert_equal resource.id, mushrooms.subject_id
+    assert_equal 100, mushrooms.amount
 
     event = Event.where(receiver_character_id: starting_character.id).last
-    assert_match(/Project started by you has just ended. (\d{2,3}) grams of mushrooms landed on the ground/, event.body)
+    assert_equal 'Project: Collecting mushrooms has just ended '\
+                 '(100 grams of mushrooms landed in your inventory)',
+                 event.body
   end
 end

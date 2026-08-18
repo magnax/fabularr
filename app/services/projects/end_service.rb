@@ -9,6 +9,8 @@ module Projects
     def call
       Projects::Dispatcher.call(@project_id)
 
+      return if project.project_type.key == ProjectType::COLLECT
+
       update_workers
       broadcast_to_location
 
@@ -81,8 +83,6 @@ module Projects
       case project.project_type.key
       when 'build'
         build_project_info
-      when 'collect'
-        collect_project_info
       when 'discover_resource'
         discover_resource_project_info
       end
@@ -93,14 +93,6 @@ module Projects
         'project_info.build',
         item: I18n.t("#{project.recipe.recipe_type.pluralize}.#{project.recipe.key}")
       )
-    end
-
-    def collect_project_info
-      I18n.t('project_info.collect', amount: out_resource_description.amount.to_i,
-                                     res: I18n.tn(
-                                       "resources.#{out_resource_description.subject.key}"
-                                     ),
-                                     unit: I18n.t(out_resource_description.unit))
     end
 
     def discover_resource_project_info
@@ -115,10 +107,6 @@ module Projects
 
     def resource_description
       @resource_description ||= project.project_descriptions.location_resource.first
-    end
-
-    def out_resource_description
-      @out_resource_description ||= project.project_descriptions.resource_out.first
     end
 
     def location_description

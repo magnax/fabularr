@@ -155,6 +155,9 @@ en:
       point_person_you: You see %{char_name} pointing at you
     projects:
       create_location_ended: New location (%{location_info}) is successfully created
+      end:
+        collect: 'Project: %{project_name} has just ended (%{amount} grams of %{resource} landed in your inventory)'
+        collect_ground: 'Project: %{project_name} has just ended (%{amount} grams of %{resource} landed on the ground)'
       ended: Project has ended.
       machine:
         added_resource: You added %{amount} grams of %{resource} to project %{project_name}.
