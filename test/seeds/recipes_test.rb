@@ -4,6 +4,12 @@ require 'test_helper'
 
 class SeedsRecipesTest < ActiveSupport::TestCase
   test 'works' do
+    def setup
+      Resource.destroy_all
+      Skill.destroy_all
+      ItemType.destroy_all
+    end
+
     assert_difference -> { Recipe.count } => 14,
                       -> { RecipeInstruction.count } => 32 do
       require_relative '../../db/seeds/recipes'
@@ -50,11 +56,5 @@ class SeedsRecipesTest < ActiveSupport::TestCase
 
     steel_knife = ItemType.find_by(key: 'steel_knife')
     assert_not steel_knife.virtual
-  end
-
-  def teardown
-    Resource.destroy_all
-    Skill.destroy_all
-    ItemType.destroy_all
   end
 end

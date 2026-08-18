@@ -11,21 +11,37 @@ module ProjectTypes
     def call
       raise NoSuchResourceError if location_resource.blank?
 
-      receiver = InventoryObjects::IncreaseAmountService.call(
-        receiving_character, resource.key, resource_description.amount_needed
-      )
-
-      resource_description.update!(amount: amount)
-      project.project_descriptions.create!(
-        description_type: ProjectDescription::RECEIVER, subject: receiver
-      )
+      create_resource!
       update_workers!
-      return unless project.starting_character.location == project.location
+
+      return unless starting_character.location == project.location
 
       update_starting_character
     end
 
     private
+
+    def create_resource!
+      if starting_character.location == project.location
+        receiver = InventoryObjects::IncreaseAmountService.call(
+          starting_character, resource.key, resource_description.amount_needed
+        )
+      else
+        LocationObjects::IncreaseAmountService.call(
+          location, resource.key, resource_description.amount_needed
+        )
+        receiver = project.location
+      end
+
+      resource_description.update!(amount: amount)
+      project.project_descriptions.create!(
+        description_type: ProjectDescription::RECEIVER, subject: receiver
+      )
+    end
+
+    def starting_character
+      @starting_character ||= project.starting_character
+    end
 
     def location_resource
       @location_resource ||= visible_location_resources.find_by(resource_id: resource.id)
@@ -34,18 +50,15 @@ module ProjectTypes
     def update_workers!
       project.workers.active.find_each do |worker|
         worker.update!(left_at: DateTime.current)
-        next if worker.character == project.starting_character
-
-        create_event_and_broadcast!(worker)
       end
     end
 
     def update_starting_character
       event = Event.create!(
         body: body,
-        receiver_character: project.starting_character
+        receiver_character: starting_character
       )
-      broadcast_to_receiver(event.id, project.starting_character.id)
+      broadcast_to_receiver(event.id, starting_character.id)
     end
 
     def body
@@ -53,7 +66,7 @@ module ProjectTypes
     end
 
     def body_key
-      return 'events.projects.end.collect' if receiver == project.starting_character
+      return 'events.projects.end.collect' if receiver == starting_character
 
       'events.projects.end.collect_ground'
     end
@@ -87,11 +100,6 @@ module ProjectTypes
 
     def visible_location_resources
       @visible_location_resources ||= location.location_resources.visible
-    end
-
-    # TODO: case when starting character is not present in project's location
-    def receiving_character
-      @receiving_character ||= project.starting_character
     end
 
     def resource
