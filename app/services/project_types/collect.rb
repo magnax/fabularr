@@ -2,6 +2,9 @@
 
 module ProjectTypes
   class Collect < ApplicationService
+    include Projects::UpdateWorkers
+    include Projects::EndEvents
+
     class NoSuchResourceError < StandardError; end
 
     def initialize(project_id)
@@ -12,11 +15,9 @@ module ProjectTypes
       raise NoSuchResourceError if location_resource.blank?
 
       create_resource!
+
       update_workers!
-
-      return unless starting_character.location == project.location
-
-      update_starting_character
+      notify_starting_character
     end
 
     private
@@ -47,20 +48,6 @@ module ProjectTypes
       @location_resource ||= visible_location_resources.find_by(resource_id: resource.id)
     end
 
-    def update_workers!
-      project.workers.active.find_each do |worker|
-        worker.update!(left_at: DateTime.current)
-      end
-    end
-
-    def update_starting_character
-      event = Event.create!(
-        body: body,
-        receiver_character: starting_character
-      )
-      broadcast_to_receiver(event.id, starting_character.id)
-    end
-
     def body
       I18n.t(body_key, **project_info)
     end
@@ -77,13 +64,6 @@ module ProjectTypes
 
     def destination_description
       @destination_description ||= project.project_descriptions.receiver.last
-    end
-
-    def broadcast_to_receiver(event_id, receiver_id)
-      ActionCable.server.broadcast(
-        "char_#{receiver_id}",
-        { type: 'event', event_id: event_id, receiver_id: receiver_id }
-      )
     end
 
     def project_info

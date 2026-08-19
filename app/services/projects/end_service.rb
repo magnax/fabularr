@@ -9,7 +9,12 @@ module Projects
     def call
       Projects::Dispatcher.call(@project_id)
 
-      return if project.project_type.key == ProjectType::COLLECT
+      return if project.project_type.key.in?(
+        [
+          ProjectType::COLLECT,
+          ProjectType::ROAD
+        ]
+      )
 
       update_workers
       broadcast_to_location
