@@ -26,7 +26,8 @@ class ProjectsBuildEndServiceTest < ActiveSupport::TestCase
     create(:inventory_object, character: starting_character,
                               subject: resource, amount: 100)
 
-    assert_difference -> { InventoryObject.count }, 1 do
+    assert_difference -> { InventoryObject.count } => 1,
+                      -> { Event.count } => 1 do
       call_service(project.id)
     end
 

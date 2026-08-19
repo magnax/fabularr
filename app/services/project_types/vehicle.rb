@@ -2,6 +2,9 @@
 
 module ProjectTypes
   class Vehicle < ApplicationService
+    include Projects::UpdateWorkers
+    include Projects::EndEvents
+
     def initialize(project_id)
       @project_id = project_id
     end
@@ -17,9 +20,23 @@ module ProjectTypes
           parent_location: location
         )
       )
+
+      update_workers!
+
+      notify_starting_character
     end
 
     private
+
+    def body
+      I18n.t('events.projects.end.item', **project_info)
+    end
+
+    def project_info
+      {
+        item: I18n.t("#{project.recipe.recipe_type.pluralize}.#{project.recipe.key}")
+      }
+    end
 
     def location_definitions
       @location_definitions ||= all_definitions.except(:base_speed)

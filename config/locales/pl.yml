@@ -158,6 +158,7 @@ pl:
       end:
         collect: 'Projekt: %{project_name} zakończył się (%{amount} gramów %{resource} trafia do Twojego inwentarza)'
         collect_ground: 'Projekt: %{project_name} zakończył się (%{amount} gramów %{resource} trafia na ziemię)'
+        item: 'Projekt rozpoczęty przez Ciebie właśnie się zakończył. Wyprodukowano: %{item}'
         road: 'Projekt: Budowa drogi typu %{road_type} z %{start_location_link} do %{end_location_link} właśnie się zakończył'
       ended: Projekt zakończył się
       machine:

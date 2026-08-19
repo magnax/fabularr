@@ -158,6 +158,7 @@ en:
       end:
         collect: 'Project: %{project_name} has just ended (%{amount} grams of %{resource} landed in your inventory)'
         collect_ground: 'Project: %{project_name} has just ended (%{amount} grams of %{resource} landed on the ground)'
+        item: 'Project started by you has just ended. Manufactured: %{item}'
         road: 'Project: Building a %{road_type} from %{start_location_link} to %{end_location_link} just finished'
       ended: Project has ended.
       machine:

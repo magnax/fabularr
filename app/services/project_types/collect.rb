@@ -40,10 +40,6 @@ module ProjectTypes
       )
     end
 
-    def starting_character
-      @starting_character ||= project.starting_character
-    end
-
     def location_resource
       @location_resource ||= visible_location_resources.find_by(resource_id: resource.id)
     end

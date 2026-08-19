@@ -2,6 +2,9 @@
 
 module ProjectTypes
   class Build < ApplicationService
+    include Projects::UpdateWorkers
+    include Projects::EndEvents
+
     def initialize(project_id)
       @project_id = project_id
     end
@@ -9,9 +12,23 @@ module ProjectTypes
     def call
       InventoryObject.create(character: project.starting_character,
                              subject: created_item)
+
+      update_workers!
+
+      notify_starting_character
     end
 
     private
+
+    def body
+      I18n.t('events.projects.end.item', **project_info)
+    end
+
+    def project_info
+      {
+        item: I18n.t("#{project.recipe.recipe_type.pluralize}.#{project.recipe.key}")
+      }
+    end
 
     def created_item
       item_type = ItemType.find_by(key: project.recipe.key)

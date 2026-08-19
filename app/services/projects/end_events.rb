@@ -11,4 +11,8 @@ module Projects::EndEvents
 
     Events::BroadcastService.call(starting_character.id, event.id)
   end
+
+  def starting_character
+    @starting_character ||= project.starting_character
+  end
 end

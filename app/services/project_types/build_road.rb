@@ -51,10 +51,6 @@ module ProjectTypes
       @road_description ||= project.project_descriptions.road.first
     end
 
-    def starting_character
-      @starting_character ||= project.starting_character
-    end
-
     def project
       @project ||= Project.find_by(id: @project_id)
     end

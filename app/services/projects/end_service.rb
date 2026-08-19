@@ -12,7 +12,8 @@ module Projects
       return if project.project_type.key.in?(
         [
           ProjectType::COLLECT,
-          ProjectType::ROAD
+          ProjectType::ROAD,
+          ProjectType::BUILD
         ]
       )
 

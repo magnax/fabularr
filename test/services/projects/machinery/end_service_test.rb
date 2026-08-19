@@ -51,7 +51,8 @@ class ProjectsMachineryEndServiceTest < ActiveSupport::TestCase
                                  unit: 'grams')
     create(:worker, project: project, character: starting_character)
 
-    assert_difference -> { InventoryObject.count }, 1 do
+    assert_difference -> { InventoryObject.count } => 1,
+                      -> { Event.count } => 1 do
       call_service(project.id)
     end
 
