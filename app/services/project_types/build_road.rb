@@ -24,18 +24,15 @@ module ProjectTypes
     private
 
     def body
-      I18n.t('events.projects.my_ended', project_info: project_info)
+      I18n.t('events.projects.end.road', **project_info)
     end
 
     def project_info
-      return unless project.project_descriptions.any?
-
-      case project.project_type.key
-      when 'build'
-        build_project_info
-      when 'discover_resource'
-        discover_resource_project_info
-      end
+      {
+        road_type: I18n.t("roads.types.#{road_type}"),
+        start_location_link: project_location.loc_id,
+        end_location_link: dest_location.loc_id
+      }
     end
 
     def project_location

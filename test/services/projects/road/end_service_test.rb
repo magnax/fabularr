@@ -28,5 +28,12 @@ class ProjectsRoadEndServiceTest < ActiveSupport::TestCase
     assert_equal Road::PATH, road.road_type
     assert_equal [@location.id, end_location.id].sort,
                  [road.location_1_id, road.location_2.id].sort
+
+    event = Event.last
+    assert_equal @character.id, event.receiver_character.id
+    assert_equal 'Project: Building a path from '\
+                 "<!--LOCID:#{@location.id}--> to "\
+                 "<!--LOCID:#{end_location.id}--> just finished",
+                 event.body
   end
 end
