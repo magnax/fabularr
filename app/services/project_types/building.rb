@@ -2,6 +2,9 @@
 
 module ProjectTypes
   class Building < ApplicationService
+    include Projects::UpdateWorkers
+    include Projects::EndEvents
+
     def initialize(project_id)
       @project_id = project_id
     end
@@ -16,9 +19,23 @@ module ProjectTypes
           name: name
         )
       )
+
+      update_workers!
+
+      notify_starting_character
     end
 
     private
+
+    def body
+      I18n.t('events.projects.end.item', **project_info)
+    end
+
+    def project_info
+      {
+        item: I18n.t("#{project.recipe.recipe_type.pluralize}.#{project.recipe.key}")
+      }
+    end
 
     def location_type
       @location_type ||= LocationType.find_by(key: recipe.key)

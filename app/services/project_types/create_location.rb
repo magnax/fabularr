@@ -2,6 +2,9 @@
 
 module ProjectTypes
   class CreateLocation < ApplicationService
+    include Projects::UpdateWorkers
+    include Projects::EndEvents
+
     def initialize(project_id)
       @project_id = project_id
     end
@@ -12,9 +15,27 @@ module ProjectTypes
       update_travellers!(location)
       project_description.update!(subject: location)
       project.update!(location: location)
+
+      update_workers!
+
+      notify_starting_character
     end
 
     private
+
+    def body
+      I18n.t('events.projects.create_location_ended', location_info: location_info)
+    end
+
+    def location_info
+      @location_info ||= I18n.t(
+        "locations.#{location_description.subject.location_type.key}"
+      )
+    end
+
+    def location_description
+      @location_description ||= project.project_descriptions.location.first
+    end
 
     def position
       project_description.metadata['coords']

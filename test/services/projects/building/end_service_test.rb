@@ -29,7 +29,8 @@ class ProjectsBuildingEndServiceTest < ActiveSupport::TestCase
     create(:worker, project: project, character: starting_character)
 
     assert_difference -> { InventoryObject.count } => 0,
-                      -> { Location.count } => 1 do
+                      -> { Location.count } => 1,
+                      -> { Event.count } => 1 do
       call_service(project.id)
     end
 
@@ -38,5 +39,9 @@ class ProjectsBuildingEndServiceTest < ActiveSupport::TestCase
     new_location = Location.last
     assert_equal location.coords, new_location.coords
     assert_equal 'Town Hall', new_location.name
+
+    event = Event.last
+    assert_equal 'Project started by you has just ended. Manufactured: wood shack',
+                 event.body
   end
 end
