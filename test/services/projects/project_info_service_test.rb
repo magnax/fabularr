@@ -5,14 +5,11 @@ require 'test_helper'
 class ProjectsProjectInfoServiceTest < ActiveSupport::TestCase
   def setup
     # create skills:
-    require_relative '../../../db/seeds/skills'
+    Skill::SKILLS.each do |key|
+      Skill.where(key: Skill.const_get(key)).first_or_create
+    end
 
     @project_type = create(:project_type, key: 'collect')
-  end
-
-  def teardown
-    Resource.destroy_all
-    Skill.destroy_all
   end
 
   def call_service(params)
@@ -36,10 +33,13 @@ class ProjectsProjectInfoServiceTest < ActiveSupport::TestCase
   end
 
   test 'skill names' do
+    resource = create(:resource)
+    location_resource = create(:location_resource, resource: resource)
+
     Skill::COLLECTING_SKILLS.each do |skill_name|
       skill = Skill.find_by(key: skill_name.downcase)
-      resource = create(:resource, skill: skill)
-      location_resource = create(:location_resource, resource: resource)
+      assert skill
+      resource.update!(skill: skill)
 
       params = {
         project_type_id: @project_type.id,
