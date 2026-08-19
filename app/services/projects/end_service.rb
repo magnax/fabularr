@@ -7,116 +7,19 @@ module Projects
     end
 
     def call
-      Projects::Dispatcher.call(@project_id)
+      raise NotImplementedError if service_name.nil?
 
-      return if project.project_type.key.in?(
-        [
-          ProjectType::COLLECT,
-          ProjectType::ROAD,
-          ProjectType::BUILD
-        ]
-      )
-
-      update_workers
-      broadcast_to_location
-
-      return unless project.starting_character.location == project.location
-
-      update_starting_character
+      "ProjectTypes::#{service_name}".constantize.call(project.id)
     end
 
     private
 
-    def update_workers
-      project.workers.active.find_each do |worker|
-        worker.update!(left_at: DateTime.current)
-        next if worker.character == project.starting_character
-
-        create_event_and_broadcast!(worker)
-      end
+    def service_name
+      @service_name ||= Project::DISPATCH_SERVICE[project_type_key]
     end
 
-    def create_event_and_broadcast!(worker)
-      event = Event.create!(
-        body: I18n.t('events.projects.ended'),
-        location: project.location,
-        receiver_character: worker.character
-      )
-      broadcast_to_receiver(event.id, worker.character.id)
-    end
-
-    def update_starting_character
-      event = Event.create!(
-        body: body,
-        receiver_character: project.starting_character
-      )
-      broadcast_to_receiver(event.id, project.starting_character.id)
-    end
-
-    def body
-      if project.project_type.key == ProjectType::CREATE_LOCATION
-        I18n.t('events.projects.create_location_ended', location_info: location_info)
-      else
-        I18n.t('events.projects.my_ended', project_info: project_info)
-      end
-    end
-
-    def broadcast_to_receiver(event_id, receiver_id)
-      ActionCable.server.broadcast(
-        channel, { type: 'event', event_id: event_id, receiver_id: receiver_id }
-      )
-    end
-
-    def broadcast_to_location
-      ActionCable.server.broadcast(
-        channel, { type: 'project.end', project_id: project.id }
-      )
-    end
-
-    def channel
-      @channel ||= "location_#{project.location_id}"
-    end
-
-    def location_info
-      @location_info ||= I18n.t(
-        "locations.#{location_description.subject.location_type.key}"
-      )
-    end
-
-    def project_info
-      return unless project.project_descriptions.any?
-
-      case project.project_type.key
-      when 'build'
-        build_project_info
-      when 'discover_resource'
-        discover_resource_project_info
-      end
-    end
-
-    def build_project_info
-      I18n.t(
-        'project_info.build',
-        item: I18n.t("#{project.recipe.recipe_type.pluralize}.#{project.recipe.key}")
-      )
-    end
-
-    def discover_resource_project_info
-      return I18n.t('project_info.discover_last') if resource_description.subject.blank?
-
-      I18n.t('project_info.discover', res: resource_info)
-    end
-
-    def resource_info
-      I18n.tn("resources.#{resource_description.subject.key}")
-    end
-
-    def resource_description
-      @resource_description ||= project.project_descriptions.location_resource.first
-    end
-
-    def location_description
-      @location_description ||= project.project_descriptions.location.first
+    def project_type_key
+      @project_type_key ||= project.recipe&.recipe_type || project.project_type.key
     end
 
     def project

@@ -70,17 +70,17 @@ class ProjectsCreateLocationEndServiceTest < ActiveSupport::TestCase
     end
 
     location = Location.last
-    # assert_equal 'town', location.location_class.key
-    # assert_equal 'tundra', location.location_type.key
-    # assert_equal [300, 200], location.coords.to_a
+    assert_equal 'town', location.location_class.key
+    assert_equal 'tundra', location.location_type.key
+    assert_equal [300, 200], location.coords.to_a
     assert_equal location.id, starting_character.reload.location_id
     assert_not starting_character.travelling?
 
     assert_equal location.id, travelling_character.reload.location_id
     assert_not travelling_character.travelling?
 
-    # assert_not_nil worker.reload.left_at
-    # assert_equal location.id, project.project_descriptions.sole.subject_id
+    assert_not_nil worker.reload.left_at
+    assert_equal location.id, project.project_descriptions.sole.subject_id
 
     event = Event.where(receiver_character_id: starting_character.id).last
     assert_equal "New location (#{location.location_type.key}) is successfully created", event.body
@@ -111,7 +111,7 @@ class ProjectsCreateLocationEndServiceTest < ActiveSupport::TestCase
 
     assert_difference -> { Location.count } => 1,
                       -> { Traveller.count } => -1,
-                      -> { Event.count } => 2,
+                      -> { Event.count } => 1,
                       -> { ProjectDescription.count } => 0 do
       call_service(project.id)
     end

@@ -84,19 +84,21 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
 
   test 'project checked after expected duration' do
     time = DateTime.parse('2026-02-01 11:00:00')
+    location = create(:location)
+    character = create(:character, location: location)
     Timecop.freeze(time)
     project = create(:project, :discover_resource,
                      duration: 1000, elapsed: 900,
+                     starting_character: character, location: location,
                      checked_at: DateTime.parse('2026-02-01 11:15:00'))
     create(:worker, project: project,
-                    character: create(:character),
+                    character: character,
                     left_at: nil)
 
     Timecop.freeze(time + 20.minutes) do
-      assert_difference -> { project.reload.elapsed }, 100 do
-        assert_difference -> { Event.count }, 1 do
-          call_service(project.id)
-        end
+      assert_difference -> { project.reload.elapsed } => 100,
+                        -> { Event.count } => 1 do
+        call_service(project.id)
       end
     end
 
