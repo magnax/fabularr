@@ -5,8 +5,8 @@ module ProjectTypes
     include Projects::UpdateWorkers
     include Projects::EndEvents
 
-    def initialize(project_id)
-      @project_id = project_id
+    def initialize(project)
+      @project = project
     end
 
     def call
@@ -33,7 +33,7 @@ module ProjectTypes
 
     def project_info
       {
-        item: I18n.t("#{project.recipe.recipe_type.pluralize}.#{project.recipe.key}")
+        item: I18n.t("#{@project.recipe.recipe_type.pluralize}.#{@project.recipe.key}")
       }
     end
 
@@ -42,19 +42,15 @@ module ProjectTypes
     end
 
     def name
-      project.settings['name']
+      @project.settings['name']
     end
 
     def recipe
-      @recipe ||= project.recipe
+      @recipe ||= @project.recipe
     end
 
     def location
-      @location ||= project.location
-    end
-
-    def project
-      @project ||= Project.find_by(id: @project_id)
+      @location ||= @project.location
     end
   end
 end

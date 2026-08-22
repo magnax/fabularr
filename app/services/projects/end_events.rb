@@ -2,7 +2,7 @@
 
 module Projects::EndEvents
   def notify_starting_character
-    return unless starting_character.location == project.location
+    return unless starting_character.location == @project.location
 
     event = Event.create!(
       body: body,
@@ -13,6 +13,6 @@ module Projects::EndEvents
   end
 
   def starting_character
-    @starting_character ||= project.starting_character
+    @starting_character ||= @project.starting_character
   end
 end

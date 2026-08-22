@@ -9,7 +9,7 @@ module Projects
     def call
       raise NotImplementedError if service_name.nil?
 
-      "ProjectTypes::#{service_name}".constantize.call(project.id)
+      "ProjectTypes::#{service_name}".constantize.call(project)
     end
 
     private

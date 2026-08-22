@@ -7,8 +7,8 @@ module ProjectTypes
 
     class NoSuchResourceError < StandardError; end
 
-    def initialize(project_id)
-      @project_id = project_id
+    def initialize(project)
+      @project = project
     end
 
     def call
@@ -23,7 +23,7 @@ module ProjectTypes
     private
 
     def create_resource!
-      if starting_character.location == project.location
+      if starting_character.location == @project.location
         receiver = InventoryObjects::IncreaseAmountService.call(
           starting_character, resource.key, resource_description.amount_needed
         )
@@ -31,11 +31,11 @@ module ProjectTypes
         LocationObjects::IncreaseAmountService.call(
           location, resource.key, resource_description.amount_needed
         )
-        receiver = project.location
+        receiver = @project.location
       end
 
       resource_description.update!(amount: amount)
-      project.project_descriptions.create!(
+      @project.project_descriptions.create!(
         description_type: ProjectDescription::RECEIVER, subject: receiver
       )
     end
@@ -59,19 +59,19 @@ module ProjectTypes
     end
 
     def destination_description
-      @destination_description ||= project.project_descriptions.receiver.last
+      @destination_description ||= @project.project_descriptions.receiver.last
     end
 
     def project_info
       {
-        project_name: project.short_name.upcase_first,
+        project_name: @project.short_name.upcase_first,
         amount: out_resource_description.amount.to_i,
         resource: I18n.tn("resources.#{out_resource_description.subject.key}")
       }
     end
 
     def out_resource_description
-      @out_resource_description ||= project.project_descriptions.resource_out.first
+      @out_resource_description ||= @project.project_descriptions.resource_out.first
     end
 
     def visible_location_resources
@@ -83,7 +83,7 @@ module ProjectTypes
     end
 
     def resource_description
-      @resource_description ||= project.project_descriptions.resource_out.last
+      @resource_description ||= @project.project_descriptions.resource_out.last
     end
 
     def amount
@@ -91,11 +91,7 @@ module ProjectTypes
     end
 
     def location
-      @location ||= project.location
-    end
-
-    def project
-      @project ||= Project.find_by(id: @project_id)
+      @location ||= @project.location
     end
   end
 end

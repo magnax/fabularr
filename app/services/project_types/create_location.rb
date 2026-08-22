@@ -5,8 +5,8 @@ module ProjectTypes
     include Projects::UpdateWorkers
     include Projects::EndEvents
 
-    def initialize(project_id)
-      @project_id = project_id
+    def initialize(project)
+      @project = project
     end
 
     def call
@@ -14,7 +14,7 @@ module ProjectTypes
 
       update_travellers!(location)
       project_description.update!(subject: location)
-      project.update!(location: location)
+      @project.update!(location: location)
 
       update_workers!
 
@@ -34,7 +34,7 @@ module ProjectTypes
     end
 
     def location_description
-      @location_description ||= project.project_descriptions.location.first
+      @location_description ||= @project.project_descriptions.location.first
     end
 
     def position
@@ -71,15 +71,11 @@ module ProjectTypes
     end
 
     def starting_character
-      @starting_character ||= project.starting_character
+      @starting_character ||= @project.starting_character
     end
 
     def project_description
-      @project_description ||= project.project_descriptions.location&.first
-    end
-
-    def project
-      @project ||= Project.find_by(id: @project_id)
+      @project_description ||= @project.project_descriptions.location&.first
     end
   end
 end

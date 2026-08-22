@@ -5,14 +5,14 @@ module ProjectTypes
     include Projects::UpdateWorkers
     include Projects::EndEvents
 
-    def initialize(project_id)
-      @project_id = project_id
+    def initialize(project)
+      @project = project
     end
 
     def call
       discovered_resource&.update!(status: true)
 
-      project.project_descriptions.create!(
+      @project.project_descriptions.create!(
         description_type: ProjectDescription::LOCATION_RESOURCE,
         subject: discovered_resource&.resource
       )
@@ -43,15 +43,11 @@ module ProjectTypes
     end
 
     def resource_description
-      @resource_description ||= project.project_descriptions.location_resource.first
+      @resource_description ||= @project.project_descriptions.location_resource.first
     end
 
     def location
-      @location ||= project.location
-    end
-
-    def project
-      @project ||= Project.find_by(id: @project_id)
+      @location ||= @project.location
     end
   end
 end

@@ -5,8 +5,8 @@ module ProjectTypes
     include Projects::UpdateWorkers
     include Projects::EndEvents
 
-    def initialize(project_id)
-      @project_id = project_id
+    def initialize(project)
+      @project = project
     end
 
     def call
@@ -36,7 +36,7 @@ module ProjectTypes
     end
 
     def project_location
-      @project_location ||= project.location
+      @project_location ||= @project.location
     end
 
     def dest_location
@@ -48,11 +48,7 @@ module ProjectTypes
     end
 
     def road_description
-      @road_description ||= project.project_descriptions.road.first
-    end
-
-    def project
-      @project ||= Project.find_by(id: @project_id)
+      @road_description ||= @project.project_descriptions.road.first
     end
   end
 end
