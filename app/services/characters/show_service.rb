@@ -71,8 +71,7 @@ module Characters
 
       {
         id: worker_project.id,
-        name: worker_project.name(@character, short: true)
-              .upcase_first,
+        name: worker_project.name(@character, short: true).upcase_first,
         skill: worker_skill
       }
     end

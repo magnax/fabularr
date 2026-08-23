@@ -31,6 +31,7 @@ group :development, :test do
   gem 'overmind'
   gem 'rubocop-capybara'
   gem 'rubocop-factory_bot'
+  gem 'rubocop-i18n'
   gem 'rubocop-minitest'
   gem 'rubocop-rails'
   gem 'rubocop-rake'

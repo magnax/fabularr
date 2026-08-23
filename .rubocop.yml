@@ -1,10 +1,20 @@
 require:
   - rubocop-rails
+  - rubocop-i18n
   - rubocop-capybara
   - rubocop-factory_bot
   - rubocop-minitest
   - rubocop-rake
 
+I18n/GetText/DecorateString:
+  Enabled: false
+
+I18n/RailsI18n/DecorateString:
+  Enabled: false
+
+I18n/RailsI18n/DecorateStringFormattingUsingInterpolation:
+  Enabled: false
+  
 Lint/MissingSuper:
   Enabled: false
 

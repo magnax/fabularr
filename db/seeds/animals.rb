@@ -5,7 +5,7 @@ animal_updated = 0
 res_created = 0
 res_updated = 0
 
-Definitions::Animals::CONFIG.each do |animal_def|
+Definitions::Animals::CONFIG.each do |animal_def| # rubocop:disable Metrics/BlockLength
   animal_params = animal_def.except(:key, :res)
 
   animal = Animal.find_by(key: animal_def[:key])
