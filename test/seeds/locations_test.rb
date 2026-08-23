@@ -7,8 +7,8 @@ class SeedsLocationsTest < ActiveSupport::TestCase
     create(:user)
 
     assert_difference -> { Location.count } => 10 do
-      require_relative '../../db/seeds/skills'
-      require_relative '../../db/seeds/raw_resources'
+      Seeds::Skills.call
+      Seeds::RawResources.call
       require_relative '../../db/seeds/locations'
     end
 

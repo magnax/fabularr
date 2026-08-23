@@ -10,7 +10,7 @@ require_relative 'seeds/project_types'
 Seeds::ItemTypes.call
 require_relative 'seeds/settings'
 Seeds::Skills.call
-require_relative 'seeds/raw_resources'
+Seeds::RawResources.call
 require_relative 'seeds/materials'
 require_relative 'seeds/recipes'
 require_relative 'seeds/locations'

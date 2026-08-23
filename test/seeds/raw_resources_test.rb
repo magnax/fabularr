@@ -4,11 +4,14 @@ require 'test_helper'
 
 class SeedsRawResourcesTest < ActiveSupport::TestCase
   test 'works' do
+    Resource.destroy_all
+    Skill.destroy_all
+
     expected_count = 80
 
     assert_difference -> { Resource.count } => expected_count,
                       -> { ResourceType.count } => 4 do
-      require_relative '../../db/seeds/raw_resources'
+      Seeds::RawResources.call
     end
 
     assert_equal %w[fuel medicine raw_food raw_resource], ResourceType.pluck(:key).sort
@@ -30,10 +33,5 @@ class SeedsRawResourcesTest < ActiveSupport::TestCase
     assert_equal 250, carrots.eaten
     assert_equal %w[raw_food raw_resource], carrots.resource_types.pluck(:key).sort
     assert_equal 'farming', carrots.skill.key
-  end
-
-  def teardown
-    Resource.destroy_all
-    Skill.destroy_all
   end
 end
