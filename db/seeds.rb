@@ -12,7 +12,7 @@ Seeds::Settings.call
 Seeds::Skills.call
 Seeds::RawResources.call
 Seeds::Materials.call
-require_relative 'seeds/recipes'
+Seeds::Recipes.call
 Seeds::Locations.call
 
 # "start" time

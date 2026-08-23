@@ -3,16 +3,16 @@
 require 'test_helper'
 
 class SeedsRecipesTest < ActiveSupport::TestCase
-  test 'works' do
-    def setup
-      Resource.destroy_all
-      Skill.destroy_all
-      ItemType.destroy_all
-    end
+  def setup
+    Resource.destroy_all
+    Skill.destroy_all
+    ItemType.destroy_all
+  end
 
+  test 'works' do
     assert_difference -> { Recipe.count } => 14,
                       -> { RecipeInstruction.count } => 32 do
-      require_relative '../../db/seeds/recipes'
+      Seeds::Recipes.call
     end
 
     machinery_recipe = Recipe.find_by(key: 'small_fire_pit')
