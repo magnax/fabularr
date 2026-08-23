@@ -13,7 +13,7 @@ Seeds::Skills.call
 Seeds::RawResources.call
 require_relative 'seeds/materials'
 require_relative 'seeds/recipes'
-require_relative 'seeds/locations'
+Seeds::Locations.call
 
 # "start" time
 GameTime.create!

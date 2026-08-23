@@ -9,7 +9,7 @@ class SeedsLocationsTest < ActiveSupport::TestCase
     assert_difference -> { Location.count } => 10 do
       Seeds::Skills.call
       Seeds::RawResources.call
-      require_relative '../../db/seeds/locations'
+      Seeds::Locations.call
     end
 
     Location.find_each do |location|
