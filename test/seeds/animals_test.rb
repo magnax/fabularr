@@ -4,9 +4,11 @@ require 'test_helper'
 
 class SeedsAnimalsTest < ActiveSupport::TestCase
   test 'works' do
+    AnimalPack.destroy_all
+
     assert_difference -> { Animal.count } => 7,
                       -> { AnimalResource.count } => 32 do
-      require_relative '../../db/seeds/animals'
+      Seeds::Animals.call
     end
 
     cat = Animal.find_by(key: 'cat')
@@ -24,9 +26,5 @@ class SeedsAnimalsTest < ActiveSupport::TestCase
     animal_res = sheep.animal_resources.feed.find_by(resource_id: res.id)
     assert_equal 75, animal_res.min_amount
     assert_nil animal_res.max_amount
-  end
-
-  def teardown
-    AnimalPack.destroy_all
   end
 end

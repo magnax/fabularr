@@ -5,7 +5,7 @@ User.create!(email: 'm@m.eu', password: 'fabular',
 User.create!(email: 'a@a.eu', password: 'fabular',
              password_confirmation: 'fabular')
 
-require_relative 'seeds/animals'
+Seeds::Animals.call
 require_relative 'seeds/project_types'
 Seeds::ItemTypes.call
 require_relative 'seeds/settings'
