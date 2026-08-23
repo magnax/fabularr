@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module ProjectTypes
-  class Build < ApplicationService
+module Projects
+  class Finish::Build < ApplicationService
     include Projects::UpdateWorkers
     include Projects::EndEvents
 

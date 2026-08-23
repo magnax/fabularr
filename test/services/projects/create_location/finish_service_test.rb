@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-class ProjectsCreateLocationEndServiceTest < ActiveSupport::TestCase
+class ProjectsCreateLocationFinishServiceTest < ActiveSupport::TestCase
   def setup
     create(:resource, :raw_resource)
   end
 
   def call_service(project_id)
-    Projects::EndService.call(project_id)
+    Projects::FinishService.call(project_id)
   end
 
   test '#create_location creates new location' do

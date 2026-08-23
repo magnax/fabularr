@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module ProjectTypes
-  class Collect < ApplicationService
+module Projects
+  class Finish::Collect < ApplicationService
     include Projects::UpdateWorkers
     include Projects::EndEvents
 

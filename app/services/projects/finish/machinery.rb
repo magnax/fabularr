@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module ProjectTypes
-  class Building < ApplicationService
+module Projects
+  class Finish::Machinery < ApplicationService
     include Projects::UpdateWorkers
     include Projects::EndEvents
 
@@ -10,15 +10,13 @@ module ProjectTypes
     end
 
     def call
-      Location.create!(
-        Definitions::LocationTypes::CONFIG_BUILDINGS[location_type.key].merge(
-          location_type: location_type,
-          location_class: LocationClass.find_by(key: recipe.recipe_type),
-          parent_location: location,
-          coords: location.coords,
-          name: name
+      if created_item.portable && creator_present?
+        @project.starting_character.inventory_objects.create!(
+          subject: created_item
         )
-      )
+      else
+        location.location_objects.create(subject: created_item)
+      end
 
       update_workers!
 
@@ -37,20 +35,20 @@ module ProjectTypes
       }
     end
 
-    def location_type
-      @location_type ||= LocationType.find_by(key: recipe.key)
+    def creator_present?
+      @project.location == @project.starting_character&.location
     end
 
-    def name
-      @project.settings['name']
-    end
-
-    def recipe
-      @recipe ||= @project.recipe
+    def created_item
+      ::Machinery.find_by(key: recipe.key)
     end
 
     def location
       @location ||= @project.location
+    end
+
+    def recipe
+      @recipe ||= @project.recipe
     end
   end
 end

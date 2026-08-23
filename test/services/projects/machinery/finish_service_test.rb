@@ -2,9 +2,9 @@
 
 require 'test_helper'
 
-class ProjectsMachineryEndServiceTest < ActiveSupport::TestCase
+class ProjectsMachineryFinishServiceTest < ActiveSupport::TestCase
   def call_service(project_id)
-    Projects::EndService.call(project_id)
+    Projects::FinishService.call(project_id)
   end
 
   test '#build creates manufactured item in location' do

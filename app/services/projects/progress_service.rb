@@ -44,7 +44,7 @@ module Projects
         project.update!(elapsed: project.duration, checked_at: DateTime.current)
         log.info "#{project.id}: Elapsed: #{project.reload.elapsed}"
 
-        Projects::EndService.call(project.id)
+        Projects::FinishService.call(project.id)
       end
     end
 

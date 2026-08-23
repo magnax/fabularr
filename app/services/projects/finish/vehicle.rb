@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module ProjectTypes
-  class Vehicle < ApplicationService
+module Projects
+  class Finish::Vehicle < ApplicationService
     include Projects::UpdateWorkers
     include Projects::EndEvents
 

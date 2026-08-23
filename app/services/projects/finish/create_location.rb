@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module ProjectTypes
-  class CreateLocation < ApplicationService
+module Projects
+  class Finish::CreateLocation < ApplicationService
     include Projects::UpdateWorkers
     include Projects::EndEvents
 

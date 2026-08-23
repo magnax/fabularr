@@ -2,18 +2,19 @@
 
 require 'test_helper'
 
-class ProjectsBuildingEndServiceTest < ActiveSupport::TestCase
+class ProjectsVehicleFinishServiceTest < ActiveSupport::TestCase
   def call_service(project_id)
-    Projects::EndService.call(project_id)
+    Projects::FinishService.call(project_id)
   end
 
-  test '#build/building creates building in location' do
+  test 'creates vehicle in location' do
     location = create(:location)
-    create(:location_type, key: 'wood_shack')
-    create(:location_class, key: 'building')
+    create(:location_type, key: 'small_wooden_cart')
+    create(:location_class, key: 'vehicle')
 
     wood = create(:resource, :material, key: 'wood')
-    recipe = create(:recipe, recipe_type: 'building', key: 'wood_shack', base_speed: 3600)
+    recipe = create(:recipe, recipe_type: 'vehicle',
+                             key: 'small_wooden_cart', base_speed: 3600)
     create(:recipe_instruction, recipe: recipe, subject: wood,
                                 amount: 100, unit: 'grams',
                                 instruction_type: 'resource')
@@ -25,23 +26,23 @@ class ProjectsBuildingEndServiceTest < ActiveSupport::TestCase
     create(:project_description, project: project, subject: wood, amount: 100,
                                  unit: 'grams')
     create(:project_description, :settings, project: project, subject: nil,
-                                            metadata: { name: 'Town Hall' })
+                                            metadata: { name: 'My Cart' })
     create(:worker, project: project, character: starting_character)
 
-    assert_difference -> { InventoryObject.count } => 0,
-                      -> { Location.count } => 1,
+    assert_difference -> { Location.count } => 1,
                       -> { Event.count } => 1 do
       call_service(project.id)
     end
 
-    assert_equal 1, location.reload.buildings.length
+    assert_equal 1, location.reload.vehicles.length
 
-    new_location = Location.last
-    assert_equal location.coords, new_location.coords
-    assert_equal 'Town Hall', new_location.name
+    new_vehicle = Vehicle.last
+    assert_equal location.coords, new_vehicle.coords
+    assert_equal 1.1, new_vehicle.metadata['base_speed']
+    assert_equal 'My Cart', new_vehicle.name
 
     event = Event.last
-    assert_equal 'Project started by you has just ended. Manufactured: wood shack',
+    assert_equal 'Project started by you has just ended. Manufactured: small wooden cart',
                  event.body
   end
 end

@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class Projects::EndServiceTest < ActiveSupport::TestCase
+class Projects::FinishServiceTest < ActiveSupport::TestCase
   include ActionCable::TestHelper
 
   def call_service(project_id)
-    Projects::EndService.call(project_id)
+    Projects::FinishService.call(project_id)
   end
 
   test 'broadcasting end project to starting character' do

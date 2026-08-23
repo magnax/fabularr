@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ProjectsRoadJoinServiceTest < ActiveSupport::TestCase
+class ProjectsBuildRoadJoinServiceTest < ActiveSupport::TestCase
   def setup
     @character = create(:character)
   end

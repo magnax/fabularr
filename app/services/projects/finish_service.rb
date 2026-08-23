@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Projects
-  class EndService < ApplicationService
+  class FinishService < ApplicationService
     def initialize(project_id)
       @project_id = project_id
     end
@@ -9,7 +9,7 @@ module Projects
     def call
       raise NotImplementedError if service_name.nil?
 
-      "ProjectTypes::#{service_name}".constantize.call(project)
+      "Projects::Finish::#{service_name}".constantize.call(project)
     end
 
     private

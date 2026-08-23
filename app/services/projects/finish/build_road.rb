@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module ProjectTypes
-  class BuildRoad < ApplicationService
+module Projects
+  class Finish::BuildRoad < ApplicationService
     include Projects::UpdateWorkers
     include Projects::EndEvents
 

@@ -2,14 +2,14 @@
 
 require 'test_helper'
 
-class ProjectsRoadEndServiceTest < ActiveSupport::TestCase
+class ProjectsBuildRoadFinishServiceTest < ActiveSupport::TestCase
   def setup
     @location = create(:location)
     @character = create(:character, location: @location)
   end
 
   def call_service(project_id)
-    Projects::EndService.call(project_id)
+    Projects::FinishService.call(project_id)
   end
 
   test 'creates a new path' do

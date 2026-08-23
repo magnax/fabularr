@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module ProjectTypes
-  class DiscoverResource < ApplicationService
+module Projects
+  class Finish::DiscoverResource < ApplicationService
     include Projects::UpdateWorkers
     include Projects::EndEvents
 

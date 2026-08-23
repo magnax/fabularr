@@ -2,9 +2,9 @@
 
 require 'test_helper'
 
-class Projects::DiscoverResourceEndServiceTest < ActiveSupport::TestCase
+class Projects::DiscoverResourceFinishServiceTest < ActiveSupport::TestCase
   def call_service(project_id)
-    Projects::EndService.call(project_id)
+    Projects::FinishService.call(project_id)
   end
 
   test '#discover_resource creates resource in location' do

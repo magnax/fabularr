@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ProjectsRoadLeaveServiceTest < ActiveSupport::TestCase
+class ProjectsBuildRoadLeaveServiceTest < ActiveSupport::TestCase
   def setup
     @character = create(:character)
     @char_skill = create(:character_skill, :building,

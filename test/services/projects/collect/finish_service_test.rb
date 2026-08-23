@@ -2,14 +2,14 @@
 
 require 'test_helper'
 
-class ProjectsCollectEndServiceTest < ActiveSupport::TestCase
+class ProjectsCollectFinishServiceTest < ActiveSupport::TestCase
   def setup
     @location = create(:location)
     @food_type = create(:resource_type, key: 'food')
   end
 
   def call_service(project_id)
-    Projects::EndService.call(project_id)
+    Projects::FinishService.call(project_id)
   end
 
   test '#collect raises error when wrong resource' do
@@ -22,7 +22,7 @@ class ProjectsCollectEndServiceTest < ActiveSupport::TestCase
                                                 unit: 'grams')
     create(:worker, project: project, character: starting_character)
 
-    assert_raises ProjectTypes::Collect::NoSuchResourceError do
+    assert_raises Projects::Finish::Collect::NoSuchResourceError do
       call_service(project.id)
     end
   end
