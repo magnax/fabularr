@@ -59,7 +59,7 @@ class LocationsCreateServiceTest < ActiveSupport::TestCase
   end
 
   test 'create location and animal packs' do
-    require_relative '../../../db/seeds/animals'
+    Seeds::Animals.call
 
     location_type = create(:location_type, key: 'mountains')
     coords = ActiveRecord::Point.new(x: 200, y: 200)

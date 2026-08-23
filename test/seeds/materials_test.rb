@@ -8,7 +8,7 @@ class SeedsMaterialsTest < ActiveSupport::TestCase
 
     assert_difference -> { Resource.count } => expected_count,
                       -> { ResourceType.count } => 2 do
-      require_relative '../../db/seeds/materials'
+      Seeds::Materials.call
     end
 
     assert_equal expected_count, Resource.material.count

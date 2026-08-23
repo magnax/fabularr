@@ -11,7 +11,7 @@ Seeds::ItemTypes.call
 require_relative 'seeds/settings'
 Seeds::Skills.call
 Seeds::RawResources.call
-require_relative 'seeds/materials'
+Seeds::Materials.call
 require_relative 'seeds/recipes'
 Seeds::Locations.call
 
