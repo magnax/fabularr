@@ -8,7 +8,7 @@ User.create!(email: 'a@a.eu', password: 'fabular',
 Seeds::Animals.call
 require_relative 'seeds/project_types'
 Seeds::ItemTypes.call
-require_relative 'seeds/settings'
+Seeds::Settings.call
 Seeds::Skills.call
 Seeds::RawResources.call
 Seeds::Materials.call
