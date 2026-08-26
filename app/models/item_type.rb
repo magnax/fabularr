@@ -34,6 +34,9 @@ class ItemType < ApplicationRecord
   belongs_to :parent_item_type, optional: true, class_name: 'ItemType'
   has_many :item_types, inverse_of: :parent_item_type, dependent: :destroy
 
+  has_many :item_types_tags, dependent: :destroy
+  has_many :tags, through: :item_types_tags
+
   BUILDING = 'building'
   TOOL = 'tool'
   VEHICLE = 'vehicle'

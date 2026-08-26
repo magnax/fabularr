@@ -26,6 +26,8 @@ class Item < ApplicationRecord
   belongs_to :item_type
 
   delegate :weight, to: :item_type
+  delegate :key, to: :item_type
+  delegate :tags, to: :item_type
 
   def damage_key
     'brand_new'

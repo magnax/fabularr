@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_28_075727) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_26_061956) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -148,6 +148,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_28_075727) do
     t.integer "weight"
     t.index ["item_class_id"], name: "index_item_types_on_item_class_id"
     t.index ["parent_item_type_id"], name: "index_item_types_on_parent_item_type_id"
+  end
+
+  create_table "item_types_tags", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "item_type_id"
+    t.bigint "tag_id"
+    t.datetime "updated_at", null: false
+    t.index ["item_type_id"], name: "index_item_types_tags_on_item_type_id"
+    t.index ["tag_id"], name: "index_item_types_tags_on_tag_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -351,6 +360,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_28_075727) do
     t.index ["created_at"], name: "index_solid_cable_messages_on_created_at"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "key"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "travellers", force: :cascade do |t|
     t.datetime "checked_at"
     t.datetime "created_at", null: false
@@ -397,6 +412,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_28_075727) do
   add_foreign_key "inventory_objects", "characters"
   add_foreign_key "item_types", "item_classes"
   add_foreign_key "item_types", "item_types", column: "parent_item_type_id"
+  add_foreign_key "item_types_tags", "item_types"
+  add_foreign_key "item_types_tags", "tags"
   add_foreign_key "items", "item_classes"
   add_foreign_key "location_names", "characters"
   add_foreign_key "location_names", "locations"
