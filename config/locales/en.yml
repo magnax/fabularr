@@ -493,6 +493,7 @@ en:
     inventory_objects:
       add_to_project: Add to project
       drop: Drop
+      eat: Eat
       max_drop: You can drop max.
       title: Inventory
     layout:

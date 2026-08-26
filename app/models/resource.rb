@@ -40,4 +40,12 @@ class Resource < ApplicationRecord
   def resource_types
     ResourceType.where(id: resource_type_id)
   end
+
+  def edible?
+    (resource_types.pluck(:key) & ResourceType::EDIBLE_TYPES).present?
+  end
+
+  def healing?
+    ResourceType::MEDICINE.in?(resource_types.pluck(:key))
+  end
 end

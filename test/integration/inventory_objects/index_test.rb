@@ -25,4 +25,26 @@ class InventoryObjectsIndexTest < ActionDispatch::IntegrationTest
     assert_link 'Drop', href: "#{host}/en/inventory_objects/#{inv_iron.id}/drop"
     assert_link 'Drop', href: "#{host}/en/inventory_objects/#{inv_knife.id}/drop_item"
   end
+
+  test 'edible resources have proper links' do
+    grilled_meat = create(:resource, :food, key: 'grilled_meat')
+    inv_meat = create(:inventory_object, character: @character,
+                                         subject: grilled_meat, amount: 100)
+
+    visit 'en/inventory_objects'
+
+    assert_content '100 grams grilled meat'
+    assert_link 'Eat', href: "#{host}/en/inventory_objects/#{inv_meat.id}/eat"
+  end
+
+  test 'healing resources have proper links' do
+    mushrooms = create(:resource, :medicine, key: 'mushrooms')
+    inv_mushrooms = create(:inventory_object, character: @character,
+                                              subject: mushrooms, amount: 100)
+
+    visit 'en/inventory_objects'
+
+    assert_content '100 grams mushrooms'
+    assert_link 'Eat', href: "#{host}/en/inventory_objects/#{inv_mushrooms.id}/eat"
+  end
 end
