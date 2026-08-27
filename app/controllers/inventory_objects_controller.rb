@@ -21,6 +21,10 @@ class InventoryObjectsController < ApplicationController
     @resource = inventory_object.subject
   end
 
+  def eat
+    render locals: InventoryObjects::ShowEatService.call(current_character)
+  end
+
   def drop_item
     LocationObjects::CreateService.call(
       current_character, params.permit(:inventory_object_id)

@@ -491,11 +491,17 @@ en:
       send: Send
       title: Events for
     inventory_objects:
-      add_to_project: Add to project
-      drop: Drop
-      eat: Eat
-      max_drop: You can drop max.
-      title: Inventory
+      drop:
+        max_drop: You can drop max.
+        submit: Drop
+      eat:
+        amount_label: Amount to eat
+        title: Eating
+      index:
+        add_to_project: Add to project
+        drop: Drop
+        eat: Eat
+        title: Inventory
     layout:
       admin: Admin
       back_to_char_list: Characters list

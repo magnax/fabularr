@@ -491,11 +491,17 @@ pl:
       send: Wyślij
       title: Zdarzenia dla
     inventory_objects:
-      add_to_project: Dodaj do projektu
-      drop: Upuść
-      eat: Zjedz
-      max_drop: Możesz upuścić
-      title: Inwentarz
+      drop:
+        max_drop: Możesz upuścić
+        submit: Upuść
+      eat:
+        amount_label: Ilość do zjedzenia
+        title: Jedzenie
+      index:
+        add_to_project: Dodaj do projektu
+        drop: Upuść
+        eat: Zjedz
+        title: Inwentarz
     layout:
       admin: Admin
       back_to_char_list: Lista postaci
