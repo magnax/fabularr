@@ -106,7 +106,7 @@ gold:
   skill: digging
 grapes:
   rate: 75
-  eaten: 45
+  heal: 45
   skill: farming
   types:
     - medicine

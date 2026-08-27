@@ -16,7 +16,7 @@ class InventoryObjectsEatTest < ActionDispatch::IntegrationTest
   end
 
   test 'shows eating form' do
-    grapes = create(:resource, :raw_food, key: 'grapes')
+    grapes = create(:resource, :raw_food, key: 'grapes', eaten: 100)
     inv_grapes = create(:inventory_object, character: @character,
                                            subject: grapes, amount: 100)
 
