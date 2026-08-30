@@ -27,6 +27,12 @@ class InventoryObjectsController < ApplicationController
     )
   end
 
+  def consume
+    InventoryObjects::ConsumeService.call(current_character, inventory_object_params)
+
+    redirect_to events_path
+  end
+
   def drop_item
     LocationObjects::CreateService.call(
       current_character, params.permit(:inventory_object_id)

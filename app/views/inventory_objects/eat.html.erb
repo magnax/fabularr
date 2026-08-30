@@ -3,6 +3,12 @@
     <%= t('views.inventory_objects.eat.title') %>
   </div>
   
-  <%= t('views.inventory_objects.eat.amount_label') %>:
+  <%= form_for :inventory_object, url: eat_inventory_objects_url, method: 'POST' do |form| %>
+    <%= t('views.inventory_objects.eat.amount_label') %>:
+    <%= form.hidden_field :subject_id, value: 2 %>
+    <%= form.hidden_field :subject_type, value: 'Resource' %>
+    <%= form.text_field :amount %>
+    <%= form.submit 'Eat' %>
+  <% end %>
 
 </section>

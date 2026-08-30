@@ -26,4 +26,85 @@ class InventoryObjectsEatTest < ActionDispatch::IntegrationTest
 
     assert_includes response.parsed_body.to_s, 'Amount to eat:'
   end
+
+  test '#post create eating action' do
+    grapes = create(:resource, :raw_food, key: 'grapes', heal: 100)
+    inv_grapes = create(:inventory_object, character: @character,
+                                           subject: grapes, amount: 1000)
+    @character.update!(damage: 20)
+
+    params = {
+      inventory_object: {
+        subject_id: grapes.id,
+        subject_type: 'Resource',
+        amount: 250
+      }
+    }
+
+    assert_difference -> { Event.count } => 1 do
+      post eat_inventory_objects_url, params: params
+    end
+
+    assert_redirected_to events_path
+
+    event = Event.last
+    assert_equal 'You eat 250 grams of your grapes', event.body
+
+    assert_equal 17.5, @character.reload.damage
+    assert_equal 750, inv_grapes.reload.amount
+  end
+
+  test '#post eat up all if amount is greater than in inventory' do
+    grapes = create(:resource, :raw_food, key: 'grapes', heal: 100)
+    create(:inventory_object, character: @character,
+                              subject: grapes, amount: 100)
+    @character.update!(damage: 0)
+
+    params = {
+      inventory_object: {
+        subject_id: grapes.id,
+        subject_type: 'Resource',
+        amount: 250
+      }
+    }
+
+    assert_difference -> { Event.count } => 1,
+                      -> { InventoryObject.count } => -1 do
+      post eat_inventory_objects_url, params: params
+    end
+
+    assert_redirected_to events_path
+
+    event = Event.last
+    assert_equal 'You eat all of your grapes', event.body
+
+    assert_equal 0, @character.reload.damage
+  end
+
+  test '#post can eat up more than needed to fully heal' do
+    grapes = create(:resource, :raw_food, key: 'grapes', heal: 100)
+    inv_grapes = create(:inventory_object, character: @character,
+                                           subject: grapes, amount: 1000)
+    @character.update!(damage: 1)
+
+    params = {
+      inventory_object: {
+        subject_id: grapes.id,
+        subject_type: 'Resource',
+        amount: 250
+      }
+    }
+
+    assert_difference -> { Event.count } => 1 do
+      post eat_inventory_objects_url, params: params
+    end
+
+    assert_redirected_to events_path
+
+    event = Event.last
+    assert_equal 'You eat 250 grams of your grapes', event.body
+
+    assert_equal 0, @character.reload.damage
+    assert_equal 750, inv_grapes.reload.amount
+  end
 end

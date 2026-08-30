@@ -48,4 +48,8 @@ class Resource < ApplicationRecord
   def healing?
     ResourceType::MEDICINE.in?(resource_types.pluck(:key))
   end
+
+  def rate_1g
+    1.0 / heal
+  end
 end

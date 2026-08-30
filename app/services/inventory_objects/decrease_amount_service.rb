@@ -11,8 +11,10 @@ module InventoryObjects
     def call
       if @amount >= inventory_object.amount
         inventory_object.destroy
+        0
       else
         inventory_object.update!(amount: inventory_object.amount - @amount)
+        inventory_object.amount
       end
     end
 

@@ -25,6 +25,7 @@ Fabularr::Application.routes.draw do
       get :drop
       get :drop_item
       get :eat
+      post :eat, on: :collection, to: 'inventory_objects#consume'
     end
     resources :location_names, only: %i[create]
     resources :location_objects, only: [:create] do
