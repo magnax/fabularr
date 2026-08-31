@@ -107,4 +107,58 @@ class InventoryObjectsEatTest < ActionDispatch::IntegrationTest
     assert_equal 0, @character.reload.damage
     assert_equal 750, inv_grapes.reload.amount
   end
+
+  test '#post can eat up some to reduce hunger' do
+    grapes = create(:resource, :raw_food, key: 'grapes', eaten: 100)
+    inv_grapes = create(:inventory_object, character: @character,
+                                           subject: grapes, amount: 1000)
+    @character.update!(hunger: 5)
+
+    params = {
+      inventory_object: {
+        subject_id: grapes.id,
+        subject_type: 'Resource',
+        amount: 100
+      }
+    }
+
+    assert_difference -> { Event.count } => 1 do
+      post eat_inventory_objects_url, params: params
+    end
+
+    assert_redirected_to events_path
+
+    event = Event.last
+    assert_equal 'You eat 100 grams of your grapes', event.body
+
+    assert_equal 0, @character.reload.hunger
+    assert_equal 900, inv_grapes.reload.amount
+  end
+
+  test '#post can eat up more than needed to fully reduce hunger' do
+    grapes = create(:resource, :raw_food, key: 'grapes', eaten: 100)
+    inv_grapes = create(:inventory_object, character: @character,
+                                           subject: grapes, amount: 1000)
+    @character.update!(hunger: 3)
+
+    params = {
+      inventory_object: {
+        subject_id: grapes.id,
+        subject_type: 'Resource',
+        amount: 200
+      }
+    }
+
+    assert_difference -> { Event.count } => 1 do
+      post eat_inventory_objects_url, params: params
+    end
+
+    assert_redirected_to events_path
+
+    event = Event.last
+    assert_equal 'You eat 200 grams of your grapes', event.body
+
+    assert_equal 0, @character.reload.hunger
+    assert_equal 800, inv_grapes.reload.amount
+  end
 end

@@ -52,4 +52,8 @@ class Resource < ApplicationRecord
   def rate_1g
     1.0 / heal
   end
+
+  def eaten_rate_1percent
+    eaten * 0.2
+  end
 end

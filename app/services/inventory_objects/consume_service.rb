@@ -13,6 +13,7 @@ module InventoryObjects
       raise InvalidResourceError if resource.blank? || inventory_object.blank?
 
       update_character_damage!
+      update_character_hunger!
       @amount_left = InventoryObjects::DecreaseAmountService.call(
         @character, resource, amount
       )
@@ -29,6 +30,15 @@ module InventoryObjects
       new_damage = 0 if new_damage.negative?
 
       @character.update!(damage: new_damage)
+    end
+
+    def update_character_hunger!
+      return if @character.hunger.zero?
+
+      new_hunger = @character.hunger - (resource.eaten_rate_1percent * amount)
+      new_hunger = 0 if new_hunger.negative?
+
+      @character.update!(hunger: new_hunger)
     end
 
     def body
