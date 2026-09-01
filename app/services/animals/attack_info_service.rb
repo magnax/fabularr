@@ -32,7 +32,8 @@ module Animals
     end
 
     def last_attacked_packs_ids
-      @last_attacked_packs_ids ||= @character.character_actions.hunting.pluck(:subject_id)
+      @last_attacked_packs_ids ||=
+        @character.character_actions.hunting.recent.pluck(:subject_id)
     end
 
     # TODO: duplicate code!

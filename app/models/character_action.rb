@@ -26,6 +26,7 @@ class CharacterAction < ApplicationRecord
   belongs_to :subject, polymorphic: true
 
   scope :hunting, -> { where(key: HUNTING) }
+  scope :recent, -> { where('created_at > ?', DateTime.current - 1.day) }
 
   HUNTING = 'hunting'
   ATTACK = 'attack'
