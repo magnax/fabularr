@@ -13,8 +13,8 @@ class ProjectsBuildFinishServiceTest < ActiveSupport::TestCase
     resource = create(:resource, :material, key: 'stone')
     create(:item_type, key: 'stone_knife', weight: 120)
     recipe = create(:recipe, key: 'stone_knife')
-    create(:recipe_instruction, recipe: recipe,
-                                instruction_type: 'resource', subject: resource, amount: 100)
+    create(:recipe_instruction, recipe: recipe, instruction_type: 'resource',
+                                subject: resource, amount: 100)
 
     starting_character = create(:character, location: location)
     project = create(:project, :build, location: location,

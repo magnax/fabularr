@@ -29,6 +29,8 @@ class Item < ApplicationRecord
   delegate :key, to: :item_type
   delegate :tags, to: :item_type
 
+  scope :weapon, -> { joins(:item_type).merge(ItemType.weapon) }
+
   def damage_key
     'brand_new'
   end

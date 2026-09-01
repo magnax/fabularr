@@ -24,7 +24,17 @@
 class InventoryObject < ApplicationRecord
   belongs_to :subject, polymorphic: true
   belongs_to :character
+  belongs_to :item, class_name: 'Item',
+                    foreign_key: 'subject_id', inverse_of: false,
+                    optional: true
 
   scope :resource, -> { where(subject_type: 'Resource') }
   scope :item, -> { where(subject_type: 'Item') }
+  scope :weapon, -> { joins(:item).merge(Item.weapon) }
+
+  def item
+    return unless subject_type == 'Item'
+
+    super
+  end
 end

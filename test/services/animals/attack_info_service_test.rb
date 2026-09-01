@@ -60,4 +60,31 @@ class AnimalsAttackInfoServiceTest < ActiveSupport::TestCase
     pack = res[:animals].find { |p| p[:name] == 'dog' }
     assert pack[:can_attack]
   end
+
+  test 'show weapons sorted by attack strength' do
+    dog = create(:animal, key: 'dog')
+    create(:animal_pack, location: @character.location, animal: dog)
+    weapon = create(:tag, key: Tag::WEAPON)
+
+    knife_type = create(:item_type, key: 'knife', attack: 6)
+    spear_type = create(:item_type, key: 'bone_spear', attack: 10)
+
+    create(:item_types_tag, item_type: knife_type, tag: weapon)
+    create(:item_types_tag, item_type: spear_type, tag: weapon)
+
+    knife = create(:item, item_type: knife_type)
+    spear = create(:item, item_type: spear_type)
+
+    create(:inventory_object, character: @character, subject: knife)
+    create(:inventory_object, character: @character, subject: spear)
+
+    res = call_service
+
+    assert_equal 3, res[:weapons].length
+
+    weapon = res[:weapons].first
+
+    assert_equal 'bone_spear', weapon[0]
+    assert_equal 10, weapon[1]
+  end
 end

@@ -9,11 +9,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Tag < ApplicationRecord
-  has_many :item_types, through: :item_type_tags
-
-  MATERIAL = 'material' # item can be used like resource in project
-  PROTECTION = 'protection'
-  TOOL = 'tool'
-  WEAPON = 'weapon'
+FactoryBot.define do
+  factory :tag do
+    key { 'tool' }
+  end
 end
