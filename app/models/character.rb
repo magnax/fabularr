@@ -10,7 +10,9 @@
 #  gender            :string
 #  hunger            :float            default(0.0)
 #  name              :string
+#  status            :boolean          default(TRUE)
 #  tiredness         :float            default(0.0)
+#  weight            :integer
 #  created_at        :datetime
 #  updated_at        :datetime
 #  location_id       :integer
