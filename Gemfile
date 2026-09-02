@@ -8,6 +8,7 @@ gem 'i18n'
 gem 'jbuilder'
 gem 'net-http'
 gem 'observer'
+gem 'ostruct'
 gem 'pg'
 gem 'pry-rails'
 gem 'puma'
@@ -47,7 +48,6 @@ group :test do
   gem 'minitest-reporters'
   gem 'mocha'
   gem 'mutex_m'
-  gem 'ostruct'
   gem 'simplecov', require: false
   gem 'timecop'
 end
