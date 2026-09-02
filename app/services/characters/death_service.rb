@@ -7,7 +7,13 @@ module Characters
     end
 
     def call
-      true # TODO: dummy service for now
+      character.update!(status: false, weight: Character::WEIGHT)
+    end
+
+    private
+
+    def character
+      @character ||= Character.find_by(id: @character_id)
     end
   end
 end
