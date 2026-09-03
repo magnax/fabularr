@@ -1,0 +1,10 @@
+{
+  "name": "app",
+  "private": true,
+  "devDependencies": {
+    "esbuild": "^0.25.6"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/application-esbuild.js --bundle --sourcemap --format=iife --outfile=app/assets/builds/application-bundled.js"
+  }
+}

@@ -2,3 +2,4 @@
 //= link_directory ../stylesheets .css
 //= link_directory ../images .png
 //= link_directory ../images .svg
+//= link_tree ../builds
