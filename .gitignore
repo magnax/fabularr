@@ -25,6 +25,7 @@ pickle-email-*.html
 .env
 .keep
 yarn.lock
+package-lock.json
 
 /app/assets/builds/*
 !/app/assets/builds/.keep

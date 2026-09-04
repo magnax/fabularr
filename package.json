@@ -6,5 +6,8 @@
   },
   "scripts": {
     "build": "esbuild app/javascript/application-esbuild.js --bundle --sourcemap --format=iife --outfile=app/assets/builds/application-bundled.js"
+  },
+  "dependencies": {
+    "@rails/actioncable": "^7.2.302"
   }
 }

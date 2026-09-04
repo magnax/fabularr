@@ -1,9 +1,9 @@
 //= require channels
-//= require projects.js
 //= require rails-ujs
 
 function clearErrors() {
   try {
+    console.log("clear errors...");
     document.querySelector('.alert').remove();
   } catch (_error) { }
 }

@@ -1,3 +1,5 @@
+//= require common.js
+
 window.onload = function () {
   console.log("character list page loaded");
 
