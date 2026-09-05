@@ -1,4 +1,4 @@
-window.recount = function (currentField) {
+function recount(currentField) {
   ratio = Number(currentField.value) / Number(currentField.dataset['amount'])
 
   for (let i = 0; i < currentField.form.elements.length; i++) {
@@ -9,3 +9,5 @@ window.recount = function (currentField) {
     }
   }
 };
+
+export { recount };
