@@ -6,6 +6,4 @@ window.onload = function () {
   currentUserId = document.getElementById('current_user').dataset.id;
 
   setInterval(checkEvents, 10000);
-
-  subscribeTime();
 }

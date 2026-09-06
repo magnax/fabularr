@@ -1,8 +1,6 @@
 //= require common.js
 
 window.onload = function () {
-  subscribeTime();
-
   document.querySelector('.submit-button').addEventListener("click", (event) => {
     event.preventDefault();
     const message = document.getElementById('submit-body').value;

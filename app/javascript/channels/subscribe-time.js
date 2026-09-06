@@ -1,3 +1,12 @@
+function subscribeTime() {
+  App.cable.subscriptions.create({ channel: "TimeChannel" }, {
+    received(data) {
+      console.log(data);
+      dispatchTimeEvent(data.payload);
+    }
+  })
+}
+
 function dispatchTimeEvent(data) {
   const dd = document.getElementById('header-date-day');
   const dh = document.getElementById('header-date-hour');
@@ -15,3 +24,5 @@ function dispatchTimeEvent(data) {
     dm.textContent = data.minute;
   }
 }
+
+export { subscribeTime };
