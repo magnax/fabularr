@@ -1,13 +1,6 @@
 //= require channels
 //= require rails-ujs
 
-function clearErrors() {
-  try {
-    console.log("clear errors...");
-    document.querySelector('.alert').remove();
-  } catch (_error) { }
-}
-
 function checkEvents() {
   fetch(`/api/events/unread?user_id=${currentUserId}`)
     .then(response => {

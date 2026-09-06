@@ -1,4 +1,4 @@
-function dispatch_event(event_id, character_id) {
+function dispatchEvent(event_id, character_id) {
   fetch(`/api/events/${event_id}?character_id=${character_id}`)
     .then(response => {
       if (!response.ok) {
@@ -35,3 +35,5 @@ function createLine(event) {
         </div>
       `
 };
+
+export { dispatchEvent };

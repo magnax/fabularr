@@ -1,12 +1,3 @@
-function dispatch_project(id, progress) {
-  const element = document.getElementById(`percent-${id}`)
-  element.innerHTML = progress;
-}
-
-function dispatch_end_project(id) {
-  document.querySelector(`[data-project-id="${id}"]`).remove();
-}
-
 function dispatchTimeEvent(data) {
   const dd = document.getElementById('header-date-day');
   const dh = document.getElementById('header-date-hour');
