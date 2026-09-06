@@ -1,5 +1,6 @@
 import { dispatchEvent } from './dispatch-event.js';
 import { dispatchProgress, dispatchEndProject } from './dispatch-projects.js';
+import { createConsumer } from "@rails/actioncable";
 
 function initCharacterChannel() {
   if (!document.getElementById('current_character')) {
@@ -10,7 +11,9 @@ function initCharacterChannel() {
 
   currentCharacterId = document.getElementById('current_character').dataset.id;
 
-  App.cable.subscriptions.create({ channel: "CharacterChannel", character_id: currentCharacterId }, {
+  const consumer = createConsumer();
+
+  consumer.subscriptions.create({ channel: "CharacterChannel", character_id: currentCharacterId }, {
     connected() {
       console.log("Connected!!!");
     },

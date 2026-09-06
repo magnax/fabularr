@@ -1,7 +1,15 @@
-//= require channels
-//= require rails-ujs
+function initCharacterList() {
+  if (!document.getElementById('current_user')) {
+    return;
+  }
+
+  console.log("character list page loaded");
+  setInterval(checkEvents, 10000);
+};
 
 function checkEvents() {
+  const currentUserId = document.getElementById('current_user').dataset.id;
+
   fetch(`/api/events/unread?user_id=${currentUserId}`)
     .then(response => {
       if (!response.ok) {
@@ -23,9 +31,6 @@ function checkEvents() {
     .catch(error => {
       console.error("There was a problem with the fetch operation:", error);
     });
-}
+};
 
-function toggleRecipe(el) {
-  const details = el.parentNode.querySelector('.recipe-details');
-  details.style['display'] = details.style['display'] === 'none' ? 'block' : 'none';
-}
+export { initCharacterList };

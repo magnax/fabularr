@@ -1,6 +1,8 @@
-//= require common.js
+function initSubmitButton() {
+  if (!document.querySelector('.submit-button')) {
+    return;
+  }
 
-window.onload = function () {
   document.querySelector('.submit-button').addEventListener("click", (event) => {
     event.preventDefault();
     const message = document.getElementById('submit-body').value;
@@ -23,4 +25,6 @@ window.onload = function () {
       .then(data => { })
       .catch(err => console.error('Error:'));
   })
-}
+};
+
+export { initSubmitButton };

@@ -1,5 +1,9 @@
+import { createConsumer } from "@rails/actioncable";
+
 function subscribeTime() {
-  App.cable.subscriptions.create({ channel: "TimeChannel" }, {
+  const consumer = createConsumer();
+
+  consumer.subscriptions.create({ channel: "TimeChannel" }, {
     received(data) {
       console.log(data);
       dispatchTimeEvent(data.payload);
