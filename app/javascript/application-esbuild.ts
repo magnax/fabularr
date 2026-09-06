@@ -1,5 +1,5 @@
 import { recount } from './recount.js';
-import { toggleRecipe } from './toggle-recipe.js';
+import { toggleRecipe } from './toggle-recipe.ts';
 import clearErrors from './helpers/clear-errors.ts';
 import { initSubmitButton } from './helpers/init-submit-button.js';
 import { initCharacterList } from './helpers/init-character-list.js';
