@@ -7,3 +7,5 @@ declare global {
     initCharacter: any;
   }
 }
+
+declare module '@rails/ujs';
