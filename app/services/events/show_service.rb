@@ -32,7 +32,7 @@ module Events
     def animals
       return if location.blank?
 
-      location.animal_packs.map do |pack|
+      location.animal_packs.includes(:animal).map do |pack|
         I18n.t("animals.#{pack.animal.key}.p")
       end.sort.join(', ')
     end

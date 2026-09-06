@@ -17,6 +17,6 @@ class LocationResource < ApplicationRecord
   belongs_to :location, optional: true
   belongs_to :resource
 
-  scope :visible, -> { where(status: true) }
+  scope :visible, -> { includes(:resource).where(status: true) }
   scope :available, -> { where(status: false).order(sorting: :asc) }
 end

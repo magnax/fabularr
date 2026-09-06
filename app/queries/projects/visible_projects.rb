@@ -13,12 +13,15 @@ module Projects
     end
 
     def location_projects
-      @character.location&.projects&.pending&.includes(:starting_character, :project_type)
+      @character.location
+                &.projects
+                &.pending
+                &.includes(:starting_character, :project_type, recipe: :skill)
     end
 
     def location_create_projects
       Project.pending
-             .includes(:starting_character, :project_type)
+             .includes(:starting_character, :project_type, :recipe)
              .joins(:project_type, :project_descriptions)
              .where(project_types: { key: 'create_location' })
              .where(project_descriptions: { description_type: 'location' })

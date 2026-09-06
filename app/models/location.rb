@@ -100,7 +100,8 @@ class Location < ApplicationRecord
   end
 
   def roads
-    roads_from + roads_to
+    roads_from.includes(location_2: :location_class) +
+      roads_to.includes(location_1: :location_class)
   end
 
   def display_name(character, parent: false)
