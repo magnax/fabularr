@@ -1,4 +1,4 @@
-import { recount } from './recount.js';
+import { recount } from './recount.ts';
 import { toggleRecipe } from './toggle-recipe.ts';
 import clearErrors from './helpers/clear-errors.ts';
 import { initSubmitButton } from './helpers/init-submit-button.js';

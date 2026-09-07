@@ -1,10 +1,11 @@
 function toggleRecipe(el: HTMLElement) {
-  const details: HTMLElement | null =
-    el?.parentNode?.querySelector('.recipe-details') || null;
+  const details = el.parentNode?.querySelector<HTMLElement>('.recipe-details');
 
-  if (details !== null) {
-    details.style['display'] = details.style['display'] === 'none' ? 'block' : 'none';
+  if (details == null) {
+    return;
   }
+
+  details.style.display = details.style.display === 'none' ? '' : 'none';
 }
 
 export { toggleRecipe };
