@@ -3,8 +3,8 @@ import { toggleRecipe } from './toggle-recipe.ts';
 import clearErrors from './helpers/clear-errors.ts';
 import { initSubmitButton } from './helpers/init-submit-button.js';
 import { initCharacterList } from './helpers/init-character-list.js';
-import { initCharacterChannel } from './channels/init-character-channel.js';
-import { subscribeTime } from './channels/subscribe-time.js';
+import { initCharacterChannel } from './channels/init-character-channel.ts';
+import { subscribeTime } from './channels/subscribe-time.ts';
 import Rails from '@rails/ujs';
 
 window.recount = recount;

@@ -1,23 +1,23 @@
 import { dispatchEvent } from './dispatch-event.js';
 import { dispatchProgress, dispatchEndProject } from './dispatch-projects.js';
 import { createConsumer } from "@rails/actioncable";
+import { type EventData } from "../types/event-data.js";
 
 function initCharacterChannel() {
-  if (!document.getElementById('current_character')) {
+  const currentCharacterId = document.getElementById('current_character')?.dataset.id;
+
+  if (!currentCharacterId) {
     return;
   }
 
   console.log("initializing character channel...");
-
-  currentCharacterId = document.getElementById('current_character').dataset.id;
-
   const consumer = createConsumer();
 
   consumer.subscriptions.create({ channel: "CharacterChannel", character_id: currentCharacterId }, {
     connected() {
       console.log("Connected!!!");
     },
-    received(data) {
+    received(data: EventData) {
       switch (data.type) {
         case 'event':
           console.log("Event received...");
