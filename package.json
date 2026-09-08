@@ -1,7 +1,9 @@
 {
   "name": "app",
   "private": true,
+  "license": "GPL-3.0-only",
   "devDependencies": {
+    "@types/rails__actioncable": "^8.0.3",
     "@types/rails__ujs": "^6.0.4",
     "esbuild": "^0.25.6"
   },
