@@ -1,12 +1,12 @@
 type GameDate = {
-  day: string,
-  hour: string,
-  minute: string
+  readonly day: string,
+  readonly hour: string,
+  readonly minute: string
 };
 
 type GameDatePayload = {
-  type: 'time',
-  payload: GameDate
+  readonly type: 'time',
+  readonly payload: GameDate
 };
 
 export { GameDate, GameDatePayload };

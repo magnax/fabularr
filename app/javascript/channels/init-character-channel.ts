@@ -24,9 +24,13 @@ function initCharacterChannel() {
           dispatchEvent(data.event_id, currentCharacterId);
           break;
         case 'project':
-          dispatchProgress(data.id, data.progress);
+          if (!data.id || !data.progress) break;
+
+          dispatchProgress(data.id, String(data.progress));
           break;
         case 'project.end':
+          if (!data.project_id) break;
+
           dispatchEndProject(data.project_id);
           break;
         default:

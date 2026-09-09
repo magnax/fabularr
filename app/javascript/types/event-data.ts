@@ -1,9 +1,9 @@
 type EventData = {
-  type: 'event' | 'project' | 'project.end',
-  event_id: number,
-  id: number,
-  progress: number,
-  project_id: number
+  readonly type: 'event' | 'project' | 'project.end',
+  readonly event_id?: number,
+  readonly id?: number,
+  readonly progress?: number,
+  readonly project_id?: number
 }
 
 export { EventData };
