@@ -1,7 +1,7 @@
 import { dispatchEvent } from './dispatch-event.js';
-import { dispatchProgress, dispatchEndProject } from './dispatch-projects.js';
+import { dispatchProgress, dispatchEndProject } from './dispatch-projects.ts';
 import { createConsumer } from "@rails/actioncable";
-import { type EventData } from "../types/event-data.js";
+import { type EventData } from "../types/event-data.ts";
 
 function initCharacterChannel() {
   const currentCharacterId = document.getElementById('current_character')?.dataset.id;
@@ -21,7 +21,9 @@ function initCharacterChannel() {
       switch (data.type) {
         case 'event':
           console.log("Event received...");
-          dispatchEvent(data.event_id, currentCharacterId);
+          if (!data.event_id) break;
+
+          dispatchEvent(data.event_id, Number(currentCharacterId));
           break;
         case 'project':
           if (!data.id || !data.progress) break;

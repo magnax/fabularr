@@ -6,4 +6,9 @@ type EventData = {
   readonly project_id?: number
 }
 
-export { EventData };
+type DisplayEvent = {
+  created_at: any,
+  body: string
+}
+
+export { EventData, DisplayEvent };
