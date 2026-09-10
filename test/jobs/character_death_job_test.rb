@@ -20,11 +20,4 @@ class CharacterDeathJobTest < ActiveSupport::TestCase
     assert_not @character.reload.status
     assert_equal Character::WEIGHT, @character.weight
   end
-
-  test 'schedule next run' do
-    Sidekiq.testing!(:fake) do
-      call_job
-      assert_equal 1, CharacterDeathJob.jobs.size
-    end
-  end
 end

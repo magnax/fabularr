@@ -20,7 +20,7 @@ module Characters
         new_hunger = character.hunger + HUNGER_POINTS
         if new_hunger >= 100
           new_hunger = 100
-          CharacterDeathJob.perform_in(Character::DEATH_DELAY)
+          CharacterDeathJob.perform_in(Character::DEATH_DELAY, character.id)
         end
       else
         return if hunger_change.zero?
@@ -35,7 +35,7 @@ module Characters
     def create_hunger_event!
       return unless hunger_change.positive?
 
-      create_event!(I18n.t('events.hungry'))
+      Events::CreateAndBroadcastService.call(@character, I18n.t('events.hungry'))
     end
 
     def hunger_change
@@ -80,15 +80,7 @@ module Characters
         body = I18n.t('events.eaten', amount: amount, res: resource.subject.key)
       end
 
-      create_event!(body)
-    end
-
-    def create_event!(body)
-      event = Event.create!(
-        body: body,
-        receiver_character: @character
-      )
-      ActionCable.server.broadcast("char_#{@character.id}", { type: 'event', event_id: event.id })
+      Events::CreateAndBroadcastService.call(@character, body)
     end
 
     def foods
