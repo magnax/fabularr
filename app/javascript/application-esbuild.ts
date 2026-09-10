@@ -1,7 +1,7 @@
 import { recount } from './recount.ts';
 import { toggleRecipe } from './toggle-recipe.ts';
 import clearErrors from './helpers/clear-errors.ts';
-import { initSubmitButton } from './helpers/init-submit-button.js';
+import { initSubmitButton } from './helpers/init-submit-button.ts';
 import { initCharacterList } from './helpers/init-character-list.js';
 import { initCharacterChannel } from './channels/init-character-channel.ts';
 import { subscribeTime } from './channels/subscribe-time.ts';

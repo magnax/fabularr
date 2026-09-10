@@ -1,6 +1,6 @@
 <%= form_for(:event) do |f| %>
 
-  <%= f.text_field :body, id: 'submit-body' %>
+  <%= f.text_area :body, id: 'submit-body', rows: 1, cols: 80 %>
   <%= f.submit t('views.events.send'), data: { disable_with: false }, 
     class: "submit-button btn btn-large btn-primary" 
   %>
