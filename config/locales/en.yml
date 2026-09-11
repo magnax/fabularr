@@ -108,6 +108,7 @@ en:
         to_me: "%{char_name} says to You: %{body}"
         me: "You say: %{body}"
         to_other: "You say to %{char_name}: %{body}"
+    death: You see that %{character_link} dies.
     drop_item: You drop a %{item}
     drop_item_others: You see that %{character_link} is dropping a %{item}
     drop_resource: You drop %{amount} %{unit} of %{res}

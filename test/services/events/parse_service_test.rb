@@ -32,6 +32,17 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
     assert_equal event.body, result[:body]
   end
 
+  test 'still parse talk event from dead character' do
+    character = create(:character, gender: 'M', status: false)
+    event = create(:event, body: "You see <!--CHARID:#{character.id}--> dies.",
+                           location: @location, character: @current_character)
+
+    result = call_service(event)
+
+    assert_equal "You see <a href=\"/characters/#{character.id}/name\">unknown man</a>"\
+                 ' dies.', result[:body]
+  end
+
   test 'parse talk event from the same character' do
     event = create(:event, body: Faker::Lorem.sentence,
                            location: @location, character: @current_character)

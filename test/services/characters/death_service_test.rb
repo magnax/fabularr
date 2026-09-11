@@ -18,8 +18,28 @@ class CharactersDeathServiceTest < ActiveSupport::TestCase
     create(:inventory_object, character: @character, subject: stone, amount: 100)
     create(:inventory_object, character: @character, subject: knife)
 
-    assert_difference -> { LocationObject.count } => 2 do
+    assert_difference -> { LocationObject.count } => 2,
+                      -> { Event.count } => 0 do
       call_service
     end
+  end
+
+  test 'stop working on project after dying' do
+    create(:worker, character: @character, left_at: nil)
+
+    assert_difference -> { Worker.active.count } => -1 do
+      call_service
+    end
+  end
+
+  test 'create events when other characters are present' do
+    char = create(:character, location: @character.location)
+
+    assert_difference -> { Event.count } => 1 do
+      call_service
+    end
+
+    event = Event.where(receiver_character: char).sole
+    assert_equal "You see that <!--CHARID:#{@character.id}--> dies.", event.body
   end
 end

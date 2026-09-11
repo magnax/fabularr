@@ -108,6 +108,7 @@ pl:
         to_me: "%{char_name} mówi do Ciebie: %{body}"
         me: 'Mówisz: %{body}'
         to_other: 'Mówisz do %{char_name}: %{body}'
+    death: Widzisz jak %{character_link} umiera.
     drop_item: Upuszczasz %{item}
     drop_item_others: Widzisz jak %{character_link} upuszcza %{item}
     drop_resource: Upuszczasz %{amount} %{unit} %{res}

@@ -30,7 +30,7 @@ module Events
       return event_body unless char_matches.any?
 
       char_matches.flatten.each do |match|
-        character_for = Character.find_by(id: match)
+        character_for = Character.unscoped.find_by(id: match)
         name_for = link_to_name_for(character_for)
         event_body = event_body.gsub(Event::CHARID_REGEX_TEXT.gsub('(\d+)', match), name_for)
       end

@@ -9,25 +9,35 @@ module Characters
     def call
       character.update!(status: false, weight: Character::WEIGHT)
 
+      Workers::EndService.call(character)
       drop_inventory!
+      create_events!
     end
 
     private
 
     def drop_inventory!
-      @character.inventory_objects.item.each do |item|
+      character.inventory_objects.item.each do |item|
         location.location_objects.create!(subject: item.subject)
       end
-      @character.inventory_objects.item.destroy_all
+      character.inventory_objects.item.destroy_all
 
-      @character.inventory_objects.resource.each do |item|
+      character.inventory_objects.resource.each do |item|
         LocationObjects::IncreaseAmountService.call(location, item.subject.key, item.amount)
       end
-      @character.inventory_objects.resource.destroy_all
+      character.inventory_objects.resource.destroy_all
+    end
+
+    def create_events!
+      location.visible_characters.each do |char|
+        body = I18n.t('events.death', character_link: character.char_id)
+
+        Events::CreateAndBroadcastService.call(char, body)
+      end
     end
 
     def location
-      @location ||= @character.location
+      @location ||= character.location
     end
 
     def character

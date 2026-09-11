@@ -11,14 +11,10 @@ module Workers
 
       worker.update!(left_at: Time.current)
 
-      CharacterSkills::UpdateService.call(worker)
+      CharacterSkills::UpdateService.call(worker) if @character.status
     end
 
     private
-
-    def project
-      @project ||= worker.project
-    end
 
     def worker
       @worker ||= @character.worker
