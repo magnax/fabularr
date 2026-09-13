@@ -73,6 +73,9 @@ Fabularr::Application.routes.draw do
       resources :events, only: :show do
         get :unread, on: :collection
       end
+      resources :characters, only: [] do
+        get :name
+      end
     end
   end
 

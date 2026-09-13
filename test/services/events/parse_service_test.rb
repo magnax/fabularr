@@ -12,6 +12,11 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
     Events::ParseService.call(event, @current_character)
   end
 
+  def expected_character_link(character_id, gender = 'woman')
+    "<a class=\"character-name\" data-char-id=\"#{character_id}\""\
+      " href=\"/characters/#{character_id}/name\">unknown #{gender}</a>"
+  end
+
   test 'parse simple event (ie. weather change)' do
     event = create(:event, body: Faker::Lorem.sentence,
                            location: @location, character_id: nil)
@@ -40,8 +45,7 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
     result = call_service(event)
 
     assert_equal 'You see '\
-                 "<a class=\"character-name\" href=\"/characters/#{character.id}/name\">"\
-                 'unknown man</a> dies.', result[:body]
+                 "#{expected_character_link(character.id, 'man')} dies.", result[:body]
   end
 
   test 'parse talk event from the same character' do
@@ -84,8 +88,7 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
     result = call_service(event)
 
     expected_body = 'You can see new person: '\
-                    '<a class="character-name"'\
-                    " href=\"/characters/#{character.id}/name\">unknown woman</a>"
+                    "#{expected_character_link(character.id)}"
     assert_equal expected_body, result[:body]
     assert_nil result[:lead]
   end
@@ -104,8 +107,7 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
 
     expected_body =
       'You can see that ' \
-      '<a class="character-name"'\
-      " href=\"/characters/#{character.id}/name\">unknown woman</a>" \
+      "#{expected_character_link(character.id)}" \
       ' is entering: ' \
       "<a href=\"/locations/#{location.id}/name\">unnamed place</a>"
     assert_equal expected_body, result[:body]
@@ -131,10 +133,8 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
 
     expected_body =
       'You see ' \
-      '<a class="character-name" '\
-      "href=\"/characters/#{character1.id}/name\">unknown woman</a> and " \
-      '<a class="character-name"'\
-      " href=\"/characters/#{character2.id}/name\">unknown man</a>" \
+      "#{expected_character_link(character1.id)} and " \
+      "#{expected_character_link(character2.id, 'man')}" \
       ' are going from '\
       "<a href=\"/locations/#{location.id}/name\">unnamed place</a>" \
       ' into: ' \
