@@ -39,8 +39,9 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
 
     result = call_service(event)
 
-    assert_equal "You see <a href=\"/characters/#{character.id}/name\">unknown man</a>"\
-                 ' dies.', result[:body]
+    assert_equal 'You see '\
+                 "<a class=\"character-name\" href=\"/characters/#{character.id}/name\">"\
+                 'unknown man</a> dies.', result[:body]
   end
 
   test 'parse talk event from the same character' do
@@ -82,7 +83,9 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
 
     result = call_service(event)
 
-    expected_body = "You can see new person: <a href=\"/characters/#{character.id}/name\">unknown woman</a>"
+    expected_body = 'You can see new person: '\
+                    '<a class="character-name"'\
+                    " href=\"/characters/#{character.id}/name\">unknown woman</a>"
     assert_equal expected_body, result[:body]
     assert_nil result[:lead]
   end
@@ -101,7 +104,8 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
 
     expected_body =
       'You can see that ' \
-      "<a href=\"/characters/#{character.id}/name\">unknown woman</a>" \
+      '<a class="character-name"'\
+      " href=\"/characters/#{character.id}/name\">unknown woman</a>" \
       ' is entering: ' \
       "<a href=\"/locations/#{location.id}/name\">unnamed place</a>"
     assert_equal expected_body, result[:body]
@@ -127,8 +131,10 @@ class Events::ParseServiceTest < ActiveSupport::TestCase
 
     expected_body =
       'You see ' \
-      "<a href=\"/characters/#{character1.id}/name\">unknown woman</a> and " \
-      "<a href=\"/characters/#{character2.id}/name\">unknown man</a>" \
+      '<a class="character-name" '\
+      "href=\"/characters/#{character1.id}/name\">unknown woman</a> and " \
+      '<a class="character-name"'\
+      " href=\"/characters/#{character2.id}/name\">unknown man</a>" \
       ' are going from '\
       "<a href=\"/locations/#{location.id}/name\">unnamed place</a>" \
       ' into: ' \
