@@ -83,6 +83,7 @@ module Users
 
     def characters
       @characters ||= @user.characters
+                           .active
                            .includes(
                              location: %i[location_type location_class parent_location]
                            )

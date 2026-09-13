@@ -106,4 +106,14 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     assert_content '(T 0%)'
     assert_selector 'img[title="vehicle"]'
   end
+
+  test 'show only alive characters on the list' do
+    create(:character, user: @user, status: false)
+
+    visit list_url
+
+    assert_equal 200, page.status_code
+
+    assert_content "You don't have any characters"
+  end
 end
