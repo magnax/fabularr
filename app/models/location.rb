@@ -69,18 +69,18 @@ class Location < ApplicationRecord
     # not final implementation, there will be probably some refinement to
     # distinguish between visible and hearable characters
     # (ie. inside/outside locations)
-    characters
+    characters.active
   end
 
   # in/out vehicles, in/out buildings with open windows
   def hearable_characters
-    return characters + vehicles_characters unless vehicle?
+    return characters.active + vehicles_characters unless vehicle?
 
-    characters + (parent_location&.characters || []) + vehicles_characters
+    characters.active + (parent_location&.characters&.active || []) + vehicles_characters
   end
 
   def vehicles_characters
-    vehicles.map(&:characters).flatten
+    vehicles.map(&:visible_characters).flatten
   end
 
   def town?

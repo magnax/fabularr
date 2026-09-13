@@ -19,6 +19,14 @@ class EventsShowServiceTest < ActiveSupport::TestCase
     assert_equal [@character.id, other_char.id].sort, res[:characters].pluck(:id).sort
   end
 
+  test 'only alive characters are present' do
+    create(:character, location: @character.location, status: false)
+
+    res = call_service
+
+    assert_equal [@character.id], res[:characters].pluck(:id)
+  end
+
   test 'travel info' do
     traveller = create(:traveller, subject: @character)
     @character.update!(location: nil, coords: { x: 100, y: 100 })
@@ -144,6 +152,18 @@ class EventsShowServiceTest < ActiveSupport::TestCase
     assert_equal 'Fabular City', res[:location_info][:toplevel_location_name]
     assert_equal @character.location_id, res[:location_info][:toplevel_location_id]
     assert_equal '[forest][100.0, 100.0]', res[:location_info][:location_type]
+  end
+
+  test 'location info - character in town, not seeing dead body in vehicle' do
+    create(:location_name, location: @character.location,
+                           character: @character, name: 'Fabular City')
+    vehicle = create(:location, :vehicle, parent_location: @character.location,
+                                          name: 'Turtle')
+    create(:character, location: vehicle, status: false)
+
+    res = call_service
+
+    assert_equal [@character.id], res[:characters].pluck(:id)
   end
 
   test 'location info - character in building in town' do

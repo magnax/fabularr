@@ -51,7 +51,7 @@ class Character < ApplicationRecord
   validates :spawn_location_id, presence: true
   validates :user_id, presence: true
 
-  default_scope -> { where(status: true) }
+  scope :active, -> { where(status: true) }
 
   def x
     location&.moveable? && location.coords ? location.coords.x : coords.x
