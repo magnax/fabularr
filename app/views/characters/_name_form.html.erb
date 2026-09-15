@@ -1,5 +1,5 @@
-<%= t 'views.characters.name.current_name' %>: <%= @charname.display_name %>
-<%= form_for(@charname) do |f| %>
+<%= t 'views.characters.name.current_name' %>: <%= charname.display_name %>
+<%= form_for(charname) do |f| %>
 
 <%= render 'shared/error_messages', object: f.object %>
 	

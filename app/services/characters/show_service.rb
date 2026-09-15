@@ -19,7 +19,7 @@ module Characters
         hunger: hunger,
         id: subject_character.id,
         location: location,
-        name: @character.name_for(subject_character),
+        name: @character.char_name_or_build(subject_character),
         project: project,
         self_view: @character == subject_character,
         skills: skills,

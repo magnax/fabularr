@@ -23,5 +23,6 @@ class ApiCharactersNameTest < ActionDispatch::IntegrationTest
 
     res = response.parsed_body.to_s
     assert_includes res, 'Damage: 0%'
+    assert_includes res, 'Current name:'
   end
 end

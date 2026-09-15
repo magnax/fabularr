@@ -17,12 +17,12 @@ class CharactersController < ApplicationController
   end
 
   def name
-    @named_character = Character.find(params[:character_id])
-    @charname = current_character.char_name_or_build @named_character
+    render locals: CharNames::ShowService.call(current_character, params[:character_id])
   end
 
   def point
     Events::PointService.call(current_character, 'character', params[:character_id])
+
     redirect_to events_path
   end
 
