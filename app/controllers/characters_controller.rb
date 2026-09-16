@@ -33,12 +33,16 @@ class CharactersController < ApplicationController
 
   def show
     render locals: Characters::ShowService.call(current_character, params[:id])
+  rescue Characters::InvalidCharacterError => e
+    render_error I18n.t('errors.characters.invalid')
   end
 
   def talk
     render locals: Characters::TalkService.call(
       current_character, params[:character_id]
     )
+  rescue Characters::InvalidCharacterError => e
+    render_error I18n.t('errors.characters.invalid')
   end
 
   private

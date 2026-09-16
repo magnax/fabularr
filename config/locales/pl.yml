@@ -98,6 +98,8 @@ pl:
     attacks:
       animal:
         not_enough_time: Jeszcze nie możesz atakować niektórych zwierząt
+    characters:
+      invalid: Nieprawidłowa postać lub postać jest nieobecna
     projects:
       machine_in_use: To urządzenie jest aktualnie używane
       only_outside: Ten projekt można rozpocząć tylko na zewnątrz

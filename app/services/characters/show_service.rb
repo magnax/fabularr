@@ -2,8 +2,6 @@
 
 module Characters
   class ShowService < ApplicationService
-    class InvalidCharacterError < StandardError; end
-
     def initialize(character, char_id)
       @character = character
       @char_id = char_id

@@ -8,6 +8,8 @@ module Characters
     end
 
     def call
+      raise InvalidCharacterError if named_character.blank?
+
       {
         charname: charname.name,
         named_character_id: @named_character_id

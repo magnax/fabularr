@@ -22,6 +22,14 @@ class CharactersTalkTest < ActionDispatch::IntegrationTest
     assert_link 'Talk', href: "#{host}/en/characters/#{@other_character.id}/talk"
   end
 
+  test 'raise error for invalid character' do
+    sign_in_character
+    visit character_talk_url(character_id: 0)
+
+    assert_equal 200, page.status_code
+    assert_text 'Invalid character or character not present'
+  end
+
   test 'content for unnamed character on character name page' do
     create(:char_name, character: @current_character,
                        named: @other_character, name: 'Ella')

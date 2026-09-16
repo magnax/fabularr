@@ -16,7 +16,7 @@ class CharactersShowServiceTest < ActiveSupport::TestCase
   end
 
   test 'non existent character' do
-    assert_raises Characters::ShowService::InvalidCharacterError do
+    assert_raises Characters::InvalidCharacterError do
       call_service(@character, 0)
     end
   end
