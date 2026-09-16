@@ -1,6 +1,6 @@
 <section id="description">
   <div class="title-bar">
-    <%= t('views.characters.show.info', name: name) %>
+    <%= t('views.characters.show.info', name: charname[:name]) %>
   </div>
   <% if project %>
     <%= "#{age} #{t('and')}" %>
@@ -118,5 +118,5 @@
   <div class="title-bar">
     <%= t('views.characters.show.description') %>
   </div>
-  <%= render 'characters/name_form' %>
+  <%= render 'characters/name_form', charname: charname %>
 </section>

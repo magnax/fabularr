@@ -6,6 +6,12 @@ function initNameLinks() {
 
         const parent = el.parentElement
         const charId = el.dataset.charId;
+        const nameClass = `name-char-${charId}`
+
+        if (parent?.querySelector(`.${nameClass}`)) {
+          parent?.querySelector(`.${nameClass}`)?.remove();
+          return;
+        }
 
         if (!charId) {
           console.log("NO Character ID!!");
@@ -24,6 +30,7 @@ function initNameLinks() {
 
           const div = document.createElement('div');
           div.classList.add('name-info');
+          div.classList.add(nameClass);
           div.innerHTML = data.content;
 
           parent?.append(div);
@@ -38,4 +45,22 @@ function initNameLinks() {
   }
 }
 
-export { initNameLinks };
+function enableTab(el: HTMLElement) {
+  const parent = el.parentElement;
+  const tabName = el.dataset.tab;
+
+  if (!tabName || !parent) return;
+
+  const tab = parent.querySelector<HTMLDivElement>(`.${tabName}`);
+
+  if (!tab) return;
+
+  parent?.querySelectorAll<HTMLDivElement>('.tab').forEach((e) => {
+    e.style.display = 'none';
+  });
+
+  tab.style.display = '';
+  console.log('enabled');
+}
+
+export { initNameLinks, enableTab };

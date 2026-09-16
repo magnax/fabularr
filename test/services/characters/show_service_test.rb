@@ -31,7 +31,8 @@ class CharactersShowServiceTest < ActiveSupport::TestCase
 
     res = call_service(@character, @character.id)
 
-    assert_equal 'Magnus', res['name']
+    assert_equal 'Magnus', res[:charname][:name]
+    assert_equal @character.id, res[:charname][:char_id]
     assert_equal 'He is in his twenties', res['age']
     assert_equal 2, res['spawn_day']
     assert_equal location.id, res['spawn_location_id']
@@ -58,16 +59,18 @@ class CharactersShowServiceTest < ActiveSupport::TestCase
 
     res = call_service(@character, other_character.id)
 
-    assert_equal 'unknown man', res['name']
+    assert_equal 'unknown man', res[:charname][:name]
   end
 
   test 'show info about other (named)' do
     other_character = create(:character, gender: 'M')
-    create(:char_name, character: @character, named: other_character, name: 'Mosstan')
+    create(:char_name, character: @character, named: other_character,
+                       name: 'Mosstan')
 
     res = call_service(@character, other_character.id)
 
-    assert_equal 'Mosstan', res['name']
+    assert_equal 'Mosstan', res[:charname][:name]
+    assert_equal other_character.id, res[:charname][:char_id]
   end
 
   test 'show info about other - do not show skills' do

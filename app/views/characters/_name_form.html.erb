@@ -1,12 +1,9 @@
-<%= t 'views.characters.name.current_name' %>: <%= charname.display_name %>
-<%= form_for(charname) do |f| %>
-
-<%= render 'shared/error_messages', object: f.object %>
-	
-  <%= f.hidden_field :named_id %>
+<%= t 'views.characters.name.current_name' %>: <%= charname[:name] %>
+<%= form_for(:char_name, url: char_names_url, method: 'POST') do |f| %>
+  <%= f.hidden_field :named_id, value: charname[:char_id] %>
 
   <%= f.label :name, t('views.characters.name.new_name') %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, value: charname[:name] %>
 
   <%= f.label :description %>
   <%= f.text_field :description %>

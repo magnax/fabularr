@@ -9,7 +9,10 @@ module CharNames
 
     def call
       {
-        charname: charname
+        charname: {
+          name: charname.name,
+          char_id: charname.named_id
+        }
       }
     end
 

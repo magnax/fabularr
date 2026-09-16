@@ -1,2 +1,14 @@
-Damage: <%= damage %>%
-<%= render 'characters/name_form', charname: name %>
+<div class="tab-navs">
+  <a onclick="enableTab(this);" data-tab="damage-info">
+    Info
+  </a>
+  <a onclick="enableTab(this);" data-tab="char-name-info">
+    Name
+  </a>
+  <div class="tabs">
+    <div class="tab damage-info">Damage: <%= damage %>%</div>
+    <div class="tab char-name-info" style="display:none;">
+      <%= render 'characters/name_form', charname: charname %>
+    </div>
+  </div>
+</div>

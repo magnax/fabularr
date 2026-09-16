@@ -6,6 +6,9 @@ class CharactersShowTest < ActionDispatch::IntegrationTest
   def setup
     @user = create(:user)
     @character = create(:character, user: @user, name: 'Magnus')
+    strength = create(:skill, key: 'strength')
+    create(:character_skill, character: @character, skill: strength,
+                             level: 4, status: false)
   end
 
   def sign_in_character
@@ -17,6 +20,7 @@ class CharactersShowTest < ActionDispatch::IntegrationTest
   test 'link to character name on events page' do
     sign_in_character
 
+    assert_equal 200, page.status_code
     assert_link 'Magnus', href: "#{host}/en/characters/#{@character.id}"
   end
 
@@ -24,6 +28,7 @@ class CharactersShowTest < ActionDispatch::IntegrationTest
     sign_in_character
     visit character_url(id: @character.id)
 
+    assert_equal 200, page.status_code
     assert_text 'Current name: Magnus'
   end
 end

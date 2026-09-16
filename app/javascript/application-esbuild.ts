@@ -7,9 +7,11 @@ import { initCharacterList } from './helpers/init-character-list.ts';
 import { initCharacterChannel } from './channels/init-character-channel.ts';
 import { subscribeTime } from './channels/subscribe-time.ts';
 import Rails from '@rails/ujs';
+import { enableTab } from './helpers/init-name-links.ts';
 
 window.recount = recount;
 window.toggleRecipe = toggleRecipe;
+window.enableTab = enableTab;
 
 Rails.start();
 

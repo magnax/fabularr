@@ -19,7 +19,10 @@ module Characters
         hunger: hunger,
         id: subject_character.id,
         location: location,
-        name: @character.char_name_or_build(subject_character),
+        charname: {
+          name: charname.name,
+          char_id: charname.named_id
+        },
         project: project,
         self_view: @character == subject_character,
         skills: skills,
@@ -42,6 +45,10 @@ module Characters
 
     def gender
       subject_character.gender.downcase
+    end
+
+    def charname
+      @charname ||= @character.char_name_or_build(subject_character)
     end
 
     def location
