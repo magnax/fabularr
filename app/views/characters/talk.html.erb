@@ -1,9 +1,9 @@
-<%= t 'views.characters.talk.talk_to', charname: @charname.display_name %>
+<%= t 'views.characters.talk.talk_to', charname: charname %>
 
 <%= form_for(:event, url: events_url) do |f| %>
 
   <%= f.text_field :body, id: 'submit-body' %>
-  <%= f.hidden_field :receiver_character_id, value: @named_character.id %>
+  <%= f.hidden_field :receiver_character_id, value: named_character_id %>
   <%= f.hidden_field :reload, value: true %>
   <%= f.submit t('views.events.send'), data: { disable_with: false }, class: "btn btn-large btn-primary" %>
 

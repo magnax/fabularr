@@ -28,6 +28,7 @@ class CharactersTalkTest < ActionDispatch::IntegrationTest
     sign_in_character
     visit character_talk_url(character_id: @other_character.id)
 
+    assert_equal 200, page.status_code
     assert_text 'Say something to Ella'
   end
 end

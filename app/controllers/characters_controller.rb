@@ -36,9 +36,9 @@ class CharactersController < ApplicationController
   end
 
   def talk
-    @named_character = Character.find(params[:character_id])
-    @charname = current_character.char_name_or_build @named_character
-    @location = current_character.location
+    render locals: Characters::TalkService.call(
+      current_character, params[:character_id]
+    )
   end
 
   private
