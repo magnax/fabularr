@@ -10,7 +10,9 @@ class FeedJobTest < ActiveSupport::TestCase
   test "update character's hunger" do
     character = create(:character)
 
-    call_job
+    Sidekiq.testing!(:fake) do
+      call_job
+    end
 
     assert_equal 5, character.reload.hunger
   end

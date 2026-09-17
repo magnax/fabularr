@@ -24,8 +24,10 @@ class CharactersFeedServiceTest < ActiveSupport::TestCase
   test 'increase hunger up to 100' do
     @character.update!(hunger: 96)
 
-    assert_difference -> { Event.count } => 1 do
-      call_service
+    Sidekiq.testing!(:fake) do
+      assert_difference -> { Event.count } => 1 do
+        call_service
+      end
     end
 
     assert_equal 100, @character.reload.hunger
@@ -48,8 +50,10 @@ class CharactersFeedServiceTest < ActiveSupport::TestCase
     food = create(:resource, :raw_food, key: 'potatoes', eaten: 25)
     inv = create(:inventory_object, character: @character, subject: food, amount: 100)
 
-    assert_difference -> { Event.count } => 1 do
-      call_service
+    Sidekiq.testing!(:fake) do
+      assert_difference -> { Event.count } => 1 do
+        call_service
+      end
     end
 
     assert_equal 0, @character.reload.hunger
