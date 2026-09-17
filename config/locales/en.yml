@@ -100,6 +100,8 @@ en:
         not_enough_time: You still cannot attack some animals
     characters:
       invalid: Invalid character or character not present
+    inventory_objects:
+      invalid: You don't have this object
     projects:
       machine_in_use: This machine is already used
       only_outside: This project can be started only outside

@@ -15,6 +15,13 @@ class InventoryObjectsDropTest < ActionDispatch::IntegrationTest
     "/en/inventory_objects/#{id}/drop"
   end
 
+  test 'shows error message when invalid resource' do
+    get events_route(0)
+
+    assert_response :found
+    assert_redirected_to '/en/events'
+  end
+
   test 'shows form for dropping resource' do
     stone = create(:resource, key: 'stone')
     inv_stone = create(:inventory_object, character: @character,

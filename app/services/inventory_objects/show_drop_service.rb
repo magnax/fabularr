@@ -8,6 +8,8 @@ module InventoryObjects
     end
 
     def call
+      raise InvalidObjectError if inventory_object.blank?
+
       {
         amount: inventory_object.amount,
         unit: inventory_object.unit || 'grams',
