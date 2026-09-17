@@ -4,8 +4,7 @@ class InventoryObjectsController < ApplicationController
   before_action :current_character_set
 
   def index
-    @resources = current_character.inventory_objects.resource
-    @items = current_character.inventory_objects.item
+    render locals: InventoryObjects::ShowService.call(current_character)
   end
 
   def create
