@@ -15,7 +15,7 @@ class InventoryObjectsDropTest < ActionDispatch::IntegrationTest
     "/en/inventory_objects/#{id}/drop"
   end
 
-  test 'creates location object' do
+  test 'shows form for dropping resource' do
     stone = create(:resource, key: 'stone')
     inv_stone = create(:inventory_object, character: @character,
                                           subject: stone, amount: 100)

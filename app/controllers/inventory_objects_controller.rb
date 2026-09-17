@@ -14,10 +14,8 @@ class InventoryObjectsController < ApplicationController
   end
 
   def drop
-    @character = current_character
-    @location = @character.location
-    @inventory_object = inventory_object
-    @resource = inventory_object.subject
+    render locals: InventoryObjects::ShowDropService.call(current_character,
+                                                          params[:inventory_object_id])
   end
 
   def eat
