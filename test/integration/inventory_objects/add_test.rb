@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class InventoryObjectsDropTest < ActionDispatch::IntegrationTest
+class InventoryObjectsAddTest < ActionDispatch::IntegrationTest
   def setup
     @location = create(:location)
     user = create(:user)

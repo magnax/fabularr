@@ -8,16 +8,27 @@ class InventoryObjectsController < ApplicationController
   end
 
   def create
-    InventoryObjects::CreateService.call(current_character, inventory_object_params)
+    InventoryObjects::CreateService.call(
+      current_character, inventory_object_params
+    )
 
     redirect_to events_path
   end
 
   def drop
-    render locals: InventoryObjects::ShowDropService.call(current_character,
-                                                          params[:inventory_object_id])
+    render locals: InventoryObjects::ShowDropService.call(
+      current_character, params[:inventory_object_id]
+    )
   rescue InventoryObjects::InvalidObjectError
     render_error I18n.t('errors.inventory_objects.invalid')
+  end
+
+  def drop_item
+    LocationObjects::CreateService.call(
+      current_character, params.permit(:inventory_object_id)
+    )
+
+    redirect_to events_path
   end
 
   def eat
@@ -32,19 +43,9 @@ class InventoryObjectsController < ApplicationController
     redirect_to events_path
   end
 
-  def drop_item
-    LocationObjects::CreateService.call(
-      current_character, params.permit(:inventory_object_id)
-    )
-
-    redirect_to events_path
-  end
-
   def add
-    @inventory_object = current_character.inventory_objects.find_by(id: params[:inventory_object_id])
-    @resource = inventory_object.subject
-    @projects = Projects::FilterMissingResourceService.call(
-      current_character, @inventory_object.subject
+    render locals: InventoryObjects::ShowAddService.call(
+      current_character, params[:inventory_object_id]
     )
   end
 
@@ -62,9 +63,5 @@ class InventoryObjectsController < ApplicationController
 
   def add_params
     params.permit(:amount, :subject_id, :subject_type, :project_id)
-  end
-
-  def inventory_object
-    @inventory_object ||= InventoryObject.find_by(id: params[:inventory_object_id])
   end
 end
