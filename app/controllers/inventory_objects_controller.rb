@@ -47,6 +47,8 @@ class InventoryObjectsController < ApplicationController
     render locals: InventoryObjects::ShowAddService.call(
       current_character, params[:inventory_object_id]
     )
+  rescue InventoryObjects::InvalidObjectError
+    render_error I18n.t('errors.inventory_objects.invalid')
   end
 
   def update

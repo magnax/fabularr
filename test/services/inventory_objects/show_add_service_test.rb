@@ -11,6 +11,12 @@ class InventoryObjectsShowAddServiceTest < ActiveSupport::TestCase
     InventoryObjects::ShowAddService.call(@character, inv_object_id)
   end
 
+  test 'raise error when invalid inventory object' do
+    assert_raise InventoryObjects::InvalidObjectError do
+      call_service(0)
+    end
+  end
+
   test 'returns resource info & projects' do
     iron = create(:resource, key: 'iron')
     inv_iron = create(:inventory_object, character: @character, subject: iron,

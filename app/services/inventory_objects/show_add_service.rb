@@ -8,6 +8,8 @@ module InventoryObjects
     end
 
     def call
+      raise InvalidObjectError if inventory_object.blank?
+
       {
         amount: inventory_object.amount,
         inventory_object_id: inventory_object.id,

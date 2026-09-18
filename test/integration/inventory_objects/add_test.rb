@@ -11,6 +11,13 @@ class InventoryObjectsAddTest < ActionDispatch::IntegrationTest
     login(user, @character)
   end
 
+  test 'invalid inventory object' do
+    get '/en/inventory_objects/0/add'
+
+    assert_response :found
+    assert_redirected_to '/en/events'
+  end
+
   test 'show add to project page' do
     stone = create(:resource, key: 'stone')
     inv_stone = create(:inventory_object, character: @character,
