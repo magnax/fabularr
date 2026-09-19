@@ -32,11 +32,13 @@ Fabularr::Application.routes.draw do
       get :take
       get :take_item
     end
+    resources :location_resources, only: [] do
+      get :new, on: :collection, as: :discover
+    end
     resources :locations do
       get :enter
       get :name
       get :examine, on: :collection
-      resources :location_resources, only: :new
     end
     resources :maps, only: :index
     resources :projects, only: %i[create destroy show] do

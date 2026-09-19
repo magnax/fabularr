@@ -3,7 +3,8 @@
     <%= t('views.location_resources.new.title') %>
   </div>
   <%= form_for :project, url: projects_url, method: 'POST' do |form| %>
-    <%= form.hidden_field :project_type_id, value: @project_type_id %>
+    <%= form.hidden_field :location_id, value: location_id %>
+    <%= form.hidden_field :project_type_id, value: project_type_id %>
     <%= form.submit t('views.projects.discover') %>
   <% end %>
 </section>

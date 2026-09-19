@@ -40,7 +40,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     assert_content('Items')
     assert_content('Projects')
     assert_link('Discover new resource',
-                href: "#{host}/en/locations/#{fabular_city.id}/location_resources/new")
+                href: "#{host}/en/location_resources")
     assert_link('Build menu', href: "#{host}/en/recipes")
     assert_link('Inventory', href: "#{host}/en/inventory_objects")
     assert_selector 'section#map'

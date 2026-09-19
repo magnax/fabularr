@@ -4,13 +4,10 @@ class LocationResourcesController < ApplicationController
   before_action :current_character_set
 
   def new
-    @location = Location.find_by(id: location_id)
-    @project_type_id = ProjectType.find_by(key: 'discover_resource').id
-  end
-
-  private
-
-  def location_id
-    @location_id ||= params[:location_id] || params[:project][:location_id]
+    render locals: LocationResources::ShowDiscoverService.call(
+      current_character
+    )
+  rescue LocationResources::InvalidLocationError
+    render_error(I18n.t('errors.location_resources.invalid_location'))
   end
 end

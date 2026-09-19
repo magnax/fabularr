@@ -104,6 +104,8 @@ pl:
       invalid: Nie masz takiego obiektu
     location_objects:
       invalid: Nieprawidłowy obiekt
+    location_resources:
+      invalid_location: Nieprawidłowa lokacja
     projects:
       machine_in_use: To urządzenie jest aktualnie używane
       only_outside: Ten projekt można rozpocząć tylko na zewnątrz

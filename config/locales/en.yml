@@ -104,6 +104,8 @@ en:
       invalid: You don't have this object
     location_objects:
       invalid: Invalid object
+    location_resources:
+      invalid_location: Invalid location
     projects:
       machine_in_use: This machine is already used
       only_outside: This project can be started only outside

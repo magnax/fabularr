@@ -5,15 +5,25 @@ require 'test_helper'
 class LocationResourcesNewTest < ActionDispatch::IntegrationTest
   def setup
     @user = create(:user)
-    @character = create(:character, name: 'Magnus', user: @user)
+    @location = create(:location)
+    @character = create(:character, location: @location, name: 'Magnus', user: @user)
+    create(:project_type, key: 'discover_resource')
+
     login(@user, @character)
   end
 
-  test 'show page' do
-    create(:project_type, key: 'discover_resource')
-    location = create(:location)
+  test 'shows error message when invalid location' do
+    building = create(:location, :building, parent_location: @location)
+    @character.update!(location: building)
 
-    get "/locations/#{location.id}/location_resources/new"
+    get '/location_resources'
+
+    assert_response :found
+    assert_redirected_to '/en/events'
+  end
+
+  test 'show page' do
+    get '/location_resources'
 
     assert_response :ok
 
