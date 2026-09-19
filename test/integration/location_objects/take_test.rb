@@ -15,6 +15,13 @@ class LocationObjectsDropTest < ActionDispatch::IntegrationTest
     "/en/location_objects/#{id}/take"
   end
 
+  test 'shows error message when invalid resource' do
+    get events_route(0)
+
+    assert_response :found
+    assert_redirected_to '/en/events'
+  end
+
   test 'show take resource page' do
     stone = create(:resource, key: 'stone')
     loc_stone = create(:location_object, location: @location,

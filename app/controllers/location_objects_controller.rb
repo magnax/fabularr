@@ -10,10 +10,11 @@ class LocationObjectsController < ApplicationController
   end
 
   def take
-    @character = current_character
-    @location = @character.location
-    @location_object = location_object
-    @resource = location_object.subject
+    render locals: LocationObjects::ShowTakeService.call(
+      current_character, params[:location_object_id]
+    )
+  rescue LocationObjects::InvalidObjectError
+    render_error(I18n.t('errors.location_objects.invalid'))
   end
 
   def take_item
@@ -28,9 +29,5 @@ class LocationObjectsController < ApplicationController
 
   def location_object_params
     params.require(:location_object).permit(:subject_id, :subject_type, :amount)
-  end
-
-  def location_object
-    @location_object ||= LocationObject.find_by(id: params[:location_object_id])
   end
 end

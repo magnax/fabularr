@@ -102,6 +102,8 @@ pl:
       invalid: Nieprawidłowa postać lub postać jest nieobecna
     inventory_objects:
       invalid: Nie masz takiego obiektu
+    location_objects:
+      invalid: Nieprawidłowy obiekt
     projects:
       machine_in_use: To urządzenie jest aktualnie używane
       only_outside: Ten projekt można rozpocząć tylko na zewnątrz
