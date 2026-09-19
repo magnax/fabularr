@@ -21,7 +21,7 @@
         <div class="recipe-details" style="display: <%= expanded_class %>">
           <%= 
             link_to(
-              t('views.recipes.index.continue'), new_build_projects_url(recipe[:id]),
+              t('views.recipes.index.continue'), build_new_projects_url(recipe[:id]),
               style: 'display: inline-block;'
             )
           %>

@@ -5,7 +5,7 @@
     </div>
     <% if character.location.town? %>
       <div style="margin:4px 0;">
-          <%= link_to t('views.events.index.build_road'), new_road_projects_url(location_id: character.location_id), class: 'char-action' %>
+          <%= link_to t('views.events.index.build_road'), road_new_projects_url(location_id: character.location_id), class: 'char-action' %>
       </div>
     <% end %>
   <% end %>

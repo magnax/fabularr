@@ -59,10 +59,10 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     assert_content('mushrooms')
     assert_link(
-      'Collect', href: "#{host}/en/projects/new/collect/#{mushrooms.id}"
+      'Collect', href: "#{host}/en/new/projects/collect/#{mushrooms.id}"
     )
     assert_no_link(
-      'Collect', href: "#{host}/en/projects/new/collect/#{stone.id}"
+      'Collect', href: "#{host}/en/new/projects/collect/#{stone.id}"
     )
   end
 
@@ -106,7 +106,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     sign_in
     click_link 'Magnus'
 
-    assert_link 'Build a road', href: "#{host}/en/projects/new/road/#{fabular_city.id}"
+    assert_link 'Build a road', href: "#{host}/en/new/projects/road/#{fabular_city.id}"
   end
 
   test 'show exit and link to start travel on the road' do

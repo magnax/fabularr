@@ -13,6 +13,10 @@ class ProjectsCollectNewTest < ActionDispatch::IntegrationTest
     click_link 'Magnus'
   end
 
+  def path(resource_id)
+    "/en/new/projects/collect/#{resource_id}"
+  end
+
   def teardown
     Resource.destroy_all
   end
@@ -21,7 +25,7 @@ class ProjectsCollectNewTest < ActionDispatch::IntegrationTest
     wood = create(:resource, key: 'wood', daily_rate: 600)
     location_resource = create(:location_resource, resource: wood,
                                                    location: @character.location)
-    visit "/en/projects/new/collect/#{location_resource.id}"
+    visit(path(location_resource.id))
 
     assert_equal 200, page.status_code
     assert_content 'One character can collect only 600 grams in one day'
@@ -33,7 +37,7 @@ class ProjectsCollectNewTest < ActionDispatch::IntegrationTest
     location_resource = create(:location_resource, resource: stone,
                                                    location: @character.location)
 
-    visit "/en/projects/new/collect/#{location_resource.id}"
+    visit(path(location_resource.id))
 
     assert_equal 200, page.status_code
     assert_selector 'div[class="title-bar"]', text: 'digging for stone'
@@ -50,7 +54,7 @@ class ProjectsCollectNewTest < ActionDispatch::IntegrationTest
     create(:recipe_instruction, :tool, recipe: recipe, speed: 1.2, subject: stone_knife)
     create(:recipe_instruction, :tool, recipe: recipe, speed: 2, subject: stone_axe)
 
-    visit "/en/projects/new/collect/#{location_resource.id}"
+    visit(path(location_resource.id))
 
     assert_equal 200, page.status_code
     assert_content 'One character can collect only 600 grams in one day'

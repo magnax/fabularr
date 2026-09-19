@@ -11,10 +11,14 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
     click_link 'Magnus'
   end
 
+  def path
+    "/en/new/projects/road/#{@character.location_id}"
+  end
+
   test 'building road - no locations available' do
     create(:project_type, key: 'road')
 
-    visit "/en/projects/new/road/#{@character.location_id}"
+    visit(path)
 
     assert_equal 200, page.status_code
     assert_content 'You cannot build any new road at the moment'
@@ -26,7 +30,7 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
     available_location = create(:location, coords: { x: 350, y: 250 })
     unavailable_location = create(:location, coords: { x: 400, y: 270 })
 
-    visit "/en/projects/new/road/#{@character.location_id}"
+    visit(path)
 
     assert_equal 200, page.status_code
     assert_content 'Available locations: 1'
@@ -45,7 +49,7 @@ class ProjectsNewTest < ActionDispatch::IntegrationTest
                                location: @character.location)
     create(:project_description, :road, project: project, subject: location)
 
-    visit "/en/projects/new/road/#{@character.location_id}"
+    visit(path)
 
     assert_equal 200, page.status_code
     assert_content 'Available locations: 0'

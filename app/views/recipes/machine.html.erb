@@ -6,7 +6,7 @@
 
   <div><%= t('views.recipes.index.recipes_count', count: count) %></div>
 
-  <%= form_for :project, url: new_machine_projects_url do |f| %>
+  <%= form_for :project, url: machine_new_projects_url do |f| %>
     <%= f.hidden_field :machine_id, value: machine_id %>
 
     <ul style="list-style:none;text-align:left;">

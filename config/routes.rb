@@ -44,15 +44,15 @@ Fabularr::Application.routes.draw do
     resources :projects, only: %i[create destroy show] do
       get :join
       get :leave
-      collection do
-        get 'new/build/:recipe_id', to: 'projects#new', as: :new_build,
-                                    defaults: { type: 'build' }
-        get 'new/collect/:location_resource_id', to: 'projects#new', as: :new,
-                                                 defaults: { type: 'collect' }
-        get 'new/road/:location_id', to: 'projects#new', as: :new_road,
-                                     defaults: { type: 'road' }
-        post 'new/machine', to: 'projects#new', as: :new_machine,
-                            defaults: { type: 'machine' }
+      scope path: 'new', as: :new, to: 'projects#new' do
+        get 'build/:recipe_id',
+            as: :build, on: :collection, defaults: { type: 'build' }
+        get 'collect/:location_resource_id',
+            as: :collect, on: :collection, defaults: { type: 'collect' }
+        get 'road/:location_id',
+            as: :road, on: :collection, defaults: { type: 'road' }
+        post 'machine',
+             as: :machine, on: :collection, defaults: { type: 'machine' }
       end
     end
     resources :recipes, only: [:index] do
