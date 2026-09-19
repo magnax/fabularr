@@ -2,9 +2,6 @@
 
 module Locations
   class EnterLocationService < ApplicationService
-    class MaxCharactersExceededError < StandardError; end
-    class MaxCapacityExceededError < StandardError; end
-
     def initialize(character, location_id)
       @character = character
       @location_id = location_id

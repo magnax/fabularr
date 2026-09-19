@@ -6,9 +6,9 @@ class LocationsController < ApplicationController
 
   def enter
     Locations::EnterLocationService.call(current_character, params[:location_id])
-  rescue Locations::EnterLocationService::MaxCharactersExceededError => _e
+  rescue Locations::MaxCharactersExceededError => _e
     flash[:error] = I18n.t 'flash.errors.max_characters_exceeded'
-  rescue Locations::EnterLocationService::MaxCapacityExceededError => _e
+  rescue Locations::MaxCapacityExceededError => _e
     flash[:error] = I18n.t 'flash.errors.max_capacity_exceeded'
   ensure
     redirect_to events_path

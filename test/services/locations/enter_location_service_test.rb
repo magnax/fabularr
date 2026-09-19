@@ -76,7 +76,7 @@ class Locations::EnterLocationServiceTest < ActiveSupport::TestCase
 
     create(:character, location: building)
 
-    assert_raises Locations::EnterLocationService::MaxCharactersExceededError do
+    assert_raises Locations::MaxCharactersExceededError do
       call_service(building.id)
     end
   end
@@ -91,7 +91,7 @@ class Locations::EnterLocationServiceTest < ActiveSupport::TestCase
     create(:location_object, location: building, subject: stone, amount: 30_000)
     create(:inventory_object, character: @character, subject: stone, amount: 11_000)
 
-    assert_raises Locations::EnterLocationService::MaxCapacityExceededError do
+    assert_raises Locations::MaxCapacityExceededError do
       call_service(building.id)
     end
   end
