@@ -138,7 +138,7 @@ class AttacksAnimalsCreateServiceTest < ActiveSupport::TestCase
       weapon: 0
     }
 
-    assert_raises Attacks::Animal::NotEnoughTimeError do
+    assert_raises Attacks::Animals::NotEnoughTimeError do
       call_service(params)
     end
   end

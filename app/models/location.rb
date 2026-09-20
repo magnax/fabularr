@@ -91,6 +91,10 @@ class Location < ApplicationRecord
     location_class.key == 'vehicle'
   end
 
+  def building?
+    location_class.key == 'building'
+  end
+
   def moveable?
     location_class.moveable
   end

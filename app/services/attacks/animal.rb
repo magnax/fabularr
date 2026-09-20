@@ -2,8 +2,6 @@
 
 module Attacks
   class Animal < ApplicationService
-    class NotEnoughTimeError < StandardError; end
-
     def initialize(character, params)
       @character = character
       @params = params
@@ -28,7 +26,7 @@ module Attacks
 
         time_diff = DateTime.current.to_i - action.updated_at.to_i
 
-        raise NotEnoughTimeError if time_diff < GameTime::DAY
+        raise Attacks::Animals::NotEnoughTimeError if time_diff < GameTime::DAY
       end
     end
 
