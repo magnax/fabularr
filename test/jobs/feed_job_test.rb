@@ -21,17 +21,19 @@ class FeedJobTest < ActiveSupport::TestCase
     character = create(:character, hunger: 99)
 
     Sidekiq.testing!(:fake) do
-      call_job
-
-      assert_equal 100, character.reload.hunger
-      assert_equal 1, CharacterDeathJob.jobs.size
+      assert_difference -> { CharacterDeathJob.jobs.size } => 1 do
+        call_job
+      end
     end
+
+    assert_equal 100, character.reload.hunger
   end
 
   test 'schedule next run' do
     Sidekiq.testing!(:fake) do
-      call_job
-      assert_equal 1, FeedJob.jobs.size
+      assert_difference -> { FeedJob.jobs.size } => 1 do
+        call_job
+      end
     end
   end
 end
