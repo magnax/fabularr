@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:18
+    container_name: postgres-db2
+    restart: "no"
+
+    environment:
+      POSTGRES_USER: fabular
+      POSTGRES_PASSWORD: fabular
+      POSTGRES_DB: fabular_dev
+      PGDATA: /var/lib/postgresql/18/docker
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - /home/mn/postgres/data:/var/lib/postgresql/18/docker
+
+volumes:
+  postgres_data:
