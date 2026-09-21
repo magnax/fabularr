@@ -2,10 +2,9 @@
 
 module Events
   class PointService < ApplicationService
-    def initialize(character, subject_type, subject_id)
+    def initialize(character, params)
       @character = character
-      @subject_type = subject_type
-      @subject_id = subject_id
+      @params = params
     end
 
     def call
@@ -47,7 +46,7 @@ module Events
     end
 
     def subject
-      @subject_type.camelize.constantize.find_by(id: @subject_id)
+      @subject ||= @params[:type].camelize.constantize.find_by(id: @params[:id])
     end
   end
 end

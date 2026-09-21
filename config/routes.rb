@@ -14,7 +14,6 @@ Fabularr::Application.routes.draw do
     resources :characters, only: %i[new create show] do
       get :attack
       get :name
-      get :point
       get :set
       get :talk
     end
@@ -70,6 +69,10 @@ Fabularr::Application.routes.draw do
     match '/logout', to: 'sessions#destroy', via: 'delete'
     match '/list', to: 'users#show', via: 'get'
     match '/attack', to: 'attacks#create', via: 'post'
+
+    scope path: 'point', controller: 'events', action: 'point' do
+      get 'character/:id', as: :point_character, defaults: { type: 'character' }
+    end
 
     namespace :api do
       resources :events, only: :show do

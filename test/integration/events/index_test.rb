@@ -193,4 +193,16 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     assert_no_link 'Examine location'
     assert_no_link 'Reverse'
   end
+
+  test 'links to various things that can be pointed' do
+    fabular_city = create(:location, name: 'Fabular City')
+    create(:character, name: 'Magnus', location: fabular_city, user: @user)
+    other_character = create(:character, location: fabular_city)
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_link(nil, title: 'Point at this person',
+                     href: "#{host}/en/point/character/#{other_character.id}")
+  end
 end

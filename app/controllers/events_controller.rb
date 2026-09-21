@@ -20,9 +20,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def point
+    Events::PointService.call(current_character, point_params)
+
+    redirect_to events_path
+  end
+
   private
 
   def event_params
     params.require(:event).permit(:body, :receiver_character_id)
+  end
+
+  def point_params
+    params.permit(:id, :type)
   end
 end
