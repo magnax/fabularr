@@ -196,6 +196,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
   test 'links to various things that can be pointed' do
     fabular_city = create(:location, name: 'Fabular City')
+    other_location = create(:location)
+    road = create(:road, location_1: fabular_city, location_2: other_location)
     create(:character, name: 'Magnus', location: fabular_city, user: @user)
     other_character = create(:character, location: fabular_city)
 
@@ -204,5 +206,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     assert_link(nil, title: 'Point at this person',
                      href: "#{host}/en/point/character/#{other_character.id}")
+    assert_link(nil, title: 'Point at this road',
+                     href: "#{host}/en/point/road/#{road.id}")
   end
 end

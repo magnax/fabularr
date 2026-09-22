@@ -21,4 +21,12 @@ class EventsPointTest < ActionDispatch::IntegrationTest
 
     assert_response :found
   end
+
+  test 'point to road' do
+    other_location = create(:location)
+    road = create(:road, location_1: @location, location_2: other_location)
+    get "/en/point/road/#{road.id}"
+
+    assert_response :found
+  end
 end

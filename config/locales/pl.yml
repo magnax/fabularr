@@ -162,6 +162,8 @@ pl:
       point_person_me: Wskazujesz na %{char_name}
       point_person_other: Widzisz jak %{char_name_1} wskazuje na %{char_name_2}
       point_person_you: '<b>Widzisz jak %{char_name} wskazuje na Ciebie</b>'
+      point_road_me: 'Wskazujesz na drogę: %{road_info}'
+      point_road_other: 'Widzisz jak %{character_link} wskazuje na drogę: %{road_info}'
     projects:
       create_location_ended: Nowa osada (%{location_info}) została utworzona
       end:
@@ -382,6 +384,9 @@ pl:
       n: cynk
       gen: cynku
   roads:
+    actions:
+      point: Wskaż tę drogę
+    name: '%{type} do %{location_link}'
     path: ścieżka z %{location_1} do %{location_2}
     types:
       path: ścieżka

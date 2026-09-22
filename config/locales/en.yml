@@ -162,6 +162,8 @@ en:
       point_person_me: You point at %{char_name}
       point_person_other: You see %{char_name_1} pointing at %{char_name_2}
       point_person_you: You see %{char_name} pointing at you
+      point_road_me: 'You point at road: %{road_info}'
+      point_road_other: 'You see %{character_link} pointing at road: %{road_info}'
     projects:
       create_location_ended: New location (%{location_info}) is successfully created
       end:
@@ -382,6 +384,9 @@ en:
 
     
   roads:
+    actions:
+      point: Point at this road
+    name: '%{type} to %{location_link}'
     path: path from %{location_1} to %{location_2}
     types:
       path: path
