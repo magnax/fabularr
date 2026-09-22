@@ -144,6 +144,13 @@ class Character < ApplicationRecord
     travellers.active.first
   end
 
+  def visible_by?(other_character)
+    return true if location == other_character.location
+    return false if location.building? || other_character.location.building?
+
+    toplevel_location == other_character.toplevel_location
+  end
+
   def toplevel_location
     return if location.blank?
 
@@ -183,6 +190,7 @@ class Character < ApplicationRecord
       .order('resources.eaten DESC')
   end
 
+  # TODO: this doesn't belong to character!
   def decade
     d = (GameTime.last.days / GameTime::DAYS_IN_YEAR + 20) / 10 * 10
     d = 100 if d > 100

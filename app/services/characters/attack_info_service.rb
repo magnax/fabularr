@@ -12,7 +12,7 @@ module Characters
     end
 
     def call
-      raise Characters::InvalidCharacterError if invalid_character?
+      raise Characters::InvalidCharacterError unless valid_character?
       raise Attacks::Characters::NotEnoughTimeError unless can_attack?
 
       {
@@ -24,18 +24,8 @@ module Characters
 
     private
 
-    def invalid_character?
-      target_character.blank? || !same_location_or_vehicle?
-    end
-
-    def same_location_or_vehicle?
-      target_character.location == @character.location || visible?
-    end
-
-    def visible?
-      return false if @character.location.building? || target_character.location.building?
-
-      target_character.toplevel_location == @character.toplevel_location
+    def valid_character?
+      target_character.present? && @character.visible_by?(target_character)
     end
 
     def can_attack?
