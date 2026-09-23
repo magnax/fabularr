@@ -21,7 +21,7 @@ module Events
     private
 
     def visible_road?
-      true
+      road.start_location(@character.location) == @character.location
     end
 
     def create_location_events!

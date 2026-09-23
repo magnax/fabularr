@@ -34,4 +34,8 @@ class Road < ApplicationRecord
   def destination_location(start_location)
     location_2 == start_location ? location_1 : location_2
   end
+
+  def start_location(location)
+    location_2 == location ? location_2 : location_1
+  end
 end
