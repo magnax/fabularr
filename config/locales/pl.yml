@@ -162,6 +162,8 @@ pl:
       point_person_me: Wskazujesz na %{char_name}
       point_person_other: Widzisz jak %{char_name_1} wskazuje na %{char_name_2}
       point_person_you: '<b>Widzisz jak %{char_name} wskazuje na Ciebie</b>'
+      point_project_me: 'Wskazujesz na projekt: %{project_info}'
+      point_project_other: 'Widzisz jak %{character_link} wskazuje na projekt: %{project_info}'
       point_road_me: 'Wskazujesz na drogę: %{road_info}'
       point_road_other: 'Widzisz jak %{character_link} wskazuje na drogę: %{road_info}'
     projects:
@@ -285,6 +287,8 @@ pl:
     discover_resource: Poszukiwanie nowych zasobów
     road: budowa drogi
   projects:
+    actions:
+      point: Wskaż ten projekt
     join: Dołącz do projektu
     leave: Opuść projekt
     name:

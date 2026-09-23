@@ -162,6 +162,8 @@ en:
       point_person_me: You point at %{char_name}
       point_person_other: You see %{char_name_1} pointing at %{char_name_2}
       point_person_you: You see %{char_name} pointing at you
+      point_project_me: 'You point at project: %{project_info}'
+      point_project_other: 'You see %{character_link} pointing at project: %{project_info}'
       point_road_me: 'You point at road: %{road_info}'
       point_road_other: 'You see %{character_link} pointing at road: %{road_info}'
     projects:
@@ -285,6 +287,8 @@ en:
     discover_resource: Discovering new resources
     road: building road
   projects:
+    actions:
+      point: 'Point at this project'
     join: Join project
     leave: Leave project
     name:

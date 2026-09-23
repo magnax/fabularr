@@ -72,6 +72,7 @@ Fabularr::Application.routes.draw do
 
     scope path: 'point', controller: 'events', action: 'point' do
       get 'character/:id', as: :point_character, defaults: { type: 'character' }
+      get 'project/:id', as: :point_project, defaults: { type: 'project' }
       get 'road/:id', as: :point_road, defaults: { type: 'road' }
     end
 

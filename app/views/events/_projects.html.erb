@@ -3,7 +3,7 @@
     <% projects.each do |project| %>
       <div style="padding: 4px 0px 3px 10px;">
         <div style="width:110px;display:inline-block;vertical-align:top;text-align:right;margin-right:10px;">
-          <%= link_to fa_icon('hand-o-right'), '', title: 'Point at this project' %>
+          <%= link_to fa_icon('hand-o-right'), point_project_url(project.id), title: t('projects.actions.point') %>
           <%= link_to fa_icon('info-circle'), project_url(project.id) %>
           <% if @current_character.project.blank? %>
             <% if project.ready %>

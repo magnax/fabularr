@@ -200,6 +200,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     road = create(:road, location_1: fabular_city, location_2: other_location)
     create(:character, name: 'Magnus', location: fabular_city, user: @user)
     other_character = create(:character, location: fabular_city)
+    project = create(:project, location: fabular_city, elapsed: 0, duration: 100)
 
     sign_in
     click_link 'Magnus'
@@ -208,5 +209,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
                      href: "#{host}/en/point/character/#{other_character.id}")
     assert_link(nil, title: 'Point at this road',
                      href: "#{host}/en/point/road/#{road.id}")
+    assert_link(nil, title: 'Point at this project',
+                     href: "#{host}/en/point/project/#{project.id}")
   end
 end
