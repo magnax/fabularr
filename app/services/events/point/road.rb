@@ -25,20 +25,16 @@ module Events
     end
 
     def create_location_events!
-      @character.location.visible_characters.each do |char|
-        next if @character == char
+      Events::CreateEventForAllService.call(@character.location.visible_characters,
+                                            body, except: @character)
+    end
 
-        event = Event.create!(
-          body: I18n.t(
-            'events.point.point_road_other',
-            road_info: road_info,
-            character_link: @character.char_id
-          ),
-          receiver_character: char
-        )
-
-        Events::BroadcastService.call(char.id, event.id)
-      end
+    def body
+      I18n.t(
+        'events.point.point_road_other',
+        road_info: road_info,
+        character_link: @character.char_id
+      )
     end
 
     def road_info

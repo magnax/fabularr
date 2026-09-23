@@ -3,15 +3,12 @@
 module Events
   class CreateEventForAllService < ApplicationService
     def initialize(characters, body, except: nil)
-      @characters = characters
+      @characters = characters - [except].flatten.compact
       @body = body
-      @except = except
     end
 
     def call
       @characters.each do |ch|
-        next if ch == @except
-
         Event.create!(
           character_id: nil,
           receiver_character_id: ch.id,
