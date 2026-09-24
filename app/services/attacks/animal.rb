@@ -81,59 +81,43 @@ module Attacks
     end
 
     def create_events!(key, damage)
-      event = Event.create!(
-        body: I18n.t('events.hit.animal', key: key, damage: damage.to_i,
-                                          skill: skill, weapon: weapon_key),
-        receiver_character: @character
-      )
-      Events::BroadcastService.call(@character.id, event.id)
+      body = I18n.t('events.hit.animal', key: key, damage: damage.to_i,
+                                         skill: skill, weapon: weapon_key)
+      Events::CreateAndBroadcastService.call(@character, body)
 
       create_location_events!(key)
     end
 
     def create_kill_events!(key)
-      event = Event.create!(
-        body: I18n.t('events.hit.animal_kill', key: key, skill: skill,
-                                               weapon: weapon_key),
-        receiver_character: @character
-      )
-      Events::BroadcastService.call(@character.id, event.id)
+      body = I18n.t('events.hit.animal_kill', key: key, skill: skill,
+                                              weapon: weapon_key)
+      Events::CreateAndBroadcastService.call(@character, body)
 
       create_location_kill_events!(key)
     end
 
     def create_location_events!(key)
-      @character.location.visible_characters.each do |char|
-        next if char == @character
+      body = I18n.t(
+        'events.hit.animal_other',
+        key: key, skill: skill,
+        weapon: weapon_key, character_link: @character.char_id
+      )
 
-        event = Event.create!(
-          body: I18n.t(
-            'events.hit.animal_other',
-            key: key, skill: skill,
-            weapon: weapon_key, character_link: @character.char_id
-          ),
-          receiver_character: char
-        )
-
-        Events::BroadcastService.call(char.id, event.id)
-      end
+      Events::CreateEventForAllService.call(
+        @character.location.visible_characters, body, except: @character
+      )
     end
 
     def create_location_kill_events!(key)
-      @character.location.visible_characters.each do |char|
-        next if char == @character
+      body = I18n.t(
+        'events.hit.animal_kill_other',
+        key: key, skill: skill,
+        weapon: weapon_key, character_link: @character.char_id
+      )
 
-        event = Event.create!(
-          body: I18n.t(
-            'events.hit.animal_kill_other',
-            key: key, skill: skill,
-            weapon: weapon_key, character_link: @character.char_id
-          ),
-          receiver_character: char
-        )
-
-        Events::BroadcastService.call(char.id, event.id)
-      end
+      Events::CreateEventForAllService.call(
+        @character.location.visible_characters, body, except: @character
+      )
     end
 
     def skill
@@ -146,23 +130,23 @@ module Attacks
     end
 
     def damage_points
+      # TODO: adjust by character skill
       return 4 if weapon.blank?
 
-      10
+      weapon.item.attack
     end
 
     def weapon_key
-      key = if weapon.blank?
-              'bare_fist'
-            else
-              'stone_knife'
-            end
+      return I18n.t('items.bare_fist') if weapon.blank?
 
-      I18n.t("items.#{key}")
+      [
+        I18n.t("items.damage.#{weapon.item.damage_key}"),
+        I18n.t("items.#{weapon.item.key}")
+      ].join(' ')
     end
 
     def weapon
-      nil
+      @weapon ||= @character.inventory_objects.find_by(id: @params[:inventory_object_id])
     end
 
     def target_packs

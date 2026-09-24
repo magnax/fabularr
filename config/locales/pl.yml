@@ -238,8 +238,11 @@ pl:
     bronze_pickaxe: brązowy kilof
     damage:
       brand_new: całkiem nowy
+      crumbling: rozpadający się
       damaged: uszkodzony
       new: nowy
+      often_used: często używany
+      old: stary
       used: używany
     iron_knife: żelazny nóż
     knife: nóż

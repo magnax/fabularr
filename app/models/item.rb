@@ -34,9 +34,10 @@ class Item < ApplicationRecord
   belongs_to :placeable, polymorphic: true, optional: true
   belongs_to :item_type
 
-  delegate :weight, to: :item_type
+  delegate :attack, to: :item_type
   delegate :key, to: :item_type
   delegate :tags, to: :item_type
+  delegate :weight, to: :item_type
 
   scope :weapon, -> { joins(:item_type).merge(ItemType.weapon) }
 

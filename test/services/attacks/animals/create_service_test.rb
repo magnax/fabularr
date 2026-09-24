@@ -142,4 +142,52 @@ class AttacksAnimalsCreateServiceTest < ActiveSupport::TestCase
       call_service(params)
     end
   end
+
+  test 'attack animals with weapon - raise error when invalid weapon' do
+    create(:animal_pack, animal: @cat, location: @location,
+                         amount: 3, points: 62)
+
+    params = {
+      force: 10,
+      target_ids: [@cat.id],
+      target_type: 'animal',
+      weapon: 'stone_knife'
+    }
+
+    assert_raises Attacks::InvalidWeaponError do
+      call_service(params)
+    end
+  end
+
+  test 'attack animals with weapon - use least damaged item' do
+    cats = create(:animal_pack, animal: @cat, location: @location,
+                                amount: 3, points: 62)
+    weapon = create(:tag, key: Tag::WEAPON)
+    knife_type = create(:item_type, key: 'knife', attack: 6)
+    create(:item_types_tag, item_type: knife_type, tag: weapon)
+    used_knife = create(:item, item_type: knife_type, damage: 90)
+    new_knife = create(:item, item_type: knife_type, damage: 30)
+
+    create(:inventory_object, character: @character, subject: used_knife)
+    create(:inventory_object, character: @character, subject: new_knife)
+
+    params = {
+      force: 10,
+      target_ids: [@cat.id],
+      target_type: 'animal',
+      weapon: 'knife'
+    }
+
+    assert_difference -> { Event.count } => 2 do
+      call_service(params)
+    end
+
+    assert_equal 56, cats.reload.points
+    assert_equal 2, cats.amount
+
+    event = Event.where(receiver_character: @character).sole
+
+    assert_equal 'You skillfully kill a cat, using new knife.',
+                 event.body
+  end
 end

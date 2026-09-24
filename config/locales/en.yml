@@ -238,8 +238,11 @@ en:
     bronze_pickaxe: bronze pickaxe
     damage:
       brand_new: brand new
+      crumbling: crumbling
       damaged: damaged
       new: new
+      often_used: often_used
+      old: old
       used: used
     iron_knife: iron knife
     knife: knife
