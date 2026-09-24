@@ -52,11 +52,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_202035) do
 
   create_table "char_names", id: :serial, force: :cascade do |t|
     t.integer "character_id"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.text "description"
     t.string "name"
     t.integer "named_id"
-    t.datetime "updated_at"
+    t.datetime "updated_at", precision: nil
     t.index ["character_id", "named_id"], name: "index_char_names_on_character_id_and_named_id", unique: true
     t.index ["character_id"], name: "index_char_names_on_character_id"
     t.index ["named_id"], name: "index_char_names_on_named_id"
@@ -86,7 +86,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_202035) do
 
   create_table "characters", id: :serial, force: :cascade do |t|
     t.point "coords"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.float "damage", default: 0.0
     t.string "gender"
     t.float "hunger", default: 0.0
@@ -95,7 +95,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_202035) do
     t.integer "spawn_location_id"
     t.boolean "status", default: true
     t.float "tiredness", default: 0.0
-    t.datetime "updated_at"
+    t.datetime "updated_at", precision: nil
     t.integer "user_id"
     t.integer "weight"
   end
@@ -219,7 +219,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_202035) do
 
   create_table "locations", id: :serial, force: :cascade do |t|
     t.point "coords"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.bigint "location_class_id"
     t.integer "location_type_id"
     t.integer "max_capacity"
@@ -227,7 +227,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_202035) do
     t.jsonb "metadata"
     t.string "name"
     t.integer "parent_location_id"
-    t.datetime "updated_at"
+    t.datetime "updated_at", precision: nil
     t.index ["location_class_id"], name: "index_locations_on_location_class_id"
   end
 
@@ -385,12 +385,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_202035) do
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.string "email"
     t.boolean "god", default: false
     t.string "password_digest"
     t.string "remember_token"
-    t.datetime "updated_at"
+    t.datetime "updated_at", precision: nil
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
