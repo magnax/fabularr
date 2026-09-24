@@ -22,6 +22,15 @@
 #  fk_rails_...  (item_class_id => item_classes.id)
 #
 class Item < ApplicationRecord
+  STRUCTURE_POINTS = {
+    25 => 'brand_new',
+    50 => 'new',
+    63 => 'used',
+    75 => 'often_used',
+    87 => 'old',
+    100 => 'crumbling'
+  }.freeze
+
   belongs_to :placeable, polymorphic: true, optional: true
   belongs_to :item_type
 
@@ -32,6 +41,6 @@ class Item < ApplicationRecord
   scope :weapon, -> { joins(:item_type).merge(ItemType.weapon) }
 
   def damage_key
-    'brand_new'
+    STRUCTURE_POINTS.filter { |k, _v| k > damage }.first[1]
   end
 end
