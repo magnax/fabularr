@@ -128,4 +128,58 @@ class AttacksCreateServiceTest < ActiveSupport::TestCase
                  "efficiently hurts <!--CHARID:#{target_character.id}--> "\
                  'using bare fist', event_spectator.body
   end
+
+  test 'raise error when invalid weapon' do
+    target_character = create(:character, location: @character.location)
+
+    params = {
+      target_id: target_character.id,
+      target_type: 'character',
+      weapon: 'knife',
+      force: 5
+    }
+
+    assert_raises Attacks::InvalidWeaponError do
+      call_service(params)
+    end
+  end
+
+  test 'attack other with weapon - newest first' do
+    target_character = create(:character, location: @character.location)
+    weapon = create(:tag, key: Tag::WEAPON)
+    knife_type = create(:item_type, key: 'knife', attack: 6)
+    create(:item_types_tag, item_type: knife_type, tag: weapon)
+    used_knife = create(:item, item_type: knife_type, damage: 90)
+    new_knife = create(:item, item_type: knife_type, damage: 30)
+
+    create(:inventory_object, character: @character, subject: used_knife)
+    create(:inventory_object, character: @character, subject: new_knife)
+
+    params = {
+      target_id: target_character.id,
+      target_type: 'character',
+      weapon: 'knife',
+      force: 5
+    }
+
+    assert_difference -> { Event.count } => 3 do
+      call_service(params)
+    end
+
+    assert_equal 3, target_character.reload.damage
+
+    event_attacker = Event.where(receiver_character: @character).sole
+    event_target = Event.where(receiver_character: target_character).sole
+    event_spectator = Event.where(receiver_character: @location_character).sole
+
+    assert_equal "You efficiently hurt <!--CHARID:#{target_character.id}--> "\
+                 'using new knife. He loses 3 points.', event_attacker.body
+    assert_equal "<b><!--CHARID:#{@character.id}-->"\
+                 ' efficiently hurts you using new knife. '\
+                 "You lose 3 points. You're not saving any points.</b>",
+                 event_target.body
+    assert_equal "You see <!--CHARID:#{@character.id}--> "\
+    "efficiently hurts <!--CHARID:#{target_character.id}--> "\
+    'using new knife', event_spectator.body
+  end
 end
