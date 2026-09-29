@@ -149,8 +149,8 @@ class AttacksCreateServiceTest < ActiveSupport::TestCase
     weapon = create(:tag, key: Tag::WEAPON)
     knife_type = create(:item_type, key: 'knife', attack: 6)
     create(:item_types_tag, item_type: knife_type, tag: weapon)
-    used_knife = create(:item, item_type: knife_type, damage: 90)
-    new_knife = create(:item, item_type: knife_type, damage: 30)
+    used_knife = create(:item, item_type: knife_type, damage: 9000)
+    new_knife = create(:item, item_type: knife_type, damage: 3000)
 
     create(:inventory_object, character: @character, subject: used_knife)
     create(:inventory_object, character: @character, subject: new_knife)
@@ -181,5 +181,45 @@ class AttacksCreateServiceTest < ActiveSupport::TestCase
     assert_equal "You see <!--CHARID:#{@character.id}--> "\
     "efficiently hurts <!--CHARID:#{target_character.id}--> "\
     'using new knife', event_spectator.body
+  end
+
+  test 'attack other with weapon - use protection' do
+    weapon = create(:tag, key: Tag::WEAPON)
+    shield = create(:tag, key: Tag::PROTECTION)
+    knife_type = create(:item_type, key: 'knife', attack: 6)
+    shield_type = create(:item_type, key: 'iron_shield', defense: 20)
+    create(:item_types_tag, item_type: knife_type, tag: weapon)
+    create(:item_types_tag, item_type: shield_type, tag: shield)
+
+    knife = create(:item, item_type: knife_type, damage: 9000)
+    iron_shield = create(:item, item_type: shield_type, damage: 1000)
+
+    create(:inventory_object, character: @character, subject: knife)
+    create(:inventory_object, character: @location_character, subject: iron_shield)
+
+    params = {
+      target_id: @location_character.id,
+      target_type: 'character',
+      weapon: 'knife',
+      force: 10
+    }
+
+    assert_difference -> { Event.count } => 2 do
+      call_service(params)
+    end
+
+    assert_equal 0, @location_character.reload.damage
+    assert_equal 8900, knife.reload.damage
+    assert_equal 900, iron_shield.reload.damage
+
+    event_attacker = Event.where(receiver_character: @character).sole
+    event_target = Event.where(receiver_character: @location_character).sole
+
+    assert_equal "You efficiently hurt <!--CHARID:#{@location_character.id}--> "\
+                 'using crumbling knife. He loses 0 points.', event_attacker.body
+    assert_equal "<b><!--CHARID:#{@character.id}-->"\
+                 ' efficiently hurts you using crumbling knife. You lose 0 points. '\
+                 'You efficiently save 20 points using your brand new iron shield.</b>',
+                 event_target.body
   end
 end

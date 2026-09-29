@@ -41,7 +41,7 @@ module Attacks
           drop_resources!(animal)
           create_kill_events!(animal_name(animal.key))
         else
-          create_events!(animal_name(animal.key), damage)
+          create_events!(animal_name(animal.key), hit_damage)
         end
 
         pack.update!(points: points, amount: amount)
@@ -67,7 +67,7 @@ module Attacks
     end
 
     def calculate_damage(pack, animal)
-      points = pack.points - damage
+      points = pack.points - hit_damage
       amount = (points.to_i / animal.health.to_i) + 1
 
       [points, amount]

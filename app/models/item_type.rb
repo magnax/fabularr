@@ -37,5 +37,6 @@ class ItemType < ApplicationRecord
   has_many :item_types_tags, dependent: :destroy
   has_many :tags, through: :item_types_tags
 
-  scope :weapon, -> { left_joins(:tags).where(tags: { key: 'weapon' }) }
+  scope :weapon, -> { left_joins(:tags).where(tags: { key: Tag::WEAPON }) }
+  scope :protection, -> { left_joins(:tags).where(tags: { key: Tag::PROTECTION }) }
 end

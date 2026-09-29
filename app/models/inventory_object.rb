@@ -31,6 +31,7 @@ class InventoryObject < ApplicationRecord
   scope :resource, -> { where(subject_type: 'Resource') }
   scope :item, -> { where(subject_type: 'Item') }
   scope :weapon, -> { joins(:item).merge(Item.weapon) }
+  scope :protection, -> { joins(:item).merge(Item.protection) }
 
   scope :item_by_key, ->(key) { weapon.where(subject: { key: key }) }
 

@@ -23,12 +23,12 @@
 #
 class Item < ApplicationRecord
   STRUCTURE_POINTS = {
-    25 => 'brand_new',
-    50 => 'new',
-    63 => 'used',
-    75 => 'often_used',
-    87 => 'old',
-    100 => 'crumbling'
+    2500 => 'brand_new',
+    5000 => 'new',
+    6300 => 'used',
+    7500 => 'often_used',
+    8700 => 'old',
+    10_000 => 'crumbling'
   }.freeze
 
   belongs_to :placeable, polymorphic: true, optional: true
@@ -40,6 +40,7 @@ class Item < ApplicationRecord
   delegate :weight, to: :item_type
 
   scope :weapon, -> { joins(:item_type).merge(ItemType.weapon) }
+  scope :protection, -> { joins(:item_type).merge(ItemType.protection) }
 
   def damage_key
     STRUCTURE_POINTS.filter { |k, _v| k > damage }.first[1]

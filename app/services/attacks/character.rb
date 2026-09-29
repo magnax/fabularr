@@ -11,6 +11,7 @@ module Attacks
 
     def call
       apply_damage!
+      apply_items_rot!
 
       if slap?
         create_slap_events!
@@ -22,7 +23,12 @@ module Attacks
     private
 
     def apply_damage!
-      target_character.update!(damage: target_character.damage + damage)
+      target_character.update!(damage: target_character.damage + total_damage)
+    end
+
+    def apply_items_rot!
+      Items::ApplyUseDamageService.call(weapon.subject) if weapon.present?
+      Items::ApplyUseDamageService.call(protection.subject) if protection.present?
     end
 
     def create_hit_events!
@@ -62,7 +68,7 @@ module Attacks
     def body_hit_other
       I18n.t('events.hit.character.hit_other',
              skill: skill, character_link: target_character.char_id,
-             weapon: weapon_key, lose: damage.round(0), pronoun: target_pronoun)
+             weapon: weapon_key, lose: total_damage.round(0), pronoun: target_pronoun)
     end
 
     def body_hit_self
@@ -91,13 +97,13 @@ module Attacks
     def hit_self
       I18n.t('events.hit.character.hit_self',
              skill: skill, weapon: weapon_key,
-             lose: damage.round(0))
+             lose: total_damage.round(0))
     end
 
     def hit_by
       I18n.t('events.hit.character.hit_by',
              character_link: @character.char_id, skill: skill,
-             weapon: weapon_key, lose: damage.round(0))
+             weapon: weapon_key, lose: total_damage.round(0))
     end
 
     def target_pronoun
@@ -116,29 +122,9 @@ module Attacks
       weapon.blank? && @params[:force].to_i.zero?
     end
 
-    def defend
-      if protection.present?
-        I18n.t('events.hit.character.defend', skill: skill,
-                                              saved: saved,
-                                              protection: protection)
-      else
-        I18n.t('events.hit.character.defend_no_protection')
-      end
-    end
-
-    def protection
-      # TODO: Not implemented!
-      nil
-    end
-
     def skill
       key = Skill::MAP_LEVELS[@character.fighting.level.floor]
       I18n.t("skills.#{key}")
-    end
-
-    def saved
-      # TODO: Not implemented!
-      23
     end
 
     def target_character

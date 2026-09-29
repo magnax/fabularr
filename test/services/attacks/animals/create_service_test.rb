@@ -165,8 +165,8 @@ class AttacksAnimalsCreateServiceTest < ActiveSupport::TestCase
     weapon = create(:tag, key: Tag::WEAPON)
     knife_type = create(:item_type, key: 'knife', attack: 6)
     create(:item_types_tag, item_type: knife_type, tag: weapon)
-    used_knife = create(:item, item_type: knife_type, damage: 90)
-    new_knife = create(:item, item_type: knife_type, damage: 30)
+    used_knife = create(:item, item_type: knife_type, damage: 9000)
+    new_knife = create(:item, item_type: knife_type, damage: 3000)
 
     create(:inventory_object, character: @character, subject: used_knife)
     create(:inventory_object, character: @character, subject: new_knife)

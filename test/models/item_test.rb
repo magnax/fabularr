@@ -35,10 +35,10 @@ class ItemTest < ActiveSupport::TestCase
 
   test '#damage_key' do
     assert_equal 'brand_new', build(:item, damage: 0).damage_key
-    assert_equal 'new', build(:item, damage: 25.01).damage_key
-    assert_equal 'used', build(:item, damage: 50.01).damage_key
-    assert_equal 'often_used', build(:item, damage: 63.01).damage_key
-    assert_equal 'old', build(:item, damage: 75.01).damage_key
-    assert_equal 'crumbling', build(:item, damage: 87.01).damage_key
+    assert_equal 'new', build(:item, damage: 2501).damage_key
+    assert_equal 'used', build(:item, damage: 5001).damage_key
+    assert_equal 'often_used', build(:item, damage: 6301).damage_key
+    assert_equal 'old', build(:item, damage: 7501).damage_key
+    assert_equal 'crumbling', build(:item, damage: 8701).damage_key
   end
 end
