@@ -29,6 +29,14 @@ class GameTime < ApplicationRecord
     }
   end
 
+  def self.decade_since(date)
+    d = (((GameTime.last.days - GameTime.last.days(date)) /
+           GameTime::DAYS_IN_YEAR) + 20) / 10 * 10
+    d = 100 if d > 100
+
+    d
+  end
+
   def days(end_date = nil)
     diff = (end_date || updated_at).to_i - created_at.to_i
 

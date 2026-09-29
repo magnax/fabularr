@@ -190,12 +190,8 @@ class Character < ApplicationRecord
       .order('resources.eaten DESC')
   end
 
-  # TODO: this doesn't belong to character!
   def decade
-    d = (GameTime.last.days / GameTime::DAYS_IN_YEAR + 20) / 10 * 10
-    d = 100 if d > 100
-
-    d
+    GameTime.decade_since(created_at)
   end
 
   def strength

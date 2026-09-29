@@ -140,6 +140,7 @@ class CharacterTest < ActiveSupport::TestCase
 
   test '#decade' do
     time_start = Date.parse('2026-06-01')
+    GameTime.create(created_at: time_start)
 
     data_in_days = {
       1 => 20,
@@ -157,15 +158,18 @@ class CharacterTest < ActiveSupport::TestCase
       3001 => 100
     }
 
-    character = create(:character)
-    GameTime.create(created_at: time_start)
+    # lock time, so 4000 days elapsed from the beginning
+    time_end = time_start + 4000
+    GameTime.last.update!(updated_at: time_end)
 
     data_in_days.each do |days, result|
-      time_end = time_start + days
-      GameTime.last.update!(updated_at: time_end)
+      # move back in time for given amount of days and create character
+      create_time = time_end - days
+      Timecop.travel(create_time)
+      character = create(:character)
 
+      # move forward to current game time so character is given amount of days old
       Timecop.travel(time_end)
-
       assert_equal result, character.decade
     end
   end
