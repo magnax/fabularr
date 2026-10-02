@@ -38,6 +38,10 @@ class Project < ApplicationRecord
   scope :pending, -> { where('elapsed < duration') }
   scope :completed, -> { where('elapsed = duration') }
 
+  AUTOMATIC = 'automatic'
+  MANUAL = 'manual'
+  SEMIAUTOMATIC = 'semiautomatic'
+
   DISPATCH_SERVICE = {
     'build' => 'Build',
     'building' => 'Building',

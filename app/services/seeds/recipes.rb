@@ -41,8 +41,9 @@ module Seeds
       base_speed = base_speed.to_i * GameTime::DAY if base_speed&.to_s&.match(/\d{1,2}d/)
 
       attrs = {
-        recipe_type: recipe_type,
         base_speed: base_speed,
+        recipe_type: recipe_type,
+        run_type: recipe_definition[:run_type] || Project::MANUAL,
         skill: Skill.where(key: recipe_definition[:skill]).first_or_create
       }
 

@@ -8,6 +8,7 @@
 #  base_speed  :integer
 #  key         :string
 #  recipe_type :string
+#  run_type    :string           default("manual")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  skill_id    :bigint
