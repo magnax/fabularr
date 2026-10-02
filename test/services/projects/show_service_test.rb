@@ -43,6 +43,15 @@ class ProjectsShowServiceTest < ActiveSupport::TestCase
                  res[:participants].pluck(:skill).sort
     assert_equal 50, res[:progress]
     assert_equal '1 hour', res[:time]
-    assert_equal 'hand', res[:run_type]
+    assert_equal 'manual', res[:run_type]
+  end
+
+  test 'automatic project' do
+    recipe = create(:recipe, run_type: Project::AUTOMATIC)
+    project = create(:project, recipe: recipe, starting_character: @character)
+
+    res = call_service(project.id)
+
+    assert_equal 'automatic', res[:run_type]
   end
 end

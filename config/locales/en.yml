@@ -562,12 +562,13 @@ en:
     project_descriptions:
       grilled_meat: grilling meat
     projects:
+      automatic: Automatic
       collect: Collect
       collect_info: One character can %{skill_name} only %{amount} grams in one day.
       collect_info_tool_html: If you have <b>%{key}</b>, you can %{skill_name} %{amount} grams in one day.
       create_location: Create new location!
       discover: Discover
-      hand: Manual
+      manual: Manual
       info:
         percent: '%{progress} percent'
       machine:

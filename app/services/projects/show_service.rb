@@ -18,7 +18,7 @@ module Projects
         progress: project.progress(1),
         repeats: repeats,
         resources_used: resources_used,
-        run_type: 'hand', # TODO: will add automatic/semi-automattic types later
+        run_type: project.run_type || Project::MANUAL,
         start_day: start_day,
         starting_character_id: project.starting_character.id,
         starting_character_name: project.starting_character.name_for(@character),

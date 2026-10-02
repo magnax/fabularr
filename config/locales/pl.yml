@@ -562,12 +562,13 @@ pl:
     project_descriptions:
       grilled_meat: pieczenie mięsa
     projects:
+      automatic: Wykonywane automatycznie
       collect: Zbieraj
       collect_info: W ciągu jednego dnia jedna postać może %{skill_name} tylko %{amount} gram.
       collect_info_tool_html: Jeśli masz <b>%{key}</b>, możesz %{skill_name} %{amount} gram jednego dnia.
       create_location: Utwórz nową lokację!
       discover: Odkrywaj
-      hand: Wykonywane ręcznie
+      manual: Wykonywane ręcznie
       info:
         percent: '%{progress} procent'
       machine:

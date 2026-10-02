@@ -38,6 +38,8 @@ class Project < ApplicationRecord
   scope :pending, -> { where('elapsed < duration') }
   scope :completed, -> { where('elapsed = duration') }
 
+  delegate :run_type, to: :recipe, allow_nil: true
+
   AUTOMATIC = 'automatic'
   MANUAL = 'manual'
   SEMIAUTOMATIC = 'semiautomatic'
