@@ -116,7 +116,8 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
     create(:location_resource, resource: stone, location: location, status: true)
     time = DateTime.parse('2026-02-01 11:00:00')
     Timecop.freeze(time)
-    project = create(:project, :collect, starting_character: character, location: location,
+    project = create(:project, :collect, starting_character: character,
+                                         location: location,
                                          duration: 600, elapsed: 0, checked_at: nil)
     create(:project_description, :resource_out, project: project,
                                                 subject: stone, amount_needed: 10)
@@ -158,6 +159,29 @@ class ProjectsProgressServiceTest < ActiveSupport::TestCase
     assert_equal 30, inv_stone.amount
     assert_equal 600, project.elapsed
 
+    Timecop.unfreeze
+  end
+
+  test 'automatic projects progress without workers' do
+    time = DateTime.parse('2026-02-01 11:00:00')
+    end_time = time + 12.hours
+
+    dried_dung = create(:resource, key: 'dried_dung')
+    recipe = create(:recipe, key: 'dried_dung', recipe_type: 'drying',
+                             run_type: Project::AUTOMATIC)
+
+    Timecop.freeze(time)
+    project = create(:project, starting_character: create(:character),
+                               recipe: recipe,
+                               duration: 86_400, elapsed: 0, checked_at: nil)
+    create(:project_description, :resource_out, project: project,
+                                                subject: dried_dung, amount_needed: 800)
+
+    Timecop.freeze(end_time)
+    call_service(project.id)
+
+    assert_equal 43_200, project.reload.elapsed
+    assert_equal end_time, project.checked_at
     Timecop.unfreeze
   end
 end

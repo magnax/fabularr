@@ -8,8 +8,8 @@ module Projects
 
     def call
       return unless pending_project?
-      return unless project.workers.any?
-      return unless workers.any?
+      return unless project.workers.any? || automatic?
+      return unless workers.any? || automatic?
 
       if (project.duration - project.elapsed) > elapsed_time
         progress_project!
@@ -57,6 +57,8 @@ module Projects
     end
 
     def calculate_elapsed_time
+      return world_elapsed_time if automatic?
+
       workers.inject(0) do |elapsed, worker|
         current_time = DateTime.current
         t_start = if created_after_checked?(worker)
@@ -70,6 +72,10 @@ module Projects
       end
     end
 
+    def world_elapsed_time
+      DateTime.current.to_time - (project.checked_at || project.created_at)
+    end
+
     def workers
       @workers ||= project.workers.active +
                    Worker
@@ -78,6 +84,7 @@ module Projects
     end
 
     def broadcast_progress!
+      # TODO: this should broadcast to characters' channels
       ActionCable.server.broadcast(
         "location_#{project.location_id}",
         {
@@ -91,6 +98,10 @@ module Projects
     def created_after_checked?(worker)
       project.checked_at.nil? ||
         (worker.created_at >= project.checked_at)
+    end
+
+    def automatic?
+      project.run_type == Project::AUTOMATIC
     end
 
     def project
