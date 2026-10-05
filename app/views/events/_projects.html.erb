@@ -6,7 +6,7 @@
           <%= link_to fa_icon('hand-o-right'), point_project_url(project.id), title: t('projects.actions.point') %>
           <%= link_to fa_icon('info-circle'), project_url(project.id) %>
           <% if @current_character.project.blank? %>
-            <% if project.ready %>
+            <% if project.ready && !(project.run_type == Project::AUTOMATIC) %>
               <%= link_to fa_icon('user-plus'), project_join_url(project.id), title: t('projects.join') %>
             <% end %>
           <% elsif @current_character.project == project %>
