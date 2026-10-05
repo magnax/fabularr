@@ -3,27 +3,28 @@
     <% projects.each do |project| %>
       <div style="padding: 4px 0px 3px 10px;">
         <div style="width:110px;display:inline-block;vertical-align:top;text-align:right;margin-right:10px;">
-          <%= link_to fa_icon('hand-o-right'), point_project_url(project.id), title: t('projects.actions.point') %>
-          <%= link_to fa_icon('info-circle'), project_url(project.id) %>
+          <%= link_to fa_icon('hand-o-right'), point_project_url(project[:id]), title: t('projects.actions.point') %>
+          <%= link_to fa_icon('info-circle'), project_url(project[:id]) %>
           <% if @current_character.project.blank? %>
-            <% if project.ready && !(project.run_type == Project::AUTOMATIC) %>
-              <%= link_to fa_icon('user-plus'), project_join_url(project.id), title: t('projects.join') %>
+            <% if project[:can_join] %>
+              <%= link_to fa_icon('user-plus'), project_join_url(project[:id]), title: t('projects.join') %>
             <% end %>
-          <% elsif @current_character.project == project %>
-            <%= link_to fa_icon('user-times'), project_leave_url(project.id), title: t('projects.leave') %>
+          <% elsif @current_character.project&.id == project[:id] %>
+            <%= link_to fa_icon('user-times'), project_leave_url(project[:id]), title: t('projects.leave') %>
           <% end %>
           <%= link_to fa_icon('times-rectangle-o'), '', title: 'Remove this project' %>
         </div>
-        <% worker_class = @current_character.project == project ? 'current-worker' : '' %>
-        <div data-project-id="<%= project.id %>"  style="display:inline-block;max-width:650px;" class="<%= worker_class %>">
-          <%= project.name(@current_character, short: true).upcase_first.html_safe %>
-          <% if project.ready %>
+        <% worker_class = @current_character.project&.id == project[:id] ? 'current-worker' : '' %>
+        <div data-project-id="<%= project[:id] %>"  style="display:inline-block;max-width:650px;" class="<%= worker_class %>">
+          <%= project[:name].html_safe %>
+          <% if project[:ready] %>
             <%= "\u2714" %>
           <% else %>
             <%= "\u2718" %>
           <% end %>
-          (<span id="percent-<%= project.id %>"><%= project.progress %></span>%), 
-          <%= t('projects.started_by', char_url: link_to(current_character.name_for(project.starting_character), character_name_url(project.starting_character_id))).html_safe %>
+          (<span id="percent-<%= project[:id] %>"><%= project[:progress] %></span>%), 
+          <%= t('projects.started_by', 
+                 char_url: project[:starting_character_link]).html_safe %>
         </div>
       </div>
     <% end %>

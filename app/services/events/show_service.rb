@@ -2,6 +2,9 @@
 
 module Events
   class ShowService < ApplicationService
+    include Rails.application.routes.url_helpers
+    include ActionView::Helpers::UrlHelper
+
     def initialize(character)
       @character = character
     end
@@ -20,7 +23,7 @@ module Events
         location_info: Locations::InfoService.call(@character),
         location_resources: visible_resources,
         project: project,
-        projects: Projects::VisibleProjects.call(@character),
+        projects: projects,
         roads: roads,
         travel_info: travel_info,
         vehicles: location&.vehicles
@@ -96,6 +99,24 @@ module Events
 
     def objects
       @objects ||= location&.location_objects
+    end
+
+    def projects
+      Projects::VisibleProjects.call(@character).map do |project|
+        {
+          id: project.id,
+          ready: project.ready,
+          can_join: project.joinable?,
+          name: project.name(@character, short: true).upcase_first,
+          progress: project.progress,
+          starting_character_link: link_to(
+            @character.name_for(project.starting_character),
+            character_name_url(
+              character_id: project.starting_character_id, only_path: true
+            )
+          )
+        }
+      end
     end
 
     def visible_resources

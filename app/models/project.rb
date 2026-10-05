@@ -145,4 +145,8 @@ class Project < ApplicationRecord
   def resource_out_subject
     project_descriptions.resource_out.last.subject
   end
+
+  def joinable?
+    ready && (run_type != AUTOMATIC)
+  end
 end

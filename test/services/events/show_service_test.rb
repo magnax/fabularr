@@ -216,4 +216,27 @@ class EventsShowServiceTest < ActiveSupport::TestCase
 
     assert_equal 'cats, zebras', res[:animals]
   end
+
+  test 'show projects' do
+    recipe_hand = create(:recipe)
+    recipe_auto = create(:recipe, run_type: Project::AUTOMATIC)
+    project_hand = create(:project, location: @character.location, recipe: recipe_hand,
+                                    elapsed: 300, duration: 600, ready: true)
+    project_auto = create(:project, location: @character.location, recipe: recipe_auto,
+                                    elapsed: 300, duration: 600, ready: true)
+
+    res = call_service
+
+    assert_equal 2, res[:projects].length
+    assert_equal %i[id ready can_join name progress starting_character_link].sort,
+                 res[:projects].first.keys.sort
+
+    r_hand = res[:projects].find { |p| p[:id] == project_hand.id }
+    assert r_hand[:ready]
+    assert r_hand[:can_join]
+
+    r_auto = res[:projects].find { |p| p[:id] == project_auto.id }
+    assert r_auto[:ready]
+    assert_not r_auto[:can_join]
+  end
 end
