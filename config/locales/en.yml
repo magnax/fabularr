@@ -254,8 +254,11 @@ en:
     small_firewood_shaft: small firewood shaft
     small_shaft: small shaft
     small_wooden_shaft: small wooden shaft
+    steel_hammer: steel hammer
     steel_knife: steel knife
     stone_axe: stone axe
+    stone_cleaver: stone cleaver
+    stone_hammer: stone hammer
     stone_knife: stone knife
     wooden_shaft: wooden shaft
   locations:
@@ -399,6 +402,8 @@ en:
     types:
       path: path
   select: --- select ---
+  ships:
+    sloop: sloop
   skills:
     animal_husbandry: animal husbandry
     awkwardly: awkwardly

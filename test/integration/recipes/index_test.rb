@@ -22,14 +22,16 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
     create(:recipe, recipe_type: Recipe::ITEM, key: 'stone_knife')
     create(:recipe, recipe_type: Recipe::VEHICLE, key: 'small_wooden_cart')
     create(:recipe, recipe_type: Recipe::COLLECT, key: 'wood')
+    create(:recipe, recipe_type: Recipe::SHIP, key: 'sloop')
 
     visit '/en/recipes'
 
     assert_equal 200, page.status_code
-    assert_content 'Select what you want to make (recipes: 3)'
+    assert_content 'Select what you want to make (recipes: 4)'
     assert_content 'stone knife'
     assert_content 'wood shack'
     assert_content 'small wooden cart'
+    assert_content 'sloop'
   end
 
   test 'show project setup page for given recipe' do

@@ -84,6 +84,39 @@ module Definitions::Recipes
       ]
     },
     {
+      key: 'sloop#ship',
+      base_speed: 3000,
+      instructions: [
+        { key: 'resource#iron', amount: 200 },
+        { key: 'resource#wood', amount: 14_000 },
+        { key: 'tool#hammer',
+          options: [
+            { key: 'stone_hammer' },
+            { key: 'steel_hammer' }
+          ] }
+      ]
+    },
+    {
+      key: 'stone_cleaver#item',
+      base_speed: 3600,
+      instructions: [
+        { key: 'resource#stone', amount: 300 }
+      ]
+    },
+    {
+      key: 'stone_hammer#item',
+      base_speed: 3600,
+      instructions: [
+        { key: 'resource#stone', amount: 100 },
+        { key: 'item#stone_cleaver', amount: 1 },
+        { key: 'item#small_shaft', amount: 1,
+          options: [
+            { key: 'small_wooden_shaft' },
+            { key: 'small_bone_shaft' }
+          ] }
+      ]
+    },
+    {
       key: 'stone_knife#item',
       base_speed: 3600,
       instructions: [

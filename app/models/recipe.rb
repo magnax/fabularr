@@ -31,9 +31,10 @@ class Recipe < ApplicationRecord
   GRILLING = 'grilling'
   ITEM = 'item'
   MACHINERY = 'machinery'
+  SHIP = 'ship'
   VEHICLE = 'vehicle'
 
-  BUILD_TYPES = [ITEM, BUILDING, MACHINERY, VEHICLE].freeze
+  BUILD_TYPES = [ITEM, BUILDING, MACHINERY, VEHICLE, SHIP].freeze
 
   scope :by_type, ->(type) { where(recipe_type: type) }
 end

@@ -254,8 +254,11 @@ pl:
     small_firewood_shaft: mały trzonek z drewna opałowego
     small_shaft: mały trzonek
     small_wooden_shaft: mały drewniany trzonek
+    steel_hammer: stalowy młotek
     steel_knife: stalowy nóż
     stone_axe: kamienna siekiera
+    stone_cleaver: kamienny tasak
+    stone_hammer: kamienny młotek
     stone_knife: kamienny nóż
     wooden_shaft: drewniany trzonek
   locations:
@@ -399,6 +402,8 @@ pl:
     types:
       path: ścieżka
   select: --- wybierz ---
+  ships:
+    sloop: slup
   skills:
     animal_husbandry: hodowla zwierząt 
     awkwardly: niezręcznie
