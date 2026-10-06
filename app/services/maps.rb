@@ -24,8 +24,13 @@ module Maps
     16 => 'nnw'
   }.freeze
 
-  def self.location_type(pos_x, pos_y)
-    raise InvalidPositionError if invalid_data(full_map, pos_x, pos_y)
+  SHORE_DISTANCE = 16
+  ANGLE_SAMPLE_SIZE = 36
+
+  def self.location_type(pos_x, pos_y, throw_error: true)
+    if invalid_data(full_map, pos_x, pos_y)
+      throw_error ? raise(InvalidPositionError) : nil
+    end
 
     p = full_map.pixel_color(pos_x, pos_y)
 
@@ -33,6 +38,8 @@ module Maps
 
     if color.in?(LocationType::HABITABLE_TYPES_COLORS)
       LocationType.find_by(key: LocationType::COLOR_MAP[color])
+    elsif color == LocationType::COLOR_WATER_LAKE
+      'water_lake'
     elsif color == LocationType::COLOR_WATER
       'water'
     elsif color == LocationType::COLOR_BORDER
@@ -48,7 +55,7 @@ module Maps
   end
 
   def self.full_map
-    @full_map ||= Magick::ImageList.new('app/assets/images/map.png').first
+    @full_map ||= load_map
   end
 
   def self.locations_direction_text(location_from, location_to)
@@ -89,5 +96,30 @@ module Maps
       (coords_2.y - coords_1.y)**2 +
       (coords_2.x - coords_1.x)**2
     )
+  end
+
+  def self.lakeshore?(pos_x, pos_y)
+    check_map_color(pos_x, pos_y, 'water_lake')
+  end
+
+  def self.seashore?(pos_x, pos_y)
+    check_map_color(pos_x, pos_y, 'water')
+  end
+
+  def self.check_map_color(pos_x, pos_y, color)
+    angle_value = 360.0 / ANGLE_SAMPLE_SIZE
+    (0..(ANGLE_SAMPLE_SIZE - 1)).each do |angle_index|
+      angle = (angle_index * angle_value) * (Math::PI / 180)
+      xs = pos_x + (Math.cos(angle) * SHORE_DISTANCE)
+      ys = pos_y + (Math.sin(angle) * SHORE_DISTANCE)
+
+      return true if location_type(xs, ys, throw_error: false) == color
+    end
+
+    false
+  end
+
+  def self.load_map
+    Magick::ImageList.new('app/assets/images/map.png').first
   end
 end

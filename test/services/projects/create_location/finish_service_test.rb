@@ -10,9 +10,15 @@ class ProjectsCreateLocationFinishServiceTest < ActiveSupport::TestCase
     Projects::FinishService.call(project_id)
   end
 
+  def set_map_expectations!(pos_x, pos_y, location_type)
+    Maps.expects(:location_type).with(pos_x, pos_y).returns(location_type)
+    Maps.expects(:seashore?).with(pos_x, pos_y).returns(false)
+    Maps.expects(:lakeshore?).with(pos_x, pos_y).returns(false)
+  end
+
   test '#create_location creates new location' do
     location_type = create(:location_type, key: 'tundra')
-    Maps.expects(:location_type).with(300, 200).returns(location_type)
+    set_map_expectations!(300, 200, location_type)
     starting_character = create(:character, location: nil,
                                             coords: { x: 300, y: 200 })
     create(:traveller, subject: starting_character, speed: 0)
@@ -47,7 +53,7 @@ class ProjectsCreateLocationFinishServiceTest < ActiveSupport::TestCase
 
   test '#create_location - add nearby travelling characters to new location' do
     location_type = create(:location_type, key: 'tundra')
-    Maps.expects(:location_type).with(300, 200).returns(location_type)
+    set_map_expectations!(300, 200, location_type)
     starting_character = create(:character, location: nil,
                                             coords: { x: 300, y: 200 })
     travelling_character = create(:character, location: nil,
@@ -91,7 +97,7 @@ class ProjectsCreateLocationFinishServiceTest < ActiveSupport::TestCase
 
   test 'starting character is not present when project finishes' do
     location_type = create(:location_type, key: 'tundra')
-    Maps.expects(:location_type).with(300, 200).returns(location_type)
+    set_map_expectations!(300, 200, location_type)
     starting_character = create(:character, location: nil,
                                             coords: { x: 300, y: 200 })
     other_character = create(:character, location: nil,

@@ -10,7 +10,9 @@ module Locations
     def call
       @location = Location.create!(location_type: location_type,
                                    location_class: LocationClass.find_by(key: 'town'),
-                                   coords: @coords, **@params)
+                                   coords: @coords,
+                                   lakeshore: lakeshore, seashore: seashore,
+                                   **@params)
 
       LocationResources::CreateService.call(@location)
       AnimalPacks::CreateService.call(@location)
@@ -22,6 +24,14 @@ module Locations
 
     def location_type
       @location_type ||= Maps.location_type(*position)
+    end
+
+    def lakeshore
+      Maps.lakeshore?(*position)
+    end
+
+    def seashore
+      Maps.seashore?(*position)
     end
 
     def position

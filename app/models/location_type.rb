@@ -38,6 +38,7 @@ class LocationType < ApplicationRecord
   COLOR_SWAMP = 'ac939d'
   COLOR_TUNDRA = '808080'
   COLOR_WATER = '00ffff'
+  COLOR_WATER_LAKE = '0001ff'
   COLOR_BORDER = 'e6e6e6'
 
   HABITABLE_TYPES_COLORS = [
