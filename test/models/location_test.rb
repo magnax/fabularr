@@ -6,10 +6,12 @@
 #
 #  id                 :integer          not null, primary key
 #  coords             :point
+#  lakeshore          :boolean          default(FALSE)
 #  max_capacity       :integer
 #  max_characters     :integer
 #  metadata           :jsonb
 #  name               :string
+#  seashore           :boolean          default(FALSE)
 #  created_at         :datetime
 #  updated_at         :datetime
 #  location_class_id  :bigint
@@ -32,6 +34,8 @@ class LocationTest < ActiveSupport::TestCase
 
     assert_respond_to location, :location_type_id
     assert_respond_to location, :coords
+    assert_respond_to location, :lakeshore
+    assert_respond_to location, :seashore
 
     assert location.valid?
   end

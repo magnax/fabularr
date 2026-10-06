@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_02_065721) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_06_062725) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -220,6 +220,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_065721) do
   create_table "locations", id: :serial, force: :cascade do |t|
     t.point "coords"
     t.datetime "created_at", precision: nil
+    t.boolean "lakeshore", default: false
     t.bigint "location_class_id"
     t.integer "location_type_id"
     t.integer "max_capacity"
@@ -227,6 +228,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_065721) do
     t.jsonb "metadata"
     t.string "name"
     t.integer "parent_location_id"
+    t.boolean "seashore", default: false
     t.datetime "updated_at", precision: nil
     t.index ["location_class_id"], name: "index_locations_on_location_class_id"
   end
