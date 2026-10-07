@@ -19,7 +19,7 @@ module Events
         characters: map_characters,
         events: events,
         items: items,
-        location: location,
+        location: location_hash,
         location_info: Locations::InfoService.call(@character),
         location_resources: visible_resources,
         project: project,
@@ -75,6 +75,19 @@ module Events
 
       location_type = I18n.t("vehicles.#{other_character.location.location_type.key}")
       "#{name} [#{location_type}]"
+    end
+
+    def location_hash
+      return {} if location.blank?
+
+      {
+        id: location.id,
+        parent_location_id: location.parent_location_id,
+        parent_location_name: location.parent_location&.display_name(@character),
+        town: location.town?,
+        lakeshore: location.lakeshore,
+        seashore: location.seashore
+      }
     end
 
     def items
