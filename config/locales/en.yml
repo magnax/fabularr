@@ -265,6 +265,8 @@ en:
     wooden_shaft: wooden shaft
   locations:
     beach: beach
+    borders_lake: Borders a lake
+    borders_sea: Borders a sea
     desert: desert
     fields: fields
     forest: forest

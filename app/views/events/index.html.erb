@@ -32,6 +32,12 @@
   <div class="title-bar">
     <%= t 'views.events.index.roads_here' %>
   </div>
+  <% if location[:seashore] %>
+    <%= t('locations.borders_sea') %>
+  <% end %>
+  <% if location[:lakeshore] %>
+    <%= t('locations.borders_lake') %>
+  <% end %>
   <img src="/maps" width=200 height=200>
 </section>
 

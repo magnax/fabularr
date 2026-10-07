@@ -233,4 +233,24 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     assert_link(nil, title: 'Point at this project',
                      href: "#{host}/en/point/project/#{project.id}")
   end
+
+  test 'show that location borders a sea' do
+    fabular_city = create(:location, name: 'Fabular City', seashore: true)
+    create(:character, name: 'Magnus', location: fabular_city, user: @user)
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_content 'Borders a sea'
+  end
+
+  test 'show that location borders a lake' do
+    fabular_city = create(:location, name: 'Fabular City', lakeshore: true)
+    create(:character, name: 'Magnus', location: fabular_city, user: @user)
+
+    sign_in
+    click_link 'Magnus'
+
+    assert_content 'Borders a lake'
+  end
 end

@@ -265,6 +265,8 @@ pl:
     wooden_shaft: drewniany trzonek
   locations:
     beach: plaża
+    borders_lake: Graniczy z jeziorem
+    borders_sea: Graniczy z morzem
     desert: pustynia
     fields: pola
     forest: las
