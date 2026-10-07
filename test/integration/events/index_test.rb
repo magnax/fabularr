@@ -30,6 +30,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     sign_in
     click_link 'Magnus'
 
+    assert_equal 200, page.status_code
+
     assert_content('Events for: Magnus')
     assert_content('Location:')
     assert_content('unnamed place')
@@ -44,6 +46,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     assert_link('Build menu', href: "#{host}/en/recipes")
     assert_link('Inventory', href: "#{host}/en/inventory_objects")
     assert_selector 'section#map'
+    assert_no_content 'Borders a sea'
+    assert_no_content 'Borders a lake'
   end
 
   test 'link to collect resource on events page (visible only)' do
@@ -56,6 +60,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     sign_in
     click_link 'Magnus'
+
+    assert_equal 200, page.status_code
 
     assert_content('mushrooms')
     assert_link(
@@ -80,6 +86,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     sign_in
     click_link 'Magnus'
 
+    assert_equal 200, page.status_code
+
     assert_content '200 grams mushrooms'
     assert_link 'Take', href: "#{host}/en/location_objects/#{lr.id}/take"
     assert_content 'brand new stone knife'
@@ -95,6 +103,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     sign_in
     click_link 'Magnus'
 
+    assert_equal 200, page.status_code
+
     assert_link 'unnamed place', href: "#{host}/en/locations/#{fabular_city.id}/name"
     assert_link 'Town Hall', href: "#{host}/en/locations/#{town_hall.id}/name"
   end
@@ -105,6 +115,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     sign_in
     click_link 'Magnus'
+
+    assert_equal 200, page.status_code
 
     assert_link 'Build a road', href: "#{host}/en/new/projects/road/#{fabular_city.id}"
   end
@@ -118,6 +130,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     sign_in
     click_link 'Magnus'
 
+    assert_equal 200, page.status_code
+
     assert_content 'path to unnamed place'
   end
 
@@ -129,6 +143,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     sign_in
     click_link 'Magnus'
+
+    assert_equal 200, page.status_code
 
     assert_content 'unknown woman (unnamed place)'
     assert_link 'unknown woman', href: "#{host}/en/characters/#{town_character.id}/name"
@@ -143,6 +159,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     sign_in
     click_link 'Magnus'
 
+    assert_equal 200, page.status_code
+
     assert_no_link 'unknown woman', href: "#{host}/en/characters/#{town_character.id}/name"
   end
 
@@ -154,6 +172,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     sign_in
     click_link 'Magnus'
+
+    assert_equal 200, page.status_code
 
     assert_content 'unknown woman (Turtle [small wooden cart])'
   end
@@ -226,6 +246,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     sign_in
     click_link 'Magnus'
 
+    assert_equal 200, page.status_code
+
     assert_link(nil, title: 'Point at this person',
                      href: "#{host}/en/point/character/#{other_character.id}")
     assert_link(nil, title: 'Point at this road',
@@ -241,6 +263,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     sign_in
     click_link 'Magnus'
 
+    assert_equal 200, page.status_code
+
     assert_content 'Borders a sea'
   end
 
@@ -250,6 +274,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
 
     sign_in
     click_link 'Magnus'
+
+    assert_equal 200, page.status_code
 
     assert_content 'Borders a lake'
   end
