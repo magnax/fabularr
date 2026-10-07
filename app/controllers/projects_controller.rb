@@ -19,6 +19,8 @@ class ProjectsController < ApplicationController
     render_error I18n.t('errors.projects.only_outside')
   rescue Projects::Create::Collect::InvalidResourceError
     render_error I18n.t('errors.projects.invalid_resource')
+  rescue Projects::InvalidShipBuildLocationError
+    render_error I18n.t('errors.projects.invalid_ship_location')
   end
 
   def destroy

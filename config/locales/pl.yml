@@ -107,6 +107,7 @@ pl:
     location_resources:
       invalid_location: Nieprawidłowa lokacja
     projects:
+      invalid_ship_location: Nie możesz budować statku w tej lokacji
       machine_in_use: To urządzenie jest aktualnie używane
       only_outside: Ten projekt można rozpocząć tylko na zewnątrz
   events:
@@ -244,6 +245,7 @@ pl:
       often_used: często używany
       old: stary
       used: używany
+    hammer: młotek
     iron_knife: żelazny nóż
     iron_shield: żelazna tarcza
     knife: nóż

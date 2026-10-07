@@ -107,6 +107,7 @@ en:
     location_resources:
       invalid_location: Invalid location
     projects:
+      invalid_ship_location: Ship cannot be built in this location
       machine_in_use: This machine is already used
       only_outside: This project can be started only outside
   events:
@@ -244,6 +245,7 @@ en:
       often_used: often_used
       old: old
       used: used
+    hammer: hammer
     iron_knife: iron knife
     iron_shield: iron shield
     knife: knife

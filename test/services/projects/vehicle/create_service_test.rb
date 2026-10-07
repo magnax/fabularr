@@ -57,4 +57,18 @@ class ProjectsVehicleCreateServiceTest < ActiveSupport::TestCase
       call_service(params)
     end
   end
+
+  test 'ship - error when started in location which borders sea/lake' do
+    project_type = create(:project_type, key: 'build')
+    recipe = create(:recipe, recipe_type: 'ship')
+
+    params = {
+      project_type_id: project_type.id,
+      recipe_id: recipe.id
+    }
+
+    assert_raises Projects::InvalidShipBuildLocationError do
+      call_service(params)
+    end
+  end
 end

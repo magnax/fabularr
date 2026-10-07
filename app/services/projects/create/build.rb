@@ -5,6 +5,7 @@ module Projects
     def call
       raise Projects::RecipeNotFoundError if recipe.blank?
       raise Projects::OnlyOutsideError if wrong_location?
+      raise Projects::InvalidShipBuildLocationError if wrong_ship_location?
 
       super
 
@@ -15,6 +16,12 @@ module Projects
 
     def wrong_location?
       recipe.recipe_type == Recipe::VEHICLE && !@character.location.town?
+    end
+
+    def wrong_ship_location?
+      return unless recipe.recipe_type == Recipe::SHIP
+
+      !(@character.location.seashore? || @character.location.lakeshore?)
     end
 
     def project_attributes
