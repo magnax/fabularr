@@ -569,6 +569,13 @@ pl:
       point: Wskaż to urządzenie
       use: Użyj tego urządzenia
     not_logged_in: Nie zalogowany
+    notes:
+      form:
+        title: 'Tytuł: '
+        submit: Zachowaj
+      new:
+        info: W tym polu możesz umieścić treść notatki, która zostanie zapisana w Twoim inwentarzu. Treść będzie odczytywana jako HTML, a więc oprócz zwykłego tekstu możesz używać znaczników zmieniających jej wygląd. Dostępna jest również opcja zapisania wpisu jako "nieedytowalnego", lecz po jej wybraniu nie będzie można wycofać dokonanych zmian.
+        title: Napisz notatkę
     project_descriptions:
       grilled_meat: pieczenie mięsa
     projects:

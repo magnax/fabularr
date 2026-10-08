@@ -1,0 +1,18 @@
+<section id="description">
+  <div class="title-bar"><%= t('views.notes.new.title') %></div>
+  <div class="note-form">
+    <%= t('views.notes.new.info') %>
+    <%= form_for :note do |f| %>
+      <div>
+        <%= f.label :title, t('views.notes.form.title') %>
+        <%= f.text_field :title %>
+      </div>
+      <div>
+        <%= f.text_area :body, cols: 100, rows: 20 %>
+      </div>
+      <div>
+        <%= f.submit t('views.notes.form.submit') %>
+      </div>
+    <% end %>
+  </div>
+</section>
