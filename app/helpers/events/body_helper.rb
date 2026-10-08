@@ -6,6 +6,10 @@ module Events::BodyHelper
            item: I18n.td("items.#{subject.item_type.key}"))
   end
 
+  def drop_note_body
+    I18n.t('events.drop_note', note: subject.title)
+  end
+
   def drop_resource_body
     I18n.t('events.drop_resource',
            res: I18n.td("resources.#{subject.key}"),
@@ -23,6 +27,12 @@ module Events::BodyHelper
     I18n.t('events.drop_item_others',
            character_link: character.char_id,
            item: I18n.td("items.#{subject.item_type.key}"))
+  end
+
+  def drop_note_others_body
+    I18n.t('events.drop_note_others',
+           character_link: character.char_id,
+           note: subject.title)
   end
 
   def take_resource_body

@@ -43,7 +43,8 @@ module LocationObjects
     end
 
     def should_destroy_inventory_object?
-      inventory_object.subject.is_a?(Item) || (inventory_object.amount - @amount).zero?
+      !inventory_object.subject.is_a?(Resource) ||
+        (inventory_object.amount - @amount).zero?
     end
 
     def update_running_project!
@@ -122,28 +123,21 @@ module LocationObjects
     end
 
     def create_character_event!
-      event = Event.create!(
-        body: send("drop_#{subject.class.to_s.downcase}_body"),
-        location: @character.location,
-        receiver_character: @character
-      )
+      body = send("drop_#{subject.class.to_s.downcase}_body")
 
-      Events::BroadcastService.call(@character.id, event.id)
+      Events::CreateAndBroadcastService.call(@character, body)
     end
 
     def create_other_characters_events!
-      @character.location.visible_characters.each do |char|
-        next if char == @character
+      body = send("drop_#{subject.class.to_s.downcase}_others_body")
 
-        event = Event.create!(
-          body: send("drop_#{subject.class.to_s.downcase}_others_body"),
-          location: @character.location,
-          character: nil,
-          receiver_character: char
-        )
+      Events::CreateEventForAllService.call(
+        visible_characters, body, except: @character
+      )
+    end
 
-        Events::BroadcastService.call(char.id, event.id)
-      end
+    def visible_characters
+      @visible_characters ||= @character.location.visible_characters
     end
 
     def subject

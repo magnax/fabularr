@@ -9,13 +9,15 @@ module Events
 
     def call
       @characters.each do |ch|
-        Event.create!(
+        event = Event.create!(
           character_id: nil,
           receiver_character_id: ch.id,
           body: @body
         )
 
-        ActionCable.server.broadcast("char_#{ch.id}", { type: 'event', body: @body })
+        ActionCable.server.broadcast("char_#{ch.id}", {
+                                       type: 'event', event_id: event.id
+                                     })
       end
     end
   end

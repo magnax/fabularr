@@ -2,7 +2,7 @@
 
 <% notes.each do |note| %>
   <div>
-    <%= link_to t('views.inventory_objects.index.drop'), inventory_object_drop_url(note[:id]) %>
+    <%= link_to t('views.inventory_objects.index.drop'), inventory_object_drop_item_url(note[:id]) %>
     <%= td('views.notes.note') %> - "<%= note[:title] %>"
   </div>
 <% end %>

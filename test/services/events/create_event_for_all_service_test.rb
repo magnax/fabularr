@@ -18,8 +18,9 @@ class EventsCreateEventForAllServiceTest < ActiveSupport::TestCase
       call_service([char_1, char_2], 'new event!')
     end
 
-    [char_1.id, char_2.id].each do |id|
-      assert_broadcast_on "char_#{id}", { type: 'event', body: 'new event!' }
+    Event.all.find_each do |event|
+      assert_broadcast_on "char_#{event.receiver_character_id}",
+                          { type: 'event', event_id: event.id }
     end
   end
 
@@ -31,8 +32,9 @@ class EventsCreateEventForAllServiceTest < ActiveSupport::TestCase
       call_service([char_1, char_2], 'new event')
     end
 
-    [char_1.id, char_2.id].each do |id|
-      assert_broadcast_on "char_#{id}", { type: 'event', body: 'new event' }
+    Event.all.find_each do |event|
+      assert_broadcast_on "char_#{event.receiver_character_id}",
+                          { type: 'event', event_id: event.id }
     end
   end
 end

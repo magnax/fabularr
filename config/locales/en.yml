@@ -120,6 +120,8 @@ en:
     death: You see that %{character_link} dies.
     drop_item: You drop a %{item}
     drop_item_others: You see that %{character_link} is dropping a %{item}
+    drop_note: 'You drop a note "%{note}"'
+    drop_note_others: 'You see that %{character_link} is droping a note "%{note}"'
     drop_resource: You drop %{amount} %{unit} of %{res}
     drop_resource_others: You see that %{character_link} is dropping some %{res}
     eaten: You eat %{amount} grams of your %{res}
