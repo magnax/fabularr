@@ -2,7 +2,7 @@
   <div class="title-bar"><%= t('views.notes.new.title') %></div>
   <div class="note-form">
     <%= t('views.notes.new.info') %>
-    <%= form_for :note do |f| %>
+    <%= form_for :note, url: notes_url do |f| %>
       <div>
         <%= f.label :title, t('views.notes.form.title') %>
         <%= f.text_field :title %>

@@ -8,12 +8,23 @@ module InventoryObjects
 
     def call
       {
+        notes: notes,
         resources: resources,
         items: items
       }
     end
 
     private
+
+    def notes
+      inventory_objects.note.map do |note|
+        {
+          id: note.id,
+          title: note.subject.title,
+          editable: note.subject.editable
+        }
+      end
+    end
 
     def resources
       inventory_objects.resource.map do |res|

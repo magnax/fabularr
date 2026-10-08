@@ -30,6 +30,7 @@ class InventoryObject < ApplicationRecord
 
   scope :resource, -> { where(subject_type: 'Resource') }
   scope :item, -> { where(subject_type: 'Item') }
+  scope :note, -> { where(subject_type: 'Note') }
   scope :weapon, -> { joins(:item).merge(Item.weapon) }
   scope :protection, -> { joins(:item).merge(Item.protection) }
 

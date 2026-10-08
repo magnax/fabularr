@@ -576,6 +576,7 @@ pl:
       new:
         info: W tym polu możesz umieścić treść notatki, która zostanie zapisana w Twoim inwentarzu. Treść będzie odczytywana jako HTML, a więc oprócz zwykłego tekstu możesz używać znaczników zmieniających jej wygląd. Dostępna jest również opcja zapisania wpisu jako "nieedytowalnego", lecz po jej wybraniu nie będzie można wycofać dokonanych zmian.
         title: Napisz notatkę
+      note: notatka
     project_descriptions:
       grilled_meat: pieczenie mięsa
     projects:

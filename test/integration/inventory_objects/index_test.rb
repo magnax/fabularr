@@ -52,4 +52,15 @@ class InventoryObjectsIndexTest < ActionDispatch::IntegrationTest
     assert_content '100 grams mushrooms'
     assert_link 'Eat', href: "#{host}/en/inventory_objects/#{inv_mushrooms.id}/eat"
   end
+
+  test 'notes are visible' do
+    note = create(:note, title: 'First Note', character: @character)
+    create(:inventory_object, character: @character, subject: note)
+
+    visit 'en/inventory_objects'
+
+    assert_equal 200, page.status_code
+
+    assert_content 'note - "First Note"'
+  end
 end

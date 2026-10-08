@@ -576,6 +576,7 @@ en:
       new:
         info: In this field, you can put a text of a note, that will be saved in your inventory. The content will be read as HTML, so besides regular text, you may use tags to alter its appearance. You can also save the entry as "non-editable",however, once this option is selected, the changes can no longer be undone.
         title: Write a note
+      note: note
     project_descriptions:
       grilled_meat: grilling meat
     projects:
