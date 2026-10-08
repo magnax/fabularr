@@ -1,4 +1,7 @@
 <div class="content-right">
+  <div style="margin:4px 0;">
+      <%= link_to t('views.events.index.write_note'), new_note_url, class: 'char-action' %>
+    </div>
   <% if character.location %>
     <div style="margin:3px 0;">
       <%= link_to t('views.events.index.build_menu'), recipes_url, class: 'char-action' %>

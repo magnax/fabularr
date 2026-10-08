@@ -519,6 +519,7 @@ en:
         travel_info_html: "Travelling from %{location_link}"
         travel_info_road_html: "Travelling from %{location_from_link} to %{location_to_link} (%{percent}%)"
         vehicles: 'Vehicles:'
+        write_note: Write a note
       send: Send
       title: Events for
     inventory_objects:

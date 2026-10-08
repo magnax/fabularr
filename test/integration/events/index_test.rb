@@ -48,6 +48,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     assert_selector 'section#map'
     assert_no_content 'Borders a sea'
     assert_no_content 'Borders a lake'
+    assert_link 'Write a note', href: "#{host}/en/notes/new"
   end
 
   test 'link to collect resource on events page (visible only)' do

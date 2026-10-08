@@ -519,6 +519,7 @@ pl:
         travel_info_html: "Podróżuje z %{location_link}"
         travel_info_road_html: "Podróżuje z %{location_from_link} do %{location_to_link} (%{percent}%)"
         vehicles: 'Pojazdy:'
+        write_note: Napisz notatkę
       send: Wyślij
       title: Zdarzenia dla
     inventory_objects:
