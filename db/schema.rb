@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_06_062725) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_08_061157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -241,6 +241,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_06_062725) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string "body"
+    t.bigint "character_id"
+    t.datetime "created_at", null: false
+    t.boolean "editable", default: true
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_notes_on_character_id"
+  end
+
   create_table "project_descriptions", force: :cascade do |t|
     t.float "amount"
     t.float "amount_needed"
@@ -424,6 +434,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_06_062725) do
   add_foreign_key "location_names", "locations"
   add_foreign_key "location_objects", "locations"
   add_foreign_key "locations", "location_classes"
+  add_foreign_key "notes", "characters"
   add_foreign_key "project_descriptions", "projects"
   add_foreign_key "projects", "recipes"
   add_foreign_key "recipe_instructions", "recipes"
