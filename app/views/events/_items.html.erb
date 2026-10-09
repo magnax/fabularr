@@ -1,4 +1,11 @@
-<% if items.present? || machines.present? || resources.present? %>
+<% if items.present? || machines.present? || notes.present? || resources.present? %>
+  <% notes.each do |note| %>
+    <div>
+      <%= link_to fa_icon('arrow-up'), location_object_take_item_url(note.id), title: t('views.location_objects.take') %>
+      <%= td('views.notes.note') %> - "<%= note.subject.title %>"
+    </div>
+  <% end %>
+
   <% resources.each do |item| %>
     <div>
       <%= link_to fa_icon('upload'), location_object_take_url(item.id), title: t('views.location_objects.take') %>

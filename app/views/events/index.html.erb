@@ -46,7 +46,8 @@
     <%= t 'views.events.index.items_here' %>
   </div>
   <%= render partial: "events/items", locals: { 
-    resources: items[:resources], items: items[:items], machines: items[:machines] 
+    resources: items[:resources], items: items[:items], 
+    machines: items[:machines], notes: items[:notes]
   } %>
 </section>
 

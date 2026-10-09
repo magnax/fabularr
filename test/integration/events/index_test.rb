@@ -83,6 +83,9 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     knife = create(:item, item_type: stone_knife)
     location_knife = create(:location_object, location: fabular_city,
                                               subject: knife, unit: nil)
+    note = create(:note)
+    location_note = create(:location_object, location: fabular_city,
+                                             subject: note)
 
     sign_in
     click_link 'Magnus'
@@ -93,6 +96,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     assert_link 'Take', href: "#{host}/en/location_objects/#{lr.id}/take"
     assert_content 'brand new stone knife'
     assert_link 'Take', href: "#{host}/en/location_objects/#{location_knife.id}/take_item"
+    assert_content "note - \"#{note.title}\""
+    assert_link 'Take', href: "#{host}/en/location_objects/#{location_note.id}/take_item"
   end
 
   test 'links to location names' do

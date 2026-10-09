@@ -95,6 +95,7 @@ module Events
 
       {
         items: objects&.item,
+        notes: objects&.note,
         machines: machines,
         resources: objects&.includes(:subject)&.non_zero_resource
       }
