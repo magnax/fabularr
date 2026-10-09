@@ -184,6 +184,8 @@ pl:
       starting_other: Widzisz jak %{character_link} rozpoczyna nowy projekt
     take_item: Podnosisz %{item}
     take_item_others: Widzisz jak %{character_link} podnosi %{item}
+    take_note: Podnosisz notatkę "%{note}"
+    take_note_others: Widzisz jak %{character_link} podnosi notatkę "%{note}"
     take_resource: Podnosisz %{amount} %{unit} %{res} z ziemi
     take_resource_others: Widzisz jak %{character_link} podnosi trochę %{res} z ziemi
     travel:

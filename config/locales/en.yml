@@ -184,6 +184,8 @@ en:
       starting_other: You see that %{character_link} is starting new project
     take_item: "You're taking %{item}"
     take_item_others: You see that %{character_link} is taking %{item}
+    take_note: You're taking a note "%{note}"
+    take_note_others: You see that %{character_link} is taking a note "%{note}"
     take_resource: "You're taking %{amount} %{unit} of %{res} from the ground"
     take_resource_others: 'You see that %{character_link} is taking some %{res} from the ground'
     travel:

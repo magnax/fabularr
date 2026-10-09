@@ -51,6 +51,10 @@ module Events::BodyHelper
     )
   end
 
+  def take_note_body
+    I18n.t('events.take_note', note: subject.title)
+  end
+
   def take_resource_others_body
     I18n.t(
       'events.take_resource_others',
@@ -65,5 +69,11 @@ module Events::BodyHelper
       character_link: character.char_id,
       item: I18n.td("items.#{subject.item_type.key}")
     )
+  end
+
+  def take_note_others_body
+    I18n.t('events.take_note_others',
+           character_link: character.char_id,
+           note: subject.title)
   end
 end

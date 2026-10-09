@@ -65,10 +65,6 @@ module InventoryObjects
       @optional_tools ||= Projects::OptionalTools.call(current_worker.project)
     end
 
-    def resource?
-      @resource ||= subject.is_a?(Resource)
-    end
-
     def update_location_object!
       if should_destroy_location?
         location_object.destroy
@@ -78,11 +74,11 @@ module InventoryObjects
     end
 
     def should_destroy_location?
-      item? || (location_object.amount - @amount).zero?
+      !resource? || (location_object.amount - @amount).zero?
     end
 
-    def item?
-      @item ||= subject.is_a?(Item)
+    def resource?
+      @resource ||= subject.is_a?(Resource)
     end
 
     def create_events!
@@ -91,29 +87,21 @@ module InventoryObjects
     end
 
     def create_character_event!
-      event = Event.create!(
-        body: send("take_#{subject.class.to_s.downcase}_body"),
-        location: @character.location,
-        receiver_character: @character
-      )
+      body = send("take_#{subject.class.to_s.downcase}_body")
 
-      Events::BroadcastService.call(@character.id, event.id)
+      Events::CreateAndBroadcastService.call(@character, body)
     end
 
     def create_other_characters_events!
-      @character.location.visible_characters.each do |char|
-        next if char == @character
+      # take_resource_others_body take_item_others_body take_note_others_body
+      body = send("take_#{subject.class.to_s.downcase}_others_body")
 
-        event = Event.create!(
-          # take_resource_others_body take_item_others_body
-          body: send("take_#{subject.class.to_s.downcase}_others_body"),
-          location: @character.location,
-          character: nil,
-          receiver_character: char
-        )
+      Events::CreateEventForAllService.call(visible_characters, body,
+                                            except: @character)
+    end
 
-        Events::BroadcastService.call(char.id, event.id)
-      end
+    def visible_characters
+      @visible_characters ||= @character.location.visible_characters
     end
 
     def calculated_amount
@@ -138,11 +126,19 @@ module InventoryObjects
     end
 
     def location_object
-      @location_object ||= item_location_object || resource_location_object
+      @location_object ||= item_location_object ||
+                           note_location_object ||
+                           resource_location_object
     end
 
     def item_location_object
       @item_location_object ||= location.location_objects.item.find_by(
+        id: @params[:location_object_id]
+      )
+    end
+
+    def note_location_object
+      @note_location_object ||= location.location_objects.note.find_by(
         id: @params[:location_object_id]
       )
     end
