@@ -2,6 +2,7 @@
   <% notes.each do |note| %>
     <div>
       <%= link_to fa_icon('arrow-up'), location_object_take_item_url(note.id), title: t('views.location_objects.take') %>
+      <%= link_to fa_icon('clone'), note_copy_url(note[:subject_id]), title: t('views.inventory_objects.index.copy') %>
       <%= td('views.notes.note') %> - "<%= note.subject.title %>"
     </div>
   <% end %>

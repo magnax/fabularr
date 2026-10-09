@@ -20,6 +20,7 @@ module InventoryObjects
       inventory_objects.note.map do |note|
         {
           id: note.id,
+          subject_id: note.subject_id,
           title: note.subject.title,
           editable: note.subject.editable
         }

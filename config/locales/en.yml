@@ -535,6 +535,7 @@ en:
         title: Eating
       index:
         add_to_project: Add to project
+        copy: Copy this note
         drop: Drop
         eat: Eat
         title: Inventory

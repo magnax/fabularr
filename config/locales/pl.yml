@@ -535,6 +535,7 @@ pl:
         title: Jedzenie
       index:
         add_to_project: Dodaj do projektu
+        copy: Skopiuj tę notatkę
         drop: Upuść
         eat: Zjedz
         title: Inwentarz

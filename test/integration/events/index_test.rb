@@ -98,6 +98,7 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     assert_link 'Take', href: "#{host}/en/location_objects/#{location_knife.id}/take_item"
     assert_content "note - \"#{note.title}\""
     assert_link 'Take', href: "#{host}/en/location_objects/#{location_note.id}/take_item"
+    assert_link nil, href: "#{host}/en/notes/#{note.id}/copy", title: 'Copy this note'
   end
 
   test 'links to location names' do

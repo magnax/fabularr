@@ -62,5 +62,6 @@ class InventoryObjectsIndexTest < ActionDispatch::IntegrationTest
     assert_equal 200, page.status_code
 
     assert_content 'note - "First Note"'
+    assert_link nil, href: "#{host}/en/notes/#{note.id}/copy", title: 'Copy this note'
   end
 end
