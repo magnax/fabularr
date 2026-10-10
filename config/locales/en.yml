@@ -106,6 +106,8 @@ en:
       invalid: Invalid object
     location_resources:
       invalid_location: Invalid location
+    notes:
+      invalid: Invalid note
     projects:
       invalid_ship_location: Ship cannot be built in this location
       machine_in_use: This machine is already used
@@ -159,6 +161,9 @@ en:
       projects_info: You see %{ongoing} ongoing projects, %{working} of which someone is currently working on.
     locations:
       arrive_created: You arrived at newly created town
+    notes:
+      copy: You make a copy of "%{note}"
+      copy_other: You see that %{character_link} makes a copy of "%{note}"
     people:
       spawn_info: "You see a new person, it's %{character_link}."
     point:

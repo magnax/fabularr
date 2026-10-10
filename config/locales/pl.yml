@@ -106,6 +106,8 @@ pl:
       invalid: Nieprawidłowy obiekt
     location_resources:
       invalid_location: Nieprawidłowa lokacja
+    notes:
+      invalid: Nieprawidłowa notatka
     projects:
       invalid_ship_location: Nie możesz budować statku w tej lokacji
       machine_in_use: To urządzenie jest aktualnie używane
@@ -159,6 +161,9 @@ pl:
       projects_info: Widzisz %{ongoing} rozpoczętych projektów lub innych czynności, z czego nad %{working} ktoś obecnie pracuje.
     locations:
       arrive_created: Przybyłeś do nowo utworzonej osady
+    notes:
+      copy: Robisz kopię "%{note}"
+      copy_other: Widzisz jak %{character_link} robi kopię "%{note}"
     people:
       spawn_info: Widzisz nową osobę, to %{character_link}.
     point:
