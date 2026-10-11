@@ -1,6 +1,8 @@
 <div class="note-form">
   <%= t('views.notes.new.info') %>
-  <%= form_for :note, url: notes_url do |f| %>
+  <% url = note[:id] ? note_url(note[:id]) : notes_url %>
+  <%= form_for :note, url: url, method: note[:id] ? 'put' : 'post' do |f| %>
+    <%= f.hidden_field :id, value: note[:id] %>
     <div>
       <%= f.label :title, t('views.notes.form.title') %>
       <%= f.text_field :title, value: note[:title] %>

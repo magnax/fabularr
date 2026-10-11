@@ -5,6 +5,8 @@ class NotesController < ApplicationController
 
   def edit
     render locals: Notes::ShowService.call(current_character, params[:id])
+  rescue Notes::InvalidNoteError
+    render_error(I18n.t('errors.notes.invalid'))
   end
 
   def show
@@ -15,6 +17,12 @@ class NotesController < ApplicationController
     Notes::CreateService.call(current_character, notes_params)
 
     redirect_to events_path
+  end
+
+  def update
+    Notes::UpdateService.call(current_character, notes_params)
+
+    redirect_to inventory_objects_url
   end
 
   def copy
@@ -28,6 +36,6 @@ class NotesController < ApplicationController
   private
 
   def notes_params
-    params.require(:note).permit(:title, :body)
+    params.require(:note).permit(:id, :title, :body)
   end
 end

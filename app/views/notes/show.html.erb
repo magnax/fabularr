@@ -1,9 +1,12 @@
 <section id="description">
-  <div class="title-bar"><%= note[:title] %></div>
+  <div class="title-bar">
+    <%= note[:title] %> 
+      <% if note[:editable] %>
+        <%= link_to fa_icon('pencil-square-o'), edit_note_url(note[:id]), title: t('views.notes.edit_title') %>
+      <% end %>  
+    </div>
   
-  <pre>
-    <%= note[:body].html_safe %>
-  </pre>
+  <pre><%= note[:body].html_safe %></pre>
 
   <%= link_to t('views.layout.events_link'), events_url, class: 'char-action' %>
 

@@ -22,5 +22,7 @@ class NotesNewTest < ActionDispatch::IntegrationTest
 
     assert_content 'Write a note'
     assert_content 'Title:'
+    assert_selector "form[method='post'][action='#{host}/en/notes']"
+    assert_no_selector 'input[type="hidden"][name="_method"][value="put"]', visible: false
   end
 end

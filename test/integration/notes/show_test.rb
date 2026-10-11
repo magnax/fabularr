@@ -17,6 +17,7 @@ class NotesShowTest < ActionDispatch::IntegrationTest
 
   test 'shows note' do
     note = create(:note)
+    create(:inventory_object, character: @character, subject: note)
 
     visit show_path(note.id)
 
@@ -28,6 +29,7 @@ class NotesShowTest < ActionDispatch::IntegrationTest
 
   test 'simple HTML formatting' do
     note = create(:note, body: '<b>Some text</b>')
+    create(:inventory_object, character: @character, subject: note)
 
     visit show_path(note.id)
 
