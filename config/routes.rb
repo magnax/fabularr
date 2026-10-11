@@ -40,7 +40,7 @@ Fabularr::Application.routes.draw do
       get :examine, on: :collection
     end
     resources :maps, only: :index
-    resources :notes, only: %i[index new create update show] do
+    resources :notes, only: %i[create edit index new show update] do
       get :copy
     end
     resources :projects, only: %i[create destroy show] do

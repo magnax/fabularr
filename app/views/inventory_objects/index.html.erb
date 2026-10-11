@@ -5,7 +5,7 @@
     <%= link_to t('views.inventory_objects.index.drop'), inventory_object_drop_item_url(note[:id]) %>
     <%= link_to fa_icon('clone'), note_copy_url(note[:subject_id]), title: t('views.inventory_objects.index.copy') %>
     <% if note[:editable] %>
-      <%= link_to fa_icon('pencil-square-o'), note_url(note[:subject_id]), title: t('views.notes.edit') %>
+      <%= link_to fa_icon('pencil-square-o'), edit_note_url(note[:subject_id]), title: t('views.notes.edit_title') %>
     <% end %>
     
     <%= td('views.notes.note') %> - "<%= note[:title] %>"

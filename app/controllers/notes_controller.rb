@@ -3,6 +3,10 @@
 class NotesController < ApplicationController
   def new; end
 
+  def edit
+    render locals: Notes::ShowService.call(current_character, params[:id])
+  end
+
   def create
     Notes::CreateService.call(current_character, notes_params)
 

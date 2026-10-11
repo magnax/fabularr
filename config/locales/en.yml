@@ -580,7 +580,9 @@ en:
       use: Use this machine
     not_logged_in: Not logged in
     notes:
-      edit: Edit this note
+      edit:
+        title: Edit a note
+      edit_title: Edit this note
       form:
         title: 'Title: '
         submit: Store
