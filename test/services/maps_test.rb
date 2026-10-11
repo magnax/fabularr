@@ -3,6 +3,12 @@
 require 'test_helper'
 
 class MapsTest < ActiveSupport::TestCase
+  def set_map_expectations!(map = 'app/assets/images/map.png')
+    Maps.expects(:full_map)
+        .times(2)
+        .returns(Magick::ImageList.new(map).first)
+  end
+
   test '#location_type invalid position' do
     assert_raises Maps::InvalidPositionError do
       Maps.location_type(-10, -10)
@@ -10,9 +16,7 @@ class MapsTest < ActiveSupport::TestCase
   end
 
   test '#location_type exception' do
-    Maps.expects(:full_map)
-        .times(1..10)
-        .returns(Magick::ImageList.new('test/fixtures/invalid_map.png').first)
+    set_map_expectations!('test/fixtures/invalid_map.png')
 
     assert_raises Maps::InvalidMapColorError do
       Maps.location_type(5, 5)
@@ -28,6 +32,7 @@ class MapsTest < ActiveSupport::TestCase
   end
 
   test '#location_type - habitable' do
+    set_map_expectations!
     swamp = create(:location_type, key: 'swamp')
 
     assert_equal swamp, Maps.location_type(300, 400)
