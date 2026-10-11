@@ -69,5 +69,9 @@ class InventoryObjectsIndexTest < ActionDispatch::IntegrationTest
     # edit note link - only for editable note
     assert_link nil, href: "#{host}/en/notes/#{note.id}/edit", title: 'Edit this note'
     assert_no_link nil, href: "#{host}/en/notes/#{note_2.id}/edit"
+
+    # view note link
+    assert_link nil, href: "#{host}/en/notes/#{note.id}", title: 'Read this note'
+    assert_link nil, href: "#{host}/en/notes/#{note_2.id}", title: 'Read this note'
   end
 end

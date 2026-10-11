@@ -7,6 +7,7 @@
     <% if note[:editable] %>
       <%= link_to fa_icon('pencil-square-o'), edit_note_url(note[:subject_id]), title: t('views.notes.edit_title') %>
     <% end %>
+    <%= link_to fa_icon('eye'), note_url(note[:subject_id]), title: t('views.notes.read_title') %>
     
     <%= td('views.notes.note') %> - "<%= note[:title] %>"
   </div>
