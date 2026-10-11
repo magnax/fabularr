@@ -7,6 +7,10 @@ class NotesController < ApplicationController
     render locals: Notes::ShowService.call(current_character, params[:id])
   end
 
+  def show
+    render locals: Notes::ShowService.call(current_character, params[:id])
+  end
+
   def create
     Notes::CreateService.call(current_character, notes_params)
 

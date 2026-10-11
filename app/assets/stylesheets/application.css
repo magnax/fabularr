@@ -34,6 +34,13 @@ a {
   }
 }
 
+pre {
+  border: 1px solid var(--desert-sand);
+  padding: 10px;
+  margin: 10px;
+  text-align: left;
+}
+
 .alert {
   padding: 6px;
   width: 380px;
