@@ -580,6 +580,7 @@ pl:
       use: Użyj tego urządzenia
     not_logged_in: Nie zalogowany
     notes:
+      edit: Edytuj tę notatkę
       form:
         title: 'Tytuł: '
         submit: Zachowaj

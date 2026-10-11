@@ -55,7 +55,9 @@ class InventoryObjectsIndexTest < ActionDispatch::IntegrationTest
 
   test 'notes are visible' do
     note = create(:note, title: 'First Note', character: @character)
+    note_2 = create(:note, editable: false)
     create(:inventory_object, character: @character, subject: note)
+    create(:inventory_object, character: @character, subject: note_2)
 
     visit 'en/inventory_objects'
 
@@ -63,5 +65,9 @@ class InventoryObjectsIndexTest < ActionDispatch::IntegrationTest
 
     assert_content 'note - "First Note"'
     assert_link nil, href: "#{host}/en/notes/#{note.id}/copy", title: 'Copy this note'
+
+    # edit note link - only for editable note
+    assert_link nil, href: "#{host}/en/notes/#{note.id}", title: 'Edit this note'
+    assert_no_link nil, href: "#{host}/en/notes/#{note_2.id}"
   end
 end
