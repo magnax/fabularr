@@ -29,4 +29,40 @@ class EventsPointTest < ActionDispatch::IntegrationTest
 
     assert_response :found
   end
+
+  test 'point to note' do
+    note = create(:note, title: 'Note 1')
+    create(:location_object, location: @location, subject: note)
+
+    assert_difference -> { Event.count } => 2 do
+      get "/en/point/note/#{note.id}"
+    end
+
+    assert_response :found
+
+    event = Event.where(receiver_character: @character).last
+    assert_equal 'You point at note "Note 1"', event.body
+
+    event = Event.where(receiver_character: @other_character).last
+    assert_equal "You see <!--CHARID:#{@character.id}-->" \
+                 ' pointing at note "Note 1"', event.body
+  end
+
+  test 'point to note from inventory' do
+    note = create(:note, title: 'Note 1')
+    create(:inventory_object, character: @character, subject: note)
+
+    assert_difference -> { Event.count } => 2 do
+      get "/en/point/note/#{note.id}"
+    end
+
+    assert_response :found
+
+    event = Event.where(receiver_character: @character).last
+    assert_equal 'You point at note "Note 1" from your inventory', event.body
+
+    event = Event.where(receiver_character: @other_character).last
+    assert_equal "You see <!--CHARID:#{@character.id}-->" \
+                 ' pointing at note "Note 1" from his/her inventory', event.body
+  end
 end

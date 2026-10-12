@@ -167,6 +167,10 @@ pl:
     people:
       spawn_info: Widzisz nową osobę, to %{character_link}.
     point:
+      point_inventory_note_me: Wskazujesz notatkę "%{note}" ze swojego inwentarza
+      point_inventory_note_other: Widzisz jak %{character_link} wskazuje notatkę "%{note}" ze jego/jej inwentarza
+      point_note_me: Wskazujesz notatkę "%{note}"
+      point_note_other: Widzisz jak %{character_link} wskazuje notatkę "%{note}"
       point_person_me: Wskazujesz na %{char_name}
       point_person_other: Widzisz jak %{char_name_1} wskazuje na %{char_name_2}
       point_person_you: '<b>Widzisz jak %{char_name} wskazuje na Ciebie</b>'

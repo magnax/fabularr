@@ -167,6 +167,10 @@ en:
     people:
       spawn_info: "You see a new person, it's %{character_link}."
     point:
+      point_inventory_note_me: You point at note "%{note}" from your inventory
+      point_inventory_note_other: You see %{character_link} pointing at note "%{note}" from his/her inventory
+      point_note_me: You point at note "%{note}"
+      point_note_other: You see %{character_link} pointing at note "%{note}"
       point_person_me: You point at %{char_name}
       point_person_other: You see %{char_name_1} pointing at %{char_name_2}
       point_person_you: You see %{char_name} pointing at you

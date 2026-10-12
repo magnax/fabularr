@@ -2,7 +2,7 @@
 
 module Events
   class PointService < ApplicationService
-    SUBJECTS = %w[character project road].freeze
+    SUBJECTS = %w[character note project road].freeze
 
     def initialize(character, params)
       @character = character
