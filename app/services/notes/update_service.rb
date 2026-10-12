@@ -10,6 +10,8 @@ module Notes
     end
 
     def call
+      raise Notes::InvalidNoteError if note.blank? || !note.editable
+
       note.update!(**update_attrs)
     end
 
