@@ -2,7 +2,7 @@
 
 module Notes
   class UpdateService < ApplicationService
-    include ActionView::Helpers::SanitizeHelper
+    include Notes::SanitizeInputHelper
 
     def initialize(character, params)
       @character = character
@@ -17,23 +17,9 @@ module Notes
 
     def update_attrs
       {
-        title: sanitize_title,
-        body: sanitize_body
+        title: sanitize_title(@params[:title]),
+        body: sanitize_body(@params[:body])
       }
-    end
-
-    def sanitize_title
-      sanitize(@params[:title], tags: [])
-    end
-
-    def sanitize_body
-      sanitize(@params[:body], tags: %w[b i strong], scrubber: scrubber)
-    end
-
-    def scrubber
-      Loofah::Scrubber.new do |node|
-        node.remove if node.name == 'script'
-      end
     end
 
     def note
