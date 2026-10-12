@@ -249,6 +249,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
     create(:character, name: 'Magnus', location: fabular_city, user: @user)
     other_character = create(:character, location: fabular_city)
     project = create(:project, location: fabular_city, elapsed: 0, duration: 100)
+    note = create(:note)
+    create(:location_object, location: fabular_city, subject: note)
 
     sign_in
     click_link 'Magnus'
@@ -261,6 +263,8 @@ class EventsIndexTest < ActionDispatch::IntegrationTest
                      href: "#{host}/en/point/road/#{road.id}")
     assert_link(nil, title: 'Point at this project',
                      href: "#{host}/en/point/project/#{project.id}")
+    assert_link(nil, title: 'Point at this note',
+                     href: "#{host}/en/point/note/#{note.id}")
   end
 
   test 'show that location borders a sea' do

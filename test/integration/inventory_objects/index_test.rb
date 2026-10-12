@@ -73,5 +73,8 @@ class InventoryObjectsIndexTest < ActionDispatch::IntegrationTest
     # view note link
     assert_link nil, href: "#{host}/en/notes/#{note.id}", title: 'Read this note'
     assert_link nil, href: "#{host}/en/notes/#{note_2.id}", title: 'Read this note'
+
+    # point note link
+    assert_link nil, href: "#{host}/en/point/note/#{note.id}", title: 'Point at this note'
   end
 end

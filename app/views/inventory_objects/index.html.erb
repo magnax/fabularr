@@ -2,6 +2,7 @@
 
 <% notes.each do |note| %>
   <div>
+    <%= link_to fa_icon('hand-o-right'), point_note_url(note[:subject_id]), title: t('views.notes.point') %>
     <%= link_to t('views.inventory_objects.index.drop'), inventory_object_drop_item_url(note[:id]) %>
     <%= link_to fa_icon('clone'), note_copy_url(note[:subject_id]), title: t('views.inventory_objects.index.copy') %>
     <% if note[:editable] %>
