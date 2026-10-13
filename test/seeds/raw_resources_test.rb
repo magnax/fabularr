@@ -3,19 +3,22 @@
 require 'test_helper'
 
 class SeedsRawResourcesTest < ActiveSupport::TestCase
-  test 'works' do
+  TEST_RESOURCE_COUNT = 80
+  TEST_RESOURCE_TYPE_COUNT = 4
+
+  def setup
     Resource.destroy_all
     Skill.destroy_all
+  end
 
-    expected_count = 80
-
-    assert_difference -> { Resource.count } => expected_count,
-                      -> { ResourceType.count } => 4 do
+  test 'works' do
+    assert_difference -> { Resource.count } => TEST_RESOURCE_COUNT,
+                      -> { ResourceType.count } => TEST_RESOURCE_TYPE_COUNT do
       Seeds::RawResources.call
     end
 
     assert_equal %w[fuel medicine raw_food raw_resource], ResourceType.pluck(:key).sort
-    assert_equal expected_count, Resource.raw_resource.count
+    assert_equal TEST_RESOURCE_COUNT, Resource.raw_resource.count
 
     # check some resources for proper values
     # healing
@@ -33,5 +36,13 @@ class SeedsRawResourcesTest < ActiveSupport::TestCase
     assert_equal 250, carrots.eaten
     assert_equal %w[raw_food raw_resource], carrots.resource_types.pluck(:key).sort
     assert_equal 'farming', carrots.skill.key
+  end
+
+  test 'does not create the same records when called twice' do
+    assert_difference -> { Resource.count } => TEST_RESOURCE_COUNT,
+                      -> { ResourceType.count } => TEST_RESOURCE_TYPE_COUNT do
+      Seeds::RawResources.call
+      Seeds::RawResources.call
+    end
   end
 end

@@ -18,13 +18,24 @@ module Seeds::CreateResources
   end
 
   def create_resource!(key, conf, res_types_id, skill)
-    Resource.create!(
-      key: key, unit: 'grams',
+    res = Resource.find_by(key: key)
+    attrs = resource_attrs(conf, res_types_id, skill)
+
+    if res.present?
+      res.update!(**attrs)
+    else
+      Resource.create!(key: key, **attrs)
+    end
+  end
+
+  def resource_attrs(conf, res_types_id, skill)
+    {
+      unit: 'grams',
       daily_rate: conf.try(:[], 'rate') || 0,
       eaten: conf.try(:[], 'eaten') || 0,
       heal: conf.try(:[], 'heal') || 0,
       resource_type_id: res_types_id,
       skill: skill
-    )
+    }
   end
 end
