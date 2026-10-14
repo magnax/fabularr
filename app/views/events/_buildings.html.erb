@@ -10,6 +10,9 @@
 <% else %>
   <%= t('views.events.index.no_vehicles_here') %>
 <% end %>
+
+<%= render 'events/ships', ships: ships %>
+
 <% if buildings.present? %>
   <h3><%= t('views.events.index.buildings') %></h3>
   <% buildings.each do |item| %>

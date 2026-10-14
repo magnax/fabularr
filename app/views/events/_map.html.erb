@@ -1,0 +1,18 @@
+<section id="map"  style="float:right;width:29%;margin-left:3px;margin-bottom:6px;">
+  <div class="title-bar">
+    <%= t 'views.events.index.roads_here' %>
+  </div>
+  <% if location && location[:seashore] %>
+    <%= t('locations.borders_sea') %>
+  <% end %>
+  <% if location && location[:lakeshore] %>
+    <%= t('locations.borders_lake') %>
+  <% end %>
+  <img src="/maps" width=200 height=200>
+
+  <% if location[:ship] %>
+    <div>
+      <%= link_to t('views.events.index.undock'), location_undock_url(location[:id]), class: 'char-action' %>
+    </div>
+  <% end %>
+</section>

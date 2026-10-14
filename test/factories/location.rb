@@ -19,5 +19,11 @@ FactoryBot.define do
       location_type { FactoryBot.create(:location_type, key: 'small_wooden_cart') }
       name { 'Turtle' }
     end
+
+    trait :ship do
+      location_class { FactoryBot.create(:location_class, :ship) }
+      location_type { FactoryBot.create(:location_type, key: 'sloop') }
+      name { 'Vinterriket' }
+    end
   end
 end

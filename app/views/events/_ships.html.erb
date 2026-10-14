@@ -1,0 +1,13 @@
+<% if ships.present? %>
+  <h3><%= t('views.events.index.ships') %></h3>
+  <% ships.each do |ship| %>
+    <div>
+      <%= link_to fa_icon('arrow-right'), location_enter_url(ship[:id]), title: t('views.ships.enter') %>
+      <%= link_to ship[:name], location_name_url(ship[:id]) %>
+      (<%= ship[:type] %>)
+    </div>
+  <% end %>
+
+<% else %>
+  <%= t('views.events.index.no_ships_here') %>
+<% end %>

@@ -533,6 +533,7 @@ pl:
         travel_info_road_html: "Podróżuje z %{location_from_link} do %{location_to_link} (%{percent}%)"
         vehicles: 'Pojazdy:'
         write_note: Napisz notatkę
+        undock: Oddokuj
       send: Wyślij
       title: Zdarzenia dla
     inventory_objects:
@@ -689,6 +690,8 @@ pl:
     sessions:
       new:
         title: Logowanie do Fabular
+    ships:
+      enter: Wejdź na ten statek
     skills:
       collecting: zbieranie
       collecting_perf: zebrać

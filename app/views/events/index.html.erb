@@ -28,18 +28,7 @@
   <%= render partial: "events/characters", locals: { characters: characters } %>
 </section>
 
-<section id="map"  style="float: right; width: 29%;margin-left:3px;">
-  <div class="title-bar">
-    <%= t 'views.events.index.roads_here' %>
-  </div>
-  <% if location && location[:seashore] %>
-    <%= t('locations.borders_sea') %>
-  <% end %>
-  <% if location && location[:lakeshore] %>
-    <%= t('locations.borders_lake') %>
-  <% end %>
-  <img src="/maps" width=200 height=200>
-</section>
+<%= render 'events/map', location: location %>
 
 <section id="items" style="clear: both;">
   <div class="title-bar">
@@ -63,7 +52,7 @@
     <%= t 'views.events.index.buildings_here' %>
   </div>
   <%= render partial: "events/buildings", locals: { 
-    buildings: buildings, vehicles: vehicles 
+    buildings: buildings, ships: ships, vehicles: vehicles
   } %>
   <% if location[:parent_location_id] %>
     <div>

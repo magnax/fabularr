@@ -533,6 +533,7 @@ en:
         travel_info_road_html: "Travelling from %{location_from_link} to %{location_to_link} (%{percent}%)"
         vehicles: 'Vehicles:'
         write_note: Write a note
+        undock: Undock
       send: Send
       title: Events for
     inventory_objects:
@@ -689,6 +690,8 @@ en:
     sessions:
       new:
         title: Fabular login
+    ships:
+      enter: Enter this ship
     skills:
       collecting: collecting
       collecting_perf: collect

@@ -38,6 +38,7 @@ Fabularr::Application.routes.draw do
       get :enter
       get :name
       get :examine, on: :collection
+      get :undock
     end
     resources :maps, only: :index
     resources :notes, only: %i[create edit index new show update] do

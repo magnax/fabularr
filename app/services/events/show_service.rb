@@ -25,6 +25,7 @@ module Events
         project: project,
         projects: projects,
         roads: roads,
+        ships: location_ships,
         travel_info: travel_info,
         vehicles: location&.vehicles
       }
@@ -84,6 +85,7 @@ module Events
         id: location.id,
         parent_location_id: location.parent_location_id,
         parent_location_name: location.parent_location&.display_name(@character),
+        ship: location.ship?,
         town: location.town?,
         lakeshore: location.lakeshore,
         seashore: location.seashore
@@ -129,6 +131,16 @@ module Events
               character_id: project.starting_character_id, only_path: true
             )
           )
+        }
+      end
+    end
+
+    def location_ships
+      location&.ships&.map do |ship|
+        {
+          id: ship.id,
+          name: ship.display_name(@character),
+          type: I18n.t("ships.#{ship.location_type.key}")
         }
       end
     end

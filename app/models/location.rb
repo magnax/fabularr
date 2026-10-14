@@ -92,6 +92,10 @@ class Location < ApplicationRecord
     location_class.key == 'town'
   end
 
+  def ship?
+    location_class.key == 'ship'
+  end
+
   def vehicle?
     location_class.key == 'vehicle'
   end

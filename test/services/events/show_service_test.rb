@@ -239,4 +239,16 @@ class EventsShowServiceTest < ActiveSupport::TestCase
     assert r_auto[:ready]
     assert_not r_auto[:can_join]
   end
+
+  test 'show ships' do
+    ship = create(:location, :ship, name: 'Ginger', parent_location: @character.location)
+
+    res = call_service
+
+    assert_equal 1, res[:ships].length
+    res_ship = res[:ships].sole
+    assert_equal ship.id, res_ship[:id]
+    assert_equal 'Ginger', res_ship[:name]
+    assert_equal 'sloop', res_ship[:type]
+  end
 end
