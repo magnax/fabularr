@@ -49,6 +49,9 @@ class Location < ApplicationRecord
   has_many :roads_to, dependent: :destroy,
                       class_name: 'Road',
                       inverse_of: :location_2
+  has_many :ships, dependent: :destroy,
+                   class_name: 'Ship',
+                   inverse_of: :parent_location
   has_many :travellers, dependent: :destroy, inverse_of: :subject
   has_many :workers, through: :projects
   has_many :vehicles, dependent: :destroy,

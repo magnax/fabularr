@@ -11,8 +11,9 @@
 #  updated_at :datetime         not null
 #
 class LocationClass < ApplicationRecord
-  TOWN = 'town'
-  BUILDING = 'building'
-  VEHICLE = 'vehicle'
   ANIMAL = 'animal'
+  BUILDING = 'building'
+  SHIP = 'ship'
+  TOWN = 'town'
+  VEHICLE = 'vehicle'
 end
