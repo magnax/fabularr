@@ -1,0 +1,23 @@
+<h2>Ships (<%= ships.length %>)</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Location ID</td>
+      <td>Name</td>
+      <td>Coords</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% ships.each do |ship| %>
+      <tr>
+        <td><%= ship.id %></td>
+        <td><%= ship.parent_location_id %></td>
+        <td>
+          <%= ship.name %>
+        </td>
+        <td><%= coords(ship) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

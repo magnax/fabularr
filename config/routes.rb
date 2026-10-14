@@ -95,5 +95,6 @@ Fabularr::Application.routes.draw do
 
     resources :characters
     resources :locations
+    resources :ships
   end
 end
