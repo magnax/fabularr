@@ -24,6 +24,13 @@ class LocationsController < ApplicationController
     @name = @location.location_name_or_build(current_character)
   end
 
+  def undock
+    render locals: Locations::UndockInfoService.call(current_character,
+                                                     params[:location_id])
+  rescue Locations::MustBeOnShipError
+    render_error I18n.t('errors.locations.must_be_on_ship')
+  end
+
   private
 
   def check_travel

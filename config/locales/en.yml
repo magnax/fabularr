@@ -106,6 +106,8 @@ en:
       invalid: Invalid object
     location_resources:
       invalid_location: Invalid location
+    locations:
+      must_be_on_ship: You must be on a ship to do this
     notes:
       invalid: Invalid note
     projects:
