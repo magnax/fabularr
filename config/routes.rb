@@ -62,6 +62,7 @@ Fabularr::Application.routes.draw do
       get 'machine/:id', to: 'recipes#machine', as: :machine, on: :collection
     end
     resources :sessions, only: %i[new create destroy]
+    resources :ship_actions, only: %i[create]
     resources :travellers, only: %i[new create update] do
       get :stop
       get :reverse

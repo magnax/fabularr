@@ -571,6 +571,9 @@ en:
         create: 'Rename'
         current_name: 'Current name:'
         new_name: 'New name:'
+      undock_info:
+        info: 'Choose a direction in which you want to undock:'
+        submit: Undock
     location_objects:
       add_to_project: 'You want to add to the project:'
       amount: 'Amount: '

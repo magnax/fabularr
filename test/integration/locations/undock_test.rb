@@ -47,6 +47,8 @@ class LocationsUndockTest < ActionDispatch::IntegrationTest
   test 'shows undock page' do
     ship = create(:location, :ship, parent_location: @location)
     create(:character, location: ship, user: @user, name: 'Magnus')
+    Locations::UndockInfoService.any_instance.expects(:call)
+                                .returns({ directions: %w[nw w] })
 
     sign_in(@user)
 
@@ -60,5 +62,8 @@ class LocationsUndockTest < ActionDispatch::IntegrationTest
 
     assert_no_link 'Undock'
     assert_content 'Choose a direction in which you want to undock:'
+    assert_selector "form[action='#{host}/en/ship_actions']"
+    assert_selector 'label', text: 'west'
+    assert_selector 'label', text: 'north-west'
   end
 end

@@ -1,1 +1,11 @@
-Choose a direction in which you want to undock:
+<%= t('views.locations.undock_info.info') %>
+
+<%= form_for :ship_action, url: ship_actions_url, method: :post do |f| %>
+  <% directions.each do |dir|  %>
+    <%= f.radio_button :direction, dir %>
+    <%= f.label :direction, t("directions.#{dir}") %>
+    <br />
+  <% end %>
+
+  <%= f.submit t('views.locations.undock_info.submit') %>
+<% end %>

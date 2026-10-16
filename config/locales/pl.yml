@@ -571,6 +571,9 @@ pl:
         create: 'Zmień nazwę'
         current_name: 'Obecna nazwa:'
         new_name: 'Nowa nazwa:'
+      undock_info:
+        info: 'Wybierz kierunek, w jakim chcesz oddokować:'
+        submit: Oddokuj
     location_objects:
       add_to_project: 'Chcesz dodać do projektu:'
       amount: 'Ilość: '
