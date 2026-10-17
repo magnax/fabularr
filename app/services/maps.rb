@@ -24,6 +24,19 @@ module Maps
     16 => 'nnw'
   }.freeze
 
+  UNDOCK_DIRECTIONS = {
+    0 => 'e',
+    1 => 'se',
+    2 => 's',
+    3 => 'sw',
+    4 => 'w',
+    5 => 'nw',
+    6 => 'n',
+    7 => 'ne'
+  }.freeze
+
+  UNDOCK_RADIUS = 20
+
   SHORE_DISTANCE = 16
   ANGLE_SAMPLE_SIZE = 36
 

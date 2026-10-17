@@ -114,6 +114,8 @@ en:
       invalid_ship_location: Ship cannot be built in this location
       machine_in_use: This machine is already used
       only_outside: This project can be started only outside
+    ship_actions:
+      invalid_undock_direction: Invalid undock direction
   events:
     character:
       talking:

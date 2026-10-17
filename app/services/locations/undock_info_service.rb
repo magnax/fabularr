@@ -2,19 +2,6 @@
 
 module Locations
   class UndockInfoService < ApplicationService
-    DIRECTIONS = {
-      0 => 'e',
-      1 => 'se',
-      2 => 's',
-      3 => 'sw',
-      4 => 'w',
-      5 => 'nw',
-      6 => 'n',
-      7 => 'ne'
-    }.freeze
-
-    RADIUS = 20
-
     def initialize(character, ship_id)
       @character = character
       @ship_id = ship_id
@@ -35,10 +22,10 @@ module Locations
     end
 
     def directions
-      DIRECTIONS.map do |index, dir|
+      Maps::UNDOCK_DIRECTIONS.map do |index, dir|
         angle = (45 * index) * (Math::PI / 180)
-        x = location.x + Math.cos(angle) * RADIUS
-        y = location.y + Math.sin(angle) * RADIUS
+        x = location.x + Math.cos(angle) * Maps::UNDOCK_RADIUS
+        y = location.y + Math.sin(angle) * Maps::UNDOCK_RADIUS
         Maps.location_type(x, y).in?(%w[water water_lake]) ? dir : nil
       end.compact
     end

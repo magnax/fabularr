@@ -28,6 +28,7 @@ class MapsTest < ActiveSupport::TestCase
   end
 
   test '#location_type - border' do
+    set_map_expectations!
     assert_equal 'border', Maps.location_type(110, 540)
   end
 

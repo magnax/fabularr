@@ -114,6 +114,8 @@ pl:
       invalid_ship_location: Nie możesz budować statku w tej lokacji
       machine_in_use: To urządzenie jest aktualnie używane
       only_outside: Ten projekt można rozpocząć tylko na zewnątrz
+    ship_actions:
+      invalid_undock_direction: Nieprawidłowy kierunek oddokowania
   events:
     character:
       talking:
