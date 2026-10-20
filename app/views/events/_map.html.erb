@@ -12,7 +12,17 @@
 
   <% if location[:ship] %>
     <div>
-      <%= link_to t('views.events.index.undock'), location_undock_url(location[:id]), class: 'char-action' %>
+      <% if travel_info.present? %>
+        <%= t('views.events.index.floating') %>
+        <br />
+        <%= form_for :traveller, url: traveller_url(travel_info[:traveller_id]), method: 'PUT' do |form| %>
+          <%= t('views.travellers.update.direction') %> <%= form.text_field :direction, value: travel_info[:direction] || '0', style: 'width:3em;' %>
+          <%= t('views.travellers.update.speed') %> <%= form.text_field :speed, value: travel_info[:speed], style: 'width:3em;' %>%
+          <%= form.submit t('views.travellers.update.submit') %>
+        <% end %>
+      <% else %>
+          <%= link_to t('views.events.index.undock'), location_undock_url(location[:id]), class: 'char-action' %>
+      <% end %>
     </div>
   <% end %>
 </section>

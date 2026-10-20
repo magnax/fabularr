@@ -11,8 +11,10 @@ module ShipActions
       raise Locations::MustBeOnShipError unless character_on_ship?
       raise ShipActions::InvalidUndockDirectionError if undock_coords.blank?
 
-      Traveller.create!(subject: ship, start_location: @character.toplevel_location)
-      ship.update!(coords: undock_coords)
+      Traveller.create!(subject_id: ship.id, subject_type: 'Ship',
+                        start_location: @character.toplevel_location, speed: 0)
+
+      ship.update!(coords: undock_coords, parent_location: nil)
     end
 
     private

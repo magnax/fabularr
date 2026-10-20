@@ -179,13 +179,25 @@ module Events
     def travel_info
       return unless @character.travelling?
 
+      location_class = if traveller.subject.is_a?(Character)
+                         nil
+                       else
+                         traveller.subject.location_type.key
+                       end
+
       {
         location: traveller.start_location,
         dest_location: traveller.destination_location,
         traveller_id: traveller.id,
         speed: traveller.speed,
         direction: traveller.direction,
-        percent: percent
+        percent: percent,
+        subject: {
+          id: traveller.subject_id,
+          name: traveller.subject.name,
+          type: traveller.subject_type.downcase,
+          class: location_class
+        }
       }
     end
 

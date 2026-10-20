@@ -63,8 +63,11 @@ class ShipActionsCreateServiceTest < ActiveSupport::TestCase
     end
 
     traveller = Traveller.last
-    assert_equal ship, traveller.subject
+    assert_equal ship.id, traveller.subject_id
+    assert_equal 'Ship', traveller.subject_type
+
     assert @character.reload.travelling?
+    assert_nil ship.reload.parent_location_id
     assert_equal 200, traveller.x
     assert_equal 80, traveller.y # undocking "north" so Y coord is decreased by 20
   end

@@ -141,7 +141,7 @@ class Character < ApplicationRecord
   end
 
   def traveller
-    travellers.active.first
+    travellers.active.first || location.travellers.active.first
   end
 
   def visible_by?(other_character)

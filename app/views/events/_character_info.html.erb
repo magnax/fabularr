@@ -27,7 +27,11 @@
       </div>
       <div class="cell cell-right">
         <% if travel_info.present? %>
-          <%= render 'travellers/travel_info', travel_info: travel_info, character: character, project: project %>
+          <% if travel_info[:subject][:type] == 'ship' %>
+            <%= link_to travel_info[:subject][:name], location_name_url(travel_info[:subject][:id]) %> - [<%= t("ships.#{travel_info[:subject][:class]}") %>]
+          <% else  %>
+            <%= render 'travellers/travel_info', travel_info: travel_info, character: character, project: project %>
+          <% end %>
         <% else %>
           <%= link_to location_info[:toplevel_location_name], location_name_url(location_info[:toplevel_location_id]) %>
           <% if location_info[:sublocation_id] %>
