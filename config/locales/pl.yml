@@ -206,6 +206,8 @@ pl:
       arrive_other: Widzisz jak %{traveller_link} przybywa z %{location_link}
       forced_stop: Zatrzymujesz się, bo nie możesz iść dalej w tym kierunku.
       reverse: Zawracasz
+      ship:
+        update: "Ustawiasz nowy kurs okrętu %{ship_link}, ustalając szybkość na %{speed} procent i kierunek na %{direction}."
       start: "Opuszczasz %{location_link} idąc w kierunku: %{direction}"
       start_road: "Opuszczasz %{location_from_link} drogą typu %{type} do %{location_to_link}"
       start_road_vehicle: "Opuszczasz %{location_from_link} drogą typu %{type} do %{location_to_link}, używając %{vehicle_link}"

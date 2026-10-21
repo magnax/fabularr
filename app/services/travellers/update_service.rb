@@ -24,12 +24,22 @@ module Travellers
 
     def create_event!
       Event.create!(
-        receiver_character: traveller.subject,
-        body: I18n.t("events.travel.#{body}")
+        receiver_character: @character,
+        body: body
       )
     end
 
     def body
+      if ship?
+        I18n.t("events.travel.ship.#{body_key}", ship_link: traveller.subject.loc_id,
+                                                 speed: speed.to_i,
+                                                 direction: direction.to_i)
+      else
+        I18n.t("events.travel.#{body_key}")
+      end
+    end
+
+    def body_key
       return 'reverse' if reverse?
       return 'stop' if stop?
 
@@ -63,6 +73,14 @@ module Travellers
     def reversed_direction
       rev = traveller.direction - 180
       rev.negative? ? rev + 360 : rev
+    end
+
+    def ship?
+      @ship ||= !on_foot? && traveller.subject.ship?
+    end
+
+    def on_foot?
+      @on_foot ||= traveller.subject.is_a?(Character)
     end
 
     def traveller

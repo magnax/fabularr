@@ -33,4 +33,29 @@ class TravellersUpdateServiceTest < ActiveSupport::TestCase
     assert_equal "You're updating travel settings",
                  ev.body
   end
+
+  test 'update ship direction and speed' do
+    ship = create(:ship)
+    @character.update!(location: ship)
+    traveller = create(:traveller, subject: ship)
+
+    params = {
+      id: traveller.id,
+      speed: 35,
+      direction: 90
+    }
+
+    assert_difference -> { Traveller.count } => 0,
+                      -> { Event.count } => 1 do
+      call_service(params)
+    end
+
+    assert_equal params[:speed], traveller.reload.speed
+    assert_equal params[:direction], traveller.direction
+
+    ev = Event.last
+    assert_equal "You're setting new course for the ship <!--LOCID:#{ship.id}-->"\
+                 ', setting speed to 35 percent and direction to 90.',
+                 ev.body
+  end
 end
