@@ -58,4 +58,47 @@ class TravellersUpdateServiceTest < ActiveSupport::TestCase
                  ', setting speed to 35 percent and direction to 90.',
                  ev.body
   end
+
+  test 'update ship travel - stop' do
+    ship = create(:ship)
+    @character.update!(location: ship)
+    traveller = create(:traveller, subject: ship, speed: 100)
+
+    params = {
+      id: traveller.id,
+      speed: 0,
+      direction: 90
+    }
+
+    assert_difference -> { Traveller.count } => 0,
+                      -> { Event.count } => 1 do
+      call_service(params)
+    end
+
+    assert_equal params[:speed], traveller.reload.speed
+    assert_equal params[:direction], traveller.direction
+
+    ev = Event.last
+    assert_equal "Ship <!--LOCID:#{ship.id}--> stops.", ev.body
+  end
+
+  test 'update ship travel - do not show event when already stopped' do
+    ship = create(:ship)
+    @character.update!(location: ship)
+    traveller = create(:traveller, subject: ship, speed: 0, direction: 20)
+
+    params = {
+      id: traveller.id,
+      speed: 0,
+      direction: 90
+    }
+
+    assert_difference -> { Traveller.count } => 0,
+                      -> { Event.count } => 0 do
+      call_service(params)
+    end
+
+    assert_equal params[:speed], traveller.reload.speed
+    assert_equal params[:direction], traveller.direction
+  end
 end

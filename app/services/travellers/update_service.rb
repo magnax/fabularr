@@ -8,6 +8,8 @@ module Travellers
     end
 
     def call
+      @stopped = traveller.speed.zero?
+
       traveller.update!(update_params)
 
       create_event!
@@ -23,6 +25,8 @@ module Travellers
     end
 
     def create_event!
+      return if stop? && @stopped
+
       Event.create!(
         receiver_character: @character,
         body: body
@@ -46,8 +50,12 @@ module Travellers
       'update'
     end
 
+    def stop?
+      @stop ||= speed.zero?
+    end
+
     def speed
-      return 0 if stop?
+      return 0 if stop_order?
       return traveller.speed if @params[:speed].blank?
 
       s = @params[:speed].to_f
@@ -62,7 +70,7 @@ module Travellers
       dir >= 0 && dir <= 360 ? dir : traveller.direction
     end
 
-    def stop?
+    def stop_order?
       @params[:order] == 'stop'
     end
 
