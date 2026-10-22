@@ -39,7 +39,7 @@ class EventsShowServiceTest < ActiveSupport::TestCase
     assert_equal traveller.speed, res[:travel_info][:speed]
     assert_equal traveller.direction, res[:travel_info][:direction]
     assert_equal traveller.id, res[:travel_info][:traveller_id]
-    assert_equal traveller.start_location, res[:travel_info][:location]
+    assert_equal traveller.start_location.id, res[:travel_info][:location][:id]
   end
 
   test 'other characters travelling nearby' do

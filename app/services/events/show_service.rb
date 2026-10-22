@@ -145,6 +145,12 @@ module Events
       end
     end
 
+    def travel_info
+      return unless @character.travelling?
+
+      Travellers::BuildTravelInfoService.call(@character, traveller)
+    end
+
     def visible_resources
       @visible_resources ||= location&.location_resources&.visible
     end
@@ -174,37 +180,6 @@ module Events
 
     def project
       @character.project
-    end
-
-    def travel_info
-      return unless @character.travelling?
-
-      location_class = if traveller.subject.is_a?(Character)
-                         nil
-                       else
-                         traveller.subject.location_type.key
-                       end
-
-      {
-        location: traveller.start_location,
-        dest_location: traveller.destination_location,
-        traveller_id: traveller.id,
-        speed: traveller.speed,
-        direction: traveller.direction,
-        percent: percent,
-        subject: {
-          id: traveller.subject_id,
-          name: traveller.subject.name,
-          type: traveller.subject_type.downcase,
-          class: location_class
-        }
-      }
-    end
-
-    def percent
-      return if traveller.road.blank?
-
-      Maps.calculate_percent(traveller, traveller.road).round(1)
     end
 
     def traveller

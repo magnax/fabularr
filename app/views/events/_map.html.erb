@@ -13,7 +13,14 @@
   <% if location[:ship] %>
     <div>
       <% if travel_info.present? %>
-        <%= t('views.events.index.floating') %>
+        <% if travel_info[:speed].zero? %>
+          <%= t('views.events.index.floating') %>
+        <% else %>
+          <%= t('views.events.index.sailing', 
+                direction: travel_info[:direction], 
+                speed: travel_info[:speed]) 
+          %>
+        <% end %>
         <br />
         <%= form_for :traveller, url: traveller_url(travel_info[:traveller_id]), method: 'PUT' do |form| %>
           <%= t('views.travellers.update.direction') %> <%= form.text_field :direction, value: travel_info[:direction] || '0', style: 'width:3em;' %>

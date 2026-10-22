@@ -2,17 +2,16 @@
   <%= t(
     'views.events.index.travel_info_road_html', 
     location_from_link: link_to(
-      travel_info[:location].display_name(character, parent: true), 
-      location_name_url(travel_info[:location].id)
+      travel_info[:location][:name], location_name_url(travel_info[:location][:id])
     ),
     location_to_link: link_to(
-      travel_info[:dest_location].display_name(character, parent: true), 
-      location_name_url(travel_info[:dest_location].id)
+      travel_info[:dest_location][:name], 
+      location_name_url(travel_info[:dest_location][:id])
     ),
     percent: travel_info[:percent]
   ) %>
 <% else %>
-  <%= t('views.events.index.travel_info_html', location_link: link_to(travel_info[:location].display_name(character, parent: true), location_name_url(travel_info[:location].id))) %>
+  <%= t('views.events.index.travel_info_html', location_link: link_to(travel_info[:location][:name], location_name_url(travel_info[:location][:id]))) %>
 <% end %>
 
 <% unless project.present? %>

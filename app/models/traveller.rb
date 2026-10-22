@@ -60,4 +60,13 @@ class Traveller < ApplicationRecord
       1
     end
   end
+
+  def traveller_type
+    case subject_type
+    when 'Character'
+      'character'
+    else
+      subject.ship? ? 'ship' : 'vehicle'
+    end
+  end
 end

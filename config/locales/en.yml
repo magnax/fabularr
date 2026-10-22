@@ -536,6 +536,7 @@ en:
         projects_here: Projects
         resources_here: Resources
         roads_here: Exits (roads)
+        sailing: This ship is currently sailing in the direction %{direction} with %{speed} percent speed.
         travel: Start travel
         travel_info_html: "Travelling from %{location_link}"
         travel_info_road_html: "Travelling from %{location_from_link} to %{location_to_link} (%{percent}%)"

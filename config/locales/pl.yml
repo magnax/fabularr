@@ -536,6 +536,7 @@ pl:
         projects_here: Projekty
         resources_here: Zasoby
         roads_here: Wyjścia (drogi)
+        sailing: Ten statek obecnie płynie w kierunku %{direction} z prędkością %{speed} procent.
         travel: Wyrusz w podróż
         travel_info_html: "Podróżuje z %{location_link}"
         travel_info_road_html: "Podróżuje z %{location_from_link} do %{location_to_link} (%{percent}%)"
