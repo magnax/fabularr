@@ -5,6 +5,7 @@
 # Table name: location_types
 #
 #  id         :bigint           not null, primary key
+#  base_speed :integer
 #  key        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -23,6 +24,12 @@ class LocationType < ApplicationRecord
   MOUNTAINS = 'mountains'
   SWAMP = 'swamp'
   TUNDRA = 'tundra'
+
+  # Water:
+  WATER = 'water'
+  WATER_LAKE = 'water_lake'
+
+  WATER_TYPES = [WATER, WATER_LAKE].freeze
 
   # Buildings:
   WOOD_SHACK = 'wood_shack'
