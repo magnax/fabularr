@@ -33,6 +33,7 @@ module Maps
 
       draw = Magick::Draw.new
       draw_locations(draw, canvas)
+      draw_sail_speed(draw, canvas)
       draw_character(draw, canvas)
       canvas
     end
@@ -62,6 +63,31 @@ module Maps
       draw.draw(canvas)
     end
 
+    def draw_sail_speed(draw, canvas)
+      return unless ship?
+      return if traveller.speed.zero?
+
+      new_coords = calculate_ship_trail
+
+      draw.stroke('black')
+      draw.line(100, 100, new_coords[:x] + 100, new_coords[:y] + 100)
+      draw.draw(canvas)
+    end
+
+    def calculate_ship_trail
+      direction = (traveller.direction + 180) % 360
+      length = (traveller.base_speed || 0) *
+               (traveller.speed / 100) *
+               Maps::SHIP_TRAIL_SCALE
+
+      angle = direction * (Math::PI / 180)
+      { x: (Math.cos(angle) * length), y: (Math.sin(angle) * length) }
+    end
+
+    def ship?
+      @character.travelling? && @character.location&.ship?
+    end
+
     def show_indexes?
       @show_indexes ||= @params[:for] == 'road' && @params[:order].is_a?(Array)
     end
@@ -89,6 +115,10 @@ module Maps
 
     def draw_position(draw, pos_x, pos_y)
       draw.circle(pos_x, pos_y, pos_x - 3, pos_y)
+    end
+
+    def traveller
+      @traveller = @character.traveller
     end
 
     def position
