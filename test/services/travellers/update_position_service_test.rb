@@ -54,7 +54,8 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
   test 'simple update - direction > 360' do
     mock_maps
     Timecop.freeze(@time)
-    traveller = create(:traveller, subject: @character, speed: 100, direction: 675) # == 315
+    traveller = create(:traveller, subject: @character, speed: 100,
+                                   direction: 675) # == 315
 
     Timecop.freeze(@time + 100.minutes)
     call_service(traveller)
@@ -179,5 +180,21 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 97.396, character_1.y.round(4)
     assert_equal 98.264, character_2.y.round(4)
     assert_equal 99.132, character_3.y.round(4)
+  end
+
+  test 'travelling by ship' do
+    ship = create(:ship, coords: { x: 100, y: 100 })
+    create(:character, location: ship)
+
+    Timecop.freeze(@time)
+    traveller = create(:traveller, subject: ship,
+                                   direction: 0, speed: 100, checked_at: time)
+
+    Timecop.freeze(@time + 30.minutes)
+
+    call_service(traveller)
+
+    assert_equal 100, ship.reload.x.round(4)
+    assert_equal 98.4376, ship.y.round(4)
   end
 end

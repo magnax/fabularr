@@ -18,12 +18,20 @@ module Travellers
 
     def subject_update_coords!
       updated_coords = new_coords(subject.coords, distance)
-      if location_type(updated_coords).is_a?(LocationType)
+      if proper_updated_coords?(updated_coords)
         subject.update!(coords: updated_coords)
       elsif distance < 1
         stop_travel!
       else
         update_coords_in_steps!(distance)
+      end
+    end
+
+    def proper_updated_coords?(coords)
+      if @traveller.traveller_type == LocationClass::SHIP
+        location_type(coords).in?(LocationType::WATER_TYPES)
+      else
+        location_type(coords).is_a?(LocationType)
       end
     end
 

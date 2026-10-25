@@ -69,4 +69,8 @@ class Traveller < ApplicationRecord
       subject.ship? ? 'ship' : 'vehicle'
     end
   end
+
+  def base_speed
+    subject.is_a?(Character) ? 3 : subject.location_type.base_speed
+  end
 end
