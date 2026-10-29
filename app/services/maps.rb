@@ -98,6 +98,14 @@ module Maps
     false
   end
 
+  def self.max_x
+    full_map.columns
+  end
+
+  def self.max_y
+    full_map.rows
+  end
+
   def self.load_map
     Magick::ImageList.new('app/assets/images/map.png').first
   end

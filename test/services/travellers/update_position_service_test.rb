@@ -197,4 +197,20 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     assert_equal 100, ship.reload.x.round(4)
     assert_equal 98.4376, ship.y.round(4)
   end
+
+  test 'travelling by ship - wrap at the edge (y coord < 0, x coord > max x)' do
+    ship = create(:ship, coords: { x: 999.8, y: 0.15 })
+    create(:character, location: ship)
+
+    Timecop.freeze(@time)
+    traveller = create(:traveller, subject: ship,
+                                   direction: 45, speed: 100, checked_at: time)
+
+    Timecop.freeze(@time + 10.minutes)
+
+    call_service(traveller)
+
+    assert_equal 0.1683, ship.reload.x.round(4)
+    assert_equal 999.7817, ship.y.round(4)
+  end
 end

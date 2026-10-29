@@ -103,12 +103,33 @@ module Travellers
     end
 
     def new_coords(coords, distance)
-      {
-        x: coords.x + (distance * Math.sin(radians)),
-        # graphics coordinate system has (0,0) in upper left corner
-        # so vertical coordinate is always negated
-        y: coords.y - (distance * Math.cos(radians))
-      }
+      x = coords.x + (distance * Math.sin(radians))
+      # graphics coordinate system has (0,0) in upper left corner
+      # so vertical coordinate is always negated
+      y = coords.y - (distance * Math.cos(radians))
+
+      # x += max_x if x.negative?
+      # x -= max_x if x > max_x
+
+      # y += max_y if y.negative?
+      # y -= max_y if y > max_y
+
+      { x: normalize(x, max_x), y: normalize(y, max_y) }
+    end
+
+    def normalize(value, max_value)
+      value += max_value if value.negative?
+      value -= max_value if value > max_value
+
+      value
+    end
+
+    def max_x
+      @max_x ||= Maps.max_x
+    end
+
+    def max_y
+      @max_y ||= Maps.max_y
     end
 
     def distance
