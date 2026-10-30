@@ -2,9 +2,6 @@
 
 module Maps
   class GenerateService < ApplicationService
-    IMAGE_WIDTH = 200
-    IMAGE_HEIGHT = 200
-
     def initialize(character, params = {})
       @character = character
       @params = params
@@ -25,11 +22,11 @@ module Maps
     end
 
     def result
-      canvas = full_map.first.crop(
-        position[:x], position[:y], IMAGE_WIDTH, IMAGE_HEIGHT
-      )
-      base = Magick::Image.new(canvas.columns, canvas.rows)
-      canvas = base.composite(canvas, 0, 0, Magick::OverCompositeOp)
+      canvas = Magick::Image.new(Maps::IMAGE_WIDTH, Maps::IMAGE_HEIGHT)
+
+      Maps::CalculateCropSlicesService.call(coords, full_map).each do |crop_slice|
+        canvas = composite_canvas(crop_slice, canvas)
+      end
 
       draw = Magick::Draw.new
       draw_locations(draw, canvas)
@@ -38,14 +35,29 @@ module Maps
       canvas
     end
 
+    def composite_canvas(slice, base)
+      canvas = full_map.first.crop(
+        slice[:x], slice[:y], slice[:width], slice[:height]
+      )
+      base.composite(
+        canvas, slice[:left], slice[:top], Magick::OverCompositeOp
+      )
+    end
+
     def draw_character(draw, canvas)
       draw.fill(@character.travelling? ? 'yellow' : 'black')
       draw.stroke(@character.travelling? ? 'black' : 'none')
-      draw.circle(100, 100, 97, 100)
+      draw.circle(
+        half_image_width, half_image_height,
+        half_image_width - 3, half_image_height
+      )
       if @params[:for] == 'road'
         draw.fill('none')
         draw.stroke('red')
-        draw.circle(100, 100, 95, 100)
+        draw.circle(
+          half_image_width, half_image_height,
+          half_image_width - 5, half_image_height
+        )
       end
       draw.draw(canvas)
     end
@@ -70,7 +82,10 @@ module Maps
       new_coords = calculate_ship_trail
 
       draw.stroke('black')
-      draw.line(100, 100, new_coords[:x] + 100, new_coords[:y] + 100)
+      draw.line(
+        half_image_width, half_image_height,
+        new_coords[:x] + half_image_width, new_coords[:y] + half_image_height
+      )
       draw.draw(canvas)
     end
 
@@ -95,7 +110,8 @@ module Maps
     def locations
       @locations ||= Location.where(
         'coords[0] > ? and coords[0] < ? and coords[1] > ? and coords[1] < ?',
-        position[:x], position[:x] + IMAGE_WIDTH, position[:y], position[:y] + IMAGE_HEIGHT
+        position[:x], position[:x] + Maps::IMAGE_WIDTH,
+        position[:y], position[:y] + Maps::IMAGE_HEIGHT
       )
     end
 
@@ -122,7 +138,15 @@ module Maps
     end
 
     def position
-      @position ||= { x: coords.x - 100, y: coords.y - 100 }
+      @position ||= { x: coords.x - half_image_width, y: coords.y - half_image_height }
+    end
+
+    def half_image_width
+      @half_image_width ||= Maps::IMAGE_WIDTH / 2
+    end
+
+    def half_image_height
+      @half_image_height ||= Maps::IMAGE_HEIGHT / 2
     end
 
     def coords

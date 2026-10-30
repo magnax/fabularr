@@ -37,4 +37,7 @@ module Maps::MapConstants
   SHORE_DISTANCE = 16
   ANGLE_SAMPLE_SIZE = 36
   SHIP_TRAIL_SCALE = 0.5
+
+  IMAGE_WIDTH = 200
+  IMAGE_HEIGHT = 200
 end
