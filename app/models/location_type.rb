@@ -32,6 +32,7 @@ class LocationType < ApplicationRecord
   WATER_TYPES = [WATER, WATER_LAKE].freeze
 
   # Buildings:
+  LIGHTHOUSE = 'lighthouse'
   WOOD_SHACK = 'wood_shack'
 
   COLOR_BEACH = 'ffeeaa'

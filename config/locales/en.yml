@@ -66,6 +66,7 @@ en:
       s: zebra
       p: zebras
   buildings:
+    lighthouse: lighthouse
     wood_shack: wood shack
   characters:
     age:
@@ -268,6 +269,7 @@ en:
     hammer: hammer
     iron_knife: iron knife
     iron_shield: iron shield
+    iron_trowel: iron trowel
     knife: knife
     lasso: lasso
     nothing_here: Nothing is laying here
@@ -283,6 +285,7 @@ en:
     stone_hammer: stone hammer
     stone_knife: stone knife
     wooden_shaft: wooden shaft
+    wooden_trowel: wooden trowel
   locations:
     beach: beach
     borders_lake: Borders a lake
@@ -410,6 +413,9 @@ en:
 
 
     string: string
+
+
+    window_glass: window glass
 
 
     wood: wood

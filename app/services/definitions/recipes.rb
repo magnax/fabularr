@@ -129,13 +129,6 @@ module Definitions::Recipes
         { key: 'tool#stone_knife', speed: 1.2 },
         { key: 'tool#stone_axe', speed: 2 }
       ]
-    },
-    {
-      key: 'wood_shack#building',
-      base_speed: 500,
-      instructions: [
-        { key: 'resource#wood', amount: 100 }
-      ]
     }
   ].freeze
 end

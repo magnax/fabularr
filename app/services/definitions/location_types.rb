@@ -6,6 +6,7 @@ module Definitions::LocationTypes
   ].freeze
 
   CONFIG_BUILDINGS = {
+    'lighthouse' => { max_capacity: 600_000, max_characters: 5 },
     'wood_shack' => { max_capacity: 400_000, max_characters: 4 }
   }.freeze
 

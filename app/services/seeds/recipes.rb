@@ -33,7 +33,8 @@ module Seeds
 
     def definitions
       @definitions ||= Definitions::Recipes::RECIPES +
-                       Definitions::Recipes::Machinery::RECIPES
+                       Definitions::Recipes::Machinery::RECIPES +
+                       Definitions::Recipes::Building::RECIPES
     end
 
     def create_recipe!(key, recipe_type, recipe_definition)

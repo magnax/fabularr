@@ -10,8 +10,8 @@ class SeedsRecipesTest < ActiveSupport::TestCase
   end
 
   test 'works' do
-    assert_difference -> { Recipe.count } => 17,
-                      -> { RecipeInstruction.count } => 39 do
+    assert_difference -> { Recipe.count } => 18,
+                      -> { RecipeInstruction.count } => 45 do
       Seeds::Recipes.call
     end
 

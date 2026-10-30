@@ -66,6 +66,7 @@ pl:
       s: zebra
       p: zebry
   buildings:
+    lighthouse: Latarnia morska
     wood_shack: Drewniana chata
   characters:
     age:
@@ -268,6 +269,7 @@ pl:
     hammer: młotek
     iron_knife: żelazny nóż
     iron_shield: żelazna tarcza
+    iron_trowel: żelazna kielnia
     knife: nóż
     lasso: lasso
     nothing_here: Nic tu nie leży
@@ -283,6 +285,7 @@ pl:
     stone_hammer: kamienny młotek
     stone_knife: kamienny nóż
     wooden_shaft: drewniany trzonek
+    wooden_trowel: drewniana kielnia
   locations:
     beach: plaża
     borders_lake: Graniczy z jeziorem
@@ -412,6 +415,9 @@ pl:
     string:
       n: sznurek
       gen: sznurka
+    window_glass:
+      n: szkło okienne
+      gen: szkła okiennego
     wood: 
       n: drewno
       gen: drewna
