@@ -8,7 +8,8 @@
     "esbuild": "^0.25.6"
   },
   "scripts": {
-    "build": "esbuild app/javascript/application-esbuild.ts --bundle --sourcemap --format=iife --outfile=app/assets/builds/application-bundled.js"
+    "build": "node config/esbuild.config.mjs",
+    "build:watch": "node config/esbuild.config.mjs --watch"
   },
   "dependencies": {
     "@rails/actioncable": "^7.2.302",

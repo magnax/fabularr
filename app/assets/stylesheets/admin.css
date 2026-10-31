@@ -27,3 +27,9 @@ body {
   font-size: 0.85em;
   color: red;
 }
+
+.distance-input {
+  width: 33px;
+  font-size: 11px;
+  font-weight: bold;
+}
