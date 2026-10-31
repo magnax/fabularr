@@ -29,6 +29,9 @@
 </section>
 
 <%= render 'events/map', location: location, travel_info: travel_info %>
+<% if nearby_objects.present? %>
+  <%= render 'events/nearby', nearby_objects: nearby_objects %>
+<% end %>
 
 <section id="items" style="clear: both;">
   <div class="title-bar">

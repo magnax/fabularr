@@ -1,0 +1,8 @@
+<section id="nearby" style="clear: both;">
+  <div class="title-bar">
+    <%= t 'views.events.index.visible_nearby' %>
+  </div>
+  <% nearby_objects.each do |obj| %>
+    <%= obj[:name] %> (<%= obj[:type] %>) - <%= t('views.events.index.nearby_distance', distance: obj[:distance], direction: obj[:direction]) %>
+  <% end %>
+</section>

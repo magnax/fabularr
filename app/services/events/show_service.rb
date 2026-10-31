@@ -14,7 +14,7 @@ module Events
 
       {
         animals: animals,
-        buildings: location&.buildings,
+        buildings: buildings,
         character: @character,
         characters: map_characters,
         events: events,
@@ -22,12 +22,13 @@ module Events
         location: location_hash,
         location_info: Locations::InfoService.call(@character),
         location_resources: visible_resources,
+        nearby_objects: Maps::NearbyObjectsService.call(@character),
         project: project,
         projects: projects,
         roads: roads,
         ships: location_ships,
         travel_info: travel_info,
-        vehicles: location&.vehicles
+        vehicles: vehicles
       }
     end
 
@@ -39,6 +40,10 @@ module Events
       location.animal_packs.includes(:animal).map do |pack|
         I18n.t("animals.#{pack.animal.key}.p")
       end.sort.join(', ')
+    end
+
+    def buildings
+      location&.buildings
     end
 
     def read_events!
@@ -149,6 +154,10 @@ module Events
       return unless @character.travelling?
 
       Travellers::BuildTravelInfoService.call(@character, traveller)
+    end
+
+    def vehicles
+      location&.vehicles
     end
 
     def visible_resources

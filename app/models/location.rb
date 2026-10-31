@@ -68,7 +68,17 @@ class Location < ApplicationRecord
   belongs_to :parent_location, optional: true, class_name: 'Location'
 
   scope :random, -> { order('RANDOM()').limit(1) }
-  scope :town, -> { joins(:location_class).where(location_class: { key: 'town' }) }
+  scope :town, lambda {
+    joins(:location_class).where(
+      location_class: { key: LocationClass::TOWN }
+    )
+  }
+  scope :lighthouse, lambda {
+    joins(:location_class, :location_type).where(
+      location_class: { key: LocationClass::BUILDING },
+      location_type: { key: LocationType::LIGHTHOUSE }
+    )
+  }
 
   def visible_characters
     # not final implementation, there will be probably some refinement to

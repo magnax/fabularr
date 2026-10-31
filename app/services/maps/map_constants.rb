@@ -1,6 +1,17 @@
 # frozen_string_literal: true
 
 module Maps::MapConstants
+  ANGLE_SAMPLE_SIZE = 36
+
+  IMAGE_WIDTH = 200
+  IMAGE_HEIGHT = 200
+
+  LIGHTHOUSE_DISTANCE = 60
+  LIGHTHOUSE_DISTANCE_LIT = 200
+  SHIP_TRAIL_SCALE = 0.5
+  SHORE_DISTANCE = 16
+  UNDOCK_RADIUS = 20
+
   DIRECTIONS = {
     0 => 'n',
     1 => 'n',
@@ -31,13 +42,4 @@ module Maps::MapConstants
     6 => 'n',
     7 => 'ne'
   }.freeze
-
-  UNDOCK_RADIUS = 20
-
-  SHORE_DISTANCE = 16
-  ANGLE_SAMPLE_SIZE = 36
-  SHIP_TRAIL_SCALE = 0.5
-
-  IMAGE_WIDTH = 200
-  IMAGE_HEIGHT = 200
 end
