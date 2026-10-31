@@ -59,16 +59,14 @@ class EventsIndexShipsTest < ActionDispatch::IntegrationTest
     create(:character, name: 'Magnus', location: sloop, user: @user)
     create(:traveller, subject: sloop, direction: 200, speed: 80)
 
-    lighthouse_type = create(:location_type, key: 'lighthouse')
-
     # TODO: for now lighthouses don't have light inside, so they are visible
     # from 60 px distance, with the name visible
     # With light added it will change, so lighthouses with light turned on
     # will be visible (without name) from 200 px distance
-    create(:location, :building, location_type: lighthouse_type, name: 'Visible Lighthouse',
-                                 coords: { x: 150, y: 100 })
-    create(:location, :building, location_type: lighthouse_type, name: 'Invisible Lighthouse',
-                                 coords: { x: 150, y: 150 })
+    create(:location, :lighthouse, name: 'Visible Lighthouse',
+                                   coords: { x: 150, y: 100 })
+    create(:location, :lighthouse, name: 'Invisible Lighthouse',
+                                   coords: { x: 150, y: 150 })
 
     sign_in
     click_link 'Magnus'
@@ -77,6 +75,7 @@ class EventsIndexShipsTest < ActionDispatch::IntegrationTest
 
     assert_content 'My Ship - [sloop]'
     assert_selector 'div[class="title-bar"]', text: 'Visible nearby'
-    assert_content 'Visible Lighthouse (lighthouse) - nearby in direction 100'
+    assert_content 'Visible Lighthouse (lighthouse) - fairly close-by in direction 90'
+    assert_content 'lighthouse - far away in direction 135'
   end
 end

@@ -95,6 +95,11 @@ pl:
     w: zachodni
     wnw: zachodnio-północno-zachodni
     wsw: zachodnio-południowo-zachodni
+  distances:
+    close: w pobliżu
+    far: w pewnej odległości
+    very_close: bardzo blisko
+    very_far: bardzo daleko
   errors:
     attacks:
       animal:

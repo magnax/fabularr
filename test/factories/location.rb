@@ -14,6 +14,12 @@ FactoryBot.define do
       name { nil }
     end
 
+    trait :lighthouse do
+      location_class { FactoryBot.create(:location_class, :building) }
+      location_type { FactoryBot.create(:location_type, key: 'lighthouse') }
+      name { Faker::Name.name }
+    end
+
     trait :vehicle do
       location_class { FactoryBot.create(:location_class, :vehicle) }
       location_type { FactoryBot.create(:location_type, key: 'small_wooden_cart') }

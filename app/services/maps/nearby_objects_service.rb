@@ -11,9 +11,10 @@ module Maps
 
       lighthouses.map do |l|
         {
-          direction: 100,
-          distance: 'nearby',
-          name: l.name,
+          id: l.id,
+          direction: Maps.direction(@character.location.coords, l.coords).round(0),
+          distance: I18n.t("distances.#{distance(l.distance)}"),
+          name: l.distance <= 60 ? l.name : nil,
           type: I18n.t('buildings.lighthouse')
         }
       end
@@ -24,10 +25,21 @@ module Maps
     def lighthouses
       Location.lighthouse
               .where(
-                "length(
-                  lseg(coords::point, point(#{@character.x},#{@character.y}))
-                ) <= ? ", Maps::LIGHTHOUSE_DISTANCE
+                "#{length_query} <= ? ", Maps::LIGHTHOUSE_DISTANCE_LIT
               )
+              .select("locations.id, coords, name, #{length_query} as distance")
+    end
+
+    def length_query
+      "length(lseg(coords::point, point(#{@character.x},#{@character.y})))"
+    end
+
+    def distance(value)
+      return 'very_far' if value > 120
+      return 'far' if value > 60
+      return 'close' if value > 20
+
+      'very_close'
     end
   end
 end

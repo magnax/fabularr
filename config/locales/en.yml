@@ -95,6 +95,11 @@ en:
     w: west
     wnw: west-north-west
     wsw: west-south-west
+  distances:
+    close: fairly close-by
+    far: far away
+    very_close: very close-by
+    very_far: very far away
   errors:
     attacks:
       animal:
