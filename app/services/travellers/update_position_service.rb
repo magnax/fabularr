@@ -19,7 +19,7 @@ module Travellers
     def subject_update_coords!
       updated_coords = new_coords(subject.coords, distance)
       if proper_updated_coords?(updated_coords)
-        subject.update!(coords: updated_coords)
+        subject.update!(coords: updated_coords, ghash: Geohash.geohash(updated_coords))
       elsif distance < 1
         stop_travel!
       else
@@ -40,7 +40,8 @@ module Travellers
         updated_coords = new_coords(subject.coords, min_distance)
         next if location_type(updated_coords).is_a?(LocationType)
 
-        subject.update!(coords: new_coords(subject.coords, min_distance - 1))
+        updated_coords = new_coords(subject.coords, min_distance - 1)
+        subject.update!(coords: updated_coords, ghash: Geohash.geohash(updated_coords))
         stop_travel!
         break
       end
@@ -107,12 +108,6 @@ module Travellers
       # graphics coordinate system has (0,0) in upper left corner
       # so vertical coordinate is always negated
       y = coords.y - (distance * Math.cos(radians))
-
-      # x += max_x if x.negative?
-      # x -= max_x if x > max_x
-
-      # y += max_y if y.negative?
-      # y -= max_y if y > max_y
 
       { x: normalize(x, max_x), y: normalize(y, max_y) }
     end

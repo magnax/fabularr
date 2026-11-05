@@ -93,7 +93,9 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
 
   test 'simplest update (straight up north) in vehicle' do
     mock_maps
-    cart = create(:location, :vehicle, parent_location: nil, coords: { x: 100, y: 100 })
+    coords = { x: 100, y: 100 }
+    ghash = Geohash.geohash(coords)
+    cart = create(:location, :vehicle, parent_location: nil, coords: coords, ghash: ghash)
     @character.update!(location: cart)
     Timecop.freeze(@time)
     traveller = create(:traveller, subject: cart, speed: 100, direction: 0)
@@ -101,9 +103,12 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     Timecop.freeze(@time + 100.minutes)
     call_service(traveller)
 
-    assert_equal 100, cart.reload.x.round(4)
-    assert_equal 94.792, cart.y.round(4)
+    new_coords = { x: 100, y: 94.792 }
+    assert_equal new_coords, { x: cart.reload.x.round(4), y: cart.y.round(4) }
+
+    new_ghash = Geohash.geohash(new_coords)
     assert_equal @time + 100.minutes, traveller.reload.checked_at
+    assert_equal new_ghash, cart.ghash
   end
 
   test 'arriving at location in vehicle' do
