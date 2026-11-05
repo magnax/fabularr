@@ -6,6 +6,7 @@
 #
 #  id                 :integer          not null, primary key
 #  coords             :point
+#  ghash              :string
 #  lakeshore          :boolean          default(FALSE)
 #  max_capacity       :integer
 #  max_characters     :integer
@@ -20,6 +21,7 @@
 #
 # Indexes
 #
+#  index_locations_on_ghash              (ghash)
 #  index_locations_on_location_class_id  (location_class_id)
 #
 # Foreign Keys
