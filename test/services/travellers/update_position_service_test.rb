@@ -16,28 +16,30 @@ class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
     Travellers::UpdatePositionService.call(traveller)
   end
 
-  directions = [
-    { dir: 0, text: 'north (up)',
-      exp_x: 100, exp_y: 94.792 },
-    { dir: 45, text: 'north-east (up right)',
-      exp_x: 103.6826, exp_y: 96.3174 },
-    { dir: 90, text: 'east (right)',
-      exp_x: 105.208, exp_y: 100 },
-    { dir: 135, text: 'south-east (down right)',
-      exp_x: 103.6826, exp_y: 103.6826 },
-    { dir: 180, text: 'south (down)',
-      exp_x: 100, exp_y: 105.208 },
-    { dir: 225, text: 'south-west (down left)',
-      exp_x: 96.3174, exp_y: 103.6826 },
-    { dir: 270, text: 'west (left)',
-      exp_x: 94.792, exp_y: 100 },
-    { dir: 315, text: 'north-west (up left)',
-      exp_x: 96.3174, exp_y: 96.3174 }
-  ]
+  test 'simple update - directions' do
+    mock_maps(16)
 
-  directions.each do |test_data|
-    test "simple update - #{test_data[:text]}" do
-      mock_maps
+    directions = [
+      { dir: 0, text: 'north (up)',
+        exp_x: 100, exp_y: 94.792 },
+      { dir: 45, text: 'north-east (up right)',
+        exp_x: 103.6826, exp_y: 96.3174 },
+      { dir: 90, text: 'east (right)',
+        exp_x: 105.208, exp_y: 100 },
+      { dir: 135, text: 'south-east (down right)',
+        exp_x: 103.6826, exp_y: 103.6826 },
+      { dir: 180, text: 'south (down)',
+        exp_x: 100, exp_y: 105.208 },
+      { dir: 225, text: 'south-west (down left)',
+        exp_x: 96.3174, exp_y: 103.6826 },
+      { dir: 270, text: 'west (left)',
+        exp_x: 94.792, exp_y: 100 },
+      { dir: 315, text: 'north-west (up left)',
+        exp_x: 96.3174, exp_y: 96.3174 }
+    ]
+
+    directions.each do |test_data|
+      @character.update!(coords: { x: 100, y: 100 })
       Timecop.freeze(@time)
       traveller = create(:traveller, subject: @character, speed: 100,
                                      direction: test_data[:dir])

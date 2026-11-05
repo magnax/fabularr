@@ -154,7 +154,7 @@ module Maps
     end
 
     def full_map
-      @full_map ||= Magick::ImageList.new('app/assets/images/map.png')
+      @full_map ||= Magick::ImageList.new(Fabularr::Application.config.map_path)
     end
   end
 end

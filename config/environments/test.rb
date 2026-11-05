@@ -42,4 +42,6 @@ Fabularr::Application.configure do
   I18n.available_locales = %i[en pl ca]
   # set default locale for testing
   config.i18n.default_locale = :en
+
+  config.map_path = 'app/assets/images/map.png'
 end

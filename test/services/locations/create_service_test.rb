@@ -82,8 +82,10 @@ class LocationsCreateServiceTest < ActiveSupport::TestCase
   end
 
   test 'create location on the sea shore' do
-    Maps.expects(:load_map)
-        .times(1)
+    Maps::ANGLE_SAMPLE_SIZE = 16
+
+    Maps.expects(:full_map)
+        .times(144)
         .returns(Magick::ImageList.new('test/fixtures/simple_map.png').first)
 
     create(:location_type, key: 'meadow')

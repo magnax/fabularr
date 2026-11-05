@@ -14,4 +14,6 @@ Fabularr::Application.configure do
     Bullet.alert = true
     Bullet.rails_logger = true
   end
+
+  config.map_path = 'app/assets/images/map.png'
 end

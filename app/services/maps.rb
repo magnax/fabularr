@@ -33,10 +33,6 @@ module Maps
       pos_x > full_map.columns || pos_y > full_map.rows
   end
 
-  def self.full_map
-    @full_map ||= load_map
-  end
-
   def self.locations_direction_text(location_from, location_to)
     direction_text(direction(location_from, location_to))
   end
@@ -106,7 +102,11 @@ module Maps
     full_map.rows
   end
 
+  def self.full_map
+    @full_map ||= load_map
+  end
+
   def self.load_map
-    Magick::ImageList.new('app/assets/images/map.png').first
+    Magick::ImageList.new(Fabularr::Application.config.map_path).first
   end
 end

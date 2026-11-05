@@ -28,12 +28,10 @@ class MapsTest < ActiveSupport::TestCase
   end
 
   test '#location_type - border' do
-    set_map_expectations!
     assert_equal 'border', Maps.location_type(110, 540)
   end
 
   test '#location_type - habitable' do
-    set_map_expectations!
     swamp = create(:location_type, key: 'swamp')
 
     assert_equal swamp, Maps.location_type(300, 400)
