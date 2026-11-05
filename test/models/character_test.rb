@@ -8,6 +8,7 @@
 #  coords            :point
 #  damage            :float            default(0.0)
 #  gender            :string
+#  ghash             :string
 #  hunger            :float            default(0.0)
 #  name              :string
 #  status            :boolean          default(TRUE)
@@ -18,6 +19,10 @@
 #  location_id       :integer
 #  spawn_location_id :integer
 #  user_id           :integer
+#
+# Indexes
+#
+#  index_characters_on_ghash  (ghash)
 #
 require 'test_helper'
 
