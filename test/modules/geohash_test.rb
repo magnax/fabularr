@@ -38,4 +38,12 @@ class GeohashTest < ActiveSupport::TestCase
     assert_equal 12, res.length
     assert_equal '8j89qgqj25e7', res
   end
+
+  test '#geohash from hash with string keys' do
+    point = { 'x' => 28, 'y' => 6732 }
+
+    res = Geohash.geohash(point)
+    assert_equal 12, res.length
+    assert_equal '8j89qgqj25e7', res
+  end
 end

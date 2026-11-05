@@ -16,7 +16,7 @@ module Geohash
   end
 
   def self.encode(coords)
-    coords = coords.to_h
+    coords = coords.to_h.with_indifferent_access
 
     x = g_encode_value(coords[:x])
     y = g_encode_value(coords[:y])

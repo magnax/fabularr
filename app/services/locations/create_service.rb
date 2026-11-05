@@ -12,6 +12,7 @@ module Locations
                                    location_class: LocationClass.find_by(key: 'town'),
                                    coords: @coords,
                                    lakeshore: lakeshore, seashore: seashore,
+                                   ghash: Geohash.geohash(@coords),
                                    **@params)
 
       LocationResources::CreateService.call(@location)

@@ -27,6 +27,7 @@ class LocationsCreateServiceTest < ActiveSupport::TestCase
     create(:resource, :raw_resource, key: 'sand')
     location_type = create(:location_type, key: 'beach')
     coords = ActiveRecord::Point.new(x: 200, y: 200)
+    expected_ghash = Geohash.geohash(coords)
     set_map_expectations!(coords.x, coords.y, location_type)
 
     assert_difference -> { Location.count } => 1 do
@@ -35,12 +36,15 @@ class LocationsCreateServiceTest < ActiveSupport::TestCase
 
     assert_includes [2, 3, 4], LocationResource.count
 
-    resources_available = Location.last.location_resources.available
+    location = Location.last
+
+    resources_available = location.location_resources.available
     first_resource = resources_available.filter { |r| r.sorting == 1 }
     assert_equal 'seaweeds', first_resource.sole.resource.key
 
     second_resource = resources_available.filter { |r| r.sorting == 2 }
     assert_equal 'sand', second_resource.sole.resource.key
+    assert_equal expected_ghash, location.ghash
   end
 
   test 'create location and location resources - mountains, only stone' do

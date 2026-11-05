@@ -21,6 +21,7 @@ class ProjectsCreateLocationFinishServiceTest < ActiveSupport::TestCase
     set_map_expectations!(300, 200, location_type)
     starting_character = create(:character, location: nil,
                                             coords: { x: 300, y: 200 })
+    ghash = Geohash.geohash(starting_character.coords)
     create(:traveller, subject: starting_character, speed: 0)
     project = create(:project, :create_location,
                      location: nil, starting_character: starting_character)
@@ -41,6 +42,7 @@ class ProjectsCreateLocationFinishServiceTest < ActiveSupport::TestCase
     assert_equal 'town', location.location_class.key
     assert_equal 'tundra', location.location_type.key
     assert_equal [300, 200], location.coords.to_a
+    assert_equal ghash, location.ghash
     assert_equal location.id, starting_character.reload.location_id
     assert_not starting_character.travelling?
 

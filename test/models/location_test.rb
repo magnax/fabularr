@@ -38,6 +38,7 @@ class LocationTest < ActiveSupport::TestCase
     assert_respond_to location, :coords
     assert_respond_to location, :lakeshore
     assert_respond_to location, :seashore
+    assert_respond_to location, :ghash
 
     assert location.valid?
   end
