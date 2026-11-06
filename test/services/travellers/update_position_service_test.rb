@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase
+class TravellersUpdatePositionServiceTest < ActiveSupport::TestCase # rubocop:disable Metrics/ClassLength
   def setup
     @character = create(:character, location: nil, coords: { x: 100, y: 100 })
     @time = DateTime.parse('2026-02-01 11:00:00')

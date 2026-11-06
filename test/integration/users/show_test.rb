@@ -22,7 +22,7 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     assert_selector 'i.fa-mars'
   end
 
-  test 'proper location type info for character' do
+  test 'proper location type info for character (PL)' do
     create(:character, user: @user)
 
     visit '/pl/list'
@@ -31,9 +31,9 @@ class UsersShowTest < ActionDispatch::IntegrationTest
     assert_selector 'img[title="town"]'
   end
 
-  test 'proper location type info when in building (parent type)' do
+  test 'proper location type info when in building (parent type, PL)' do
     location = create(:location)
-    building = create(:location, :building, parent_location: location)
+    building = create(:location, :building, parent_location: location, name: nil)
     character = create(:character, user: @user, location: building)
     create(:location_name, location: location, character: character, name: 'Fabular City')
 

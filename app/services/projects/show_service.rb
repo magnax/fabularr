@@ -18,7 +18,7 @@ module Projects
         progress: project.progress(1),
         repeats: repeats,
         resources_used: resources_used,
-        run_type: project.run_type || Project::MANUAL,
+        run_type: run_type,
         start_day: start_day,
         starting_character_id: project.starting_character.id,
         starting_character_name: project.starting_character.name_for(@character),
@@ -57,6 +57,10 @@ module Projects
 
     def repeat_description
       @repeat_description ||= project.project_descriptions.repeat.first
+    end
+
+    def run_type
+      @run_type ||= project.run_type || Project::MANUAL
     end
 
     def problems

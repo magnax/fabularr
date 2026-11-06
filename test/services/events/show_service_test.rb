@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class EventsShowServiceTest < ActiveSupport::TestCase
+class EventsShowServiceTest < ActiveSupport::TestCase # rubocop:disable Metrics/ClassLength
   def setup
     @character = create(:character)
   end
@@ -11,20 +11,15 @@ class EventsShowServiceTest < ActiveSupport::TestCase
     Events::ShowService.call(@character)
   end
 
-  test 'characters info' do
+  test 'characters info - only alive' do
     other_char = create(:character, location: @character.location)
+    dead_char = create(:character, location: @character.location, status: false)
 
     res = call_service
 
+    assert_equal 2, res[:characters].length
+    assert_not_includes res[:characters].pluck(:id), dead_char.id
     assert_equal [@character.id, other_char.id].sort, res[:characters].pluck(:id).sort
-  end
-
-  test 'only alive characters are present' do
-    create(:character, location: @character.location, status: false)
-
-    res = call_service
-
-    assert_equal [@character.id], res[:characters].pluck(:id)
   end
 
   test 'travel info' do
