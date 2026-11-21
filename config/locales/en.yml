@@ -657,6 +657,8 @@ en:
         item_name: 'Item name:'
         machine:
           title: Set amount for this project
+        name: Name
+        name_description: Enter the name of your building or vehicle below. Please note that the name can only be changed later using specific tools (chisel, carving knife, or paintbrush), so ensure that everything is set correctly.
         needed: needed
         objects_needed: Objects
         pieces: '(%{count} pcs.)'

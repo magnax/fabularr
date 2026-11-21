@@ -15,6 +15,7 @@ module Projects
       {
         item_name: item_name,
         machineries: machineries,
+        name_needed: building? || vehicle_or_ship?,
         objects: instructions_map(objects),
         placement: placement_key,
         project_type_id: project_type.id,
@@ -62,7 +63,7 @@ module Projects
     end
 
     def placement_key
-      return ['outside_all'] if vehicle?
+      return ['outside_all'] if vehicle_or_ship?
       return if placement.blank?
 
       placement.metadata['placement']
@@ -72,8 +73,12 @@ module Projects
       @placement ||= recipe_instructions.placement&.first
     end
 
-    def vehicle?
-      recipe.recipe_type == Recipe::VEHICLE
+    def vehicle_or_ship?
+      recipe.recipe_type.in?([Recipe::VEHICLE, Recipe::SHIP])
+    end
+
+    def building?
+      recipe.recipe_type == Recipe::BUILDING
     end
 
     def time_needed

@@ -71,6 +71,31 @@ class RecipesIndexTest < ActionDispatch::IntegrationTest
     assert_element 'form', action: "#{host}/en/projects"
   end
 
+  test 'show project setup page with input for name if ship' do
+    recipe = create(:recipe, recipe_type: Recipe::SHIP, base_speed: 14_400,
+                             key: 'sloop')
+    create(:project_type, :build)
+
+    visit "/en/recipes?expanded[]=#{recipe.id}"
+
+    assert_equal 200, page.status_code
+
+    click_on 'Continue'
+
+    assert_equal 200, page.status_code
+    assert_content 'Item name:'
+    assert_content 'sloop'
+    assert_content '2 hours'
+    assert_content 'Can be build only outside the buildings/vehicles'
+    assert_content 'Enter the name of your building or vehicle below. '\
+                   'Please note that the name can only be changed later using '\
+                   'specific tools (chisel, carving knife, or paintbrush), '\
+                   'so ensure that everything is set correctly.'
+    assert_content 'Name:'
+    assert_element 'form', action: "#{host}/en/projects"
+    assert_selector "input[id='project_signboard_text']"
+  end
+
   test 'show options for needed items' do
     v_small_shaft = create(:item_type, key: 'small_shaft', virtual: true)
     create(:item_type, key: 'small_wooden_shaft',

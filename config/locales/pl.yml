@@ -657,6 +657,8 @@ pl:
         item_name: 'Nazwa przedmiotu:'
         machine:
           title: Wybierz ilość dla tego projektu
+        name: Nazwa
+        name_description: Wpisz poniżej nazwę swojego budynku lub pojazdu. Należy pamiętać, że później nazwę będzie można zmienić tylko przy pomocy odpowiednich narzędzi (dłuto, nóż rzeźbiarski, pędzel), więc upewnij się, że wszystko jest ustawione poprawnie.
         needed: potrzebne
         objects_needed: Przedmioty
         pieces: '(%{count} szt.)'
