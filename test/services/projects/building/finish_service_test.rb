@@ -30,6 +30,7 @@ class ProjectsBuildingFinishServiceTest < ActiveSupport::TestCase
 
     assert_difference -> { InventoryObject.count } => 0,
                       -> { Location.count } => 1,
+                      -> { Signboard.count } => 1,
                       -> { Event.count } => 1 do
       call_service(project.id)
     end
@@ -39,6 +40,10 @@ class ProjectsBuildingFinishServiceTest < ActiveSupport::TestCase
     new_location = Location.last
     assert_equal location.coords, new_location.coords
     assert_equal 'Town Hall', new_location.name
+
+    assert_equal 1, new_location.signboards.length
+    assert_equal 'Town Hall', new_location.signboards.first.text
+    assert_equal 0, new_location.signboards.first.position
 
     event = Event.last
     assert_equal 'Project started by you has just ended. Manufactured: wood shack',

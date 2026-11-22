@@ -30,6 +30,7 @@ class ProjectsVehicleFinishServiceTest < ActiveSupport::TestCase
     create(:worker, project: project, character: starting_character)
 
     assert_difference -> { Location.count } => 1,
+                      -> { Signboard.count } => 1,
                       -> { Event.count } => 1 do
       call_service(project.id)
     end
@@ -40,6 +41,9 @@ class ProjectsVehicleFinishServiceTest < ActiveSupport::TestCase
     assert_equal location.coords, new_vehicle.coords
     assert_equal 1.1, new_vehicle.metadata['base_speed']
     assert_equal 'My Cart', new_vehicle.name
+    assert_equal 1, new_vehicle.signboards.length
+    assert_equal 'My Cart', new_vehicle.signboards.first.text
+    assert_equal 0, new_vehicle.signboards.first.position
 
     event = Event.last
     assert_equal 'Project started by you has just ended. Manufactured: small wooden cart',

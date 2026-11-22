@@ -10,7 +10,17 @@ module Projects
     end
 
     def call
-      Location.create!(
+      create_vehicle!
+
+      update_workers!
+
+      notify_starting_character
+    end
+
+    private
+
+    def create_vehicle!
+      vehicle = Location.create!(
         location_definitions.merge(
           coords: location.coords,
           location_type: location_type,
@@ -20,13 +30,10 @@ module Projects
           parent_location: location
         )
       )
+      return if name.blank?
 
-      update_workers!
-
-      notify_starting_character
+      vehicle.signboards.create!(text: name)
     end
-
-    private
 
     def body
       I18n.t('events.projects.end.item', **project_info)

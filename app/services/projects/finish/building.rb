@@ -10,7 +10,17 @@ module Projects
     end
 
     def call
-      Location.create!(
+      create_building!
+
+      update_workers!
+
+      notify_starting_character
+    end
+
+    private
+
+    def create_building!
+      building = Location.create!(
         Definitions::LocationTypes::CONFIG_BUILDINGS[location_type.key].merge(
           location_type: location_type,
           location_class: LocationClass.find_by(key: recipe.recipe_type),
@@ -19,13 +29,10 @@ module Projects
           name: name
         )
       )
+      return if name.blank?
 
-      update_workers!
-
-      notify_starting_character
+      building.signboards.create!(text: name)
     end
-
-    private
 
     def body
       I18n.t('events.projects.end.item', **project_info)
