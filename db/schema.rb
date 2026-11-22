@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_05_173434) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_22_082016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -364,6 +364,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_173434) do
     t.string "value"
   end
 
+  create_table "signboards", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "location_id"
+    t.integer "position", default: 0
+    t.string "text"
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_signboards_on_location_id"
+  end
+
   create_table "skills", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "key"
@@ -448,6 +457,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_173434) do
   add_foreign_key "roads", "locations", column: "location_1_id"
   add_foreign_key "roads", "locations", column: "location_2_id"
   add_foreign_key "sessions", "users"
+  add_foreign_key "signboards", "locations"
   add_foreign_key "travellers", "locations", column: "start_location_id"
   add_foreign_key "travellers", "roads"
 end

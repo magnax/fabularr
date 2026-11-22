@@ -64,6 +64,7 @@ class Location < ApplicationRecord
                    source: :subject, source_type: 'Item'
   has_many :machines, dependent: :destroy, through: :location_objects,
                       source: :subject, source_type: 'Machinery'
+  has_many :signboards, dependent: :destroy
 
   belongs_to :location_type
   belongs_to :location_class
