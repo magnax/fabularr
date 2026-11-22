@@ -51,7 +51,7 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(
       :project_type_id, :amount, :repeat,
       :location_resource_id, :recipe_id, :location_id, :machine_id
-    )
+    ).merge(name: params[:project][:signboard_text])
   end
 
   def project_info_params

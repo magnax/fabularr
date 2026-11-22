@@ -29,33 +29,36 @@ class ProjectsVehicleCreateTest < ActionDispatch::IntegrationTest
     assert_redirected_to '/en/events'
   end
 
-  # test 'create project - build road' do
-  #   project_type = create(:project_type, key: 'road', base_speed: 1000, fixed: true)
-  #   location = create(:location)
+  test 'create project - build ship' do
+    project_type = create(:project_type, key: 'build', base_speed: 1000, fixed: true)
+    recipe = create(:recipe, recipe_type: 'ship', key: 'sloop')
+    location = create(:location, seashore: true)
+    @character.update!(location: location)
 
-  #   params = {
-  #     project: {
-  #       project_type_id: project_type.id,
-  #       location_id: location.id
-  #     }
-  #   }
-  #   assert_difference -> { Project.count } => 1,
-  #                     -> { ProjectDescription.count } => 1,
-  #                     -> { Event.count } => 1 do
-  #     post '/projects', params: params
-  #   end
+    params = {
+      project: {
+        project_type_id: project_type.id,
+        location_id: location.id,
+        recipe_id: recipe.id,
+        signboard_text: 'My Ship'
+      }
+    }
+    assert_difference -> { Project.count } => 1,
+                      -> { ProjectDescription.count } => 1,
+                      -> { Event.count } => 1 do
+      post '/projects', params: params
+    end
 
-  #   p = Project.last
-  #   assert_equal ProjectType::ROAD, p.project_type.key
-  #   assert p.ready
+    p = Project.last
+    assert_equal ProjectType::BUILD, p.project_type.key
+    assert_not p.ready
 
-  #   pd = p.project_descriptions.sole
-  #   assert_equal ProjectDescription::ROAD, pd.description_type
-  #   assert_equal location, pd.subject
-  #   assert_equal Road::PATH, pd.metadata['road_type']
+    pd = p.project_descriptions.sole
+    assert_equal ProjectDescription::SETTINGS, pd.description_type
+    assert_equal 'My Ship', pd.metadata['name']
 
-  #   e = Event.last
-  #   assert_equal @character.id, e.receiver_character_id
-  #   assert_equal "You're starting new project: building road.", e.body
-  # end
+    e = Event.last
+    assert_equal @character.id, e.receiver_character_id
+    assert_equal "You're starting new project: Building: sloop.", e.body
+  end
 end
