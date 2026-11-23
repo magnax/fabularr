@@ -70,10 +70,11 @@ class ProjectTest < ActiveSupport::TestCase
     recipe = create(:recipe, recipe_type: Recipe::BUILDING, key: 'wood_shack')
     project = create(:project, starting_character: character,
                                project_type: project_type, recipe: recipe)
+    create(:project_description, :settings, project: project, metadata: { name: 'Workshop' })
 
     name = project.name(second_character)
 
-    assert_equal 'constructing new building (wood shack), started by: Magnus', name
+    assert_equal 'constructing building: wood shack -Workshop-, started by: Magnus', name
   end
 
   test 'proper #name for project - building road' do

@@ -98,7 +98,7 @@ class Project < ApplicationRecord
 
     case recipe.recipe_type
     when Recipe::BUILDING
-      "#{I18n.t('projects.name.start_building')} (#{recipe_item_name})"
+      "#{I18n.t('projects.name.start_building')}: #{recipe_item_name} -#{item_name}-"
     when Recipe::MACHINERY
       "#{I18n.t("views.skills.#{recipe.skill.key}")} #{recipe_item_name}"
     when Recipe::VEHICLE
