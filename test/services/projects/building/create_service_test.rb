@@ -15,10 +15,9 @@ class ProjectsBuildingCreateServiceTest < ActiveSupport::TestCase
     project_type = create(:project_type, key: 'build',
                                          base_speed: 0, fixed: true)
     wood = create(:resource, :material, key: 'wood')
-    recipe = create(:recipe, recipe_type: 'building', key: 'wood_shack', base_speed: 3600)
+    recipe = create(:recipe, :building, key: 'wood_shack', base_speed: 3600)
     create(:recipe_instruction, recipe: recipe, subject: wood,
-                                amount: 100, unit: 'grams',
-                                instruction_type: 'resource')
+                                amount: 100, unit: 'grams')
 
     params = {
       project_type_id: project_type.id,
@@ -38,7 +37,7 @@ class ProjectsBuildingCreateServiceTest < ActiveSupport::TestCase
     assert_equal 'Town Hall', pd.metadata['name']
 
     event = Event.last
-    assert_equal "You're starting new project: constructing new building (wood shack).",
+    assert_equal "You're starting new project: constructing building: wood shack -Town Hall-.",
                  event.body
   end
 end

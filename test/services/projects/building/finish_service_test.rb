@@ -13,10 +13,9 @@ class ProjectsBuildingFinishServiceTest < ActiveSupport::TestCase
     create(:location_class, key: 'building')
 
     wood = create(:resource, :material, key: 'wood')
-    recipe = create(:recipe, recipe_type: 'building', key: 'wood_shack', base_speed: 3600)
+    recipe = create(:recipe, :building, key: 'wood_shack', base_speed: 3600)
     create(:recipe_instruction, recipe: recipe, subject: wood,
-                                amount: 100, unit: 'grams',
-                                instruction_type: 'resource')
+                                amount: 100, unit: 'grams')
 
     starting_character = create(:character, location: location)
     project = create(:project, :build, location: location,
@@ -46,7 +45,8 @@ class ProjectsBuildingFinishServiceTest < ActiveSupport::TestCase
     assert_equal 0, new_location.signboards.first.position
 
     event = Event.last
-    assert_equal 'Project started by you has just ended. Manufactured: wood shack',
+    assert_equal 'Project started by you has just ended. '\
+                 'Constructed building: wood shack -Town Hall-',
                  event.body
   end
 end

@@ -34,5 +34,9 @@ FactoryBot.define do
     trait :vehicle do
       recipe_type { Recipe::VEHICLE }
     end
+
+    trait :building do
+      recipe_type { Recipe::BUILDING }
+    end
   end
 end

@@ -191,6 +191,7 @@ en:
     projects:
       create_location_ended: New location (%{location_info}) is successfully created
       end:
+        building: 'Project started by you has just ended. Constructed building: %{type} -%{name}-'
         collect: 'Project: %{project_name} has just ended (%{amount} grams of %{resource} landed in your inventory)'
         collect_ground: 'Project: %{project_name} has just ended (%{amount} grams of %{resource} landed on the ground)'
         item: 'Project started by you has just ended. Manufactured: %{item}'

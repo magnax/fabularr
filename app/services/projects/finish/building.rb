@@ -35,12 +35,13 @@ module Projects
     end
 
     def body
-      I18n.t('events.projects.end.item', **project_info)
+      I18n.t('events.projects.end.building', **project_info)
     end
 
     def project_info
       {
-        item: I18n.t("#{@project.recipe.recipe_type.pluralize}.#{@project.recipe.key}")
+        type: I18n.t("#{@project.recipe.recipe_type.pluralize}.#{@project.recipe.key}"),
+        name: name
       }
     end
 

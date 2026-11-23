@@ -191,6 +191,7 @@ pl:
     projects:
       create_location_ended: Nowa osada (%{location_info}) została utworzona
       end:
+        item: 'Projekt rozpoczęty przez Ciebie właśnie się zakończył. Wzniesiono budynek: %{type} -%{name}-'
         collect: 'Projekt: %{project_name} zakończył się (%{amount} gramów %{resource} trafia do Twojego inwentarza)'
         collect_ground: 'Projekt: %{project_name} zakończył się (%{amount} gramów %{resource} trafia na ziemię)'
         item: 'Projekt rozpoczęty przez Ciebie właśnie się zakończył. Wyprodukowano: %{item}'
