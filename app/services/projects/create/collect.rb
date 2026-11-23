@@ -8,8 +8,6 @@ module Projects
       raise InvalidResourceError unless valid_resource?
 
       super
-
-      create_project_descriptions!
     end
 
     private

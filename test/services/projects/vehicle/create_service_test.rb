@@ -38,7 +38,7 @@ class ProjectsVehicleCreateServiceTest < ActiveSupport::TestCase
     assert_equal 'My Cart', pd.metadata['name']
 
     event = Event.last
-    assert_equal "You're starting new project: building new vehicle (small wooden cart).",
+    assert_equal "You're starting new project: assembling vehicle: small wooden cart -My Cart-.",
                  event.body
   end
 

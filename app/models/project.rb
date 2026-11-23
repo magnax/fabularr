@@ -102,7 +102,7 @@ class Project < ApplicationRecord
     when Recipe::MACHINERY
       "#{I18n.t("views.skills.#{recipe.skill.key}")} #{recipe_item_name}"
     when Recipe::VEHICLE
-      "#{I18n.t('projects.name.start_vehicle')} (#{recipe_item_name})"
+      "#{I18n.t('projects.name.start_vehicle')}: #{recipe_item_name} -#{item_name}-"
     else
       "#{base_type_name}: #{recipe_item_name}"
     end
@@ -110,6 +110,10 @@ class Project < ApplicationRecord
 
   def recipe_item_name
     I18n.t("#{recipe.recipe_type.pluralize}.#{recipe.key}")
+  end
+
+  def item_name
+    project_descriptions.settings.first&.metadata&.[]('name')
   end
 
   def base_type_name

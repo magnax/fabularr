@@ -30,5 +30,9 @@ FactoryBot.define do
     trait :machinery do
       recipe_type { Recipe::MACHINERY }
     end
+
+    trait :vehicle do
+      recipe_type { Recipe::VEHICLE }
+    end
   end
 end

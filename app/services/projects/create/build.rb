@@ -8,8 +8,6 @@ module Projects
       raise Projects::InvalidShipBuildLocationError if wrong_ship_location?
 
       super
-
-      create_project_descriptions!
     end
 
     private
@@ -79,15 +77,15 @@ module Projects
     end
 
     def materials
-      recipe.recipe_instructions.resource
+      recipe_instructions.resource
     end
 
     def tools
-      recipe.recipe_instructions.tool
+      recipe_instructions.tool
     end
 
     def items
-      recipe.recipe_instructions.item
+      recipe_instructions.item
     end
 
     def create_name_description!
@@ -107,6 +105,10 @@ module Projects
 
     def duration
       recipe.base_speed
+    end
+
+    def recipe_instructions
+      @recipe_instructions ||= recipe.recipe_instructions
     end
 
     def recipe

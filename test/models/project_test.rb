@@ -150,4 +150,16 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal skill, project.skill
     assert_equal 'manufacturing small fire pit', project.name(character, short: true)
   end
+
+  test 'name for project - building vehicle' do
+    character = create(:character)
+    project_type = create(:project_type, key: ProjectType::BUILD)
+    recipe = create(:recipe, :vehicle, key: 'small_wooden_cart')
+    project = create(:project, starting_character: character,
+                               project_type: project_type, recipe: recipe)
+    create(:project_description, :settings, project: project, metadata: { name: 'My Cart' })
+
+    assert_equal 'assembling vehicle: small wooden cart -My Cart-',
+                 project.name(character, short: true)
+  end
 end

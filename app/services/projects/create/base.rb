@@ -13,11 +13,17 @@ module Projects
     def call
       @project = create_project!
 
+      create_project_descriptions!
+
       create_creator_event!
       create_others_events!
     end
 
     private
+
+    def create_project_descriptions!
+      nil
+    end
 
     def create_project!
       Project.create!(project_attributes)

@@ -336,7 +336,7 @@ pl:
       discover_resource: odkrywanie nowych zasobów
       road: budowa drogi
       start_building: wznoszenie nowego budynku
-      start_vehicle: budowa nowego pojazdu
+      start_vehicle: składanie pojazdu
       started_by: 'zaczęty przez: '
     nothing_here: Nie ma żadnych projektów
     started_by: Rozpoczęty przez %{char_url}
